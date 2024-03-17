@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using KevinCastejon.FiniteStateMachine;
 
-namespace Characters
+namespace CQ.Characters
 {
     public class PlayerController : AbstractFiniteStateMachine
     {
@@ -11,7 +11,8 @@ namespace Characters
         Animator _animator;
         Rigidbody _rigidBody;
         protected Vector2 _movementInput;
-
+        protected float _baseSpeed = 5f;
+        protected float _speedmodifier = 1f;
         private Vector3 _currentTargetRotation;
         private Vector3 _timeToReachTargetRotation;
         private Vector3 _dampedTargetRotationCurrentVelocity;
@@ -22,7 +23,8 @@ namespace Characters
         public enum PlayerStateEnum
         {
             IDLING,
-            WALKING
+            RUNING,
+            DASHING
         }
         /*
         Notes : Jangan gunakan ready apabila menggunakan state machine. 
@@ -30,13 +32,17 @@ namespace Characters
         */
         private void Awake()
         {
-            _animator = GetComponent<Animator>();
             _rigidBody = GetComponent<Rigidbody>();
-            _mainCameraTransform = Camera.main.transform;
+            _mainCameraTransform = UnityEngine.Camera.main.transform;
+            _animator = GetComponentInChildren<Animator>();
             Init(PlayerStateEnum.IDLING,
                 AbstractState.Create<IdlingState, PlayerStateEnum>(PlayerStateEnum.IDLING, this),
-                AbstractState.Create<WalkingState, PlayerStateEnum>(PlayerStateEnum.WALKING, this)
+                AbstractState.Create<RuningState, PlayerStateEnum>(PlayerStateEnum.RUNING, this),
+                AbstractState.Create<DashingState, PlayerStateEnum>(PlayerStateEnum.DASHING, this)
+
             );
+
+            _timeToReachTargetRotation.y = 0.14f;
         }
         private void OnEnable()
         {
@@ -56,6 +62,7 @@ namespace Characters
                 _playerController = GetStateMachine<PlayerController>();
                 _playerController.StartAnimation("isIdling");
                 _playerController.ResetVelocity();
+                _playerController._speedmodifier = 0f;
 
             }
             public override void OnUpdate()
@@ -63,7 +70,7 @@ namespace Characters
                 _playerController = GetStateMachine<PlayerController>();
                 if (_playerController._movementInput != Vector2.zero)
                 {
-                    TransitionToState(PlayerStateEnum.WALKING);
+                    TransitionToState(PlayerStateEnum.RUNING);
                 }
             }
             public override void OnExit()
@@ -72,13 +79,15 @@ namespace Characters
 
             }
         }
-        public class WalkingState : AbstractState
+        public class RuningState : AbstractState
         {
             PlayerController _playerController;
             public override void OnEnter()
             {
                 _playerController = GetStateMachine<PlayerController>();
-                _playerController.StartAnimation("isWalking");
+                _playerController.StartAnimation("isRuning");
+                _playerController._speedmodifier = 1f;
+
 
             }
             public override void OnUpdate()
@@ -95,8 +104,27 @@ namespace Characters
             }
             public override void OnExit()
             {
-                _playerController.StopAnimation("isWalking");
+                _playerController.StopAnimation("isRuning");
 
+            }
+        }
+
+        public class DashingState : AbstractState
+        {
+            PlayerController _playerController;
+            public override void OnEnter()
+            {
+                _playerController = GetStateMachine<PlayerController>();
+                _playerController._speedmodifier = 2f;
+
+
+            }
+            public override void OnUpdate()
+            {
+            }
+
+            public override void OnExit()
+            {
             }
         }
 
@@ -123,19 +151,30 @@ namespace Characters
 
         private void Move()
         {
+            if (_movementInput == Vector2.zero || _speedmodifier == 0f)
+            {
+                return;
+            }
+
 
             Vector3 movementDirection = GetMovementInputDirection();
 
-            // float targetRotationYAngle = Rotate(movementDirection);
+            float targetRotationYAngle = Rotate(movementDirection);
 
-            // Vector3 targetRotationDirection = GetTargetRotationDirection(targetRotationYAngle);
+            Vector3 targetRotationDirection = GetTargetRotationDirection(targetRotationYAngle);
 
-            float movementSpeed = 10f;
+            float movementSpeed = GetMovementSpeed();
 
             Vector3 currentPlayerHorizontalVelocity = GetPlayerHorizontalVelocity();
 
-            _rigidBody.AddForce(movementDirection * movementSpeed - currentPlayerHorizontalVelocity, ForceMode.VelocityChange);
+            _rigidBody.AddForce(targetRotationDirection * movementSpeed - currentPlayerHorizontalVelocity, ForceMode.VelocityChange);
         }
+
+        protected float GetMovementSpeed(bool shouldConsiderSlopes = true)
+        {
+            return _baseSpeed * _speedmodifier;
+        }
+
 
         protected Vector3 GetMovementInputDirection()
         {
@@ -164,6 +203,12 @@ namespace Characters
         {
             float directionAngle = GetDirectionAngle(direction);
 
+            if (shouldConsiderCameraRotation)
+            {
+                directionAngle = AddCameraRotationToAngle(directionAngle);
+            }
+
+
             if (directionAngle != _currentTargetRotation.y)
             {
                 UpdateTargetRotationData(directionAngle);
@@ -183,6 +228,19 @@ namespace Characters
 
             return directionAngle;
         }
+
+        private float AddCameraRotationToAngle(float angle)
+        {
+            angle += _mainCameraTransform.eulerAngles.y;
+
+            if (angle > 360f)
+            {
+                angle -= 360f;
+            }
+
+            return angle;
+        }
+
 
         private void UpdateTargetRotationData(float targetAngle)
         {

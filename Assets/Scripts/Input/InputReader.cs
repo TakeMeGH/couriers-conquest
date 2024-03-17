@@ -52,4 +52,15 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
                 break;
         }
     }
+
+    public void OnLook(InputAction.CallbackContext context)
+    {}
+
+    public void OnZoom(InputAction.CallbackContext context)
+    {}
+
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        throw new System.NotImplementedException();
+    }
 }
