@@ -1,135 +1,141 @@
-using CQ.Characters;
+using CC.Characters;
 using UnityEngine;
 
-public class PlayerDashingState : PlayerGroundedState
+namespace CC.Characters.States
 {
-    private float startTime;
-
-    private int consecutiveDashesUsed;
-
-    private bool shouldKeepRotating;
-
-    public PlayerDashingState(PlayerControllerStatesMachine _playerController) : base(_playerController)
+    public class PlayerDashingState : PlayerGroundedState
     {
-    }
+        private float startTime;
 
-    public override void Enter()
-    {
-        _playerController.PlayerCurrentData.SpeedModifier = 2f;
+        private int consecutiveDashesUsed;
 
-        base.Enter();
+        private bool shouldKeepRotating;
 
-        StartAnimation("isDashing");
-
-        // stateMachine.ReusableData.CurrentJumpForce = airborneData.JumpData.StrongForce;
-
-        // stateMachine.ReusableData.RotationData = groundedData.DashData.RotationData;
-
-        Dash();
-
-        shouldKeepRotating = _playerController.PlayerCurrentData.MovementInput != Vector2.zero;
-
-        // UpdateConsecutiveDashes();
-
-        startTime = Time.time;
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-
-        StopAnimation("isDashing");
-
-        // SetBaseRotationData();
-    }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-
-        if (!shouldKeepRotating)
+        public PlayerDashingState(PlayerControllerStatesMachine _playerController) : base(_playerController)
         {
-            return;
         }
 
-        RotateTowardsTargetRotation();
-    }
-
-    public override void OnAnimationTransitionEvent()
-    {
-        if (_playerController.PlayerCurrentData.MovementInput == Vector2.zero)
+        public override void Enter()
         {
-            _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.IDLING);
-            return;
+            _playerController.PlayerCurrentData.MovementSpeedModifier = _playerController.PlayerMovementData.DashSpeedModifier;
+
+            base.Enter();
+
+            StartAnimation("isDashing");
+
+            // stateMachine.ReusableData.CurrentJumpForce = airborneData.JumpData.StrongForce;
+
+            _playerController.PlayerCurrentData.TargetRotationReachTime = _playerController.PlayerMovementData.DashTargetRotationReachTime;
+
+            Dash();
+
+            shouldKeepRotating = _playerController.PlayerCurrentData.MovementInput != Vector2.zero;
+
+            // UpdateConsecutiveDashes();
+
+            startTime = Time.time;
         }
 
-        _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.SPRINTING);
-    }
-
-    protected override void AddInputActions()
-    {
-        base.AddInputActions();
-
-        _playerController.InputReader.MoveEvent += OnMovementPerformed;
-
-    }
-
-    protected override void RemoveInputActions()
-    {
-        base.RemoveInputActions();
-
-        _playerController.InputReader.MoveEvent -= OnMovementPerformed;
-    }
-
-    protected override void OnMovementPerformed(Vector2 movement)
-    {
-        base.OnMovementPerformed(movement);
-
-        shouldKeepRotating = true;
-    }
-
-    private void Dash()
-    {
-        Vector3 dashDirection = _playerController.transform.forward;
-
-        dashDirection.y = 0f;
-
-        UpdateTargetRotation(dashDirection, false);
-
-        if (_playerController.PlayerCurrentData.MovementInput != Vector2.zero)
+        public override void Exit()
         {
-            UpdateTargetRotation(GetMovementInputDirection());
+            base.Exit();
 
-            dashDirection = GetTargetRotationDirection(_playerController.PlayerCurrentData.CurrentTargetRotation.y);
+            StopAnimation("isDashing");
+
+            SetBaseRotationData();
         }
 
-        _playerController.RigidBody.velocity = dashDirection * GetMovementSpeed(false);
+        public override void PhysicsUpdate()
+        {
+            base.PhysicsUpdate();
+
+            if (!shouldKeepRotating)
+            {
+                return;
+            }
+
+            RotateTowardsTargetRotation();
+        }
+
+        public override void OnAnimationTransitionEvent()
+        {
+            if (_playerController.PlayerCurrentData.MovementInput == Vector2.zero)
+            {
+                _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.IDLING);
+
+                return;
+            }
+
+            _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.SPRINTING);
+        }
+
+        protected override void AddInputActions()
+        {
+            base.AddInputActions();
+
+            _playerController.InputReader.MoveEvent += OnMovementPerformed;
+
+        }
+
+        protected override void RemoveInputActions()
+        {
+            base.RemoveInputActions();
+
+            _playerController.InputReader.MoveEvent -= OnMovementPerformed;
+        }
+
+        protected override void OnMovementPerformed(Vector2 movement)
+        {
+            base.OnMovementPerformed(movement);
+
+            shouldKeepRotating = true;
+        }
+
+        private void Dash()
+        {
+            Vector3 dashDirection = _playerController.transform.forward;
+
+            dashDirection.y = 0f;
+
+            UpdateTargetRotation(dashDirection, false);
+
+            if (_playerController.PlayerCurrentData.MovementInput != Vector2.zero)
+            {
+                UpdateTargetRotation(GetMovementInputDirection());
+
+                dashDirection = GetTargetRotationDirection(_playerController.PlayerCurrentData.CurrentTargetRotation.y);
+            }
+
+            _playerController.Rigidbody.velocity = dashDirection * GetMovementSpeed(false);
+        }
+
+        // private void UpdateConsecutiveDashes()
+        // {
+        //     if (!IsConsecutive())
+        //     {
+        //         consecutiveDashesUsed = 0;
+        //     }
+
+        //     ++consecutiveDashesUsed;
+
+        //     if (consecutiveDashesUsed == groundedData.DashData.ConsecutiveDashesLimitAmount)
+        //     {
+        //         consecutiveDashesUsed = 0;
+
+        //         stateMachine.Player.Input.DisableActionFor(stateMachine.Player.Input.PlayerActions.Dash, groundedData.DashData.DashLimitReachedCooldown);
+        //     }
+        // }
+
+        // private bool IsConsecutive()
+        // {
+        //     return Time.time < startTime + groundedData.DashData.TimeToBeConsideredConsecutive;
+        // }
+
+        protected override void OnDashStarted()
+        {
+        }
+
     }
-
-    // private void UpdateConsecutiveDashes()
-    // {
-    //     if (!IsConsecutive())
-    //     {
-    //         consecutiveDashesUsed = 0;
-    //     }
-
-    //     ++consecutiveDashesUsed;
-
-    //     if (consecutiveDashesUsed == groundedData.DashData.ConsecutiveDashesLimitAmount)
-    //     {
-    //         consecutiveDashesUsed = 0;
-
-    //         stateMachine.Player.Input.DisableActionFor(stateMachine.Player.Input.PlayerActions.Dash, groundedData.DashData.DashLimitReachedCooldown);
-    //     }
-    // }
-
-    // private bool IsConsecutive()
-    // {
-    //     return Time.time < startTime + groundedData.DashData.TimeToBeConsideredConsecutive;
-    // }
-
-    // protected override void OnDashStarted(InputAction.CallbackContext context)
-    // {
-    // }
 
 }
+

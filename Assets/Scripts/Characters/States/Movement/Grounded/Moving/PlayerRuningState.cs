@@ -1,45 +1,61 @@
-using CQ.Characters;
+using CC.Characters;
 using UnityEngine;
 
-public class PlayerRuningState : PlayerMovingState
+
+namespace CC.Characters.States
 {
-    public PlayerRuningState(PlayerControllerStatesMachine _playerController) : base(_playerController)
-    {
-    }
 
-    public override void Enter()
+    public class PlayerRuningState : PlayerMovingState
     {
-        base.Enter();
-        StartAnimation("isRuning");
-        _playerController.PlayerCurrentData.SpeedModifier = 1f;
-
-    }
-
-    public override void Update()
-    {
-        base.Update();
-        if (_playerController.PlayerCurrentData.MovementInput == Vector2.zero)
+        // private float startTime;
+        public PlayerRuningState(PlayerControllerStatesMachine _playerController) : base(_playerController)
         {
-            _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.IDLING);
         }
 
-    }
+        public override void Enter()
+        {
+            _playerController.PlayerCurrentData.MovementSpeedModifier = _playerController.PlayerMovementData.RunSpeedModifier;
 
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
+            base.Enter();
 
-    }
+            StartAnimation("isRuning");
 
-    public override void Exit()
-    {
-        base.Exit();
-        StopAnimation("isRuning");
-    }
-    protected override void OnMovementCanceled()
-    {
-        _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.IDLING);
-        base.OnMovementCanceled();
+            // stateMachine.ReusableData.CurrentJumpForce = airborneData.JumpData.MediumForce;
+
+            // startTime = Time.time;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+
+            StopAnimation("isRuning");
+        }
+
+        public override void Update()
+        {
+            base.Update();
+
+            StopRunning();
+        }
+
+        private void StopRunning()
+        {
+            if (_playerController.PlayerCurrentData.MovementInput == Vector2.zero)
+            {
+                _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.IDLING);
+                return;
+            }
+
+        }
+
+        protected override void OnMovementCanceled()
+        {
+            _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.IDLING);
+
+            base.OnMovementCanceled();
+        }
     }
 
 }
+

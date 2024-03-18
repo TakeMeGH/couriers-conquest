@@ -1,24 +1,27 @@
 using UnityEngine;
 using KevinCastejon.FiniteStateMachine;
-using QC.Characters;
+using CC.Characters;
 
-namespace CQ.Characters
+namespace CC.Characters
 {
     public class PlayerControllerStatesMachine : AbstractFiniteStateMachine
     {
         [field: SerializeField] public InputReader InputReader { get; private set; }
         [field: SerializeField] public PlayerMovementSO PlayerMovementData { get; private set; }
+        [field: SerializeField] public Events.VoidEventChannelSO TriggerOnMovementStateAnimationEnterEvent { get; private set; }
+        [field: SerializeField] public Events.VoidEventChannelSO TriggerOnMovementStateAnimationExitEvent { get; private set; }
+        [field: SerializeField] public Events.VoidEventChannelSO TriggerOnMovementStateAnimationTransitionEvent { get; private set; }
 
         public Animator Animator { get; private set; }
-        public Rigidbody RigidBody { get; private set; }
+        public Rigidbody Rigidbody { get; private set; }
         public Transform MainCameraTransform { get; private set; }
         public PlayerStateData PlayerCurrentData { get; private set; }
 
         #region State
-        private PlayerIdlingState _playerIdlingState;
-        private PlayerRuningState _playerRuningState;
-        private PlayerDashingState _playerDashingState;
-        private PlayerSprintingState _playerSprintingState;
+        private States.PlayerIdlingState _playerIdlingState;
+        private States.PlayerRuningState _playerRuningState;
+        private States.PlayerDashingState _playerDashingState;
+        private States.PlayerSprintingState _playerSprintingState;
 
         #endregion
 
@@ -49,14 +52,15 @@ namespace CQ.Characters
         private void Initialize()
         {
             PlayerCurrentData = new PlayerStateData();
-            RigidBody = GetComponent<Rigidbody>();
+            Rigidbody = GetComponent<Rigidbody>();
             MainCameraTransform = UnityEngine.Camera.main.transform;
             Animator = GetComponentInChildren<Animator>();
             PlayerCurrentData.TimeToReachTargetRotation = PlayerMovementData.TargetRotationReachTime;
 
-            _playerIdlingState = new PlayerIdlingState(this);
-            _playerRuningState = new PlayerRuningState(this);
-            _playerSprintingState = new PlayerSprintingState(this);
+            _playerIdlingState = new States.PlayerIdlingState(this);
+            _playerRuningState = new States.PlayerRuningState(this);
+            _playerDashingState = new States.PlayerDashingState(this);
+            _playerSprintingState = new States.PlayerSprintingState(this);
         }
         public class IdlingState : AbstractState
         {

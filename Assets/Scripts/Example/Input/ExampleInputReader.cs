@@ -10,7 +10,7 @@ namespace Example.Input
         private void OnEnable()
         {
             inputReader.MoveEvent += OnMove;
-            inputReader.JumpEvent += OnJump;
+            inputReader.JumpPerformed += OnJump;
             inputReader.StartedRunning += OnRun;
             inputReader.StoppedRunning += OnRunStoped;
         }
@@ -18,7 +18,7 @@ namespace Example.Input
         private void OnDisable()
         {
             inputReader.MoveEvent -= OnMove;
-            inputReader.JumpEvent -= OnJump;
+            inputReader.JumpPerformed -= OnJump;
             inputReader.StartedRunning -= OnRun;
             inputReader.StoppedRunning -= OnRunStoped;
         }

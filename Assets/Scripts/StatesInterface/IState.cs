@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CQ.StatesInteface
+namespace CC.StatesInteface
 {
     public interface IState
     {

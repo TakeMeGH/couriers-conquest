@@ -9,7 +9,9 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
     // so we can skip the null check when we use them
 
     // Gameplay
-    public event UnityAction JumpEvent = delegate { };
+    public event UnityAction JumpPerformed = delegate { };
+    public event UnityAction DashPerformed = delegate { };
+
     public event UnityAction<Vector2> MoveEvent = delegate { };
     public event UnityAction MoveCanceled = delegate { };
 
@@ -41,13 +43,14 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
     public void OnJump(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
-            JumpEvent.Invoke();
+            JumpPerformed.Invoke();
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         MoveEvent.Invoke(context.ReadValue<Vector2>());
-        if(context.phase == InputActionPhase.Canceled){
+        if (context.phase == InputActionPhase.Canceled)
+        {
             MoveCanceled.Invoke();
         }
     }
@@ -64,6 +67,12 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
                 break;
         }
     }
+    public void OnDash(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            DashPerformed.Invoke();
+    }
+
     public void OnSprint(InputAction.CallbackContext context)
     {
         switch (context.phase)
@@ -85,9 +94,6 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
     public void OnZoom(InputAction.CallbackContext context)
     { }
 
-    public void OnDash(InputAction.CallbackContext context)
-    {
-    }
 
 
 }

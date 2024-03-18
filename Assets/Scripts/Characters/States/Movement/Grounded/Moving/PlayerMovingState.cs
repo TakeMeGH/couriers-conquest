@@ -1,5 +1,5 @@
-using CQ.Characters;
-using CQ.Characters.States;
+using CC.Characters;
+using CC.Characters.States;
 
 public class PlayerMovingState : PlayerGroundedState
 {

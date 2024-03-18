@@ -1,59 +1,60 @@
-using CQ.Characters;
-using CQ.Characters.States;
+using CC.Characters;
+using CC.Characters.States;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerIdlingState : PlayerGroundedState
+namespace CC.Characters.States
 {
-    public PlayerIdlingState(PlayerControllerStatesMachine _playerController) : base(_playerController)
+    public class PlayerIdlingState : PlayerGroundedState
     {
-    }
-
-    public override void Enter()
-    {
-        base.Enter();
-
-        StartAnimation("isIdling");
-        ResetVelocity();
-        _playerController.PlayerCurrentData.SpeedModifier = 0f;
-    }
-
-    public override void Update()
-    {
-        base.Update();
-
-        if (_playerController.PlayerCurrentData.MovementInput == Vector2.zero)
+        public PlayerIdlingState(PlayerControllerStatesMachine _playerController) : base(_playerController)
         {
-            return;
         }
 
-        OnMove();
-
-    }
-
-    protected virtual void OnMove()
-    {
-        if (_playerController.PlayerCurrentData.ShouldSprint)
+        public override void Enter()
         {
-            _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.SPRINTING);
-            return;
+            _playerController.PlayerCurrentData.MovementSpeedModifier = 0f;
+
+            // stateMachine.ReusableData.BackwardsCameraRecenteringData = groundedData.IdleData.BackwardsCameraRecenteringData;
+
+            base.Enter();
+
+            StartAnimation("isIdling");
+
+            // stateMachine.ReusableData.CurrentJumpForce = airborneData.JumpData.StationaryForce;
+
+            ResetVelocity();
         }
 
-        _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.RUNING);
+        public override void Exit()
+        {
+            base.Exit();
+
+            StopAnimation("isIdling");
+        }
+
+        public override void Update()
+        {
+            base.Update();
+
+            if (_playerController.PlayerCurrentData.MovementInput == Vector2.zero)
+            {
+                return;
+            }
+
+            OnMove();
+        }
+
+        public override void PhysicsUpdate()
+        {
+            base.PhysicsUpdate();
+
+            if (!IsMovingHorizontally())
+            {
+                return;
+            }
+
+            ResetVelocity();
+        }
     }
-
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-    }
-
-
-    public override void Exit()
-    {
-        base.Exit();
-        StopAnimation("isIdling");
-
-    }
-
 }

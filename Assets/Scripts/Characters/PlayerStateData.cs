@@ -1,11 +1,11 @@
 using UnityEngine;
 
-namespace QC.Characters
+namespace CC.Characters
 {
     public class PlayerStateData
     {
-        public float SpeedModifier = 1f;
         public Vector2 MovementInput;
+        public float MovementSpeedModifier = 1f;
         public bool ShouldSprint;
         private Vector3 _currentTargetRotation;
         private Vector3 _timeToReachTargetRotation;
@@ -44,6 +44,7 @@ namespace QC.Characters
             }
         }
 
+        [field: SerializeField] public Vector3 TargetRotationReachTime { get; set; }
 
 
     }

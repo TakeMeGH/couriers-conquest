@@ -14,3 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <BaseSpeed>k__BackingField: 5
   <TargetRotationReachTime>k__BackingField: {x: 0, y: 0.14, z: 0}
+  <GroundedBaseSpeed>k__BackingField: 5
+  <GroundToFallRayDistance>k__BackingField: 1
+  <SlopeSpeedAngles>k__BackingField:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  <RunSpeedModifier>k__BackingField: 1
+  <SprintSpeedModifier>k__BackingField: 1.7
+  <DashSpeedModifier>k__BackingField: 2
+  <DashTargetRotationReachTime>k__BackingField: {x: 0, y: 0.02, z: 0}
