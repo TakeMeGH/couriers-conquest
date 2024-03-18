@@ -32,12 +32,16 @@ namespace CQ.Characters.States
         protected virtual void AddInputActions()
         {
             _playerController.InputReader.MoveEvent += OnMovementPerformed;
+            _playerController.InputReader.MoveCanceled += OnMovementCanceled;
+
         }
 
 
         protected virtual void RemoveInputActions()
         {
             _playerController.InputReader.MoveEvent -= OnMovementPerformed;
+            _playerController.InputReader.MoveCanceled -= OnMovementCanceled;
+
 
         }
 
@@ -58,7 +62,7 @@ namespace CQ.Characters.States
             _playerController.RigidBody.velocity = Vector3.zero;
         }
 
-        public void OnMovementPerformed(Vector2 movement)
+        protected virtual void OnMovementPerformed(Vector2 movement)
         {
             _playerController.PlayerCurrentData.MovementInput = movement;
         }
@@ -187,6 +191,27 @@ namespace CQ.Characters.States
         protected Vector3 GetTargetRotationDirection(float targetRotationAngle)
         {
             return Quaternion.Euler(0f, targetRotationAngle, 0f) * Vector3.forward;
+        }
+
+        protected virtual void OnMovementCanceled()
+        {
+            // DisableCameraRecentering();
+        }
+
+
+        public virtual void OnAnimationEnterEvent()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public virtual void OnAnimationExitEvent()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public virtual void OnAnimationTransitionEvent()
+        {
+            throw new System.NotImplementedException();
         }
     }
 

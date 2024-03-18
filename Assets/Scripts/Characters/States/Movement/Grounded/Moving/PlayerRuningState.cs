@@ -35,6 +35,11 @@ public class PlayerRuningState : PlayerMovingState
     {
         base.Exit();
         StopAnimation("isRuning");
-
     }
+    protected override void OnMovementCanceled()
+    {
+        _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.IDLING);
+        base.OnMovementCanceled();
+    }
+
 }

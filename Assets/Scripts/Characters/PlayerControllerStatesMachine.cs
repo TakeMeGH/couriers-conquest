@@ -18,6 +18,7 @@ namespace CQ.Characters
         private PlayerIdlingState _playerIdlingState;
         private PlayerRuningState _playerRuningState;
         private PlayerDashingState _playerDashingState;
+        private PlayerSprintingState _playerSprintingState;
 
         #endregion
 
@@ -26,7 +27,8 @@ namespace CQ.Characters
         {
             IDLING,
             RUNING,
-            DASHING
+            DASHING,
+            SPRINTING,
         }
         /*
         Notes : Jangan gunakan ready apabila menggunakan state machine. 
@@ -37,7 +39,8 @@ namespace CQ.Characters
             Init(PlayerStateEnum.IDLING,
                 AbstractState.Create<IdlingState, PlayerStateEnum>(PlayerStateEnum.IDLING, this),
                 AbstractState.Create<RuningState, PlayerStateEnum>(PlayerStateEnum.RUNING, this),
-                AbstractState.Create<DashingState, PlayerStateEnum>(PlayerStateEnum.DASHING, this)
+                AbstractState.Create<DashingState, PlayerStateEnum>(PlayerStateEnum.DASHING, this),
+                AbstractState.Create<SprintingState, PlayerStateEnum>(PlayerStateEnum.SPRINTING, this)
 
             );
             Initialize();
@@ -53,6 +56,7 @@ namespace CQ.Characters
 
             _playerIdlingState = new PlayerIdlingState(this);
             _playerRuningState = new PlayerRuningState(this);
+            _playerSprintingState = new PlayerSprintingState(this);
         }
         public class IdlingState : AbstractState
         {
@@ -137,5 +141,31 @@ namespace CQ.Characters
 
             }
         }
+        public class SprintingState : AbstractState
+        {
+            PlayerControllerStatesMachine _playerController;
+            public override void OnEnter()
+            {
+                _playerController = GetStateMachine<PlayerControllerStatesMachine>();
+                _playerController._playerSprintingState.Enter();
+            }
+            public override void OnUpdate()
+            {
+                _playerController._playerSprintingState.Update();
+
+            }
+
+            public override void OnFixedUpdate()
+            {
+                _playerController._playerSprintingState.PhysicsUpdate();
+            }
+
+            public override void OnExit()
+            {
+                _playerController._playerSprintingState.Exit();
+
+            }
+        }
+
     }
 }

@@ -6,6 +6,7 @@ namespace QC.Characters
     {
         public float SpeedModifier = 1f;
         public Vector2 MovementInput;
+        public bool ShouldSprint;
         private Vector3 _currentTargetRotation;
         private Vector3 _timeToReachTargetRotation;
         private Vector3 _dampedTargetRotationCurrentVelocity;

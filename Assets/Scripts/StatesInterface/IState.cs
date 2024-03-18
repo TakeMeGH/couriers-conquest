@@ -9,8 +9,11 @@ namespace CQ.StatesInteface
         public void Enter();
         public void Update();
         public void PhysicsUpdate();
-
         public void Exit();
+        public void OnAnimationEnterEvent();
+        public void OnAnimationExitEvent();
+        public void OnAnimationTransitionEvent();
+
 
     }
 

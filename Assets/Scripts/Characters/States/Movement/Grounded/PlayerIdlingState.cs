@@ -1,5 +1,6 @@
 using CQ.Characters;
 using CQ.Characters.States;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerIdlingState : PlayerGroundedState
@@ -21,12 +22,26 @@ public class PlayerIdlingState : PlayerGroundedState
     {
         base.Update();
 
-        if (_playerController.PlayerCurrentData.MovementInput != Vector2.zero)
+        if (_playerController.PlayerCurrentData.MovementInput == Vector2.zero)
         {
-            _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.RUNING);
+            return;
         }
 
+        OnMove();
+
     }
+
+    protected virtual void OnMove()
+    {
+        if (_playerController.PlayerCurrentData.ShouldSprint)
+        {
+            _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.SPRINTING);
+            return;
+        }
+
+        _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.RUNING);
+    }
+
 
     public override void PhysicsUpdate()
     {

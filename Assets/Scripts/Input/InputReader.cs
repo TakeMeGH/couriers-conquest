@@ -11,13 +11,21 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
     // Gameplay
     public event UnityAction JumpEvent = delegate { };
     public event UnityAction<Vector2> MoveEvent = delegate { };
+    public event UnityAction MoveCanceled = delegate { };
+
     public event UnityAction StartedRunning = delegate { };
     public event UnityAction StoppedRunning = delegate { };
+    public event UnityAction StartedSprinting = delegate { };
+    public event UnityAction StopedSprinting = delegate { };
+
+
 
     GameInput _playerInput;
 
-    private void OnEnable() {
-        if(_playerInput == null){
+    private void OnEnable()
+    {
+        if (_playerInput == null)
+        {
             _playerInput = new GameInput();
             _playerInput.Gameplay.SetCallbacks(this);
         }
@@ -25,8 +33,9 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
 
     }
 
-    private void OnDisable() {
-        if(_playerInput != null) _playerInput.Gameplay.Disable();
+    private void OnDisable()
+    {
+        if (_playerInput != null) _playerInput.Gameplay.Disable();
     }
 
     public void OnJump(InputAction.CallbackContext context)
@@ -38,6 +47,9 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
     public void OnMove(InputAction.CallbackContext context)
     {
         MoveEvent.Invoke(context.ReadValue<Vector2>());
+        if(context.phase == InputActionPhase.Canceled){
+            MoveCanceled.Invoke();
+        }
     }
 
     public void OnRun(InputAction.CallbackContext context)
@@ -52,14 +64,30 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
                 break;
         }
     }
+    public void OnSprint(InputAction.CallbackContext context)
+    {
+        switch (context.phase)
+        {
+            case InputActionPhase.Performed:
+                StartedSprinting.Invoke();
+                break;
+            case InputActionPhase.Canceled:
+                StopedSprinting.Invoke();
+                break;
+        }
+
+    }
+
 
     public void OnLook(InputAction.CallbackContext context)
-    {}
+    { }
 
     public void OnZoom(InputAction.CallbackContext context)
-    {}
+    { }
 
     public void OnDash(InputAction.CallbackContext context)
     {
     }
+
+
 }
