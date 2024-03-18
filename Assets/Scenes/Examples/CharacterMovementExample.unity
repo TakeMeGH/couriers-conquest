@@ -864,9 +864,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1414981704}
-  - component: {fileID: 1414981703}
   - component: {fileID: 1414981702}
   - component: {fileID: 1414981701}
+  - component: {fileID: 1414981705}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -924,19 +924,6 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
---- !u!114 &1414981703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1414981700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c70f22478a91ed1469980391f55ac477, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _inputReader: {fileID: 11400000, guid: 2c06813ec1504fb49916705513d476fd, type: 2}
 --- !u!4 &1414981704
 Transform:
   m_ObjectHideFlags: 0
@@ -954,6 +941,22 @@ Transform:
   - {fileID: 1157745519}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1414981705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1414981700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d0d2c0f650b1b34684f4cc160d66e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <InputReader>k__BackingField: {fileID: 11400000, guid: 2c06813ec1504fb49916705513d476fd,
+    type: 2}
+  <PlayerMovementData>k__BackingField: {fileID: 11400000, guid: 514f8145d03799246805f7920b4dafde,
+    type: 2}
 --- !u!1 &1457813762
 GameObject:
   m_ObjectHideFlags: 0

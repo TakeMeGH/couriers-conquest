@@ -61,6 +61,5 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
 
     public void OnDash(InputAction.CallbackContext context)
     {
-        throw new System.NotImplementedException();
     }
 }
