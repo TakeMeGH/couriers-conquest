@@ -1347,9 +1347,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.2
-  m_Height: 1.3499999
+  m_Height: 1.5624
   m_Direction: 1
-  m_Center: {x: 0, y: 1.125, z: 0}
+  m_Center: {x: 0, y: 1.0188, z: 0}
 --- !u!54 &1414981702
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1438,7 +1438,7 @@ MonoBehaviour:
     <CenterY>k__BackingField: 0.9
     <Radius>k__BackingField: 0.2
   <SlopeData>k__BackingField:
-    <StepHeightPercentage>k__BackingField: 0.25
+    <StepHeightPercentage>k__BackingField: 0.132
     <FloatRayDistance>k__BackingField: 2
     <StepReachForce>k__BackingField: 25
   <TriggerColliderData>k__BackingField:
