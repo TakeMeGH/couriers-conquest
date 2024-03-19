@@ -100,7 +100,7 @@ namespace CC.Characters.States
         {
             // stateMachine.Player.Input.PlayerActions.Look.started += OnMouseMovementStarted;
 
-            _playerController.InputReader.MoveEvent += OnMovementPerformed;
+            _playerController.InputReader.MovePerformed += OnMovementPerformed;
             _playerController.InputReader.MoveCanceled += OnMovementCanceled;
 
             _playerController.TriggerOnMovementStateAnimationEnterEvent.OnEventRaised += OnAnimationEnterEvent;
@@ -115,7 +115,7 @@ namespace CC.Characters.States
         {
             // stateMachine.Player.Input.PlayerActions.Look.started -= OnMouseMovementStarted;
 
-            _playerController.InputReader.MoveEvent -= OnMovementPerformed;
+            _playerController.InputReader.MovePerformed -= OnMovementPerformed;
             _playerController.InputReader.MoveCanceled -= OnMovementCanceled;
 
             _playerController.TriggerOnMovementStateAnimationEnterEvent.OnEventRaised -= OnAnimationEnterEvent;
@@ -232,7 +232,6 @@ namespace CC.Characters.States
         protected void RotateTowardsTargetRotation()
         {
             float currentYAngle = _playerController.Rigidbody.rotation.eulerAngles.y;
-
             if (currentYAngle == _playerController.PlayerCurrentData.CurrentTargetRotation.y)
             {
                 return;

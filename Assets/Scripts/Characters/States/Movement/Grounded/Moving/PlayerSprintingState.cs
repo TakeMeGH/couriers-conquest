@@ -103,7 +103,7 @@ namespace CC.Characters.States
 
         protected override void OnMovementCanceled()
         {
-            _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.IDLING);
+            _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.MEDIUMSTOPPING);
 
             base.OnMovementCanceled();
         }

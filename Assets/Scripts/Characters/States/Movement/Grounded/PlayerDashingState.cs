@@ -61,7 +61,7 @@ namespace CC.Characters.States
         {
             if (_playerController.PlayerCurrentData.MovementInput == Vector2.zero)
             {
-                _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.IDLING);
+                _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.MEDIUMSTOPPING);
 
                 return;
             }
@@ -73,7 +73,7 @@ namespace CC.Characters.States
         {
             base.AddInputActions();
 
-            _playerController.InputReader.MoveEvent += OnMovementPerformed;
+            _playerController.InputReader.MovePerformed += OnMovementPerformed;
 
         }
 
@@ -81,7 +81,7 @@ namespace CC.Characters.States
         {
             base.RemoveInputActions();
 
-            _playerController.InputReader.MoveEvent -= OnMovementPerformed;
+            _playerController.InputReader.MovePerformed -= OnMovementPerformed;
         }
 
         protected override void OnMovementPerformed(Vector2 movement)

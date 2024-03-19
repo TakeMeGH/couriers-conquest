@@ -24,7 +24,10 @@ namespace CC.Characters
         #region SprintData
         [field: SerializeField, Header("Sprint Data")][field: Range(1f, 3f)] public float SprintSpeedModifier { get; private set; } = 1.7f;
         [field: SerializeField][field: Range(0f, 5f)] public float SprintToRunTime { get; private set; } = 1f;
+        #endregion
 
+        #region StopData
+        [field: SerializeField, Header("Stop Data")][field: Range(0f, 15f)] public float MediumDecelerationForce { get; private set; } = 6.5f;
         #endregion
 
         #region DashData

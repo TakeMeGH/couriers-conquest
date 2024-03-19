@@ -13,8 +13,8 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
     public event UnityAction DashPerformed = delegate { };
 
     public event UnityAction<Vector2> MoveEvent = delegate { };
+    public event UnityAction<Vector2> MovePerformed = delegate { };
     public event UnityAction MoveCanceled = delegate { };
-
     public event UnityAction StartedRunning = delegate { };
     public event UnityAction StoppedRunning = delegate { };
     public event UnityAction StartedSprinting = delegate { };
@@ -52,6 +52,9 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
         if (context.phase == InputActionPhase.Canceled)
         {
             MoveCanceled.Invoke();
+        }
+        else if (context.phase == InputActionPhase.Performed){
+            MovePerformed.Invoke(context.ReadValue<Vector2>());
         }
     }
 

@@ -42,6 +42,7 @@ namespace CC.Characters
         private States.PlayerJumpingState _playerJumpingState;
         private States.PlayerFallingState _playerFallingState;
         private States.PlayerLightLandingState _playerLightLandingState;
+        private States.PlayerMediumStoppingState _playerMediumStoppingState;
 
 
         #endregion
@@ -56,6 +57,7 @@ namespace CC.Characters
             JUMPING,
             FALLING,
             LIGHTLANDING,
+            MEDIUMSTOPPING,
         }
         /*
         Notes : Jangan gunakan ready apabila menggunakan state machine. 
@@ -70,7 +72,8 @@ namespace CC.Characters
                 AbstractState.Create<SprintingState, PlayerStateEnum>(PlayerStateEnum.SPRINTING, this),
                 AbstractState.Create<JumpingState, PlayerStateEnum>(PlayerStateEnum.JUMPING, this),
                 AbstractState.Create<FallingState, PlayerStateEnum>(PlayerStateEnum.FALLING, this),
-                AbstractState.Create<LightLandingState, PlayerStateEnum>(PlayerStateEnum.LIGHTLANDING, this)
+                AbstractState.Create<LightLandingState, PlayerStateEnum>(PlayerStateEnum.LIGHTLANDING, this),
+                AbstractState.Create<MediumStoppingState, PlayerStateEnum>(PlayerStateEnum.MEDIUMSTOPPING, this)
 
             );
             Initialize();
@@ -94,7 +97,7 @@ namespace CC.Characters
             _playerJumpingState = new States.PlayerJumpingState(this);
             _playerFallingState = new States.PlayerFallingState(this);
             _playerLightLandingState = new States.PlayerLightLandingState(this);
-
+            _playerMediumStoppingState = new States.PlayerMediumStoppingState(this);
         }
         public class IdlingState : AbstractState
         {
@@ -283,6 +286,34 @@ namespace CC.Characters
 
             }
         }
+
+        public class MediumStoppingState : AbstractState
+        {
+            PlayerControllerStatesMachine _playerController;
+            public override void OnEnter()
+            {
+                _playerController = GetStateMachine<PlayerControllerStatesMachine>();
+                _playerController._playerMediumStoppingState.Enter();
+            }
+            public override void OnUpdate()
+            {
+                _playerController._playerMediumStoppingState.Update();
+
+            }
+
+            public override void OnFixedUpdate()
+            {
+                _playerController._playerMediumStoppingState.PhysicsUpdate();
+            }
+
+            public override void OnExit()
+            {
+                _playerController._playerMediumStoppingState.Exit();
+
+            }
+        }
+
+
 
         private void OnTriggerEnter(Collider collider)
         {
