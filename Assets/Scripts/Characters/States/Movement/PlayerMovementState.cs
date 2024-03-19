@@ -102,6 +102,7 @@ namespace CC.Characters.States
 
             _playerController.InputReader.MovePerformed += OnMovementPerformed;
             _playerController.InputReader.MoveCanceled += OnMovementCanceled;
+            _playerController.InputReader.MoveEvent += ReadMovementInput;
 
             _playerController.TriggerOnMovementStateAnimationEnterEvent.OnEventRaised += OnAnimationEnterEvent;
             _playerController.TriggerOnMovementStateAnimationExitEvent.OnEventRaised += OnAnimationExitEvent;
@@ -117,6 +118,7 @@ namespace CC.Characters.States
 
             _playerController.InputReader.MovePerformed -= OnMovementPerformed;
             _playerController.InputReader.MoveCanceled -= OnMovementCanceled;
+            _playerController.InputReader.MoveEvent -= ReadMovementInput;
 
             _playerController.TriggerOnMovementStateAnimationEnterEvent.OnEventRaised -= OnAnimationEnterEvent;
             _playerController.TriggerOnMovementStateAnimationExitEvent.OnEventRaised -= OnAnimationExitEvent;
@@ -134,7 +136,7 @@ namespace CC.Characters.States
         protected virtual void OnMovementPerformed(Vector2 movement)
         {
             // UpdateCameraRecenteringState(movement);
-            ReadMovementInput(movement);
+            // ReadMovementInput(movement);
         }
 
         protected virtual void OnMovementCanceled()

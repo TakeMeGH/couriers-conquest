@@ -49,14 +49,14 @@ namespace CC.Characters.States
         {
             base.AddInputActions();
 
-            _playerController.InputReader.MoveEvent += OnMovementStarted;
+            _playerController.InputReader.MoveStarted += OnMovementStarted;
         }
 
         protected override void RemoveInputActions()
         {
             base.RemoveInputActions();
 
-            _playerController.InputReader.MoveEvent -= OnMovementStarted;
+            _playerController.InputReader.MoveStarted -= OnMovementStarted;
         }
 
         private void OnMovementStarted(Vector2 movement)

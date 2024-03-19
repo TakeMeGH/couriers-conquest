@@ -13,6 +13,7 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
     public event UnityAction DashPerformed = delegate { };
 
     public event UnityAction<Vector2> MoveEvent = delegate { };
+    public event UnityAction<Vector2> MoveStarted = delegate { };
     public event UnityAction<Vector2> MovePerformed = delegate { };
     public event UnityAction MoveCanceled = delegate { };
     public event UnityAction StartedRunning = delegate { };
@@ -49,12 +50,17 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
     public void OnMove(InputAction.CallbackContext context)
     {
         MoveEvent.Invoke(context.ReadValue<Vector2>());
-        if (context.phase == InputActionPhase.Canceled)
+        switch (context.phase)
         {
-            MoveCanceled.Invoke();
-        }
-        else if (context.phase == InputActionPhase.Performed){
-            MovePerformed.Invoke(context.ReadValue<Vector2>());
+            case InputActionPhase.Canceled:
+                MoveCanceled.Invoke();
+                break;
+            case InputActionPhase.Performed:
+                MovePerformed.Invoke(context.ReadValue<Vector2>());
+                break;
+            case InputActionPhase.Started:
+                MoveStarted.Invoke(context.ReadValue<Vector2>());
+                break;
         }
     }
 
