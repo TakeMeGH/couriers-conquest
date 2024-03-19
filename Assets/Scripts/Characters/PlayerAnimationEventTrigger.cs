@@ -10,7 +10,8 @@ namespace CC.Characters
         [SerializeField] VoidEventChannelSO _triggerOnMovementStateAnimationExitEvent;
         [SerializeField] VoidEventChannelSO _triggerOnMovementStateAnimationTransitionEvent;
 
-        private void Awake() {
+        private void Awake()
+        {
             _animator = GetComponent<Animator>();
         }
         public void TriggerOnMovementStateAnimationEnterEvent()
@@ -35,6 +36,7 @@ namespace CC.Characters
 
         public void TriggerOnMovementStateAnimationTransitionEvent()
         {
+            Debug.Log(IsInAnimationTransition());
             if (IsInAnimationTransition())
             {
                 return;
