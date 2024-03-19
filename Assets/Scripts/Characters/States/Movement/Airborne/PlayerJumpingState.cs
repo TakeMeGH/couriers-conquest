@@ -17,7 +17,7 @@ namespace CC.Characters.States
 
             _playerController.PlayerCurrentData.MovementSpeedModifier = 0f;
 
-            // stateMachine.ReusableData.MovementDecelerationForce = airborneData.JumpData.DecelerationForce;
+            _playerController.PlayerCurrentData.MovementDecelerationForce = _playerController.PlayerMovementData.DecelerationForce;
 
             _playerController.PlayerCurrentData.TargetRotationReachTime = _playerController.PlayerMovementData.JumpTargetRotationReachTime;
 
@@ -83,7 +83,7 @@ namespace CC.Characters.States
             jumpForce.x *= jumpDirection.x;
             jumpForce.z *= jumpDirection.z;
 
-            // jumpForce = GetJumpForceOnSlope(jumpForce);
+            jumpForce = GetJumpForceOnSlope(jumpForce);
 
             ResetVelocity();
 

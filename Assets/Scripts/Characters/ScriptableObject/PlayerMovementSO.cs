@@ -15,6 +15,7 @@ namespace CC.Characters
         [field: SerializeField, Header("Grounded Data")][field: Range(0f, 25f)] public float GroundedBaseSpeed { get; private set; } = 5f;
         [field: SerializeField][field: Range(0f, 5f)] public float GroundToFallRayDistance { get; private set; } = 1f;
         [field: SerializeField] public AnimationCurve SlopeSpeedAngles { get; private set; }
+        [field: SerializeField] public Vector3 GroundedTargetRotationReachTime { get; private set; }
 
         #region RunData
         [field: SerializeField, Header("Run Data")][field: Range(1f, 2f)] public float RunSpeedModifier { get; private set; } = 1f;

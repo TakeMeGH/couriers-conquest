@@ -9,6 +9,8 @@ namespace CC.Characters.States
         public PlayerMovementState(PlayerControllerStatesMachine _playerController)
         {
             this._playerController = _playerController;
+            InitializeData();
+
         }
 
         public virtual void Enter()
@@ -78,9 +80,9 @@ namespace CC.Characters.States
 
         protected void SetBaseRotationData()
         {
-            // stateMachine.ReusableData.RotationData = groundedData.BaseRotationData;
+            _playerController.PlayerCurrentData.TargetRotationReachTime = _playerController.PlayerMovementData.GroundedTargetRotationReachTime;
 
-            // stateMachine.ReusableData.TimeToReachTargetRotation = stateMachine.ReusableData.RotationData.TargetRotationReachTime;
+            _playerController.PlayerCurrentData.TimeToReachTargetRotation = _playerController.PlayerCurrentData.TargetRotationReachTime;
         }
 
         // TODO: Ganti Animation Hash
