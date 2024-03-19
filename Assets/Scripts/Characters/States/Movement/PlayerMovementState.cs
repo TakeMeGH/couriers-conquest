@@ -31,25 +31,25 @@ namespace CC.Characters.States
             Move();
         }
 
-        // public virtual void OnTriggerEnter(Collider collider)
-        // {
-        //     if (stateMachine.Player.LayerData.IsGroundLayer(collider.gameObject.layer))
-        //     {
-        //         OnContactWithGround(collider);
+        public virtual void OnTriggerEnter(Collider collider)
+        {
+            if (_playerController.LayerData.IsGroundLayer(collider.gameObject.layer))
+            {
+                OnContactWithGround(collider);
 
-        //         return;
-        //     }
-        // }
+                return;
+            }
+        }
 
-        // public virtual void OnTriggerExit(Collider collider)
-        // {
-        //     if (stateMachine.Player.LayerData.IsGroundLayer(collider.gameObject.layer))
-        //     {
-        //         OnContactWithGroundExited(collider);
+        public virtual void OnTriggerExit(Collider collider)
+        {
+            if (_playerController.LayerData.IsGroundLayer(collider.gameObject.layer))
+            {
+                OnContactWithGroundExited(collider);
 
-        //         return;
-        //     }
-        // }
+                return;
+            }
+        }
 
         public virtual void OnAnimationEnterEvent()
         {
@@ -105,6 +105,8 @@ namespace CC.Characters.States
             _playerController.TriggerOnMovementStateAnimationExitEvent.OnEventRaised += OnAnimationExitEvent;
             _playerController.TriggerOnMovementStateAnimationTransitionEvent.OnEventRaised += OnAnimationTransitionEvent;
 
+            _playerController.TriggerEnterEvent += OnTriggerEnter;
+            _playerController.TriggerExitEvent += OnTriggerExit;
         }
 
         protected virtual void RemoveInputActions()
@@ -118,6 +120,8 @@ namespace CC.Characters.States
             _playerController.TriggerOnMovementStateAnimationExitEvent.OnEventRaised -= OnAnimationExitEvent;
             _playerController.TriggerOnMovementStateAnimationTransitionEvent.OnEventRaised -= OnAnimationTransitionEvent;
 
+            _playerController.TriggerEnterEvent -= OnTriggerEnter;
+            _playerController.TriggerExitEvent -= OnTriggerExit;
         }
 
         // private void OnMouseMovementStarted(InputAction.CallbackContext context)
@@ -250,10 +254,10 @@ namespace CC.Characters.States
         {
             float movementSpeed = _playerController.PlayerMovementData.GroundedBaseSpeed * _playerController.PlayerCurrentData.MovementSpeedModifier;
 
-            // if (shouldConsiderSlopes)
-            // {
-            //     movementSpeed *= stateMachine.ReusableData.MovementOnSlopesSpeedModifier;
-            // }
+            if (shouldConsiderSlopes)
+            {
+                movementSpeed *= _playerController.PlayerCurrentData.MovementOnSlopesSpeedModifier;
+            }
 
             return movementSpeed;
         }
@@ -361,16 +365,16 @@ namespace CC.Characters.States
 
         protected void DecelerateHorizontally()
         {
-            // Vector3 playerHorizontalVelocity = GetPlayerHorizontalVelocity();
+            Vector3 playerHorizontalVelocity = GetPlayerHorizontalVelocity();
 
-            // stateMachine.Player.Rigidbody.AddForce(-playerHorizontalVelocity * stateMachine.ReusableData.MovementDecelerationForce, ForceMode.Acceleration);
+            _playerController.Rigidbody.AddForce(-playerHorizontalVelocity * _playerController.PlayerCurrentData.MovementDecelerationForce, ForceMode.Acceleration);
         }
 
         protected void DecelerateVertically()
         {
-            // Vector3 playerVerticalVelocity = GetPlayerVerticalVelocity();
+            Vector3 playerVerticalVelocity = GetPlayerVerticalVelocity();
 
-            // stateMachine.Player.Rigidbody.AddForce(-playerVerticalVelocity * stateMachine.ReusableData.MovementDecelerationForce, ForceMode.Acceleration);
+            _playerController.Rigidbody.AddForce(-playerVerticalVelocity * _playerController.PlayerCurrentData.MovementDecelerationForce, ForceMode.Acceleration);
         }
 
         protected bool IsMovingHorizontally(float minimumMagnitude = 0.1f)

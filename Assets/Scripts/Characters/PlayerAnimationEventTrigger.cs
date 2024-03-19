@@ -36,7 +36,6 @@ namespace CC.Characters
 
         public void TriggerOnMovementStateAnimationTransitionEvent()
         {
-            Debug.Log(IsInAnimationTransition());
             if (IsInAnimationTransition())
             {
                 return;

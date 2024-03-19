@@ -20,7 +20,7 @@ namespace CC.Characters.States
 
             StartAnimation("isRuning");
 
-            // stateMachine.ReusableData.CurrentJumpForce = airborneData.JumpData.MediumForce;
+            _playerController.PlayerCurrentData.CurrentJumpForce = _playerController.PlayerMovementData.MediumForce;
 
             // startTime = Time.time;
         }

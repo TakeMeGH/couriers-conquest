@@ -7,4 +7,19 @@ public class PlayerMovingState : PlayerGroundedState
     {
     }
 
+    public override void Enter()
+    {
+        base.Enter();
+
+        StartAnimation("Moving");
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        StopAnimation("Moving");
+    }
+
+
 }

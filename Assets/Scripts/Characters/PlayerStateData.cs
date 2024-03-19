@@ -6,6 +6,8 @@ namespace CC.Characters
     {
         public Vector2 MovementInput;
         public float MovementSpeedModifier = 1f;
+        public float MovementOnSlopesSpeedModifier { get; set; } = 1f;
+        public float MovementDecelerationForce { get; set; } = 1f;
         public bool ShouldSprint;
         private Vector3 _currentTargetRotation;
         private Vector3 _timeToReachTargetRotation;
@@ -43,7 +45,7 @@ namespace CC.Characters
                 return ref _dampedTargetRotationPassedTime;
             }
         }
-
+        public Vector3 CurrentJumpForce { get; set; }
         [field: SerializeField] public Vector3 TargetRotationReachTime { get; set; }
 
 

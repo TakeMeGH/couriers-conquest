@@ -21,7 +21,7 @@ namespace CC.Characters.States
 
             StartAnimation("isIdling");
 
-            // stateMachine.ReusableData.CurrentJumpForce = airborneData.JumpData.StationaryForce;
+            _playerController.PlayerCurrentData.CurrentJumpForce = _playerController.PlayerMovementData.StationaryForce;
 
             ResetVelocity();
         }

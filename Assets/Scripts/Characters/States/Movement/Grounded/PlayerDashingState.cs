@@ -23,7 +23,7 @@ namespace CC.Characters.States
 
             StartAnimation("isDashing");
 
-            // stateMachine.ReusableData.CurrentJumpForce = airborneData.JumpData.StrongForce;
+            _playerController.PlayerCurrentData.CurrentJumpForce = _playerController.PlayerMovementData.MediumForce;
 
             _playerController.PlayerCurrentData.TargetRotationReachTime = _playerController.PlayerMovementData.DashTargetRotationReachTime;
 

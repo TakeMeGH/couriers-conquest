@@ -24,7 +24,7 @@ namespace CC.Characters.States
 
             StartAnimation("isSprinting");
 
-            // stateMachine.ReusableData.CurrentJumpForce = airborneData.JumpData.StrongForce;
+            _playerController.PlayerCurrentData.CurrentJumpForce = _playerController.PlayerMovementData.MediumForce;
 
             startTime = Time.time;
 
@@ -108,19 +108,19 @@ namespace CC.Characters.States
             base.OnMovementCanceled();
         }
 
-        // protected override void OnJumpStarted(InputAction.CallbackContext context)
-        // {
-        //     shouldResetSprintState = false;
+        protected override void OnJumpStarted()
+        {
+            shouldResetSprintState = false;
 
-        //     base.OnJumpStarted(context);
-        // }
+            base.OnJumpStarted();
+        }
 
-        // protected override void OnFall()
-        // {
-        //     shouldResetSprintState = false;
+        protected override void OnFall()
+        {
+            shouldResetSprintState = false;
 
-        //     base.OnFall();
-        // }
+            base.OnFall();
+        }
 
 
     }
