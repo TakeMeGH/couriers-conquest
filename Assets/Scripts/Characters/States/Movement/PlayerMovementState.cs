@@ -25,7 +25,6 @@ namespace CC.Characters.States
 
         public virtual void Update()
         {
-            // ReadMovementInput();
         }
 
         public virtual void PhysicsUpdate()
@@ -74,8 +73,6 @@ namespace CC.Characters.States
 
         protected void SetBaseCameraRecenteringData()
         {
-            // stateMachine.ReusableData.SidewaysCameraRecenteringData = groundedData.SidewaysCameraRecenteringData;
-            // stateMachine.ReusableData.BackwardsCameraRecenteringData = groundedData.BackwardsCameraRecenteringData;
         }
 
         protected void SetBaseRotationData()
@@ -98,8 +95,6 @@ namespace CC.Characters.States
 
         protected virtual void AddInputActions()
         {
-            // stateMachine.Player.Input.PlayerActions.Look.started += OnMouseMovementStarted;
-
             _playerController.InputReader.MovePerformed += OnMovementPerformed;
             _playerController.InputReader.MoveCanceled += OnMovementCanceled;
             _playerController.InputReader.MoveEvent += ReadMovementInput;
@@ -114,8 +109,6 @@ namespace CC.Characters.States
 
         protected virtual void RemoveInputActions()
         {
-            // stateMachine.Player.Input.PlayerActions.Look.started -= OnMouseMovementStarted;
-
             _playerController.InputReader.MovePerformed -= OnMovementPerformed;
             _playerController.InputReader.MoveCanceled -= OnMovementCanceled;
             _playerController.InputReader.MoveEvent -= ReadMovementInput;
@@ -128,20 +121,12 @@ namespace CC.Characters.States
             _playerController.TriggerExitEvent -= OnTriggerExit;
         }
 
-        // private void OnMouseMovementStarted(InputAction.CallbackContext context)
-        // {
-        //     UpdateCameraRecenteringState(stateMachine.ReusableData.MovementInput);
-        // }
-
         protected virtual void OnMovementPerformed(Vector2 movement)
         {
-            // UpdateCameraRecenteringState(movement);
-            // ReadMovementInput(movement);
         }
 
         protected virtual void OnMovementCanceled()
         {
-            // DisableCameraRecentering();
         }
 
         private void ReadMovementInput(Vector2 movement)
@@ -285,73 +270,6 @@ namespace CC.Characters.States
 
         protected virtual void OnContactWithGroundExited(Collider collider)
         {
-        }
-
-        protected void UpdateCameraRecenteringState(Vector2 movementInput)
-        {
-            // if (movementInput == Vector2.zero)
-            // {
-            //     return;
-            // }
-
-            // if (movementInput == Vector2.up)
-            // {
-            //     DisableCameraRecentering();
-
-            //     return;
-            // }
-
-            // float cameraVerticalAngle = _playerController.MainCameraTransform.eulerAngles.x;
-
-            // if (cameraVerticalAngle >= 270f)
-            // {
-            //     cameraVerticalAngle -= 360f;
-            // }
-
-            // cameraVerticalAngle = Mathf.Abs(cameraVerticalAngle);
-
-            // if (movementInput == Vector2.down)
-            // {
-            //     SetCameraRecenteringState(cameraVerticalAngle, stateMachine.ReusableData.BackwardsCameraRecenteringData);
-
-            //     return;
-            // }
-
-            // SetCameraRecenteringState(cameraVerticalAngle, stateMachine.ReusableData.SidewaysCameraRecenteringData);
-        }
-
-        // protected void SetCameraRecenteringState(float cameraVerticalAngle, List<PlayerCameraRecenteringData> cameraRecenteringData)
-        // {
-        //     foreach (PlayerCameraRecenteringData recenteringData in cameraRecenteringData)
-        //     {
-        //         if (!recenteringData.IsWithinRange(cameraVerticalAngle))
-        //         {
-        //             continue;
-        //         }
-
-        //         EnableCameraRecentering(recenteringData.WaitTime, recenteringData.RecenteringTime);
-
-        //         return;
-        //     }
-
-        //     DisableCameraRecentering();
-        // }
-
-        protected void EnableCameraRecentering(float waitTime = -1f, float recenteringTime = -1f)
-        {
-            // float movementSpeed = GetMovementSpeed();
-
-            // if (movementSpeed == 0f)
-            // {
-            //     movementSpeed = groundedData.BaseSpeed;
-            // }
-
-            // stateMachine.Player.CameraRecenteringUtility.EnableRecentering(waitTime, recenteringTime, groundedData.BaseSpeed, movementSpeed);
-        }
-
-        protected void DisableCameraRecentering()
-        {
-            // stateMachine.Player.CameraRecenteringUtility.DisableRecentering();
         }
 
         protected void ResetVelocity()

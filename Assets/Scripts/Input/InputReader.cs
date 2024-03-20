@@ -11,7 +11,6 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
     // Gameplay
     public event UnityAction JumpPerformed = delegate { };
     public event UnityAction DashPerformed = delegate { };
-
     public event UnityAction<Vector2> MoveEvent = delegate { };
     public event UnityAction<Vector2> MoveStarted = delegate { };
     public event UnityAction<Vector2> MovePerformed = delegate { };
@@ -20,8 +19,7 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
     public event UnityAction StoppedRunning = delegate { };
     public event UnityAction StartedSprinting = delegate { };
     public event UnityAction StopedSprinting = delegate { };
-
-
+    public event UnityAction InteractPerformed = delegate { };
 
     GameInput _playerInput;
 
@@ -103,6 +101,13 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
     public void OnZoom(InputAction.CallbackContext context)
     { }
 
-
-
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        switch (context.phase)
+        {
+            case InputActionPhase.Performed:
+                InteractPerformed.Invoke();
+                break;
+        }
+    }
 }

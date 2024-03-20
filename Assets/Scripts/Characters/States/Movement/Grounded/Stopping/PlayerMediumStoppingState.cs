@@ -10,8 +10,6 @@ namespace CC.Characters.States
         {
             base.Enter();
 
-            // StartAnimation(stateMachine.Player.AnimationData.MediumStopParameterHash);
-
             _playerController.PlayerCurrentData.MovementDecelerationForce = _playerController.PlayerMovementData.MediumDecelerationForce;
 
             _playerController.PlayerCurrentData.CurrentJumpForce = _playerController.PlayerMovementData.MediumForce;
@@ -20,8 +18,6 @@ namespace CC.Characters.States
         public override void Exit()
         {
             base.Exit();
-
-            // StopAnimation(stateMachine.Player.AnimationData.MediumStopParameterHash);
         }
     }
 }

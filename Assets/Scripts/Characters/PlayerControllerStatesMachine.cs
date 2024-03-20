@@ -312,9 +312,6 @@ namespace CC.Characters
 
             }
         }
-
-
-
         private void OnTriggerEnter(Collider collider)
         {
             TriggerEnterEvent.Invoke(collider);
@@ -324,9 +321,6 @@ namespace CC.Characters
         {
             TriggerExitEvent.Invoke(collider);
         }
-
-
-
 
     }
 }

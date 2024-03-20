@@ -58,25 +58,6 @@ namespace CC.Characters.States
         protected override void OnContactWithGround(Collider collider)
         {
             _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.LIGHTLANDING);
-
-            // float fallDistance = playerPositionOnEnter.y - _playerController.transform.position.y;
-
-            // if (fallDistance < airborneData.FallData.MinimumDistanceToBeConsideredHardFall)
-            // {
-            //     stateMachine.ChangeState(stateMachine.LightLandingState);
-
-            //     return;
-            // }
-
-            // if (stateMachine.ReusableData.ShouldWalk && !stateMachine.ReusableData.ShouldSprint || stateMachine.ReusableData.MovementInput == Vector2.zero)
-            // {
-            //     stateMachine.ChangeState(stateMachine.HardLandingState);
-
-            //     return;
-            // }
-
-            // stateMachine.ChangeState(stateMachine.RollingState);
-
         }
     }
 }

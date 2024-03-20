@@ -7,7 +7,6 @@ namespace CC.Characters.States
 
     public class PlayerRuningState : PlayerMovingState
     {
-        // private float startTime;
         public PlayerRuningState(PlayerControllerStatesMachine _playerController) : base(_playerController)
         {
         }
@@ -21,8 +20,6 @@ namespace CC.Characters.States
             StartAnimation("isRuning");
 
             _playerController.PlayerCurrentData.CurrentJumpForce = _playerController.PlayerMovementData.MediumForce;
-
-            // startTime = Time.time;
         }
 
         public override void Exit()

@@ -31,8 +31,6 @@ namespace CC.Characters.States
 
             shouldKeepRotating = _playerController.PlayerCurrentData.MovementInput != Vector2.zero;
 
-            // UpdateConsecutiveDashes();
-
             startTime = Time.time;
         }
 
@@ -108,29 +106,6 @@ namespace CC.Characters.States
 
             _playerController.Rigidbody.velocity = dashDirection * GetMovementSpeed(false);
         }
-
-        // private void UpdateConsecutiveDashes()
-        // {
-        //     if (!IsConsecutive())
-        //     {
-        //         consecutiveDashesUsed = 0;
-        //     }
-
-        //     ++consecutiveDashesUsed;
-
-        //     if (consecutiveDashesUsed == groundedData.DashData.ConsecutiveDashesLimitAmount)
-        //     {
-        //         consecutiveDashesUsed = 0;
-
-        //         stateMachine.Player.Input.DisableActionFor(stateMachine.Player.Input.PlayerActions.Dash, groundedData.DashData.DashLimitReachedCooldown);
-        //     }
-        // }
-
-        // private bool IsConsecutive()
-        // {
-        //     return Time.time < startTime + groundedData.DashData.TimeToBeConsideredConsecutive;
-        // }
-
         protected override void OnDashStarted()
         {
         }

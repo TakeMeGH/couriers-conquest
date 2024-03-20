@@ -11,8 +11,6 @@ namespace CC.Characters.States
             base.Enter();
 
             StartAnimation("Landing");
-
-            DisableCameraRecentering();
         }
 
         public override void Exit()

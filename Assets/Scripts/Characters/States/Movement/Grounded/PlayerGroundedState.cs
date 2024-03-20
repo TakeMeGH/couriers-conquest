@@ -20,7 +20,6 @@ namespace CC.Characters.States
 
             UpdateShouldSprintState();
 
-            // UpdateCameraRecenteringState(stateMachine.ReusableData.MovementInput);
         }
 
         public override void Exit()
@@ -92,7 +91,6 @@ namespace CC.Characters.States
             {
                 _playerController.PlayerCurrentData.MovementOnSlopesSpeedModifier = slopeSpeedModifier;
 
-                // UpdateCameraRecenteringState(stateMachine.ReusableData.MovementInput);
             }
 
             return slopeSpeedModifier;

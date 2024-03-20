@@ -15,7 +15,6 @@ namespace CC.Characters.States
         {
             _playerController.PlayerCurrentData.MovementSpeedModifier = 0f;
 
-            // stateMachine.ReusableData.BackwardsCameraRecenteringData = groundedData.IdleData.BackwardsCameraRecenteringData;
             base.Enter();
 
             StartAnimation("isIdling");
