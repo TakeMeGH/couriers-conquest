@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Example.Input
+namespace CC.Example.Input
 {
     public class ExampleInputReader : MonoBehaviour
     {

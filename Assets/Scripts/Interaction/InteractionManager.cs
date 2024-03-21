@@ -3,15 +3,13 @@ using UnityEngine;
 
 namespace CC.Interaction
 {
-    public enum InteractionType { None = 0, PickUp, Shop, Talk };
 
     public class InteractionManager : MonoBehaviour
     {
         [SerializeField] private InputReader _inputReader = default;
 
-        public InteractionType currentInteractionType { get; private set; }
 
-        List<Interaction> _potentialInteractions = new List<Interaction>();
+        List<IInteraction> _potentialInteractions = new List<IInteraction>();
 
         private void OnEnable()
         {
@@ -27,20 +25,8 @@ namespace CC.Interaction
             if (_potentialInteractions.Count == 0)
                 return;
 
-            currentInteractionType = _potentialInteractions[0].type;
-            Debug.Log(_potentialInteractions[0].type + " " + _potentialInteractions[0].interactableObject);
-
-            switch (_potentialInteractions[0].type)
-            {
-                case InteractionType.Shop:
-                    break;
-
-                case InteractionType.Talk:
-                    break;
-
-                case InteractionType.PickUp:
-                    break;
-            }
+            IInteraction currentInteraction = _potentialInteractions[0];
+            currentInteraction.Interact();
         }
 
         public void OnTriggerChangeDetected(bool entered, GameObject obj)
@@ -53,22 +39,23 @@ namespace CC.Interaction
 
         private void AddPotentialInteraction(GameObject obj)
         {
-            Interaction newPotentialInteraction = new Interaction(obj);
-
-            if (newPotentialInteraction.type != InteractionType.None)
+            if (obj.TryGetComponent<IInteraction>(out IInteraction currentInteraction))
             {
-                _potentialInteractions.Insert(0, newPotentialInteraction); // insert first
+                _potentialInteractions.Insert(0, currentInteraction); // insert first
             }
         }
 
         private void RemovePotentialInteraction(GameObject obj)
         {
-            for (int i = 0; i < _potentialInteractions.Count; i++)
+            if (obj.TryGetComponent<IInteraction>(out IInteraction currentInteraction))
             {
-                if (_potentialInteractions[i].interactableObject == obj)
+                for (int i = 0; i < _potentialInteractions.Count; i++)
                 {
-                    _potentialInteractions.RemoveAt(i);
-                    break;
+                    if (_potentialInteractions[i] == currentInteraction)
+                    {
+                        _potentialInteractions.RemoveAt(i);
+                        break;
+                    }
                 }
             }
         }

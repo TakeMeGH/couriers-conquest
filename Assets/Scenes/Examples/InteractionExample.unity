@@ -240,6 +240,7 @@ GameObject:
   - component: {fileID: 121202128}
   - component: {fileID: 121202127}
   - component: {fileID: 121202126}
+  - component: {fileID: 121202130}
   m_Layer: 0
   m_Name: ShopKeeper
   m_TagString: ShopKeeper
@@ -333,6 +334,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &121202130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121202125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be7f0fc303ca262429ae4b8b389e5e48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &285919627
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,6 +358,7 @@ GameObject:
   - component: {fileID: 285919630}
   - component: {fileID: 285919629}
   - component: {fileID: 285919628}
+  - component: {fileID: 285919632}
   m_Layer: 0
   m_Name: NPC
   m_TagString: NPC
@@ -438,6 +452,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &285919632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285919627}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9737826e56e0bb4189e6fcd09d3698d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &408760647
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,6 +581,7 @@ GameObject:
   - component: {fileID: 520610917}
   - component: {fileID: 520610916}
   - component: {fileID: 520610915}
+  - component: {fileID: 520610919}
   m_Layer: 0
   m_Name: Pickupable
   m_TagString: Pickable
@@ -648,6 +675,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &520610919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 520610914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b200b4bcb082f49a89b8fff07da47f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &531837626
 GameObject:
   m_ObjectHideFlags: 0
