@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{9ebad808-4e4c-4caa-a20b-91994533d031}">
+		<property name="name">
+			<value>StepSurface</value>
+		</property>
+		<relationship name="folder">
+			<destination>{97dbf13d-e09a-4f31-9503-6f8c811859fe}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{dd2e0e3d-a753-4160-8719-426a4597e7c1}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{dd2e0e3d-a753-4160-8719-426a4597e7c1}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
