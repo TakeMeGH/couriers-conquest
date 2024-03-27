@@ -20,6 +20,12 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
     public event UnityAction StartedSprinting = delegate { };
     public event UnityAction StopedSprinting = delegate { };
     public event UnityAction InteractPerformed = delegate { };
+    public event UnityAction TargetEvent = delegate { };
+    public event UnityAction CancelEvent = delegate { };
+    public event UnityAction AttackPerformed = delegate { };
+    public event UnityAction AttackCanceled = delegate { };
+
+
 
     GameInput _playerInput;
 
@@ -110,4 +116,32 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
                 break;
         }
     }
+
+    public void OnTarget(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            TargetEvent.Invoke();
+
+    }
+    public void OnCancel(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            CancelEvent.Invoke();
+
+
+    }
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        switch (context.phase)
+        {
+            case InputActionPhase.Performed:
+                AttackPerformed.Invoke();
+                break;
+            case InputActionPhase.Canceled:
+                AttackCanceled.Invoke();
+                break;
+        }
+
+    }
+
 }
