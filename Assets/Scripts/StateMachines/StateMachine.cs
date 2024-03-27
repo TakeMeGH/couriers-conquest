@@ -1,20 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
-public abstract class StateMachine : MonoBehaviour
+namespace CC.StateMachine
 {
-    private State currentState;
-
-    public void SwitchState(State newState)
-    {   
-        currentState?.Exit();
-        currentState = newState;
-        currentState?.Enter();        
-    }
-
-    private void Update()
+    public abstract class StateMachine : MonoBehaviour
     {
-        currentState?.Tick(Time.deltaTime);
+        private IState currentState;
+
+        public void SwitchState(IState newState)
+        {
+            currentState?.Exit();
+            currentState = newState;
+            currentState?.Enter();
+        }
+
+        private void Update()
+        {
+            currentState?.Update();
+        }
+
+        private void FixedUpdate()
+        {
+            currentState?.PhysicsUpdate();
+
+        }
     }
 }

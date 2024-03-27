@@ -116,24 +116,28 @@ namespace CC.Characters.States
 
         protected virtual void OnDashStarted()
         {
-            _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.DASHING);
+            _playerController.SwitchState(_playerController.PlayerDashingState);
+            // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.DASHING);
         }
 
         protected virtual void OnJumpStarted()
         {
-            _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.JUMPING);
+            _playerController.SwitchState(_playerController.PlayerJumpingState);
+            // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.JUMPING);
         }
 
         protected virtual void OnMove()
         {
             if (_playerController.PlayerCurrentData.ShouldSprint)
             {
-                _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.SPRINTING);
+                _playerController.SwitchState(_playerController.PlayerSprintingState);
+                // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.SPRINTING);
 
                 return;
             }
 
-            _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.RUNING);
+            _playerController.SwitchState(_playerController.PlayerRuningState);
+            // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.RUNING);
         }
 
         protected override void OnContactWithGroundExited(Collider collider)
@@ -166,7 +170,9 @@ namespace CC.Characters.States
 
         protected virtual void OnFall()
         {
-            _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.FALLING);
+            _playerController.SwitchState(_playerController.PlayerFallingState);
+
+            // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.FALLING);
         }
 
         protected override void OnMovementPerformed(Vector2 movement)

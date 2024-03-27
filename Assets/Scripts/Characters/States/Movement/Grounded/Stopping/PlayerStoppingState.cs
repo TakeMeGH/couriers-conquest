@@ -42,7 +42,8 @@ namespace CC.Characters.States
 
         public override void OnAnimationTransitionEvent()
         {
-            _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.IDLING);
+            _playerController.SwitchState(_playerController.PlayerIdlingState);
+            // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.IDLING);
         }
 
         protected override void AddInputActions()

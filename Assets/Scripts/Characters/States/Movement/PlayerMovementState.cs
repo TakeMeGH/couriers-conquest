@@ -1,4 +1,4 @@
-using CC.StatesInteface;
+using CC.StateMachine;
 using UnityEngine;
 
 namespace CC.Characters.States

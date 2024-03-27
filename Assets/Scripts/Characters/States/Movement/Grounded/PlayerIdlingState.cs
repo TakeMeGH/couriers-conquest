@@ -13,6 +13,7 @@ namespace CC.Characters.States
 
         public override void Enter()
         {
+            Debug.Log("ENTER");
             _playerController.PlayerCurrentData.MovementSpeedModifier = 0f;
 
             base.Enter();
