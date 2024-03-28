@@ -24,6 +24,7 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
     public event UnityAction CancelEvent = delegate { };
     public event UnityAction AttackPerformed = delegate { };
     public event UnityAction AttackCanceled = delegate { };
+    public bool IsAttacking {get; private set;}
 
 
 
@@ -136,9 +137,11 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
         {
             case InputActionPhase.Performed:
                 AttackPerformed.Invoke();
+                IsAttacking = true;
                 break;
             case InputActionPhase.Canceled:
                 AttackCanceled.Invoke();
+                IsAttacking = false;
                 break;
         }
 

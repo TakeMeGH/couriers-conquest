@@ -1,110 +1,102 @@
-// using System;
-// using System.Collections;
-// using System.Collections.Generic;
-// using UnityEngine;
+using UnityEngine;
 
 
-// namespace CC.Characters.States
-// {
-//     public class PlayerAttackingState : PlayerMovementState
-//     {
-//         private float previousFrameTime;
-//         private bool alreadyAppliedForce;
+namespace CC.Characters.States
+{
+    public class PlayerAttackingState : PlayerAttackState
+    {
+        private float previousFrameTime;
+        private bool alreadyAppliedForce;
 
-//         private Attack attack;
-//         public PlayerAttackingState(PlayerControllerStatesMachine _playerController, int attackIndex) : base(_playerController)
-//         {
-//             attack = stateMachine.Attacks[attackIndex];
-//         }
+        private AttackSO attack;
+        public PlayerAttackingState(PlayerControllerStatesMachine _playerController, int attackIndex) : base(_playerController)
+        {
+            attack = _playerController.Attacks[attackIndex];
+        }
 
-//         public override void Enter()
-//         {
-//             stateMachine.Weapon.SetAttack(attack.Damage);
-//             stateMachine.Animator.CrossFadeInFixedTime(attack.AnimationName, attack.TransitionDuration);
-//         }
+        public override void Enter()
+        {
+            base.Enter();
+            
+            _playerController.Weapon.SetAttack(attack.Damage);
+            StartAnimation(attack.AnimationName);
+            // stateMachine.Animator.CrossFadeInFixedTime(attack.AnimationName, attack.TransitionDuration);
+        }
 
-//         public override void Tick(float deltaTime)
-//         {
-//             Move(deltaTime);
+        public override void Update()
+        {
+            base.Update();
 
-//             FaceTarget();
+            float normalizedTime = GetNormalizedTime();
 
-//             float normalizedTime = GetNormalizedTime();
+            if (normalizedTime >= previousFrameTime && normalizedTime < 1f)
+            {
+                if (normalizedTime >= attack.ForceTime)
+                {
+                    TryApplyForce();
+                }
 
-//             if (normalizedTime >= previousFrameTime && normalizedTime < 1f)
-//             {
-//                 if (normalizedTime >= attack.ForceTime)
-//                 {
-//                     TryApplyForce();
-//                 }
+                if (_playerController.InputReader.IsAttacking)
+                {
+                    TryComboAttack(normalizedTime);
+                }
+            }
+            else
+            {
+                _playerController.SwitchState(_playerController.PlayerIdlingState);
+                // if (stateMachine.Targeter.CurrentTarget != null)
+                // {
+                //     stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
+                // }
+                // else
+                // {
+                //     stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
+                // }
+            }
 
-//                 if (stateMachine.InputReader.IsAttacking)
-//                 {
-//                     TryComboAttack(normalizedTime);
-//                 }
-//             }
-//             else
-//             {
-//                 if (stateMachine.Targeter.CurrentTarget != null)
-//                 {
-//                     stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
-//                 }
-//                 else
-//                 {
-//                     stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
-//                 }
-//             }
+            previousFrameTime = normalizedTime;
+        }
 
-//             previousFrameTime = normalizedTime;
-//         }
+        public override void Exit()
+        {
+            base.Exit();
+        }
 
-//         public override void Exit()
-//         {
+        private void TryComboAttack(float normalizedTime)
+        {
+            if (attack.ComboStateIndex == -1) { return; }
 
-//         }
+            if (normalizedTime < attack.ComboAttackTime) { return; }
 
-//         private void TryComboAttack(float normalizedTime)
-//         {
-//             if (attack.ComboStateIndex == -1) { return; }
+            _playerController.SwitchState(_playerController.PlayerAttackingStates[attack.ComboStateIndex]);
+        }
 
-//             if (normalizedTime < attack.ComboAttackTime) { return; }
+        private void TryApplyForce()
+        {
+            if (alreadyAppliedForce) { return; }
 
-//             stateMachine.SwitchState
-//             (
-//                 new PlayerAttackingState
-//                 (
-//                     stateMachine,
-//                     attack.ComboStateIndex
-//                 )
-//             );
-//         }
+            _playerController.Rigidbody.AddForce(_playerController.transform.forward * attack.Force, ForceMode.VelocityChange);
 
-//         private void TryApplyForce()
-//         {
-//             if (alreadyAppliedForce) { return; }
+            alreadyAppliedForce = true;
+        }
 
-//             stateMachine.ForceReceiver.AddForce(stateMachine.transform.forward * attack.Force);
+        private float GetNormalizedTime()
+        {
+            AnimatorStateInfo currentInfo = _playerController.Animator.GetCurrentAnimatorStateInfo(0);
+            AnimatorStateInfo nextInfo = _playerController.Animator.GetNextAnimatorStateInfo(0);
 
-//             alreadyAppliedForce = true;
-//         }
-
-//         private float GetNormalizedTime()
-//         {
-//             AnimatorStateInfo currentInfo = stateMachine.Animator.GetCurrentAnimatorStateInfo(0);
-//             AnimatorStateInfo nextInfo = stateMachine.Animator.GetNextAnimatorStateInfo(0);
-
-//             if (stateMachine.Animator.IsInTransition(0) && nextInfo.IsTag("Attack"))
-//             {
-//                 return nextInfo.normalizedTime;
-//             }
-//             else if (!stateMachine.Animator.IsInTransition(0) && currentInfo.IsTag("Attack"))
-//             {
-//                 return currentInfo.normalizedTime;
-//             }
-//             else
-//             {
-//                 return 0f;
-//             }
-//         }
-//     }
-// }
+            if (_playerController.Animator.IsInTransition(0) && nextInfo.IsTag("Attack"))
+            {
+                return nextInfo.normalizedTime;
+            }
+            else if (!_playerController.Animator.IsInTransition(0) && currentInfo.IsTag("Attack"))
+            {
+                return currentInfo.normalizedTime;
+            }
+            else
+            {
+                return 0f;
+            }
+        }
+    }
+}

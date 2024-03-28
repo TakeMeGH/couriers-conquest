@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b11dc634ddf6d4a4c83184157d1af86b, type: 3}
   m_Name: AttackMove
   m_EditorClassIdentifier: 
-  <AnimationName>k__BackingField: 
-  <ComboStateIndex>k__BackingField: -1
-  <ComboAttackTime>k__BackingField: 0
-  <ForceTime>k__BackingField: 0
-  <Force>k__BackingField: 0
-  <Damage>k__BackingField: 0
+  <AnimationName>k__BackingField: Attack1
+  <ComboStateIndex>k__BackingField: 1
+  <ComboAttackTime>k__BackingField: 0.8
+  <ForceTime>k__BackingField: 0.15
+  <Force>k__BackingField: 15
+  <Damage>k__BackingField: 5

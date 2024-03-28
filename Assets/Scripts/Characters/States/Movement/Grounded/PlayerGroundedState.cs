@@ -22,6 +22,17 @@ namespace CC.Characters.States
 
         }
 
+        public override void Update()
+        {
+            base.Update();
+
+            if (_playerController.InputReader.IsAttacking)
+            {
+                _playerController.SwitchState(_playerController.PlayerAttackingStates[0]);
+                return;
+            }
+        }
+
         public override void Exit()
         {
             base.Exit();
