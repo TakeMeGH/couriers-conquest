@@ -5,7 +5,7 @@ namespace CC.Characters.States
 {
     public class PlayerAttackingState : PlayerAttackState
     {
-        private float previousFrameTime;
+        private float previousFrameTime = 0;
         private bool alreadyAppliedForce;
 
         private AttackSO attack;
@@ -17,7 +17,6 @@ namespace CC.Characters.States
         public override void Enter()
         {
             base.Enter();
-            
             _playerController.Weapon.SetAttack(attack.Damage);
             StartAnimation(attack.AnimationName);
             // stateMachine.Animator.CrossFadeInFixedTime(attack.AnimationName, attack.TransitionDuration);
@@ -25,7 +24,7 @@ namespace CC.Characters.States
 
         public override void Update()
         {
-            base.Update();
+            // base.Update();
 
             float normalizedTime = GetNormalizedTime();
 
@@ -60,6 +59,9 @@ namespace CC.Characters.States
         public override void Exit()
         {
             base.Exit();
+            previousFrameTime = 0f;
+            StopAnimation(attack.AnimationName);
+
         }
 
         private void TryComboAttack(float normalizedTime)
