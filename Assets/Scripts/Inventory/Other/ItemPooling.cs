@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemPooling : MonoBehaviour
+public class ObjectPooling : MonoBehaviour
 {
-    public static ItemPooling SharedInstance;
-    public List<GameObject> pooledObjects;
-    public GameObject objectToPool;
-    public int amountToPool;
+    public static ObjectPooling SharedInstance;
+    [SerializeField] List<List<GameObject>> _pooledObjects = new();
+    public List<ObjectToPool> ObjectsToPool;
 
     void Awake()
     {
@@ -16,25 +15,44 @@ public class ItemPooling : MonoBehaviour
 
     void Start()
     {
-        pooledObjects = new List<GameObject>();
         GameObject tmp;
-        for (int i = 0; i < amountToPool; i++)
+        for (int i = 0; i < ObjectsToPool.Count; i++)
         {
-            tmp = Instantiate(objectToPool, transform);
-            tmp.SetActive(false);
-            pooledObjects.Add(tmp);
+            var currentList = new List<GameObject>();
+            for (int j = 0; j < ObjectsToPool[i].amountToPool; j++)
+            {
+                tmp = Instantiate(ObjectsToPool[i].Object, transform);
+                tmp.SetActive(false);
+                currentList.Add(tmp);
+            }
+            _pooledObjects.Add(currentList);
         }
     }
 
-    public GameObject GetPooledObject()
+    public GameObject GetPooledObject(PoolObjectType objectType)
     {
-        for (int i = 0; i < amountToPool; i++)
+        int objectTypeInt = (int)objectType;
+        for (int i = 0; i < _pooledObjects[objectTypeInt].Count; i++)
         {
-            if (!pooledObjects[i].activeInHierarchy)
+            if (!_pooledObjects[objectTypeInt][i].activeInHierarchy)
             {
-                return pooledObjects[i];
+                return _pooledObjects[objectTypeInt][i];
             }
         }
         return null;
     }
+}
+
+public enum PoolObjectType
+{
+    Item,
+    Arrow,
+}
+
+[System.Serializable]
+public struct ObjectToPool
+{
+    public GameObject Object;
+    public PoolObjectType ObjectType;
+    public int amountToPool;
 }

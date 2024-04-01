@@ -26,7 +26,23 @@ namespace cc_inventory
         [SerializeField] private float _dropSpeed = 5;
         [SerializeField] private Volume _blurEffect;
 
-        // Start is called before the first frame update
+        [SerializeField] InputReader _inputReader;
+
+        private void OnEnable()
+        {
+            _inputReader.OpenInventoryEvent += OpenInventory;
+            _inputReader.CloseInventoryEvent += CloseInventory;
+            _inputReader.DropItemPerformed += AttemptToDrop;
+        }
+
+        private void OnDisable()
+        {
+            _inputReader.OpenInventoryEvent -= OpenInventory;
+            _inputReader.CloseInventoryEvent -= CloseInventory;
+            _inputReader.DropItemPerformed -= AttemptToDrop;
+
+
+        }
         void Start()
         {
             for (int i = 0; i < _inventorySize; i++)
@@ -34,34 +50,33 @@ namespace cc_inventory
                 items.Add(new ItemSlotInfo(null, 0));
             }
         }
-
-        void Update()
+        void OpenInventory()
         {
-            if (Input.GetKeyDown(KeyCode.Tab))
-            {
-                if (_inventoryMenu.activeSelf)
-                {
-                    _inventoryMenu.SetActive(false);
-                    _mouse.EmptySlot();
-                    _blurEffect.enabled = false;
-                    Cursor.lockState = CursorLockMode.Locked;
-                }
-                else
-                {
-                    _inventoryMenu.SetActive(true);
-                    Cursor.lockState = CursorLockMode.Confined;
-                    _blurEffect.enabled = true;
-                    RefreshInventory();
-                }
-            }
-            if (Input.GetKeyDown(KeyCode.Mouse1) && _mouse.itemSlot.item != null)
-            {
-                RefreshInventory();
-            }
+            _inventoryMenu.SetActive(true);
+            Cursor.lockState = CursorLockMode.Confined;
+            _blurEffect.enabled = true;
+            RefreshInventory();
+            _inputReader.EnableInventoryUIInput();
 
-            if (Input.GetKeyDown(KeyCode.Mouse0) && _mouse.itemSlot.item != null && !EventSystem.current.IsPointerOverGameObject())
+        }
+
+        void CloseInventory()
+        {
+            _inventoryMenu.SetActive(false);
+            _mouse.EmptySlot();
+            _blurEffect.enabled = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            _inputReader.EnableGameplayInput();
+
+
+        }
+
+        void AttemptToDrop()
+        {
+            if (_mouse.itemSlot.item != null && !EventSystem.current.IsPointerOverGameObject())
             {
                 DropItem(_mouse.itemSlot.item);
+
             }
         }
 
@@ -180,7 +195,7 @@ namespace cc_inventory
 
             Transform camTransform = Camera.main.transform;
 
-            GameObject dropPrefab = ItemPooling.SharedInstance.GetPooledObject();
+            GameObject dropPrefab = ObjectPooling.SharedInstance.GetPooledObject(PoolObjectType.Item);
             if (dropPrefab != null)
             {
                 dropPrefab.transform.position = transform.position + new Vector3(0, 1.8f, 0) + camTransform.forward;
