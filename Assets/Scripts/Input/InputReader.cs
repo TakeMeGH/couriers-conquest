@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "InputReader", menuName = "Game/Input Reader")]
-public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
+public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameInput.IInventoryUIActions
 {
     // Assign delegate{} to events to initialise them with an empty delegate
     // so we can skip the null check when we use them
@@ -20,6 +20,11 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
     public event UnityAction StartedSprinting = delegate { };
     public event UnityAction StopedSprinting = delegate { };
     public event UnityAction InteractPerformed = delegate { };
+    public event UnityAction OpenInventoryEvent = delegate { };
+    public event UnityAction CloseInventoryEvent = delegate { };
+    public event UnityAction DropItemPerformed = delegate { };
+
+
 
     GameInput _playerInput;
 
@@ -29,10 +34,11 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
         {
             _playerInput = new GameInput();
             _playerInput.Gameplay.SetCallbacks(this);
+            _playerInput.InventoryUI.SetCallbacks(this);
         }
-        _playerInput.Gameplay.Enable();
-
+        EnableGameplayInput();
     }
+
 
     private void OnDisable()
     {
@@ -110,4 +116,37 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions
                 break;
         }
     }
+
+    public void OnOpenInventory(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            OpenInventoryEvent.Invoke();
+    }
+
+
+    public void OnCloseInventory(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            CloseInventoryEvent.Invoke();
+    }
+
+    public void OnDropItem(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            DropItemPerformed.Invoke();
+    }
+
+    public void EnableGameplayInput()
+    {
+        _playerInput.Gameplay.Enable();
+        _playerInput.InventoryUI.Disable();
+    }
+
+    public void EnableInventoryUIInput()
+    {
+        _playerInput.Gameplay.Disable();
+        _playerInput.InventoryUI.Enable();
+    }
+
+
 }
