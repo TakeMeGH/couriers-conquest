@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace cc_inventory
+namespace CC.Inventory
 {
     public class MoveCube : MonoBehaviour
     {

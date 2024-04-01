@@ -1461,6 +1461,7 @@ GameObject:
   - component: {fileID: 1126281978888652164}
   - component: {fileID: 5982408834834110844}
   - component: {fileID: 1733282255323288743}
+  - component: {fileID: 8396931215882997547}
   m_Layer: 5
   m_Name: Player UI
   m_TagString: Untagged
@@ -1554,6 +1555,32 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &8396931215882997547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9220070665131688062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f938071271bf89047987191d8346db70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items: []
+  _inventoryMenu: {fileID: 6429396254883415670}
+  _itemPanel: {fileID: 0}
+  _itemPanelGrid: {fileID: 2410612041288194848}
+  _mouse: {fileID: 6434735748806763258}
+  _inventorySize: 24
+  _dropSpeed: 5
+  _blurEffect: {fileID: 0}
+  _inputReader: {fileID: 11400000, guid: 2c06813ec1504fb49916705513d476fd, type: 2}
+  _addItemToInventory: {fileID: 11400000, guid: 4611073ba66144c44ba509f62ea86853,
+    type: 2}
+  references:
+    version: 2
+    RefIds: []
 --- !u!1001 &490548319852761031
 PrefabInstance:
   m_ObjectHideFlags: 0

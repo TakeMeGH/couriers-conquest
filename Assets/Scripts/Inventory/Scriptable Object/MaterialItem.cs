@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace cc_inventory
+namespace CC.Inventory
 {
     [CreateAssetMenu(fileName = "ItemData", menuName = "Items/Material", order = 1)]
     public class MaterialItem : ABaseItem

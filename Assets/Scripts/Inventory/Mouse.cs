@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace cc_inventory
+namespace CC.Inventory
 {
     public class Mouse : MonoBehaviour
     {

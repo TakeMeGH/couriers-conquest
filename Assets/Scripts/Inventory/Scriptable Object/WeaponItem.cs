@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace cc_inventory
+namespace CC.Inventory
 {
     [CreateAssetMenu(fileName = "WeaponItem", menuName = "Items/Weapon", order = 3)]
     public class WeaponItem : ABaseItem

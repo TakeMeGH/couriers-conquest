@@ -4,8 +4,9 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
+using CC.Events;
 
-namespace cc_inventory
+namespace CC.Inventory
 {
     public class InventoryManager : MonoBehaviour
     {
@@ -25,14 +26,15 @@ namespace cc_inventory
         [SerializeField] private int _inventorySize = 24;
         [SerializeField] private float _dropSpeed = 5;
         [SerializeField] private Volume _blurEffect;
-
         [SerializeField] InputReader _inputReader;
+        [SerializeField] ItemInventoryEventChannel _addItemToInventory;
 
         private void OnEnable()
         {
             _inputReader.OpenInventoryEvent += OpenInventory;
             _inputReader.CloseInventoryEvent += CloseInventory;
             _inputReader.DropItemPerformed += AttemptToDrop;
+            _addItemToInventory.OnEventRaised += AddItem;
         }
 
         private void OnDisable()
@@ -40,6 +42,8 @@ namespace cc_inventory
             _inputReader.OpenInventoryEvent -= OpenInventory;
             _inputReader.CloseInventoryEvent -= CloseInventory;
             _inputReader.DropItemPerformed -= AttemptToDrop;
+            _addItemToInventory.OnEventRaised += AddItem;
+
 
 
         }
@@ -193,13 +197,13 @@ namespace cc_inventory
                 return;
             }
 
-            Transform camTransform = Camera.main.transform;
-
+            Transform camTransform = UnityEngine.Camera.main.transform;
+            Transform _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
             GameObject dropPrefab = ObjectPooling.SharedInstance.GetPooledObject(PoolObjectType.Item);
             if (dropPrefab != null)
             {
-                dropPrefab.transform.position = transform.position + new Vector3(0, 1.8f, 0) + camTransform.forward;
-                dropPrefab.transform.rotation = transform.rotation;
+                dropPrefab.transform.position = _playerTransform.position + new Vector3(0, 1.8f, 0) + camTransform.forward;
+                dropPrefab.transform.rotation = _playerTransform.rotation;
                 dropPrefab.SetActive(true);
             }
 

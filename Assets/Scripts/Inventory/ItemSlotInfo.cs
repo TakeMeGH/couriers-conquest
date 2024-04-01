@@ -1,6 +1,6 @@
 
 
-namespace cc_inventory {
+namespace CC.Inventory {
 
     [System.Serializable]
     public class ItemSlotInfo

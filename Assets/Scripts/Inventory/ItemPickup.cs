@@ -1,12 +1,14 @@
 using System.Collections;
+using CC.Events;
 using UnityEngine;
 
-namespace cc_inventory
+namespace CC.Inventory
 {
     public class ItemPickup : MonoBehaviour
     {
         [SerializeField] private ABaseItem _item;
         [SerializeField] private int _amount = 1;
+        [SerializeField] ItemInventoryEventChannel _addItemToInventory;
         private bool isPickup = false;
 
         public bool isDropItem = false;
@@ -18,11 +20,9 @@ namespace cc_inventory
         {
             if (other.tag == "Player")
             {
-                if(!isPickup)
+                if (!isPickup)
                 {
-                    InventoryManager playerInventory = other.GetComponent<InventoryManager>();
-
-                    if (playerInventory != null) PickUpItem(playerInventory);
+                    PickUpItem();
                 }
             }
         }
@@ -39,9 +39,9 @@ namespace cc_inventory
             isPickup = false;
         }
 
-        public void PickUpItem(InventoryManager inventory)
+        public void PickUpItem()
         {
-            _amount = inventory.AddItem(_item, _amount);
+            _amount = _addItemToInventory.RaiseEvent(_item, _amount);
 
             if (isDropItem)
             {
