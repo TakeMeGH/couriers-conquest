@@ -5,7 +5,7 @@ namespace CC.Characters.States
 {
     public class PlayerAttackingState : PlayerAttackState
     {
-        private float previousFrameTime = 0;
+        private float previousFrameTime;
         private bool alreadyAppliedForce;
 
         private AttackSO attack;
@@ -19,7 +19,12 @@ namespace CC.Characters.States
             base.Enter();
             _playerController.Weapon.SetAttack(attack.Damage);
             StartAnimation(attack.AnimationName);
+
             // stateMachine.Animator.CrossFadeInFixedTime(attack.AnimationName, attack.TransitionDuration);
+            
+            ResetVelocity();
+            alreadyAppliedForce = false;
+            previousFrameTime = 0;
         }
 
         public override void Update()
@@ -28,6 +33,7 @@ namespace CC.Characters.States
 
             float normalizedTime = GetNormalizedTime();
 
+            Debug.Log(normalizedTime + " " + previousFrameTime + " " + (normalizedTime >= previousFrameTime));
             if (normalizedTime >= previousFrameTime && normalizedTime < 1f)
             {
                 if (normalizedTime >= attack.ForceTime)
@@ -40,8 +46,9 @@ namespace CC.Characters.States
                     TryComboAttack(normalizedTime);
                 }
             }
-            else
+            else if (normalizedTime >= 1f)
             {
+                Debug.Log("MASUK SINI");
                 _playerController.SwitchState(_playerController.PlayerIdlingState);
                 // if (stateMachine.Targeter.CurrentTarget != null)
                 // {
@@ -52,8 +59,12 @@ namespace CC.Characters.States
                 //     stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
                 // }
             }
-
             previousFrameTime = normalizedTime;
+        }
+
+        public override void PhysicsUpdate()
+        {
+            Float();
         }
 
         public override void Exit()
@@ -77,7 +88,7 @@ namespace CC.Characters.States
         {
             if (alreadyAppliedForce) { return; }
 
-            _playerController.Rigidbody.AddForce(_playerController.transform.forward * attack.Force, ForceMode.VelocityChange);
+            _playerController.Rigidbody.AddForce(_playerController.transform.forward * attack.Force, ForceMode.Acceleration);
 
             alreadyAppliedForce = true;
         }
@@ -89,10 +100,12 @@ namespace CC.Characters.States
 
             if (_playerController.Animator.IsInTransition(0) && nextInfo.IsTag("Attack"))
             {
+                Debug.Log("NEXT");
                 return nextInfo.normalizedTime;
             }
             else if (!_playerController.Animator.IsInTransition(0) && currentInfo.IsTag("Attack"))
             {
+                Debug.Log("CURR");
                 return currentInfo.normalizedTime;
             }
             else

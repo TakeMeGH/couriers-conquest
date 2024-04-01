@@ -62,7 +62,7 @@ namespace CC.Characters.States
             _playerController.PlayerCurrentData.ShouldSprint = false;
         }
 
-        private void Float()
+        protected void Float()
         {
             Vector3 capsuleColliderCenterInWorldSpace = _playerController.ResizableCapsuleCollider.CapsuleColliderData.Collider.bounds.center;
 
