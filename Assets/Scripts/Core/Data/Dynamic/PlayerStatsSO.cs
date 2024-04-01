@@ -11,7 +11,7 @@ namespace CC.Core.Data.Dynamic
     public class PlayerStatsSO : ASavableModel
     {
         [SerializeField] PlayerStats statData;
-        [SerializeField] List<StatsModifierSO> modifiers;
+        [SerializeField] List<StatsModifier> modifiers;
         public float GetValue(mainStat key)
         {
             if (statData.defaultValue.TryGetValue(key, out float value))

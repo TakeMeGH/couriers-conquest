@@ -7,7 +7,7 @@ using CC.Core.Data.Dynamic;
 namespace CC.Quest
 {
     [CreateAssetMenu(menuName = "Database/QuestDataBase")]
-    public class QuestDatabaseSO : MonoBehaviour
+    public class QuestDatabaseSO : ScriptableObject
     {
         [SerializeField] SerializedDictionary<int, AQuest> _questDict;
         [SerializeField] PlayerStateSO _playerState;
