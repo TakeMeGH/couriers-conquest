@@ -1,0 +1,20 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace cc_inventory
+{
+    [CreateAssetMenu(fileName = "WeaponItem", menuName = "Items/Weapon", order = 3)]
+    public class WeaponItem : ABaseItem
+    {
+        public int weaponLevel;
+        public float attackWeapon;
+        public float healthWeapon;
+        public float costSell;
+
+        public override ItemType GetItemType()
+        {
+            return ItemType.Weapon;
+        }
+    }
+}
