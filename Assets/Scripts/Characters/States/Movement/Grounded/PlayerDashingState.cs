@@ -59,12 +59,13 @@ namespace CC.Characters.States
         {
             if (_playerController.PlayerCurrentData.MovementInput == Vector2.zero)
             {
-                _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.MEDIUMSTOPPING);
-
+                _playerController.SwitchState(_playerController.PlayerMediumStoppingState);
+                // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.MEDIUMSTOPPING);
                 return;
             }
 
-            _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.SPRINTING);
+            _playerController.SwitchState(_playerController.PlayerSprintingState);
+            // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.SPRINTING);
         }
 
         protected override void AddInputActions()

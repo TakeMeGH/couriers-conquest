@@ -1,11 +1,11 @@
 using UnityEngine;
-using KevinCastejon.FiniteStateMachine;
 using CC.Characters.DataBlueprint.Layers;
 using UnityEngine.Events;
+using System.Collections.Generic;
 
 namespace CC.Characters
 {
-    public class PlayerControllerStatesMachine : AbstractFiniteStateMachine
+    public class PlayerControllerStatesMachine : StateMachine.StateMachine
     {
         [field: Header("Input Reader")]
         [field: SerializeField] public InputReader InputReader { get; private set; }
@@ -21,12 +21,17 @@ namespace CC.Characters
         [field: Header("Collisions")]
         [field: SerializeField] public PlayerLayerData LayerData { get; private set; }
 
+        [field: Header("Attack Combo")]
+        [field: SerializeField] public AttackSO[] Attacks { get; private set; }
+        [field: SerializeField] public WeaponDamage Weapon { get; private set; }
+
         #region Component
         public Animator Animator { get; private set; }
         public Rigidbody Rigidbody { get; private set; }
         public Transform MainCameraTransform { get; private set; }
         public PlayerStateData PlayerCurrentData { get; private set; }
         public PlayerResizableCapsuleCollider ResizableCapsuleCollider { get; private set; }
+        
         #endregion
 
         #region Events
@@ -35,49 +40,17 @@ namespace CC.Characters
         #endregion
 
         #region State
-        private States.PlayerIdlingState _playerIdlingState;
-        private States.PlayerRuningState _playerRuningState;
-        private States.PlayerDashingState _playerDashingState;
-        private States.PlayerSprintingState _playerSprintingState;
-        private States.PlayerJumpingState _playerJumpingState;
-        private States.PlayerFallingState _playerFallingState;
-        private States.PlayerLightLandingState _playerLightLandingState;
-        private States.PlayerMediumStoppingState _playerMediumStoppingState;
-
-
+        public States.PlayerIdlingState PlayerIdlingState { get; private set; }
+        public States.PlayerRuningState PlayerRuningState { get; private set; }
+        public States.PlayerDashingState PlayerDashingState { get; private set; }
+        public States.PlayerSprintingState PlayerSprintingState { get; private set; }
+        public States.PlayerJumpingState PlayerJumpingState { get; private set; }
+        public States.PlayerFallingState PlayerFallingState { get; private set; }
+        public States.PlayerLightLandingState PlayerLightLandingState { get; private set; }
+        public States.PlayerMediumStoppingState PlayerMediumStoppingState { get; private set; }
+        public List<States.PlayerAttackingState> PlayerAttackingStates { get; private set; }
         #endregion
 
-
-        public enum PlayerStateEnum
-        {
-            IDLING,
-            RUNING,
-            DASHING,
-            SPRINTING,
-            JUMPING,
-            FALLING,
-            LIGHTLANDING,
-            MEDIUMSTOPPING,
-        }
-        /*
-        Notes : Jangan gunakan ready apabila menggunakan state machine. 
-        Hal ini menyebabkan OnEnter pada state default tidak terpanggil.
-        */
-        private void Awake()
-        {
-            Init(PlayerStateEnum.IDLING,
-                AbstractState.Create<IdlingState, PlayerStateEnum>(PlayerStateEnum.IDLING, this),
-                AbstractState.Create<RuningState, PlayerStateEnum>(PlayerStateEnum.RUNING, this),
-                AbstractState.Create<DashingState, PlayerStateEnum>(PlayerStateEnum.DASHING, this),
-                AbstractState.Create<SprintingState, PlayerStateEnum>(PlayerStateEnum.SPRINTING, this),
-                AbstractState.Create<JumpingState, PlayerStateEnum>(PlayerStateEnum.JUMPING, this),
-                AbstractState.Create<FallingState, PlayerStateEnum>(PlayerStateEnum.FALLING, this),
-                AbstractState.Create<LightLandingState, PlayerStateEnum>(PlayerStateEnum.LIGHTLANDING, this),
-                AbstractState.Create<MediumStoppingState, PlayerStateEnum>(PlayerStateEnum.MEDIUMSTOPPING, this)
-
-            );
-            Initialize();
-        }
 
         private void Initialize()
         {
@@ -90,228 +63,28 @@ namespace CC.Characters
             MainCameraTransform = UnityEngine.Camera.main.transform;
             PlayerCurrentData.TimeToReachTargetRotation = PlayerMovementData.TargetRotationReachTime;
 
-            _playerIdlingState = new States.PlayerIdlingState(this);
-            _playerRuningState = new States.PlayerRuningState(this);
-            _playerDashingState = new States.PlayerDashingState(this);
-            _playerSprintingState = new States.PlayerSprintingState(this);
-            _playerJumpingState = new States.PlayerJumpingState(this);
-            _playerFallingState = new States.PlayerFallingState(this);
-            _playerLightLandingState = new States.PlayerLightLandingState(this);
-            _playerMediumStoppingState = new States.PlayerMediumStoppingState(this);
+            PlayerIdlingState = new States.PlayerIdlingState(this);
+            PlayerRuningState = new States.PlayerRuningState(this);
+            PlayerDashingState = new States.PlayerDashingState(this);
+            PlayerSprintingState = new States.PlayerSprintingState(this);
+            PlayerJumpingState = new States.PlayerJumpingState(this);
+            PlayerFallingState = new States.PlayerFallingState(this);
+            PlayerLightLandingState = new States.PlayerLightLandingState(this);
+            PlayerMediumStoppingState = new States.PlayerMediumStoppingState(this);
+
+            PlayerAttackingStates = new List<States.PlayerAttackingState>();
+            for(int i = 0; i < Attacks.Length; i++){
+                States.PlayerAttackingState newAttackingState = new States.PlayerAttackingState(this, i); 
+                PlayerAttackingStates.Add(newAttackingState);
+            }
         }
-        public class IdlingState : AbstractState
+
+        private void Start()
         {
-            PlayerControllerStatesMachine _playerController;
-            public override void OnEnter()
-            {
-                _playerController = GetStateMachine<PlayerControllerStatesMachine>();
-                _playerController._playerIdlingState.Enter();
-
-
-            }
-            public override void OnUpdate()
-            {
-
-                _playerController._playerIdlingState.Update();
-
-            }
-            public override void OnFixedUpdate()
-            {
-                _playerController._playerIdlingState.PhysicsUpdate();
-
-            }
-
-            public override void OnExit()
-            {
-
-                _playerController._playerIdlingState.Exit();
-
-
-            }
-        }
-        public class RuningState : AbstractState
-        {
-            PlayerControllerStatesMachine _playerController;
-            public override void OnEnter()
-            {
-                _playerController = GetStateMachine<PlayerControllerStatesMachine>();
-                _playerController._playerRuningState.Enter();
-
-            }
-            public override void OnUpdate()
-            {
-                _playerController._playerRuningState.Update();
-
-            }
-
-            public override void OnFixedUpdate()
-            {
-                _playerController._playerRuningState.PhysicsUpdate();
-
-            }
-            public override void OnExit()
-            {
-                _playerController._playerRuningState.Exit();
-
-
-            }
+            Initialize();
+            SwitchState(PlayerIdlingState);
         }
 
-        public class DashingState : AbstractState
-        {
-            PlayerControllerStatesMachine _playerController;
-            public override void OnEnter()
-            {
-                _playerController = GetStateMachine<PlayerControllerStatesMachine>();
-                _playerController._playerDashingState.Enter();
-            }
-            public override void OnUpdate()
-            {
-                _playerController._playerDashingState.Update();
-
-            }
-
-            public override void OnFixedUpdate()
-            {
-                _playerController._playerDashingState.PhysicsUpdate();
-            }
-
-            public override void OnExit()
-            {
-                _playerController._playerDashingState.Exit();
-
-            }
-        }
-        public class SprintingState : AbstractState
-        {
-            PlayerControllerStatesMachine _playerController;
-            public override void OnEnter()
-            {
-                _playerController = GetStateMachine<PlayerControllerStatesMachine>();
-                _playerController._playerSprintingState.Enter();
-            }
-            public override void OnUpdate()
-            {
-                _playerController._playerSprintingState.Update();
-
-            }
-
-            public override void OnFixedUpdate()
-            {
-                _playerController._playerSprintingState.PhysicsUpdate();
-            }
-
-            public override void OnExit()
-            {
-                _playerController._playerSprintingState.Exit();
-
-            }
-        }
-
-        public class JumpingState : AbstractState
-        {
-            PlayerControllerStatesMachine _playerController;
-            public override void OnEnter()
-            {
-                _playerController = GetStateMachine<PlayerControllerStatesMachine>();
-                _playerController._playerJumpingState.Enter();
-            }
-            public override void OnUpdate()
-            {
-                _playerController._playerJumpingState.Update();
-
-            }
-
-            public override void OnFixedUpdate()
-            {
-                _playerController._playerJumpingState.PhysicsUpdate();
-            }
-
-            public override void OnExit()
-            {
-                _playerController._playerJumpingState.Exit();
-
-            }
-        }
-
-        public class FallingState : AbstractState
-        {
-            PlayerControllerStatesMachine _playerController;
-            public override void OnEnter()
-            {
-                _playerController = GetStateMachine<PlayerControllerStatesMachine>();
-                _playerController._playerFallingState.Enter();
-            }
-            public override void OnUpdate()
-            {
-                _playerController._playerFallingState.Update();
-
-            }
-
-            public override void OnFixedUpdate()
-            {
-                _playerController._playerFallingState.PhysicsUpdate();
-            }
-
-            public override void OnExit()
-            {
-                _playerController._playerFallingState.Exit();
-
-            }
-        }
-
-
-        public class LightLandingState : AbstractState
-        {
-            PlayerControllerStatesMachine _playerController;
-            public override void OnEnter()
-            {
-                _playerController = GetStateMachine<PlayerControllerStatesMachine>();
-                _playerController._playerLightLandingState.Enter();
-            }
-            public override void OnUpdate()
-            {
-                _playerController._playerLightLandingState.Update();
-
-            }
-
-            public override void OnFixedUpdate()
-            {
-                _playerController._playerLightLandingState.PhysicsUpdate();
-            }
-
-            public override void OnExit()
-            {
-                _playerController._playerLightLandingState.Exit();
-
-            }
-        }
-
-        public class MediumStoppingState : AbstractState
-        {
-            PlayerControllerStatesMachine _playerController;
-            public override void OnEnter()
-            {
-                _playerController = GetStateMachine<PlayerControllerStatesMachine>();
-                _playerController._playerMediumStoppingState.Enter();
-            }
-            public override void OnUpdate()
-            {
-                _playerController._playerMediumStoppingState.Update();
-
-            }
-
-            public override void OnFixedUpdate()
-            {
-                _playerController._playerMediumStoppingState.PhysicsUpdate();
-            }
-
-            public override void OnExit()
-            {
-                _playerController._playerMediumStoppingState.Exit();
-
-            }
-        }
         private void OnTriggerEnter(Collider collider)
         {
             TriggerEnterEvent.Invoke(collider);
