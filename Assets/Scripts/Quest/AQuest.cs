@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace CC.Quest
 {
-    public abstract class AQuest : MonoBehaviour
+    public abstract class AQuest : ScriptableObject
     {
         [SerializeField] int _questID;
         [SerializeField] QuestType _questType;

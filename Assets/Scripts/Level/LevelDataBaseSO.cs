@@ -15,7 +15,6 @@ namespace CC.Level
         public StatsModifier getModifierByExp(float exp)
         {
             calculateLevel(exp);
-            StatsModifier temp = stats[level];
             if(level > stats.Length - 1) return stats[stats.Length - 1];
             return stats[level];
         }

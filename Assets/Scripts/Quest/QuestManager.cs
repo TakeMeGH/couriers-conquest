@@ -62,5 +62,12 @@ namespace CC.Quest
             acceptedQuest = null;
         }
         #endregion "Quest Flow"
+
+        #region "Getter"
+        public AQuest GetAcceptedQuest()
+        {
+            return acceptedQuest;
+        }
+        #endregion "Getter"
     }
 }

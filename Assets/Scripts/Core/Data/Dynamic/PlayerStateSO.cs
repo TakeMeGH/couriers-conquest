@@ -5,7 +5,7 @@ using CC.Core.Save;
 
 namespace CC.Core.Data.Dynamic
 {
-    [CreateAssetMenu(menuName = "Game/Data/Dynamic/PlayerStates")]
+    [CreateAssetMenu(menuName = "Data/Dynamics/PlayerStates")]
     public class PlayerStateSO : ASavableModel
     {
         [SerializeField] PlayerStateData _state;

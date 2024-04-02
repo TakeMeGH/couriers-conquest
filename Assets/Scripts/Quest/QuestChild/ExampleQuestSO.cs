@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace CC.Quest
 {
+    [CreateAssetMenu(menuName = "Data/Statics/Quest/ExampleQuest")]
     public class ExampleQuestSO : AQuest
     {
         [SerializeField] questPrefab[] _questPrefabs;
@@ -20,6 +21,7 @@ namespace CC.Quest
         public override void OnQuestProgress(Component sender, object data)
         {
             _pickedUp = true;
+            Debug.Log("picked up");
         }
         public override void OnQuestFinished(Component sender, object data)
         {
@@ -42,14 +44,19 @@ namespace CC.Quest
                 }
                 _instantiatedPrefabs.Clear();
             }
-            foreach (GameObject item in GameObject.FindGameObjectsWithTag("PayLoad"))
-            {
-                Destroy(item);
-            }
-            foreach (GameObject item in GameObject.FindGameObjectsWithTag("VPayload"))
-            {
-                item.SetActive(false);
-            }
+            //foreach (GameObject item in GameObject.FindGameObjectsWithTag("PayLoad"))
+            //{
+               // Destroy(item);
+            //}
+            //foreach (GameObject item in GameObject.FindGameObjectsWithTag("VPayload"))
+            //{
+               // item.SetActive(false);
+            //}
+        }
+
+        public bool IsPickedUp()
+        {
+            return _pickedUp;
         }
     }
 

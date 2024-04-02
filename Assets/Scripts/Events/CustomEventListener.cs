@@ -28,6 +28,7 @@ namespace CC.Event
         }
         public void call(Component sender, object data)
         {
+            Debug.Log("Calling event");
             eventToCall?.Invoke(sender, data);
         }
         public void clear()

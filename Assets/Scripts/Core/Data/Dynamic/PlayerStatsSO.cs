@@ -7,7 +7,7 @@ using CC.Core.Data.Stable;
 
 namespace CC.Core.Data.Dynamic
 {
-    [CreateAssetMenu(menuName = "Data/PlayerStats")]
+    [CreateAssetMenu(menuName = "Data/Dynamics/PlayerStats")]
     public class PlayerStatsSO : ASavableModel
     {
         [SerializeField] PlayerStats statData;
