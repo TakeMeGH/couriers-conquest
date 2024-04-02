@@ -49,7 +49,8 @@ namespace CC.Characters.States
                 return;
             }
 
-            _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.FALLING);
+            _playerController.SwitchState(_playerController.PlayerFallingState);
+            // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.FALLING);
         }
 
         public override void PhysicsUpdate()

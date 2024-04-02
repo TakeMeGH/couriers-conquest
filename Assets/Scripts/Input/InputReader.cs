@@ -20,6 +20,13 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     public event UnityAction StartedSprinting = delegate { };
     public event UnityAction StopedSprinting = delegate { };
     public event UnityAction InteractPerformed = delegate { };
+    public event UnityAction TargetEvent = delegate { };
+    public event UnityAction CancelEvent = delegate { };
+    public event UnityAction AttackPerformed = delegate { };
+    public event UnityAction AttackCanceled = delegate { };
+    public bool IsAttacking {get; private set;}
+
+
     public event UnityAction OpenInventoryEvent = delegate { };
     public event UnityAction CloseInventoryEvent = delegate { };
     public event UnityAction DropItemPerformed = delegate { };
@@ -116,6 +123,36 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
                 break;
         }
     }
+
+    public void OnTarget(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            TargetEvent.Invoke();
+
+    }
+    public void OnCancel(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            CancelEvent.Invoke();
+
+
+    }
+    public void OnAttack(InputAction.CallbackContext context)
+    {
+        switch (context.phase)
+        {
+            case InputActionPhase.Performed:
+                AttackPerformed.Invoke();
+                IsAttacking = true;
+                break;
+            case InputActionPhase.Canceled:
+                AttackCanceled.Invoke();
+                IsAttacking = false;
+                break;
+        }
+
+    }
+
 
     public void OnOpenInventory(InputAction.CallbackContext context)
     {
