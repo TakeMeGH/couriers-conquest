@@ -7,15 +7,18 @@ namespace CC.Characters
     public class CameraLookPointSetter : MonoBehaviour
     {
         [SerializeField] TransformAnchor _playerCameraLookTransform;
-        private void OnEnable()
+        // private void OnEnable()
+        // {
+        //     _playerCameraLookTransform.Provide(transform);
+
+        // }
+
+        // private void OnDisable()
+        // {
+        //     _playerCameraLookTransform.Unset();
+        private void Start()
         {
             _playerCameraLookTransform.Provide(transform);
-        }
-
-        private void OnDisable()
-        {
-            _playerCameraLookTransform.Unset();
-
         }
     }
 
