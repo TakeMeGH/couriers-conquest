@@ -18,7 +18,7 @@ namespace CC.Camera
 
         private void OnDisable()
         {
-            _playerTransformAnchor.OnAnchorProvided += SetupPlayerVirtualCamera;
+            _playerTransformAnchor.OnAnchorProvided -= SetupPlayerVirtualCamera;
 
         }
 

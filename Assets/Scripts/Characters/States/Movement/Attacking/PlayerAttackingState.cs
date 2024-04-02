@@ -33,7 +33,6 @@ namespace CC.Characters.States
 
             float normalizedTime = GetNormalizedTime();
 
-            Debug.Log(normalizedTime + " " + previousFrameTime + " " + (normalizedTime >= previousFrameTime));
             if (normalizedTime >= previousFrameTime && normalizedTime < 1f)
             {
                 if (normalizedTime >= attack.ForceTime)
@@ -48,7 +47,6 @@ namespace CC.Characters.States
             }
             else if (normalizedTime >= 1f)
             {
-                Debug.Log("MASUK SINI");
                 _playerController.SwitchState(_playerController.PlayerIdlingState);
                 // if (stateMachine.Targeter.CurrentTarget != null)
                 // {
@@ -100,12 +98,10 @@ namespace CC.Characters.States
 
             if (_playerController.Animator.IsInTransition(0) && nextInfo.IsTag("Attack"))
             {
-                Debug.Log("NEXT");
                 return nextInfo.normalizedTime;
             }
             else if (!_playerController.Animator.IsInTransition(0) && currentInfo.IsTag("Attack"))
             {
-                Debug.Log("CURR");
                 return currentInfo.normalizedTime;
             }
             else
