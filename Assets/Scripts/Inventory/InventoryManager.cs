@@ -25,7 +25,7 @@ namespace CC.Inventory
         [Space]
         [SerializeField] private int _inventorySize = 24;
         [SerializeField] private float _dropSpeed = 5;
-        [SerializeField] private Volume _blurEffect;
+        // [SerializeField] private Volume _blurEffect;
         [SerializeField] InputReader _inputReader;
         [SerializeField] ItemInventoryEventChannel _addItemToInventory;
 
@@ -58,7 +58,7 @@ namespace CC.Inventory
         {
             _inventoryMenu.SetActive(true);
             Cursor.lockState = CursorLockMode.Confined;
-            _blurEffect.enabled = true;
+            // _blurEffect.enabled = true;
             RefreshInventory();
             _inputReader.EnableInventoryUIInput();
 
@@ -68,7 +68,7 @@ namespace CC.Inventory
         {
             _inventoryMenu.SetActive(false);
             _mouse.EmptySlot();
-            _blurEffect.enabled = false;
+            // _blurEffect.enabled = false;
             Cursor.lockState = CursorLockMode.Locked;
             _inputReader.EnableGameplayInput();
 
