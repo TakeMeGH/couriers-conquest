@@ -31,6 +31,12 @@ namespace CC.Characters.States
                 _playerController.SwitchState(_playerController.PlayerAttackingStates[0]);
                 return;
             }
+
+             if (_playerController.InputReader.IsBlocking)
+            {
+                _playerController.SwitchState(_playerController.PlayerBlockingState);
+                return;
+            }
         }
 
         public override void Exit()
