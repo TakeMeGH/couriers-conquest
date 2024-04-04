@@ -36,6 +36,25 @@ namespace SA
         Transform helper;
         float delta;
 
+        [SerializeField] InputReader _inputReader;
+
+        private void OnEnable()
+        {
+            _inputReader.MoveEvent += UpdateMove;
+        }
+
+        private void OnDisable()
+        {
+            _inputReader.MoveEvent += UpdateMove;
+        }
+
+        void UpdateMove(Vector2 move)
+        {
+            horizontal = move.x;
+            vertical = move.y;
+        }
+
+
         void Start()
         {
             Init();
@@ -55,7 +74,7 @@ namespace SA
             origin.y += 1.4f;
             Vector3 dir = transform.forward;
             RaycastHit hit;
-            if(Physics.Raycast(origin,dir, out hit, 5))
+            if (Physics.Raycast(origin, dir, out hit, 5))
             {
                 helper.position = PosWithOffset(origin, hit.point);
                 InitForClimb(hit);
@@ -65,7 +84,7 @@ namespace SA
         void InitForClimb(RaycastHit hit)
         {
             isClimbing = true;
-            
+
             helper.transform.rotation = Quaternion.LookRotation(-hit.normal);
             startPos = transform.position;
             targetPos = hit.point + (hit.normal * offsetFromWall);
@@ -82,13 +101,13 @@ namespace SA
 
         public void Tick(float delta)
         {
-            if(!inPosition)
+            if (!inPosition)
             {
                 GetInPosition();
                 return;
             }
 
-            if(!isLerping)
+            if (!isLerping)
             {
                 horizontal = Input.GetAxis("Horizontal");
                 vertical = Input.GetAxis("Vertical");
@@ -127,7 +146,7 @@ namespace SA
             else
             {
                 t += delta * climbSpeed;
-                if(t > 1)
+                if (t > 1)
                 {
                     t = 1;
                     isLerping = false;
@@ -149,7 +168,7 @@ namespace SA
 
             //Raycast towards the direction you want to move
             RaycastHit hit;
-            if(Physics.Raycast(origin,dir, out hit ,dis))
+            if (Physics.Raycast(origin, dir, out hit, dis))
             {
                 //Check if it's a corner
                 return false;
@@ -161,7 +180,7 @@ namespace SA
 
             //Raycast forward towards the wall
             DebugLine.singleton.SetLine(origin, origin + (dir * dis2), 1);
-            if(Physics.Raycast(origin,dir, out hit, dis2))
+            if (Physics.Raycast(origin, dir, out hit, dis2))
             {
                 helper.position = PosWithOffset(origin, hit.point);
                 helper.rotation = Quaternion.LookRotation(-hit.normal);
@@ -171,30 +190,30 @@ namespace SA
             origin = origin + (dir * dis2);
             dir = -moveDir;
             DebugLine.singleton.SetLine(origin, origin + dir, 1);
-            if (Physics.Raycast(origin,dir,out hit, rayForwardTowardsWall))
+            if (Physics.Raycast(origin, dir, out hit, rayForwardTowardsWall))
             {
                 helper.position = PosWithOffset(origin, hit.point);
                 helper.rotation = Quaternion.LookRotation(-hit.normal);
                 return true;
             }
 
-           // return false;
+            // return false;
 
             origin += dir * dis2;
             dir = -Vector3.up;
 
             DebugLine.singleton.SetLine(origin, origin + dir, 2);
-          //  Debug.DrawRay(origin, dir, Color.yellow);
-            if(Physics.Raycast(origin,dir, out hit, dis2))
+            //  Debug.DrawRay(origin, dir, Color.yellow);
+            if (Physics.Raycast(origin, dir, out hit, dis2))
             {
                 float angle = Vector3.Angle(-helper.forward, hit.normal);
-                if(angle < 40)
+                if (angle < 40)
                 {
                     helper.position = PosWithOffset(origin, hit.point);
                     helper.rotation = Quaternion.LookRotation(-hit.normal);
                     return true;
                 }
-            } 
+            }
 
             return false;
         }
@@ -203,7 +222,7 @@ namespace SA
         {
             t += delta;
 
-            if(t > 1)
+            if (t > 1)
             {
                 t = 1;
                 inPosition = true;
@@ -223,7 +242,7 @@ namespace SA
             Vector3 offset = direction * offsetFromWall;
             return target + offset;
         }
-     
+
     }
 
 
