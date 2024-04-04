@@ -2,32 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Health : MonoBehaviour
+namespace CC.Combats
 {
-    [SerializeField] private int maxHealth = 100;
 
-    private int health;
-
-    private bool isInvunerable;
-
-    private void Start()
+    public class Health : MonoBehaviour
     {
-        health = maxHealth;
-    }
+        [SerializeField] private int maxHealth = 100;
 
-    public void SetInvunerable(bool isInvunerable)
-    {
-        this.isInvunerable = isInvunerable;
-    }
+        private int health;
 
-    public void DealDamage(int damage)
-    {
-        if (health == 0) { return; }
+        private bool isInvunerable;
 
-        if (isInvunerable) { return; }
+        private void Start()
+        {
+            health = maxHealth;
+        }
 
-        health = Mathf.Max(health - damage, 0);
+        public void SetInvunerable(bool isInvunerable)
+        {
+            this.isInvunerable = isInvunerable;
+        }
 
-        Debug.Log(health);
+        public void DealDamage(int damage)
+        {
+            if (health == 0) { return; }
+
+            if (isInvunerable) { return; }
+
+            health = Mathf.Max(health - damage, 0);
+
+            Debug.Log(health);
+        }
     }
 }
