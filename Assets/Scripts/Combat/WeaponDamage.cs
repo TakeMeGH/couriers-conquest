@@ -2,35 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponDamage : MonoBehaviour
+
+namespace CC.Combats
 {
-    [SerializeField] private Collider myCollider;
-
-    private int damage;
-
-    private List<Collider> alreadyCollidedWith = new List<Collider>();
-
-    private void OnEnable()
+    public class WeaponDamage : MonoBehaviour
     {
-        alreadyCollidedWith.Clear();
-    }
+        [SerializeField] private Collider myCollider;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other == myCollider) { return; }
+        private int damage;
 
-        if (alreadyCollidedWith.Contains(other)) { return; }
+        private List<Collider> alreadyCollidedWith = new List<Collider>();
 
-        alreadyCollidedWith.Add(other);
-
-        if (other.TryGetComponent<Health>(out Health health))
+        private void OnEnable()
         {
-            health.DealDamage(damage);
+            alreadyCollidedWith.Clear();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other == myCollider) { return; }
+
+            if (alreadyCollidedWith.Contains(other)) { return; }
+
+            alreadyCollidedWith.Add(other);
+
+            if (other.TryGetComponent<Health>(out Health health))
+            {
+                health.DealDamage(damage);
+            }
+        }
+
+        public void SetAttack(int damage)
+        {
+            this.damage = damage;
         }
     }
 
-    public void SetAttack(int damage)
-    {
-        this.damage = damage;
-    }
 }
+

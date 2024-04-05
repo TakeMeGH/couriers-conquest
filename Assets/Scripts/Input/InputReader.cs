@@ -24,6 +24,9 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     public event UnityAction CancelEvent = delegate { };
     public event UnityAction AttackPerformed = delegate { };
     public event UnityAction AttackCanceled = delegate { };
+    public event UnityAction BlockPerformed = delegate { };
+    public event UnityAction BlockCanceled = delegate { };
+    public bool IsBlocking {get; private set;}
     public bool IsAttacking {get; private set;}
 
 
@@ -148,6 +151,22 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
             case InputActionPhase.Canceled:
                 AttackCanceled.Invoke();
                 IsAttacking = false;
+                break;
+        }
+
+    }
+
+    public void OnBlock(InputAction.CallbackContext context)
+    {
+        switch (context.phase)
+        {
+            case InputActionPhase.Performed:
+                BlockPerformed.Invoke();
+                IsBlocking = true;
+                break;
+            case InputActionPhase.Canceled:
+                BlockCanceled.Invoke();
+                IsBlocking = false;
                 break;
         }
 
