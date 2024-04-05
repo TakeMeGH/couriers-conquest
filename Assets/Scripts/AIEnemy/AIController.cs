@@ -34,6 +34,8 @@ public class AIController : MonoBehaviour
     bool m_IsPatrol;
     bool m_CaughtPlayer;
 
+    Animator animator;
+
     void Start()
     {
         m_PlayerPosition = Vector3.zero;
@@ -51,12 +53,19 @@ public class AIController : MonoBehaviour
         navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
 
         m_WaitTime = Random.Range(0f, maxWaitTime);
+
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        
         EnviromentView();
+        if (animator != null)
+        {
+        animator.SetFloat("Speed", navMeshAgent.velocity.magnitude);
+        }
 
         if (!m_IsPatrol)
         {
@@ -66,6 +75,8 @@ public class AIController : MonoBehaviour
         {
             Patroling();
         }
+
+        
     }
 
     private void Chasing()
