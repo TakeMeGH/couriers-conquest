@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class AIController : MonoBehaviour
 {
-    // Start is called before the first frame update
     public NavMeshAgent navMeshAgent;
     public float startWaitTime = 4;
     public float timetoRotate = 2;
@@ -19,6 +18,8 @@ public class AIController : MonoBehaviour
     public float meshResolution = 1f;
     public int edgeIterations = 4;
     public float edgeDistance = 0.5f;
+    public float stoppingDistance = 0.01f;
+
     public float maxWaitTime;
 
     public Transform[] waypoints;
@@ -47,10 +48,12 @@ public class AIController : MonoBehaviour
 
         m_CurrentWaypointIndex = 0;
         navMeshAgent = GetComponent<NavMeshAgent>();
+        navMeshAgent.stoppingDistance = stoppingDistance;
 
         navMeshAgent.isStopped = false;
         navMeshAgent.speed = speedWalk;
         navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
+
 
         m_WaitTime = Random.Range(0f, maxWaitTime);
 
@@ -60,11 +63,11 @@ public class AIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         EnviromentView();
         if (animator != null)
         {
-        animator.SetFloat("Speed", navMeshAgent.velocity.magnitude);
+            animator.SetFloat("Speed", navMeshAgent.velocity.magnitude);
         }
 
         if (!m_IsPatrol)
@@ -76,7 +79,7 @@ public class AIController : MonoBehaviour
             Patroling();
         }
 
-        
+
     }
 
     private void Chasing()
@@ -89,9 +92,9 @@ public class AIController : MonoBehaviour
             Move(speedRun);
             navMeshAgent.SetDestination(m_PlayerPosition);
         }
-        if(navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+        if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
         {
-            if(m_WaitTime <= 0 && !m_CaughtPlayer && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position)>=6f) 
+            if (m_WaitTime <= 0 && !m_CaughtPlayer && Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 6f)
             {
                 m_IsPatrol = true;
                 m_PlayerNear = false;
@@ -102,7 +105,7 @@ public class AIController : MonoBehaviour
             }
             else
             {
-                if(Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position)>= 2.5f)
+                if (Vector3.Distance(transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 2.5f)
                 {
                     Stop();
                     m_WaitTime -= Time.deltaTime;
@@ -115,7 +118,7 @@ public class AIController : MonoBehaviour
     {
         if (m_PlayerNear)
         {
-            if(m_TimeToRotate <= 0)
+            if (m_TimeToRotate <= 0)
             {
                 Move(speedWalk);
                 LookingPlayer(playerLastPosition);
@@ -131,9 +134,9 @@ public class AIController : MonoBehaviour
             m_PlayerNear = false;
             playerLastPosition = Vector3.zero;
             navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
-            if(navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
+            if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
             {
-                if(m_WaitTime <= 0)
+                if (m_WaitTime <= 0)
                 {
                     NextPoint();
                     Move(speedWalk);
@@ -154,7 +157,7 @@ public class AIController : MonoBehaviour
         navMeshAgent.speed = speed;
     }
 
-    void Stop ()
+    void Stop()
     {
         navMeshAgent.isStopped = true;
         navMeshAgent.speed = 0;
@@ -163,9 +166,9 @@ public class AIController : MonoBehaviour
     {
         if (useRandom)
         {
-            m_CurrentWaypointIndex = Random.Range(0, waypoints.Length); 
+            m_CurrentWaypointIndex = Random.Range(0, waypoints.Length);
         }
-        
+
         navMeshAgent.SetDestination(waypoints[m_CurrentWaypointIndex].position);
 
     }
@@ -175,12 +178,12 @@ public class AIController : MonoBehaviour
         m_CaughtPlayer = true;
     }
 
-    void LookingPlayer (Vector3 player)
+    void LookingPlayer(Vector3 player)
     {
         navMeshAgent.SetDestination(player);
-        if(Vector3.Distance(transform.position, player)<=0.3)
+        if (Vector3.Distance(transform.position, player) <= 0.3)
         {
-            if(m_WaitTime <= 0)
+            if (m_WaitTime <= 0)
             {
                 m_PlayerNear = false;
                 Move(speedWalk);
@@ -199,14 +202,14 @@ public class AIController : MonoBehaviour
     {
         Collider[] playerInRange = Physics.OverlapSphere(transform.position, viewRadius, playerMask);
 
-        for(int i=0; i<playerInRange.Length;i++)
+        for (int i = 0; i < playerInRange.Length; i++)
         {
             Transform player = playerInRange[i].transform;
             Vector3 dirToPlayer = (player.position - transform.position).normalized;
-            if(Vector3.Angle(transform.forward, dirToPlayer)<viewAngle/2)
+            if (Vector3.Angle(transform.forward, dirToPlayer) < viewAngle / 2)
             {
                 float dstToPlayer = Vector3.Distance(transform.position, player.position);
-                if(!Physics.Raycast(transform.position, dirToPlayer, dstToPlayer, obstacleMask))
+                if (!Physics.Raycast(transform.position, dirToPlayer, dstToPlayer, obstacleMask))
                 {
                     m_PlayerInRange = true;
                     m_IsPatrol = false;
@@ -216,14 +219,14 @@ public class AIController : MonoBehaviour
                     m_PlayerInRange = false;
                 }
             }
-            if(Vector3.Distance(transform.position, player.position)>viewRadius)
+            if (Vector3.Distance(transform.position, player.position) > viewRadius)
             {
                 m_PlayerInRange = false;
             }
-        if (m_PlayerInRange)
-        {
-            m_PlayerPosition = player.transform.position;
-        }
+            if (m_PlayerInRange)
+            {
+                m_PlayerPosition = player.transform.position;
+            }
         }
     }
 
