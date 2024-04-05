@@ -134,15 +134,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Block"",
-                    ""type"": ""Button"",
-                    ""id"": ""a204dfe8-611a-4589-b4ee-9e8b592ee601"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -343,17 +334,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""OpenInventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""ada9d73b-3c31-410c-a0d7-3ff75a0ad43a"",
-                    ""path"": ""<Keyboard>/e"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Block"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -422,7 +402,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Gameplay_Target = m_Gameplay.FindAction("Target", throwIfNotFound: true);
         m_Gameplay_Cancel = m_Gameplay.FindAction("Cancel", throwIfNotFound: true);
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
-        m_Gameplay_Block = m_Gameplay.FindAction("Block", throwIfNotFound: true);
         // InventoryUI
         m_InventoryUI = asset.FindActionMap("InventoryUI", throwIfNotFound: true);
         m_InventoryUI_CloseInventory = m_InventoryUI.FindAction("CloseInventory", throwIfNotFound: true);
@@ -500,7 +479,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Target;
     private readonly InputAction m_Gameplay_Cancel;
     private readonly InputAction m_Gameplay_Attack;
-    private readonly InputAction m_Gameplay_Block;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -517,7 +495,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Target => m_Wrapper.m_Gameplay_Target;
         public InputAction @Cancel => m_Wrapper.m_Gameplay_Cancel;
         public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
-        public InputAction @Block => m_Wrapper.m_Gameplay_Block;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -563,9 +540,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
-            @Block.started += instance.OnBlock;
-            @Block.performed += instance.OnBlock;
-            @Block.canceled += instance.OnBlock;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -606,9 +580,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
-            @Block.started -= instance.OnBlock;
-            @Block.performed -= instance.OnBlock;
-            @Block.canceled -= instance.OnBlock;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -694,7 +665,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnTarget(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
-        void OnBlock(InputAction.CallbackContext context);
     }
     public interface IInventoryUIActions
     {

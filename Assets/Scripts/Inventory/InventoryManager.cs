@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
 using CC.Events;
+using TMPro;
 
 namespace CC.Inventory
 {
@@ -29,6 +30,10 @@ namespace CC.Inventory
         [SerializeField] InputReader _inputReader;
         [SerializeField] ItemInventoryEventChannel _addItemToInventory;
 
+        [Header("Weight System")]
+        [SerializeField] private TextMeshProUGUI _textWeight;
+        private float _weightValue;
+
         private void OnEnable()
         {
             _inputReader.OpenInventoryEvent += OpenInventory;
@@ -43,18 +48,16 @@ namespace CC.Inventory
             _inputReader.CloseInventoryEvent -= CloseInventory;
             _inputReader.DropItemPerformed -= AttemptToDrop;
             _addItemToInventory.OnEventRaised += AddItem;
-
-
-
         }
-        void Start()
+
+        private void Start()
         {
             for (int i = 0; i < _inventorySize; i++)
             {
                 items.Add(new ItemSlotInfo(null, 0));
             }
         }
-        void OpenInventory()
+        private void OpenInventory()
         {
             _inventoryMenu.SetActive(true);
             Cursor.lockState = CursorLockMode.Confined;
@@ -64,7 +67,7 @@ namespace CC.Inventory
 
         }
 
-        void CloseInventory()
+        private void CloseInventory()
         {
             _inventoryMenu.SetActive(false);
             _mouse.EmptySlot();
@@ -75,12 +78,11 @@ namespace CC.Inventory
 
         }
 
-        void AttemptToDrop()
+        private void AttemptToDrop()
         {
             if (_mouse.itemSlot.item != null && !EventSystem.current.IsPointerOverGameObject())
             {
                 DropItem(_mouse.itemSlot.item);
-
             }
         }
 
@@ -130,6 +132,26 @@ namespace CC.Inventory
                 index++;
             }
             _mouse.EmptySlot();
+            WeightCount();
+        }
+
+        private void WeightCount()
+        {
+            _textWeight.text = "Weight : " + WeightValue().ToString();
+        }
+
+        public float WeightValue()
+        {
+            _weightValue = 0;
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].item != null)
+                {
+                    _weightValue += items[i].item.itemWeight * items[i].stacks;
+                }
+            }
+
+            return _weightValue;
         }
 
         public int AddItem(ABaseItem item, int amount)
@@ -222,6 +244,11 @@ namespace CC.Inventory
             if (_mouse.itemSlot.stacks < 1) ClearSlot(_mouse.itemSlot);
             _mouse.EmptySlot();
             RefreshInventory();
+        }
+
+        public void UseItem(ABaseItem item)
+        {
+            item.UseItem();
         }
 
         public void ClearSlot(ItemSlotInfo slot)

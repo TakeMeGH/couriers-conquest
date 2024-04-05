@@ -13,5 +13,10 @@ namespace CC.Inventory{
         {
             return ItemType.Rune;
         }
+
+        public override void UseItem()
+        {
+            Debug.Log("Use Rune");
+        }
     }
 }

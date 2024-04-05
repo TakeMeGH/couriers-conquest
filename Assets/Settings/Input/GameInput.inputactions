@@ -112,15 +112,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
-                },
-                {
-                    "name": "Block",
-                    "type": "Button",
-                    "id": "a204dfe8-611a-4589-b4ee-9e8b592ee601",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -319,17 +310,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "OpenInventory",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ada9d73b-3c31-410c-a0d7-3ff75a0ad43a",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Block",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

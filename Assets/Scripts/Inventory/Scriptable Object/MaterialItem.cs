@@ -12,5 +12,10 @@ namespace CC.Inventory
         {
             return ItemType.Materials;
         }
+
+        public override void UseItem()
+        {
+            Debug.Log("Use " + itemName);
+        }
     }
 }
