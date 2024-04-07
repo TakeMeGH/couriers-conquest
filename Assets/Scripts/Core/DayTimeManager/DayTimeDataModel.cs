@@ -27,7 +27,6 @@ namespace CC.Core.Daytime {
         {
             _daytimeData.day = day;
         }
-
         public int getDay()
         {
             return _daytimeData.day;
