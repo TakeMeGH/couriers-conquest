@@ -36,16 +36,12 @@ namespace CC.Inventory
 
         private void OnEnable()
         {
-            _inputReader.OpenInventoryEvent += OpenInventory;
-            _inputReader.CloseInventoryEvent += CloseInventory;
             _inputReader.DropItemPerformed += AttemptToDrop;
             _addItemToInventory.OnEventRaised += AddItem;
         }
 
         private void OnDisable()
         {
-            _inputReader.OpenInventoryEvent -= OpenInventory;
-            _inputReader.CloseInventoryEvent -= CloseInventory;
             _inputReader.DropItemPerformed -= AttemptToDrop;
             _addItemToInventory.OnEventRaised += AddItem;
         }
@@ -57,9 +53,8 @@ namespace CC.Inventory
                 items.Add(new ItemSlotInfo(null, 0));
             }
         }
-        private void OpenInventory()
+        public void OpenInventory()
         {
-            _inventoryMenu.SetActive(true);
             Cursor.lockState = CursorLockMode.Confined;
             // _blurEffect.enabled = true;
             RefreshInventory();
@@ -67,9 +62,8 @@ namespace CC.Inventory
 
         }
 
-        private void CloseInventory()
+        public void CloseInventory()
         {
-            _inventoryMenu.SetActive(false);
             _mouse.EmptySlot();
             // _blurEffect.enabled = false;
             Cursor.lockState = CursorLockMode.Locked;
