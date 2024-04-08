@@ -11,17 +11,17 @@ namespace CC.Inventory{
         public string itemDescription;
         public Sprite itemSprite;
         public int maxStacks;
-        public GameObject itemPrefab;
 
         public abstract ItemType GetItemType();
+        public abstract void UseItem();
 
     }
 
     public enum ItemType
     {
         Materials,
-        Potion,
-        Weapon,
-        Rune
+        Consumable,
+        Rune,
+        Weapon
     }
 }

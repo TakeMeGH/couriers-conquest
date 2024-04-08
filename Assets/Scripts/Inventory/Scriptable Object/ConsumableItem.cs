@@ -5,7 +5,7 @@ using UnityEngine;
 namespace CC.Inventory{
 
     [CreateAssetMenu(fileName = "ItemData", menuName = "Items/Potion", order = 2)]
-    public class PotionItem : ABaseItem
+    public class ConsumableItem : ABaseItem
     {
         public float bonusHp;
         public float bonusAttack;
@@ -14,7 +14,12 @@ namespace CC.Inventory{
 
         public override ItemType GetItemType()
         {
-            return ItemType.Potion;
+            return ItemType.Consumable;
+        }
+
+        public override void UseItem()
+        {
+            Debug.Log("Use Consumbale");
         }
     }
 }
