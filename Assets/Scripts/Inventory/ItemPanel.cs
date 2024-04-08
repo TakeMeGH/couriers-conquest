@@ -7,10 +7,10 @@ using TMPro;
 
 namespace CC.Inventory
 {
-    public class ItemPanel : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler, IPointerUpHandler, IDragHandler, IDropHandler, IBeginDragHandler, IEndDragHandler
+    public class ItemPanel : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IDragHandler, IDropHandler, IBeginDragHandler, IEndDragHandler
     {
         public InventoryManager inventory;
-        private Mouse mouse;
+        public Mouse mouse;
         public ItemSlotInfo itemSlot;
         public Image itemImage;
         public TextMeshProUGUI stacksText;
@@ -36,12 +36,26 @@ namespace CC.Inventory
             }
         }
 
-        public void OnPointerDown(PointerEventData eventData)
+        public void OnPointerClick(PointerEventData eventData)
         {
-        }
-
-        public void OnPointerUp(PointerEventData eventData)
-        {
+            if (eventData.button == PointerEventData.InputButton.Left)
+            {
+                if (mouse.itemSlot.item == null)
+                {
+                    itemSlot.item.UseItem();
+                }
+                else if (mouse.itemSlot.item != null)
+                {
+                    OnClick();
+                }
+            }
+            else if (eventData.button == PointerEventData.InputButton.Right)
+            {
+                if (mouse.itemSlot.item != null)
+                {
+                    inventory.RefreshInventory();
+                }
+            }
         }
 
         public void OnDrop(PointerEventData eventData)
@@ -58,7 +72,7 @@ namespace CC.Inventory
             }
         }
 
-        public void PickupItem()
+        private void PickupItem()
         {
             mouse.itemSlot = itemSlot;
             mouse.sourceItemPanel = this;
@@ -67,11 +81,17 @@ namespace CC.Inventory
             mouse.SetUI();
 
         }
-        public void FadeOut()
+        private void FadeOut()
         {
             itemImage.CrossFadeAlpha(0.3f, 0.05f, true);
         }
-        public void DropItem()
+
+        private void FadeIn()
+        {
+            itemImage.CrossFadeAlpha(1f, 0.5f, true); // Mengembalikan opasitas ke 1 dalam waktu 0.5 detik
+        }
+
+        private void DropItem()
         {
             itemSlot.item = mouse.itemSlot.item;
             if (mouse.splitSize < mouse.itemSlot.stacks)
@@ -86,7 +106,7 @@ namespace CC.Inventory
                 inventory.ClearSlot(mouse.itemSlot);
             }
         }
-        public void SwapItem(ItemSlotInfo slotA, ItemSlotInfo slotB)
+        private void SwapItem(ItemSlotInfo slotA, ItemSlotInfo slotB)
         {
             //Hold item for transfer
             ItemSlotInfo tempItem = new ItemSlotInfo(slotA.item, slotA.stacks);
@@ -97,7 +117,7 @@ namespace CC.Inventory
             slotB.item = tempItem.item;
             slotB.stacks = tempItem.stacks;
         }
-        public void StackItem(ItemSlotInfo source, ItemSlotInfo destination, int amount)
+        private void StackItem(ItemSlotInfo source, ItemSlotInfo destination, int amount)
         {
             int slotsAvailable = destination.item.maxStacks - destination.stacks;
             if (slotsAvailable == 0) return;
@@ -115,7 +135,7 @@ namespace CC.Inventory
             }
         }
 
-        public void OnClick()
+        private void OnClick()
         {
             if (inventory != null)
             {
@@ -174,5 +194,11 @@ namespace CC.Inventory
                 }
             }
         }
+
+        public void RefreshInventory()
+        {
+            inventory.RefreshInventory();
+        }
+        
     }
 }

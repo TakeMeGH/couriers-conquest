@@ -16,5 +16,10 @@ namespace CC.Inventory
         {
             return ItemType.Weapon;
         }
+
+        public override void UseItem()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

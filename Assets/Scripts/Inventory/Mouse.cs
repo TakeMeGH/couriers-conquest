@@ -41,6 +41,12 @@ namespace CC.Inventory
             }
             if (itemSlot.item != null)
             {
+                if (Input.GetKey(KeyCode.Mouse1))
+                {
+                    sourceItemPanel.RefreshInventory();
+                    return;
+                }
+
                 if (Input.GetAxis("Mouse ScrollWheel") > 0 && splitSize < itemSlot.stacks)
                 {
                     splitSize++;
@@ -49,6 +55,7 @@ namespace CC.Inventory
                 {
                     splitSize--;
                 }
+
                 stacksText.text = "" + splitSize;
                 if (splitSize == itemSlot.stacks) sourceItemPanel.stacksText.gameObject.SetActive(false);
                 else
