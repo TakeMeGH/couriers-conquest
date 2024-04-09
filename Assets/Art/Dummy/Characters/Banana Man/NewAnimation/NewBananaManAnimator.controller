@@ -667,8 +667,16 @@ BlendTree:
   m_Name: SprintBlendTree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 9611e4ce0adb79d448f67e86878990d1, type: 2}
+    m_Motion: {fileID: 7400000, guid: e5db02b665ab882419ee3764206caa96, type: 2}
     m_Threshold: 0
+    m_Position: {x: 0, y: 0}
+    m_TimeScale: 1
+    m_CycleOffset: 0
+    m_DirectBlendParameter: Velocity
+    m_Mirror: 0
+  - serializedVersion: 2
+    m_Motion: {fileID: 7400000, guid: 9611e4ce0adb79d448f67e86878990d1, type: 2}
+    m_Threshold: 5
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
     m_CycleOffset: 0
