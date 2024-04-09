@@ -32,18 +32,24 @@ namespace CC.Inventory
 
         [Header("Weight System")]
         [SerializeField] private TextMeshProUGUI _textWeight;
+        [SerializeField] FloatEventChannelSO _onWeightUpdated;
+        [SerializeField] VoidEventChannelSO _onItemPickup;
+
         private float _weightValue;
 
         private void OnEnable()
         {
             _inputReader.DropItemPerformed += AttemptToDrop;
             _addItemToInventory.OnEventRaised += AddItem;
+            _onItemPickup.OnEventRaised += WeightCount;
         }
 
         private void OnDisable()
         {
             _inputReader.DropItemPerformed -= AttemptToDrop;
             _addItemToInventory.OnEventRaised += AddItem;
+            _onItemPickup.OnEventRaised -= WeightCount;
+
         }
 
         private void Start()
@@ -55,6 +61,7 @@ namespace CC.Inventory
         }
         public void OpenInventory()
         {
+            _inventoryMenu.SetActive(true);
             Cursor.lockState = CursorLockMode.Confined;
             // _blurEffect.enabled = true;
             RefreshInventory();
@@ -64,6 +71,7 @@ namespace CC.Inventory
 
         public void CloseInventory()
         {
+            _inventoryMenu.SetActive(false);
             _mouse.EmptySlot();
             // _blurEffect.enabled = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -144,7 +152,7 @@ namespace CC.Inventory
                     _weightValue += items[i].item.itemWeight * items[i].stacks;
                 }
             }
-
+            _onWeightUpdated.RaiseEvent(_weightValue);
             return _weightValue;
         }
 

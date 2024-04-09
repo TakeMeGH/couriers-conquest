@@ -151,7 +151,7 @@ namespace CC.Characters.States
 
             Vector3 currentPlayerHorizontalVelocity = GetPlayerHorizontalVelocity();
 
-            _playerController.Rigidbody.AddForce(targetRotationDirection * movementSpeed - currentPlayerHorizontalVelocity, ForceMode.VelocityChange);
+            _playerController.Rigidbody.AddForce(targetRotationDirection * movementSpeed - currentPlayerHorizontalVelocity * _playerController.Rigidbody.mass , ForceMode.Impulse);
         }
 
         protected Vector3 GetMovementInputDirection()
