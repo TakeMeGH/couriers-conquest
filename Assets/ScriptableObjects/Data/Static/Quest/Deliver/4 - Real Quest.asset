@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fc8af5ec0429eb41a03046326a0106e, type: 3}
+  m_Name: 4 - Real Quest
+  m_EditorClassIdentifier: 
+  _questID: 4
+  _questType: 1
+  _questName: Real Quest
+  _questDescription: Real Quest
+  _questPrerequisitesID: 
+  pickupPrefab:
+    prefab: {fileID: 6618757732054344946, guid: 2d91994ca4c272f44b09906af30c2c7e,
+      type: 3}
+    position: {x: -19, y: 0.5, z: -19}
+  dropPrefab:
+    prefab: {fileID: 7398444736682334487, guid: a6f939b696e940a4997a1a0b76e85d2b,
+      type: 3}
+    position: {x: 19, y: 0.5, z: 19}
+  _questPrefabs: []
+  itemToDeliver: {fileID: 11400000, guid: ce83f5a78d4d3434e9bd48d8cce1b003, type: 2}
+  _pickedUp: 0

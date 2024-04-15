@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CC.Inventory{
+namespace CC.Inventory
+{
     public abstract class ABaseItem : ScriptableObject
     {
         public string itemName;
@@ -20,6 +21,7 @@ namespace CC.Inventory{
         Materials,
         Consumable,
         Rune,
-        Equipment
+        Equipment,
+        QuestItem,
     }
 }

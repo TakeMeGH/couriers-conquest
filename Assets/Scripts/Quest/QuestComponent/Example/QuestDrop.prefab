@@ -120,7 +120,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onDrop: {fileID: 11400000, guid: 38cd4e099427acd4a89565c352e7f044, type: 2}
-  _manager: {fileID: 0}
+  _itemCheckEvent: {fileID: 11400000, guid: 41611e7359646fa4aa396be77ab032bc, type: 2}
+  _questItemRemoveEvent: {fileID: 11400000, guid: 766a1bd66c57f004c9da23725408ea2d,
+    type: 2}
 --- !u!1 &8419293048270914436
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +134,7 @@ GameObject:
   - component: {fileID: 1119288976629204673}
   - component: {fileID: 1320952424777404502}
   - component: {fileID: 528162576697409461}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: InterractableComponent
   m_TagString: Untagged
   m_Icon: {fileID: 0}

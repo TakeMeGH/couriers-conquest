@@ -8,6 +8,7 @@ using CC.Events;
 using TMPro;
 using UnityEngine.InputSystem;
 using System;
+using CC.Event;
 
 namespace CC.Inventory
 {
@@ -29,6 +30,8 @@ namespace CC.Inventory
         [SerializeField] private float _dropSpeed = 5;
         [SerializeField] InputReader _inputReader;
         [SerializeField] ItemInventoryEventChannel _addItemToInventory;
+        [SerializeField] SenderDataEventChannelSO _removeItemEvent;
+        [SerializeField] ItemInventoryCheckEventChannel _itemCheckEvent;
 
         [Header("Weight System")]
         [SerializeField] private TextMeshProUGUI _textWeight;
@@ -43,6 +46,8 @@ namespace CC.Inventory
             _inputReader.DropItemPerformed += AttemptToDrop;
             _addItemToInventory.OnEventRaised += AddItem;
             _onItemPickup.OnEventRaised += WeightCount;
+            _removeItemEvent.OnEventRaised.AddListener(RemoveItem);
+            _itemCheckEvent.OnEventRaised += CheckItem;
         }
 
         private void OnDisable()
@@ -50,6 +55,8 @@ namespace CC.Inventory
             _inputReader.DropItemPerformed -= AttemptToDrop;
             _addItemToInventory.OnEventRaised -= AddItem;
             _onItemPickup.OnEventRaised -= WeightCount;
+            _removeItemEvent.OnEventRaised.RemoveListener(RemoveItem);
+            _itemCheckEvent.OnEventRaised -= CheckItem;
         }
 
         private void Awake()
@@ -90,7 +97,7 @@ namespace CC.Inventory
 
         private void Initialize()
         {
-            for(int i = 0; i < _itemPanelGrid.Length; i++)
+            for (int i = 0; i < _itemPanelGrid.Length; i++)
             {
                 ItemPanel[] itemPanelsInGrid = _itemPanelGrid[i].GetComponentsInChildren<ItemPanel>();
                 _existingPanels.AddRange(itemPanelsInGrid);
@@ -114,7 +121,8 @@ namespace CC.Inventory
                 AttachDefaultItem(i);
                 Debug.Log("Try " + i.ToString());
             }
-;       }
+;
+        }
 
         private void AttachDefaultItem(int targetSlot)
         {
@@ -124,10 +132,10 @@ namespace CC.Inventory
 
                 if (items[i].item.GetItemType() == ItemType.Equipment)
                 {
-                    if(((EquipmentItem)items[i].item).specificType == _existingPanels[targetSlot].slotType)
+                    if (((EquipmentItem)items[i].item).specificType == _existingPanels[targetSlot].slotType)
                     {
                         items[targetSlot].item = items[i].item;
-                        items[targetSlot].stacks = items[i].stacks; 
+                        items[targetSlot].stacks = items[i].stacks;
                         items[i].item = null;
                         break;
                     }
@@ -165,7 +173,7 @@ namespace CC.Inventory
                         panel.itemImage.CrossFadeAlpha(1, 0.05f, true);
                         panel.stacksText.gameObject.SetActive(true);
 
-                        if(i.stacks > 1)
+                        if (i.stacks > 1)
                         {
                             panel.stacksText.text = "" + i.stacks;
                         }
@@ -297,6 +305,31 @@ namespace CC.Inventory
             RefreshInventory();
         }
 
+        bool CheckItem(ABaseItem _item)
+        {
+            foreach (ItemSlotInfo i in items)
+            {
+                if (_item == i.item)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        void RemoveItem(Component _component, object _item)
+        {
+            ABaseItem _itemToRemove = (ABaseItem)_item;
+            foreach (ItemSlotInfo i in items)
+            {
+                if (_itemToRemove == i.item)
+                {
+                    i.item = null;
+                    break;
+                }
+            }
+        }
+
         public void UseItem(ABaseItem item)
         {
             item.UseItem();
@@ -309,7 +342,8 @@ namespace CC.Inventory
         }
     }
 
-    public enum ItemSlotType{
+    public enum ItemSlotType
+    {
         Inventory,
         Weapon,
         Shield,
