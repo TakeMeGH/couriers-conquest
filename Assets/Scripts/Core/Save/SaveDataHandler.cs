@@ -5,21 +5,33 @@ using Newtonsoft.Json;
 using System.IO;
 using System;
 using Newtonsoft.Json.Linq;
+using CC.Event;
+using CC.Core.Save.UI;
+using System.Threading.Tasks;
 
 namespace CC.Core.Save
 {
     public class SaveDataHandler : MonoBehaviour
     {
-        [SerializeField] List<ASavableModel> _dataModels;
+        [SerializeField] List<ASavableModel> _dataModels; //slot 0 untuk DayTime DataModel
         [SerializeField] GameData _gameData;
-        [SerializeField] float _intervalSecond = 300;
+        //[SerializeField] float _intervalSecond = 300;
         [SerializeField] bool autoSave;
+        [Header("Load")]
+        [SerializeField] bool _loadOnAwake;
+        [SerializeField] SenderDataEventChannelSO _OnAwakeLoad;
+        [Header("Events")]
+        [SerializeField] SenderDataEventChannelSO _OnBeforeSave;
+        [SerializeField] SenderDataEventChannelSO _OnLoadFinished;
         float timeIndicator;
+        private void Awake()
+        {
+            if(_loadOnAwake) _OnAwakeLoad?.raiseEvent(this, null);
+        }
         private void Start()
         {
-            //ForceSaveData(0);
+            Debug.Log("Save Location = " + Application.persistentDataPath + "/GameData/Save");
         }
-
         private void Update()
         {
             //timeIndicator += Time.deltaTime;
@@ -33,12 +45,27 @@ namespace CC.Core.Save
         #region "To be Called On Event"
         public void LoadGame(Component sender, object slot)
         {
-            if (slot is int) StartCoroutine(LoadData((int)slot));
+            if (slot is int) {LoadData((int)slot); }
         }
 
         public void AutoSave(Component sender, object slot)
         {
-            if (slot is int) StartCoroutine(ForceSaveData((int)slot));
+            Debug.Log("Auto saving..");
+            if (autoSave && slot is int) StartCoroutine(ForceSaveData((int)slot));
+        }
+
+        public void QuestSave(bool setAuto)
+        {
+            if (autoSave)
+            {
+                autoSave = setAuto;
+                StartCoroutine(ForceSaveData(1));
+            }
+            else
+            {
+                autoSave = setAuto;
+                StartCoroutine(ForceSaveData(1));
+            }
         }
 
         public void ManualSave(Component sender, object slot)
@@ -49,9 +76,11 @@ namespace CC.Core.Save
 
         IEnumerator ForceSaveData(int slot)
         {
+            _OnBeforeSave?.raiseEvent(this, null);
             string path = Application.persistentDataPath + "/GameData/Save" + slot;
             Debug.Log(path);
             _gameData = new GameData();
+            _gameData.saveTime = DateTime.Now;
             foreach (var model in _dataModels)
             {
                 _gameData.saveableModelSOs.Add(model.Save());
@@ -95,7 +124,7 @@ namespace CC.Core.Save
             return null;
         }
 
-        IEnumerator LoadData(int slot)
+        async void LoadData(int slot)
         {
             string path = Application.persistentDataPath + "/GameData/Save" + slot;
             Debug.Log("trying to load" + path);
@@ -103,23 +132,39 @@ namespace CC.Core.Save
             if (!File.Exists(path))
             {
                 Debug.Log("File on slot not found");
-                return null;
+                return;
             }
             try
             {
                 GameData LoadedGameData = JsonConvert.DeserializeObject<GameData>(File.ReadAllText(path));
+                var taskList = new List<Task>();
                 for (int i = 0; i < _dataModels.Count; i++)
                 {
                     object loadedData = LoadedGameData.saveableModelSOs[i];
-                    Debug.Log(loadedData.GetType());
-                    _dataModels[i].Load(loadedData);
+                    //_dataModels[i].Load(loadedData);
+                    taskList.Add(populateDataModels(_dataModels[i], loadedData));
                 }
+                await Task.WhenAll(taskList);
+                Debug.Log("Load Finishes");
+                _OnLoadFinished?.raiseEvent(this, null);
             }
             catch (Exception e)
             {
                 Debug.LogError(e.ToString());
             }
-            return null;
+        }
+
+        async Task populateDataModels(ASavableModel model, object data)
+        {
+            model.Load(data);
+            await Task.Yield();
+        }
+
+        public async void initNewGame()
+        {
+            foreach (var model in _dataModels) model.SetDefaultValue();
+            await Task.Yield();
+            _OnLoadFinished?.raiseEvent(this, null);
         }
     }
 
@@ -127,6 +172,7 @@ namespace CC.Core.Save
     public class GameData
     {
         [Header("Meta")]
+        public DateTime saveTime;
         [Header("Data")]
         public List<object> saveableModelSOs = new();
     }

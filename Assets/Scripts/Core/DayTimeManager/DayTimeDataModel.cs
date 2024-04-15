@@ -9,6 +9,7 @@ namespace CC.Core.Daytime {
     public class DayTimeDataModel :ASavableModel
     {
         [SerializeField] DayTimeData _daytimeData;
+        [SerializeField] DayTimeData _defaultDaytimeData;
         public override ISaveable Save()
         {
             return _daytimeData;
@@ -35,11 +36,21 @@ namespace CC.Core.Daytime {
         {
             return _daytimeData.time;
         }
+        public override void SetDefaultValue()
+        {
+            _daytimeData.CopyFrom(_defaultDaytimeData);
+        }
     }
     [System.Serializable]
     public class DayTimeData : ISaveable
     {
         public int day;
         public int time;
+        public void CopyFrom(ISaveable obj)
+        {
+            var target = (DayTimeData)obj;
+            this.day = target.day;
+            this.time = target.time;
+        }
     }
 }
