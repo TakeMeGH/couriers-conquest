@@ -14,6 +14,7 @@ namespace CC.Inventory
         public ItemSlotInfo itemSlot;
         public Image itemImage;
         public TextMeshProUGUI stacksText;
+        public ItemSlotType slotType;
 
         private bool click;
 
@@ -24,6 +25,8 @@ namespace CC.Inventory
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            if (CheckSlotType()) return;
+
             click = true;
         }
 
@@ -31,22 +34,26 @@ namespace CC.Inventory
         {
             if (click)
             {
-                OnClick();
+                OnAction();
                 click = false;
             }
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
+
             if (eventData.button == PointerEventData.InputButton.Left)
             {
                 if (mouse.itemSlot.item == null)
                 {
-                    itemSlot.item.UseItem();
+                    if(itemSlot.item != null)
+                    {
+                        itemSlot.item.UseItem();
+                    }
                 }
                 else if (mouse.itemSlot.item != null)
                 {
-                    OnClick();
+                    OnAction();
                 }
             }
             else if (eventData.button == PointerEventData.InputButton.Right)
@@ -60,16 +67,25 @@ namespace CC.Inventory
 
         public void OnDrop(PointerEventData eventData)
         {
-            OnClick();
+            if (CheckSlotType()) return;
+
+            OnAction();
             click = false;
         }
         public void OnDrag(PointerEventData eventData)
         {
+            if (CheckSlotType()) return;
+
             if (click)
             {
-                OnClick();
+                OnAction();
                 click = false;
             }
+        }
+
+        private bool CheckSlotType()
+        {
+            return slotType == ItemSlotType.Inventory || slotType == ItemSlotType.Consumable ? false : true;
         }
 
         private void PickupItem()
@@ -84,11 +100,6 @@ namespace CC.Inventory
         private void FadeOut()
         {
             itemImage.CrossFadeAlpha(0.3f, 0.05f, true);
-        }
-
-        private void FadeIn()
-        {
-            itemImage.CrossFadeAlpha(1f, 0.5f, true); // Mengembalikan opasitas ke 1 dalam waktu 0.5 detik
         }
 
         private void DropItem()
@@ -108,7 +119,6 @@ namespace CC.Inventory
         }
         private void SwapItem(ItemSlotInfo slotA, ItemSlotInfo slotB)
         {
-            //Hold item for transfer
             ItemSlotInfo tempItem = new ItemSlotInfo(slotA.item, slotA.stacks);
 
             slotA.item = slotB.item;
@@ -135,7 +145,7 @@ namespace CC.Inventory
             }
         }
 
-        private void OnClick()
+        private void OnAction()
         {
             if (inventory != null)
             {
@@ -150,48 +160,91 @@ namespace CC.Inventory
                         FadeOut();
                     }
                 }
+
                 else
                 {
-                    //Clicked on original slot
-                    if (itemSlot == mouse.itemSlot)
+                    if(slotType == ItemSlotType.Inventory)
                     {
-                        mouse.EmptySlot();
-                        inventory.RefreshInventory();
+                        OnActionInventory();
                     }
-                    //Clicked on empty slot
-                    else if (itemSlot.item == null)
+                    else if(slotType == ItemSlotType.Consumable)
                     {
-                        DropItem();
-                        inventory.RefreshInventory();
+                        OnActionConsumableItem();
                     }
-                    else if (itemSlot.item != mouse.itemSlot.item)
+                    else 
                     {
-                        SwapItem(itemSlot, mouse.itemSlot);
-                        inventory.RefreshInventory();
-                    }
-                    //Clicked on occupied slot of different item type
-                    else if (itemSlot.item.maxStacks != mouse.itemSlot.item.maxStacks)
-                    {
-                        SwapItem(itemSlot, mouse.itemSlot);
-                        inventory.RefreshInventory();
-                    }
-                    //Clicked on occupided slot of same type
-                    else if (itemSlot.stacks < itemSlot.item.maxStacks)
-                    {
-                        StackItem(mouse.itemSlot, itemSlot, mouse.splitSize);
-                        inventory.RefreshInventory();
-                    }
-                    else if (itemSlot.stacks >= itemSlot.item.maxStacks)
-                    {
-                        SwapItem(itemSlot, mouse.itemSlot);
-                        inventory.RefreshInventory();
-                    }
-                    else
-                    {
-                        mouse.EmptySlot();
-                        inventory.RefreshInventory();
+                        OnActionEquipmentSlot();
                     }
                 }
+            }
+        }
+
+        private void OnActionInventory()
+        {
+            //Clicked on original slot
+            if (itemSlot == mouse.itemSlot)
+            {
+                mouse.EmptySlot();
+            }
+            //Clicked on empty slot
+            else if (itemSlot.item == null)
+            {
+                DropItem();
+            }
+            else if (itemSlot.item != mouse.itemSlot.item)
+            {
+                SwapItem(itemSlot, mouse.itemSlot);
+            }
+            //Clicked on occupied slot of different item type
+            else if (itemSlot.item.maxStacks != mouse.itemSlot.item.maxStacks)
+            {
+                SwapItem(itemSlot, mouse.itemSlot);
+            }
+            //Clicked on occupided slot of same type
+            else if (itemSlot.stacks < itemSlot.item.maxStacks)
+            {
+                StackItem(mouse.itemSlot, itemSlot, mouse.splitSize);
+            }
+            else if (itemSlot.stacks >= itemSlot.item.maxStacks)
+            {
+                SwapItem(itemSlot, mouse.itemSlot);
+            }
+            else
+            {
+                mouse.EmptySlot();
+            }
+
+            inventory.RefreshInventory();
+        }
+
+        private void OnActionEquipmentSlot()
+        {
+            if (mouse.itemSlot.item.GetItemType() != ItemType.Equipment) {
+                Debug.Log("Slot Not Match");
+                return;
+            };
+
+            EquipmentItem equipmentScript = (EquipmentItem)mouse.itemSlot.item;
+
+            if (slotType == equipmentScript.specificType)
+            {
+                OnActionInventory();
+            }
+            else
+            {
+                Debug.Log("Slot Not Match");
+            }
+        }
+
+        private void OnActionConsumableItem()
+        {
+            if(mouse.itemSlot.item.GetItemType() == ItemType.Consumable)
+            {
+                OnActionInventory();
+            }
+            else
+            {
+                Debug.Log("Slot Not Match");
             }
         }
 
@@ -199,6 +252,5 @@ namespace CC.Inventory
         {
             inventory.RefreshInventory();
         }
-        
     }
 }
