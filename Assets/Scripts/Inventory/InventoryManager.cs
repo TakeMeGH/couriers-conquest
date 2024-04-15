@@ -99,6 +99,7 @@ namespace CC.Inventory
             for (int i = 0; i < _existingPanels.Count; i++)
             {
                 items.Add(new ItemSlotInfo(null, 0));
+                _existingPanels[i].mouse = mouse;
             }
         }
 
