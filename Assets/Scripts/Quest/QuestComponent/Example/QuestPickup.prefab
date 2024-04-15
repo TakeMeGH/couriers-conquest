@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8278809900438450825}
   - component: {fileID: 4677874892122127410}
   - component: {fileID: 4860125412270869010}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: InterractableComponent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,4 +203,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _onPickup: {fileID: 11400000, guid: 00f2c113d4d2e8b43b961d419f346124, type: 2}
-  _manager: {fileID: 0}
+  _addItemToInventory: {fileID: 11400000, guid: 4611073ba66144c44ba509f62ea86853,
+    type: 2}
