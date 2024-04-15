@@ -429,7 +429,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3603770861154309902}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8744186122886361867}
+        m_TargetAssemblyTypeName: CC.Core.Save.UI.LoadButton, Assembly-CSharp
+        m_MethodName: loadOnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8744186122886361867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,9 +455,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slot: 0
+  _handler: {fileID: 0}
   _saveDateText: {fileID: 0}
   _dayText: {fileID: 8281983348273470069}
   _timeText: {fileID: 2977466878796018660}
+  _nullField: {fileID: 8381628248860847941}
+  _notNullObject: {fileID: 2704259817067771541}
 --- !u!1 &7075024422445747023
 GameObject:
   m_ObjectHideFlags: 0

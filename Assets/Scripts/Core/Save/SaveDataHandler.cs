@@ -23,6 +23,7 @@ namespace CC.Core.Save
         [Header("Events")]
         [SerializeField] SenderDataEventChannelSO _OnBeforeSave;
         [SerializeField] SenderDataEventChannelSO _OnLoadFinished;
+        [SerializeField] SenderDataEventChannelSO _OnSaveFinished;
         float timeIndicator;
         private void Awake()
         {
@@ -76,6 +77,8 @@ namespace CC.Core.Save
 
         IEnumerator ForceSaveData(int slot)
         {
+            Debug.Log("Saving..");
+            yield return null;
             _OnBeforeSave?.raiseEvent(this, null);
             string path = Application.persistentDataPath + "/GameData/Save" + slot;
             Debug.Log(path);
@@ -121,7 +124,8 @@ namespace CC.Core.Save
                     Debug.LogError(e.ToString());
                 }
             }
-            return null;
+            yield return null;
+            _OnSaveFinished?.raiseEvent(this, null);
         }
 
         async void LoadData(int slot)

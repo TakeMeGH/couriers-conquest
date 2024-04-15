@@ -6,6 +6,7 @@ using UnityEngine;
 using TMPro;
 using CC.Core.Daytime;
 using Newtonsoft.Json.Linq;
+using UnityEngine.UI;
 
 namespace CC.Core.Save.UI
 {
@@ -13,6 +14,7 @@ namespace CC.Core.Save.UI
     {
         [SerializeField] int slot;
         [SerializeField] GameData _data;
+        [SerializeField] SaveDataHandler _handler;
         [Header("Display")]
         [SerializeField] TextMeshProUGUI _saveDateText;
         [SerializeField] TextMeshProUGUI _dayText;
@@ -44,6 +46,7 @@ namespace CC.Core.Save.UI
         {
             _notNullObject.SetActive(false);
             _nullField.SetActive(true);
+            GetComponent<Button>().interactable = false;
         }
 
         void OnDisplay()
@@ -51,8 +54,13 @@ namespace CC.Core.Save.UI
             DayTimeData _model = ((JObject)_data.saveableModelSOs[0]).ToObject<DayTimeData>();
             _nullField.SetActive(false);
             _notNullObject.SetActive(true);
-            _dayText.text = _model.day.ToString();
-            _timeText.text = _model.time.ToString();
+            _dayText.text = "Day " + _model.day.ToString();
+            _timeText.text = string.Format("{0:00}:{1:00}", _model.time / 60, _model.time % 60);
+        }
+
+        public void loadOnClick()
+        {
+            _handler.LoadGame(this, slot);
         }
     }
 }

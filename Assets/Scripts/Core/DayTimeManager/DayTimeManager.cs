@@ -54,7 +54,7 @@ namespace CC.Core.Daytime
             if (_recTime > _secToMin)
             {
                 Debug.Log("UpdatingTime");
-                if(_time >= 1440){ _model.OnTimeUpdate(0); _model.OnDayUpdate(_model.getDay() + 1); _AutoSave?.raiseEvent(this,0) ; _day = _model.getDay(); }
+                if(_time >= 1440){_model.OnTimeUpdate(0); _model.OnDayUpdate(_model.getDay() + 1); _AutoSave?.raiseEvent(this,0) ; _day = _model.getDay(); _time = _model.getTime(); }
                 else _model.OnTimeUpdate(_time + 1);
                 _currentTimeGrad = _model.getTime() / 1440f;
                 Debug.Log(_model.getTime() / 1440f);
