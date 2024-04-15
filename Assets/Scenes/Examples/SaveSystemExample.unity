@@ -1486,44 +1486,6 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
---- !u!84 &991436831
-RenderTexture:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_ImageContentsHash:
-    serializedVersion: 2
-    Hash: 00000000000000000000000000000000
-  m_ForcedFallbackFormat: 4
-  m_DownscaleFallback: 0
-  m_IsAlphaChannelOptional: 0
-  serializedVersion: 5
-  m_Width: 512
-  m_Height: 512
-  m_AntiAliasing: 1
-  m_MipCount: -1
-  m_DepthStencilFormat: 94
-  m_ColorFormat: 4
-  m_MipMap: 0
-  m_GenerateMips: 1
-  m_SRGB: 1
-  m_UseDynamicScale: 0
-  m_BindMS: 0
-  m_EnableCompatibleFormat: 1
-  m_EnableRandomWrite: 0
-  m_TextureSettings:
-    serializedVersion: 2
-    m_FilterMode: 1
-    m_Aniso: 1
-    m_MipBias: 0
-    m_WrapU: 1
-    m_WrapV: 1
-    m_WrapW: 1
-  m_Dimension: 2
-  m_VolumeDepth: 1
-  m_ShadowSamplingMode: 2
 --- !u!1 &1159090203
 GameObject:
   m_ObjectHideFlags: 0
@@ -2265,6 +2227,89 @@ MonoBehaviour:
   maximumDistance: 6
   smoothing: 4
   zoomSensitivity: 1
+--- !u!84 &1655483472
+RenderTexture:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 5
+  m_Width: 512
+  m_Height: 512
+  m_AntiAliasing: 1
+  m_MipCount: -1
+  m_DepthStencilFormat: 94
+  m_ColorFormat: 4
+  m_MipMap: 0
+  m_GenerateMips: 1
+  m_SRGB: 1
+  m_UseDynamicScale: 0
+  m_BindMS: 0
+  m_EnableCompatibleFormat: 1
+  m_EnableRandomWrite: 0
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_Dimension: 2
+  m_VolumeDepth: 1
+  m_ShadowSamplingMode: 2
+--- !u!21 &1736380430
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: GrassMaterial(Clone)
+  m_Shader: {fileID: -6465566751694194690, guid: 679d4a09699f14847b7be5166b3761d2,
+    type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Blend: 1
+    - _BlendMult: 0.75
+    - _BlendOff: 0.25
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    m_Colors: []
+  m_BuildTextureStacks: []
 --- !u!1 &1828975250
 GameObject:
   m_ObjectHideFlags: 0
@@ -2847,7 +2892,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1910101902}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 400614356}
+        m_TargetAssemblyTypeName: CC.Quest.UI.QuestViewUI, Assembly-CSharp
+        m_MethodName: cancelQuest
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1910101902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3720,51 +3777,6 @@ MonoBehaviour:
   m_MaximumFOV: 60
   m_MinimumOrthoSize: 1
   m_MaximumOrthoSize: 5000
---- !u!21 &2112288063
-Material:
-  serializedVersion: 8
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: GrassMaterial(Clone)
-  m_Shader: {fileID: -6465566751694194690, guid: 679d4a09699f14847b7be5166b3761d2,
-    type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
-  m_InvalidKeywords: []
-  m_LightmapFlags: 4
-  m_EnableInstancingVariants: 1
-  m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
-  stringTagMap: {}
-  disabledShaderPasses: []
-  m_LockedProperties: 
-  m_SavedProperties:
-    serializedVersion: 3
-    m_TexEnvs:
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    m_Ints: []
-    m_Floats:
-    - _Blend: 1
-    - _BlendMult: 0.75
-    - _BlendOff: 0.25
-    - _QueueControl: 0
-    - _QueueOffset: 0
-    m_Colors: []
-  m_BuildTextureStacks: []
 --- !u!33 &8321122617496515
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -3979,10 +3991,63 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1409673874894867467, guid: 3e2d6192dae12a24c9d412d585fadad1,
+        type: 3}
+      propertyPath: _onQuestStart
+      value: 
+      objectReference: {fileID: 11400000, guid: 16c9f5e50df3b214ab937f600f5ab22d,
+        type: 2}
+    - target: {fileID: 1409673874894867467, guid: 3e2d6192dae12a24c9d412d585fadad1,
+        type: 3}
+      propertyPath: _onQuestCancel
+      value: 
+      objectReference: {fileID: 11400000, guid: 42a53de6e2e76ae4c8b183fe6da10e7a,
+        type: 2}
     - target: {fileID: 4691319134581961750, guid: 3e2d6192dae12a24c9d412d585fadad1,
         type: 3}
       propertyPath: m_Name
       value: QuestManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386042157683916794, guid: 3e2d6192dae12a24c9d412d585fadad1,
+        type: 3}
+      propertyPath: listeners.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386042157683916794, guid: 3e2d6192dae12a24c9d412d585fadad1,
+        type: 3}
+      propertyPath: listeners.Array.data[6].channel
+      value: 
+      objectReference: {fileID: 11400000, guid: 26a1f4370c620f348b8f527e620ab9bc,
+        type: 2}
+    - target: {fileID: 5386042157683916794, guid: 3e2d6192dae12a24c9d412d585fadad1,
+        type: 3}
+      propertyPath: listeners.Array.data[6].eventToCall.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386042157683916794, guid: 3e2d6192dae12a24c9d412d585fadad1,
+        type: 3}
+      propertyPath: listeners.Array.data[6].eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 984707804515308832}
+    - target: {fileID: 5386042157683916794, guid: 3e2d6192dae12a24c9d412d585fadad1,
+        type: 3}
+      propertyPath: listeners.Array.data[6].eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386042157683916794, guid: 3e2d6192dae12a24c9d412d585fadad1,
+        type: 3}
+      propertyPath: listeners.Array.data[6].eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: tryCancelQuest
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386042157683916794, guid: 3e2d6192dae12a24c9d412d585fadad1,
+        type: 3}
+      propertyPath: listeners.Array.data[6].eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: CC.Quest.QuestManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5386042157683916794, guid: 3e2d6192dae12a24c9d412d585fadad1,
+        type: 3}
+      propertyPath: listeners.Array.data[6].eventToCall.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7971589950083939957, guid: 3e2d6192dae12a24c9d412d585fadad1,
         type: 3}
@@ -4039,6 +4104,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e2d6192dae12a24c9d412d585fadad1, type: 3}
+--- !u!114 &984707804515308832 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1409673874894867467, guid: 3e2d6192dae12a24c9d412d585fadad1,
+    type: 3}
+  m_PrefabInstance: {fileID: 984707804515308831}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0b3b4ef489dbaa4ebd942ba527902ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!33 &985703169568221636
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -58692,7 +58769,7 @@ MonoBehaviour:
     normal: {x: 0, y: 1, z: 0}
     length: {x: 0.075, y: 0.4}
     color: {x: 0.47382903, y: 1.0468895, z: 0.0041763904}
-  m_InstantiatedMaterial: {fileID: 2112288063}
+  m_InstantiatedMaterial: {fileID: 1736380430}
 --- !u!23 &5570378112795443784
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -59108,7 +59185,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 6.043765, z: 0}
-  m_LocalScale: {x: 1, y: 1.0000772, z: 1.0000772}
+  m_LocalScale: {x: 1, y: 1.0000782, z: 1.0000782}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6532806025346936226}
@@ -59489,7 +59566,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 2048
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 991436831}
+  m_TargetTexture: {fileID: 1655483472}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1

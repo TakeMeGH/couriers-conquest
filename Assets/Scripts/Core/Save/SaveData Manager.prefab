@@ -98,6 +98,7 @@ MonoBehaviour:
   _OnAwakeLoad: {fileID: 11400000, guid: 53f99b3e64b3ca14ea975df575f4470b, type: 2}
   _OnBeforeSave: {fileID: 11400000, guid: 86485d50d160eb645884d2cab3fa5c3e, type: 2}
   _OnLoadFinished: {fileID: 11400000, guid: 1b4fc92c341e1c9448ea128f13dfd9c3, type: 2}
+  _OnSaveFinished: {fileID: 0}
 --- !u!1 &4292635983923061608
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,7 +880,7 @@ PrefabInstance:
     - target: {fileID: 8744186122886361867, guid: 234edf9c42ec0a94290ca67cfb6ec7b9,
         type: 3}
       propertyPath: slot
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8744186122886361867, guid: 234edf9c42ec0a94290ca67cfb6ec7b9,
         type: 3}
@@ -1165,6 +1166,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8744186122886361867, guid: 234edf9c42ec0a94290ca67cfb6ec7b9,
         type: 3}
+      propertyPath: slot
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8744186122886361867, guid: 234edf9c42ec0a94290ca67cfb6ec7b9,
+        type: 3}
       propertyPath: _handler
       value: 
       objectReference: {fileID: 1223120037944052256}
@@ -1303,6 +1309,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8744186122886361867, guid: 234edf9c42ec0a94290ca67cfb6ec7b9,
+        type: 3}
+      propertyPath: slot
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8744186122886361867, guid: 234edf9c42ec0a94290ca67cfb6ec7b9,
         type: 3}
