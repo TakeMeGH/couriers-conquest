@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: PlayerState
   m_EditorClassIdentifier: 
   _state:
+    currentPosition: {x: 17.4, y: 0, z: 0}
+    finishedQuest: 
+  _defaultState:
     currentPosition: {x: 0, y: 0, z: 0}
     finishedQuest: 

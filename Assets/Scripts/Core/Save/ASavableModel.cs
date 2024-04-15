@@ -9,6 +9,10 @@ namespace CC.Core.Save
     {
         public abstract ISaveable Save();
         public abstract void Load(object data);
+        public abstract void SetDefaultValue();
     }
-    public interface ISaveable { }
+    public interface ISaveable
+    {
+        public void CopyFrom(ISaveable obj);
+    }
 }
