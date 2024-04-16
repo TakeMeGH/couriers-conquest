@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CC.Inventory{
 
-    [CreateAssetMenu(fileName = "ItemData", menuName = "Items/Potion", order = 2)]
+    [CreateAssetMenu(fileName = "ConsumableItem", menuName = "Items/Consumable", order = 2)]
     public class ConsumableItem : ABaseItem
     {
         public float bonusHp;

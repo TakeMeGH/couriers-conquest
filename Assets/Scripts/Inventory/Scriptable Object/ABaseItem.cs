@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CC.Inventory{
+namespace CC.Inventory
+{
     public abstract class ABaseItem : ScriptableObject
     {
         public string itemName;
-        public string itemId;
         public float itemWeight;
         public string itemDescription;
         public Sprite itemSprite;
@@ -14,7 +14,6 @@ namespace CC.Inventory{
 
         public abstract ItemType GetItemType();
         public abstract void UseItem();
-
     }
 
     public enum ItemType
@@ -22,6 +21,7 @@ namespace CC.Inventory{
         Materials,
         Consumable,
         Rune,
-        Weapon
+        Equipment,
+        QuestItem,
     }
 }

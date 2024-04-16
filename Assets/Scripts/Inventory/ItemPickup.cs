@@ -50,7 +50,7 @@ namespace CC.Inventory
             }
             else
             {
-                if (_amount < 1) Destroy(this.transform.root.gameObject);
+                if (_amount < 1) Destroy(this.transform.parent.gameObject);
             }
         }
 
