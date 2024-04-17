@@ -26,8 +26,10 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     public event UnityAction AttackCanceled = delegate { };
     public event UnityAction BlockPerformed = delegate { };
     public event UnityAction BlockCanceled = delegate { };
-    public bool IsBlocking {get; private set;}
-    public bool IsAttacking {get; private set;}
+    public event UnityAction WalkToggleStarted = delegate { };
+
+    public bool IsBlocking { get; private set; }
+    public bool IsAttacking { get; private set; }
 
 
     public event UnityAction OpenInventoryEvent = delegate { };
@@ -204,5 +206,9 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
         _playerInput.InventoryUI.Enable();
     }
 
-
+    public void OnWalkToggle(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+            WalkToggleStarted.Invoke();
+    }
 }
