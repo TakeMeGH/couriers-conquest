@@ -162,7 +162,6 @@ namespace CC.Characters.States
 
             _playerController.Rigidbody.AddForce(targetRotationDirection * movementSpeed - currentPlayerHorizontalVelocity * _playerController.Rigidbody.mass, ForceMode.Impulse);
             _playerController.Animator.SetFloat("Velocity", _playerController.Rigidbody.velocity.magnitude);
-            Debug.Log(_playerController.Rigidbody.velocity.magnitude);
         }
 
         protected Vector3 GetMovementInputDirection()

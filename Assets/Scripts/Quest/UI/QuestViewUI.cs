@@ -74,7 +74,7 @@ namespace CC.Quest.UI
 
         public void closeView()
         {
-            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.lockState = CursorLockMode.Locked;
             _inputReader.EnableGameplayInput();
         }
     }
