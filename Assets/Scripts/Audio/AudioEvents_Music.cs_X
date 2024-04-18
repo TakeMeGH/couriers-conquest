@@ -1,0 +1,18 @@
+using System.Collections;
+using System.Collections.Generic;
+using FMODUnity;
+using UnityEngine;
+
+public class AudioEvents_Music : MonoBehaviour
+{
+    [field: Header("UI Music Field")]
+    [field: SerializeField] public EventReference Music_Field {get;private set;}
+
+
+    private void Awake() {
+         if (instance != null){
+            Debug.LogError("Somehow there's more than one FMOD_AudioManager in the scene");
+        }    
+        instance = this;
+    }
+}
