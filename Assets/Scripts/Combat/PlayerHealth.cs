@@ -1,19 +1,18 @@
-using UnityEngine;
+/*using UnityEngine;
 
 namespace CC.Combats
 {
-    public class Health : MonoBehaviour
+    public class PlayerHealth : MonoBehaviour
     {
         [SerializeField] private int maxHealth = 100;
-        [SerializeField] private float damageReduction = 0.2f; // 20% damage reduction
 
         private int health;
+
         private bool isInvunerable;
 
         private void Start()
         {
             health = maxHealth;
-            Debug.Log("Initial Player Health: " + health);
         }
 
         public int GetCurrentHealth()
@@ -26,18 +25,15 @@ namespace CC.Combats
             this.isInvunerable = isInvunerable;
         }
 
-        public void DealDamage(int damage)
-        {  
-            Debug.Log("Received Damage: " + damage);
-
+        public void DamageReceive(int damage)
+        {
             if (health == 0) { return; }
 
             if (isInvunerable) { return; }
 
-            int calculatedDamage = Mathf.Min(Mathf.RoundToInt(damage * (1 - damageReduction)), health);
-            health = Mathf.Max(health - calculatedDamage, 0);
-            Debug.Log("Calculated Damage after Reduction: " + calculatedDamage);
+            health = Mathf.Max(health - damage, 0);
             Debug.Log("Player Health after Damage: " + health);
         }
     }
 }
+*/
