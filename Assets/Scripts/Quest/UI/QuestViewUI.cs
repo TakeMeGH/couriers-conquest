@@ -65,8 +65,16 @@ namespace CC.Quest.UI
             _cancelEvent?.raiseEvent(this, selectedQuest.GetQuestID());
         }
 
+        public void openView()
+        {
+            RefreshList();
+            Cursor.lockState = CursorLockMode.Confined;
+
+        }
+
         public void closeView()
         {
+            Cursor.lockState = CursorLockMode.Confined;
             _inputReader.EnableGameplayInput();
         }
     }

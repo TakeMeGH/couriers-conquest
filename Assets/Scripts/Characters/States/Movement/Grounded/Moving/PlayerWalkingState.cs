@@ -36,7 +36,8 @@ namespace CC.Characters.States
 
         protected override void OnMovementCanceled()
         {
-            _playerController.SwitchState(_playerController.PlayerMediumStoppingState);
+            // Harusnya stoping -> for now idle
+            _playerController.SwitchState(_playerController.PlayerIdlingState);
 
             base.OnMovementCanceled();
         }

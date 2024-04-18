@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using CC.Events;
 
 [CreateAssetMenu(fileName = "InputReader", menuName = "Game/Input Reader")]
 public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameInput.IInventoryUIActions
@@ -35,6 +36,9 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     public event UnityAction OpenInventoryEvent = delegate { };
     public event UnityAction CloseInventoryEvent = delegate { };
     public event UnityAction DropItemPerformed = delegate { };
+    [SerializeField] VoidEventChannelSO _enableCameraInputEvent;
+
+    [SerializeField] VoidEventChannelSO _disableCameraInputEvent;
 
 
 
@@ -197,12 +201,16 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     public void EnableGameplayInput()
     {
         _playerInput.Gameplay.Enable();
+        _enableCameraInputEvent.RaiseEvent();
+
         _playerInput.InventoryUI.Disable();
     }
 
     public void EnableInventoryUIInput()
     {
         _playerInput.Gameplay.Disable();
+        _disableCameraInputEvent.RaiseEvent();
+
         _playerInput.InventoryUI.Enable();
     }
 
