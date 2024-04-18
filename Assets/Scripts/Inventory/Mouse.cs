@@ -17,7 +17,11 @@ namespace CC.Inventory
         public ItemPanel sourceItemPanel;
         public int splitSize;
 
-        // Update is called once per frame
+        private void Start()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+
+        }
         void Update()
         {
             transform.position = Input.mousePosition;

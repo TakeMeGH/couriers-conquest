@@ -354,6 +354,7 @@ AnimatorStateMachine:
     - {fileID: 3920721974796599748}
     - {fileID: 1618093448629301644}
     - {fileID: -5621738604173050590}
+    - {fileID: -5397247201907694847}
   - first: {fileID: 7087449220638828030}
     second:
     - {fileID: 9193873135300811135}
@@ -491,6 +492,23 @@ AnimatorTransition:
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 8857995725983288004}
   m_DstState: {fileID: 0}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 1
+--- !u!1109 &-5397247201907694847
+AnimatorTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: isIdling
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 338103975312780762}
   m_Solo: 0
   m_Mute: 0
   m_IsExit: 0

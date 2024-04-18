@@ -50,6 +50,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2354980168500475971}
   - component: {fileID: 1223120037944052256}
+  - component: {fileID: 4821725625957702718}
   m_Layer: 5
   m_Name: SaveData Manager
   m_TagString: Untagged
@@ -93,12 +94,89 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 28552fa33ae8c7643afcd2503a8d23fe, type: 2}
   - {fileID: 11400000, guid: b8def99fed8f3ab47b6dacd033f88368, type: 2}
   - {fileID: 11400000, guid: f3ee829ae9f91ee48b6a0fd3da31e4a9, type: 2}
-  autoSave: 0
-  _loadOnAwake: 0
+  autoSave: 1
+  _loadOnAwake: 1
   _OnAwakeLoad: {fileID: 11400000, guid: 53f99b3e64b3ca14ea975df575f4470b, type: 2}
   _OnBeforeSave: {fileID: 11400000, guid: 86485d50d160eb645884d2cab3fa5c3e, type: 2}
   _OnLoadFinished: {fileID: 11400000, guid: 1b4fc92c341e1c9448ea128f13dfd9c3, type: 2}
   _OnSaveFinished: {fileID: 0}
+--- !u!114 &4821725625957702718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3898237635604149944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc664d1b263d3c4caade25e036d29be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listeners:
+  - channel: {fileID: 11400000, guid: 9afbbccb9af97664ab243f21fe678eaa, type: 2}
+    eventToCall:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1223120037944052256}
+          m_TargetAssemblyTypeName: CC.Core.Save.SaveDataHandler, Assembly-CSharp
+          m_MethodName: AutoSave
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - channel: {fileID: 11400000, guid: 16c9f5e50df3b214ab937f600f5ab22d, type: 2}
+    eventToCall:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1223120037944052256}
+          m_TargetAssemblyTypeName: CC.Core.Save.SaveDataHandler, Assembly-CSharp
+          m_MethodName: QuestSave
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - channel: {fileID: 11400000, guid: 42a53de6e2e76ae4c8b183fe6da10e7a, type: 2}
+    eventToCall:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1223120037944052256}
+          m_TargetAssemblyTypeName: CC.Core.Save.SaveDataHandler, Assembly-CSharp
+          m_MethodName: QuestSave
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
+  - channel: {fileID: 11400000, guid: 38cd4e099427acd4a89565c352e7f044, type: 2}
+    eventToCall:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1223120037944052256}
+          m_TargetAssemblyTypeName: CC.Core.Save.SaveDataHandler, Assembly-CSharp
+          m_MethodName: QuestSave
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 1
+          m_CallState: 2
 --- !u!1 &4292635983923061608
 GameObject:
   m_ObjectHideFlags: 0

@@ -9,6 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] InputReader _inputReader;
     [SerializeField] SenderDataEventChannelSO _onInventoryOpen;
     [SerializeField] SenderDataEventChannelSO _onInventoryClose;
+    bool isInventoryOpen;
 
 
     private void OnEnable()
@@ -26,11 +27,15 @@ public class UIManager : MonoBehaviour
 
     private void OpenInventory()
     {
+        if(isInventoryOpen) return;
+        isInventoryOpen = true;
         _onInventoryOpen?.raiseEvent(this, null);
     }
 
     private void CloseInventory()
     {
+        if (!isInventoryOpen) return;
+        isInventoryOpen = false;
         _onInventoryClose?.raiseEvent(this, null);
     }
 
