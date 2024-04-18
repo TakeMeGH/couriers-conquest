@@ -1,55 +1,54 @@
-using CC.Inventory;
-using System.Collections;
-using System.Collections.Generic;
-using System.Xml;
-using UnityEditor;
 using UnityEngine;
+using System.Collections.Generic;
 
-public class ItemDictionary
+namespace CC.Inventory
 {
-    private string _folderPath = "Assets/ScriptableObjects/Item/";
-    private string[] _specificPath = { "Consumable", "Materials", "Quest", "Rune", "Equipment" }; 
-    [SerializeField] private Dictionary<string, ABaseItem> _itemDictionary = new Dictionary<string, ABaseItem>();
-
-    public void Initialize()
+    public class ItemDictionary : MonoBehaviour
     {
-        for(int i = 0; i < _specificPath.Length; i++)
+        [SerializeField] private string[] _specificPath = { "Consumable", "Materials", "Quest", "Rune", "Equipment" };
+        private Dictionary<string, ABaseItem> _itemDictionary = new Dictionary<string, ABaseItem>();
+
+        void Start()
         {
-            AttachMaterials(_specificPath[i]);
+            Initialize();
         }
-    }
 
-    private void AttachMaterials(string path)
-    {
-        string[] assetGuids = AssetDatabase.FindAssets("t:" + typeof(ABaseItem).Name, new[] { _folderPath + path });
-
-        // Menghapus isi list scriptableObjects sebelumnya
-        _itemDictionary.Clear();
-
-        foreach (string assetGuid in assetGuids)
+        public void Initialize()
         {
-            string assetPath = AssetDatabase.GUIDToAssetPath(assetGuid);
-
-            ABaseItem scriptableObject = AssetDatabase.LoadAssetAtPath<ABaseItem>(assetPath);
-
-            if (scriptableObject != null)
+            foreach (string path in _specificPath)
             {
-                _itemDictionary.Add(scriptableObject.name, scriptableObject);
-                //Debug.Log("Add " + scriptableObject.name);
+                AttachMaterials(path);
+            }
+        }
+
+        private void AttachMaterials(string path)
+        {
+            ABaseItem[] items = Resources.LoadAll<ABaseItem>("Item/" + path);
+            _itemDictionary.Clear(); // Consider clearing the dictionary outside this loop if you do not intend to reset it each time
+
+            foreach (ABaseItem item in items)
+            {
+                if (item != null)
+                {
+                    _itemDictionary.Add(item.name, item);
+                    // Debug.Log("Added " + item.name);
+                }
+            }
+        }
+
+        public ABaseItem GetValueByKey(string key)
+        {
+            ABaseItem item;
+            if (_itemDictionary.TryGetValue(key, out item))
+            {
+                return item;
+            }
+            else
+            {
+                Debug.LogWarning("Key not found in dictionary: " + key);
+                return null;
             }
         }
     }
 
-    public ABaseItem GetValueByKey(string key)
-    {
-        if (_itemDictionary.ContainsKey(key))
-        {
-            return _itemDictionary[key];
-        }
-        else
-        {
-            Debug.LogWarning("Key tidak ditemukan dalam dictionary: " + key);
-            return null;
-        }
-    }
 }
