@@ -32,7 +32,7 @@ namespace CC.Characters.States
                 return;
             }
 
-             if (_playerController.InputReader.IsBlocking)
+            if (_playerController.InputReader.IsBlocking)
             {
                 _playerController.SwitchState(_playerController.PlayerBlockingState);
                 return;
@@ -148,13 +148,16 @@ namespace CC.Characters.States
             if (_playerController.PlayerCurrentData.ShouldSprint)
             {
                 _playerController.SwitchState(_playerController.PlayerSprintingState);
-                // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.SPRINTING);
+                return;
+            }
 
+            if (_playerController.PlayerCurrentData.ShouldWalk)
+            {
+                _playerController.SwitchState(_playerController.PlayerWalkingState);
                 return;
             }
 
             _playerController.SwitchState(_playerController.PlayerRuningState);
-            // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.RUNING);
         }
 
         protected override void OnContactWithGroundExited(Collider collider)

@@ -17,6 +17,11 @@ namespace CC.Characters
         [field: SerializeField] public AnimationCurve SlopeSpeedAngles { get; private set; }
         [field: SerializeField] public Vector3 GroundedTargetRotationReachTime { get; private set; }
 
+
+        #region WalkData
+        [field: SerializeField][field: Range(0f, 1f)] public float WalkSpeedModifier { get; private set; } = 0.225f;
+
+        #endregion
         #region RunData
         [field: SerializeField, Header("Run Data")][field: Range(1f, 2f)] public float RunSpeedModifier { get; private set; } = 1f;
         #endregion

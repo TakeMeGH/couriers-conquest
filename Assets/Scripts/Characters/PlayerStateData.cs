@@ -9,6 +9,8 @@ namespace CC.Characters
         public float MovementOnSlopesSpeedModifier { get; set; } = 1f;
         public float MovementDecelerationForce { get; set; } = 1f;
         public bool ShouldSprint;
+        public bool ShouldWalk;
+
         private Vector3 _currentTargetRotation;
         private Vector3 _timeToReachTargetRotation;
         private Vector3 _dampedTargetRotationCurrentVelocity;
