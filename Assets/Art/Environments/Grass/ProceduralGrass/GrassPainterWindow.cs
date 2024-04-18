@@ -1,12 +1,18 @@
+#if UNITY_EDITOR
+
+
 using System.Collections.Generic;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Jobs;
+
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEditorInternal;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+
 
 public class GrassPainterWindow : EditorWindow
 {
@@ -535,7 +541,6 @@ public class GrassPainterWindow : EditorWindow
 
     }
 
-#if UNITY_EDITOR
     public void HandleUndo()
     {
         if (grassCompute != null)
@@ -1299,6 +1304,6 @@ public class GrassPainterWindow : EditorWindow
 
     }
 
-#endif
 }
 
+#endif

@@ -48,7 +48,7 @@ namespace CC.Characters.States
 
             Vector3 limitedVelocityForce = new Vector3(0f, -_playerController.PlayerMovementData.FallSpeedLimit - playerVerticalVelocity.y, 0f);
 
-            _playerController.Rigidbody.AddForce(limitedVelocityForce, ForceMode.VelocityChange);
+            _playerController.Rigidbody.AddForce(limitedVelocityForce, ForceMode.Impulse);
         }
 
         protected override void ResetSprintState()

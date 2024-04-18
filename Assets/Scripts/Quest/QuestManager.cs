@@ -1,5 +1,6 @@
 using UnityEngine;
 using CC.Core.Data.Dynamic;
+using CC.Event;
 
 namespace CC.Quest
 {
@@ -10,6 +11,9 @@ namespace CC.Quest
         [SerializeField] PlayerStateSO _playerState;
         [SerializeField] AQuest acceptedQuest;
 
+        [Header("Events")]
+        [SerializeField] SenderDataEventChannelSO _onQuestStart;
+        [SerializeField] SenderDataEventChannelSO _onQuestCancel;
         public void acceptQuest(Component sender, object data)
         {
             if (acceptedQuest != null)
@@ -26,16 +30,15 @@ namespace CC.Quest
                 return;
             }
             acceptedQuest = temp;
-            acceptedQuest.OnQuestStarted(sender,data);
+            _onQuestStart.raiseEvent(sender, data);
         }
-
 
         public void tryCancelQuest(Component sender, object data)
         {
             if (data is not int) return;
             int questID = (int)data;
             if (questID != acceptedQuest.GetQuestID()) { Debug.Log("you have not accepted this quest"); return; }
-            CancelQuest(sender, data);
+            _onQuestCancel?.raiseEvent(sender, data);
         }
 
         #region "Quest Flow"

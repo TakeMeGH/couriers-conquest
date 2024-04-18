@@ -48,6 +48,8 @@ MonoBehaviour:
   _database: {fileID: 11400000, guid: f02396429b9477745ae3f20fce0af416, type: 2}
   _playerState: {fileID: 11400000, guid: b8def99fed8f3ab47b6dacd033f88368, type: 2}
   acceptedQuest: {fileID: 0}
+  _onQuestStart: {fileID: 11400000, guid: 16c9f5e50df3b214ab937f600f5ab22d, type: 2}
+  _onQuestCancel: {fileID: 11400000, guid: 42a53de6e2e76ae4c8b183fe6da10e7a, type: 2}
 --- !u!114 &5386042157683916794
 MonoBehaviour:
   m_ObjectHideFlags: 0

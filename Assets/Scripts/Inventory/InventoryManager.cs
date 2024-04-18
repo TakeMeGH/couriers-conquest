@@ -5,6 +5,10 @@ using System.Linq;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering;
 using CC.Events;
+using TMPro;
+using UnityEngine.InputSystem;
+using System;
+using CC.Event;
 
 namespace CC.Inventory
 {
@@ -15,89 +19,138 @@ namespace CC.Inventory
         [Space]
         [Header("Inventory Menu Components")]
         [SerializeField] private GameObject _inventoryMenu;
-        [SerializeField] private GameObject _itemPanel;
-        [SerializeField] private GameObject _itemPanelGrid;
-        [SerializeField] private Mouse _mouse;
-        public Mouse mouse { get => _mouse; }
+        [SerializeField] private GameObject[] _itemPanelGrid;
+        [SerializeField] private Mouse _itemSlotMouse;
+        public Mouse mouse { get => _itemSlotMouse; }
 
-        private List<ItemPanel> existingPanels = new List<ItemPanel>();
+        [SerializeField] private List<ItemPanel> _existingPanels = new List<ItemPanel>();
 
         [Space]
         [SerializeField] private int _inventorySize = 24;
         [SerializeField] private float _dropSpeed = 5;
-        // [SerializeField] private Volume _blurEffect;
         [SerializeField] InputReader _inputReader;
         [SerializeField] ItemInventoryEventChannel _addItemToInventory;
+        [SerializeField] SenderDataEventChannelSO _removeItemEvent;
+        [SerializeField] ItemInventoryCheckEventChannel _itemCheckEvent;
+
+        [Header("Weight System")]
+        [SerializeField] private TextMeshProUGUI _textWeight;
+        [SerializeField] FloatEventChannelSO _onWeightUpdated;
+        [SerializeField] VoidEventChannelSO _onItemPickup;
+
+        private float _weightValue;
+        private ItemDictionary _itemDictionary;
 
         private void OnEnable()
         {
-            _inputReader.OpenInventoryEvent += OpenInventory;
-            _inputReader.CloseInventoryEvent += CloseInventory;
             _inputReader.DropItemPerformed += AttemptToDrop;
             _addItemToInventory.OnEventRaised += AddItem;
+            _onItemPickup.OnEventRaised += WeightCount;
+            _removeItemEvent.OnEventRaised.AddListener(RemoveItem);
+            _itemCheckEvent.OnEventRaised += CheckItem;
         }
 
         private void OnDisable()
         {
-            _inputReader.OpenInventoryEvent -= OpenInventory;
-            _inputReader.CloseInventoryEvent -= CloseInventory;
             _inputReader.DropItemPerformed -= AttemptToDrop;
-            _addItemToInventory.OnEventRaised += AddItem;
-
-
-
+            _addItemToInventory.OnEventRaised -= AddItem;
+            _onItemPickup.OnEventRaised -= WeightCount;
+            _removeItemEvent.OnEventRaised.RemoveListener(RemoveItem);
+            _itemCheckEvent.OnEventRaised -= CheckItem;
         }
-        void Start()
+
+        private void Awake()
         {
-            for (int i = 0; i < _inventorySize; i++)
-            {
-                items.Add(new ItemSlotInfo(null, 0));
-            }
+            _itemDictionary = new ItemDictionary();
+            _itemDictionary.Initialize();
         }
-        void OpenInventory()
+
+        private void Start()
+        {
+            Initialize();
+            SetDefaultEquipment();
+        }
+        public void OpenInventory()
         {
             _inventoryMenu.SetActive(true);
             Cursor.lockState = CursorLockMode.Confined;
-            // _blurEffect.enabled = true;
             RefreshInventory();
             _inputReader.EnableInventoryUIInput();
 
         }
 
-        void CloseInventory()
+        public void CloseInventory()
         {
             _inventoryMenu.SetActive(false);
-            _mouse.EmptySlot();
-            // _blurEffect.enabled = false;
+            _itemSlotMouse.EmptySlot();
             Cursor.lockState = CursorLockMode.Locked;
             _inputReader.EnableGameplayInput();
-
-
         }
 
-        void AttemptToDrop()
+        private void AttemptToDrop()
         {
-            if (_mouse.itemSlot.item != null && !EventSystem.current.IsPointerOverGameObject())
+            if (_itemSlotMouse.itemSlot.item != null && !EventSystem.current.IsPointerOverGameObject())
             {
-                DropItem(_mouse.itemSlot.item);
-
+                DropItem(_itemSlotMouse.itemSlot.item);
             }
+        }
+
+        private void Initialize()
+        {
+            for (int i = 0; i < _itemPanelGrid.Length; i++)
+            {
+                ItemPanel[] itemPanelsInGrid = _itemPanelGrid[i].GetComponentsInChildren<ItemPanel>();
+                _existingPanels.AddRange(itemPanelsInGrid);
+            }
+
+            for (int i = 0; i < _existingPanels.Count; i++)
+            {
+                items.Add(new ItemSlotInfo(null, 0));
+                _existingPanels[i].mouse = mouse;
+            }
+        }
+
+        private void SetDefaultEquipment()
+        {
+            AddItem(_itemDictionary.GetValueByKey("Long Sword"), 1);
+            AddItem(_itemDictionary.GetValueByKey("Basic Armor"), 1);
+            AddItem(_itemDictionary.GetValueByKey("Basic Shield"), 1);
+
+            for (int i = _inventorySize; i < _existingPanels.Count; i++)
+            {
+                AttachDefaultItem(i);
+                Debug.Log("Try " + i.ToString());
+            }
+;
+        }
+
+        private void AttachDefaultItem(int targetSlot)
+        {
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].item == null) continue;
+
+                if (items[i].item.GetItemType() == ItemType.Equipment)
+                {
+                    if (((EquipmentItem)items[i].item).specificType == _existingPanels[targetSlot].slotType)
+                    {
+                        items[targetSlot].item = items[i].item;
+                        items[targetSlot].stacks = items[i].stacks;
+                        items[i].item = null;
+                        break;
+                    }
+                    else
+                    {
+                        Debug.Log(targetSlot.ToString() + " Not Added");
+                    }
+                }
+            }
+
+            RefreshInventory();
         }
 
         public void RefreshInventory()
         {
-            existingPanels = _itemPanelGrid.GetComponentsInChildren<ItemPanel>().ToList();
-            //Create Panels if needed
-            if (existingPanels.Count < _inventorySize)
-            {
-                int amountToCreate = _inventorySize - existingPanels.Count;
-                for (int i = 0; i < amountToCreate; i++)
-                {
-                    GameObject newPanel = Instantiate(_itemPanel, _itemPanelGrid.transform);
-                    existingPanels.Add(newPanel.GetComponent<ItemPanel>());
-                }
-            }
-
             int index = 0;
             foreach (ItemSlotInfo i in items)
             {
@@ -107,7 +160,7 @@ namespace CC.Inventory
                 else i.name += ": -";
 
                 //Update our Panels
-                ItemPanel panel = existingPanels[index];
+                ItemPanel panel = _existingPanels[index];
                 panel.name = i.name + " Panel";
                 if (panel != null)
                 {
@@ -119,7 +172,15 @@ namespace CC.Inventory
                         panel.itemImage.sprite = i.item.itemSprite;
                         panel.itemImage.CrossFadeAlpha(1, 0.05f, true);
                         panel.stacksText.gameObject.SetActive(true);
-                        panel.stacksText.text = "" + i.stacks;
+
+                        if (i.stacks > 1)
+                        {
+                            panel.stacksText.text = "" + i.stacks;
+                        }
+                        else
+                        {
+                            panel.stacksText.gameObject.SetActive(false);
+                        }
                     }
                     else
                     {
@@ -129,7 +190,28 @@ namespace CC.Inventory
                 }
                 index++;
             }
-            _mouse.EmptySlot();
+
+            _itemSlotMouse.EmptySlot();
+            WeightCount();
+        }
+
+        private void WeightCount()
+        {
+            _textWeight.text = "Weight : " + WeightValue().ToString();
+        }
+
+        public float WeightValue()
+        {
+            _weightValue = 0;
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (items[i].item != null)
+                {
+                    _weightValue += items[i].item.itemWeight * items[i].stacks;
+                }
+            }
+            _onWeightUpdated.RaiseEvent(_weightValue);
+            return _weightValue;
         }
 
         public int AddItem(ABaseItem item, int amount)
@@ -190,7 +272,6 @@ namespace CC.Inventory
 
         public void DropItem(ABaseItem item)
         {
-            //Exit method if no Item was found
             if (item == null)
             {
                 Debug.Log("Could not find Item in Dictionary to add to drop");
@@ -215,13 +296,43 @@ namespace CC.Inventory
             if (ip != null)
             {
                 ip.item = item;
-                ip.amount = _mouse.splitSize;
-                _mouse.itemSlot.stacks -= _mouse.splitSize;
+                ip.amount = _itemSlotMouse.splitSize;
+                _itemSlotMouse.itemSlot.stacks -= _itemSlotMouse.splitSize;
             }
 
-            if (_mouse.itemSlot.stacks < 1) ClearSlot(_mouse.itemSlot);
-            _mouse.EmptySlot();
+            if (_itemSlotMouse.itemSlot.stacks < 1) ClearSlot(_itemSlotMouse.itemSlot);
+            _itemSlotMouse.EmptySlot();
             RefreshInventory();
+        }
+
+        bool CheckItem(ABaseItem _item)
+        {
+            foreach (ItemSlotInfo i in items)
+            {
+                if (_item == i.item)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        void RemoveItem(Component _component, object _item)
+        {
+            ABaseItem _itemToRemove = (ABaseItem)_item;
+            foreach (ItemSlotInfo i in items)
+            {
+                if (_itemToRemove == i.item)
+                {
+                    i.item = null;
+                    break;
+                }
+            }
+        }
+
+        public void UseItem(ABaseItem item)
+        {
+            item.UseItem();
         }
 
         public void ClearSlot(ItemSlotInfo slot)
@@ -230,4 +341,14 @@ namespace CC.Inventory
             slot.stacks = 0;
         }
     }
+
+    public enum ItemSlotType
+    {
+        Inventory,
+        Weapon,
+        Shield,
+        Armor,
+        Consumable
+    }
 }
+

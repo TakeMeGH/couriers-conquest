@@ -121,6 +121,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "WalkToggle",
+                    "type": "Button",
+                    "id": "a7b3ec53-8448-4c3f-85d3-ef57f5f0e000",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -302,17 +311,6 @@
                 },
                 {
                     "name": "",
-                    "id": "34f38328-4996-4810-ac84-d8b917e1d658",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "b0ef3204-2530-42d4-8bf1-8fd899578e90",
                     "path": "<Keyboard>/tab",
                     "interactions": "",
@@ -324,12 +322,12 @@
                 },
                 {
                     "name": "",
-                    "id": "ada9d73b-3c31-410c-a0d7-3ff75a0ad43a",
-                    "path": "<Keyboard>/e",
+                    "id": "3171085b-55c2-4bb9-b6f1-e3f9d82172b0",
+                    "path": "<Keyboard>/leftCtrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Block",
+                    "action": "WalkToggle",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

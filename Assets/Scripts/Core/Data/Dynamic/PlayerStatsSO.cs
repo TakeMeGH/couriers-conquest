@@ -12,6 +12,8 @@ namespace CC.Core.Data.Dynamic
     {
         [SerializeField] PlayerStats statData;
         [SerializeField] List<StatsModifier> modifiers;
+        [Header("default")]
+        [SerializeField] PlayerStats _defaultStatData;
         public float GetValue(mainStat key)
         {
             if (statData.defaultValue.TryGetValue(key, out float value))
@@ -51,6 +53,10 @@ namespace CC.Core.Data.Dynamic
         {
             statData = ((JObject)data).ToObject<PlayerStats>();
         }
+        public override void SetDefaultValue()
+        {
+            statData.CopyFrom(_defaultStatData);
+        }
     }
     [System.Serializable]
     public class PlayerStats : ISaveable
@@ -58,6 +64,13 @@ namespace CC.Core.Data.Dynamic
         public SerializedDictionary<mainStat, float> defaultValue;
         public SerializedDictionary<mainStat, float> instanceValue;
         public int playerExp;
+        public void CopyFrom(ISaveable obj)
+        {
+            var target = (PlayerStats)obj;
+            this.defaultValue = new(target.defaultValue);
+            this.instanceValue = new(target.instanceValue);
+            this.playerExp = target.playerExp;
+        }
     }
 
     public enum mainStat

@@ -143,6 +143,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""WalkToggle"",
+                    ""type"": ""Button"",
+                    ""id"": ""a7b3ec53-8448-4c3f-85d3-ef57f5f0e000"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -324,17 +333,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""34f38328-4996-4810-ac84-d8b917e1d658"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Attack"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""b0ef3204-2530-42d4-8bf1-8fd899578e90"",
                     ""path"": ""<Keyboard>/tab"",
                     ""interactions"": """",
@@ -346,12 +344,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""ada9d73b-3c31-410c-a0d7-3ff75a0ad43a"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""id"": ""3171085b-55c2-4bb9-b6f1-e3f9d82172b0"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Block"",
+                    ""action"": ""WalkToggle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -423,6 +421,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Gameplay_Cancel = m_Gameplay.FindAction("Cancel", throwIfNotFound: true);
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_Block = m_Gameplay.FindAction("Block", throwIfNotFound: true);
+        m_Gameplay_WalkToggle = m_Gameplay.FindAction("WalkToggle", throwIfNotFound: true);
         // InventoryUI
         m_InventoryUI = asset.FindActionMap("InventoryUI", throwIfNotFound: true);
         m_InventoryUI_CloseInventory = m_InventoryUI.FindAction("CloseInventory", throwIfNotFound: true);
@@ -501,6 +500,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Cancel;
     private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_Block;
+    private readonly InputAction m_Gameplay_WalkToggle;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -518,6 +518,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Cancel => m_Wrapper.m_Gameplay_Cancel;
         public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
         public InputAction @Block => m_Wrapper.m_Gameplay_Block;
+        public InputAction @WalkToggle => m_Wrapper.m_Gameplay_WalkToggle;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -566,6 +567,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Block.started += instance.OnBlock;
             @Block.performed += instance.OnBlock;
             @Block.canceled += instance.OnBlock;
+            @WalkToggle.started += instance.OnWalkToggle;
+            @WalkToggle.performed += instance.OnWalkToggle;
+            @WalkToggle.canceled += instance.OnWalkToggle;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -609,6 +613,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Block.started -= instance.OnBlock;
             @Block.performed -= instance.OnBlock;
             @Block.canceled -= instance.OnBlock;
+            @WalkToggle.started -= instance.OnWalkToggle;
+            @WalkToggle.performed -= instance.OnWalkToggle;
+            @WalkToggle.canceled -= instance.OnWalkToggle;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -695,6 +702,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnCancel(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
+        void OnWalkToggle(InputAction.CallbackContext context);
     }
     public interface IInventoryUIActions
     {
