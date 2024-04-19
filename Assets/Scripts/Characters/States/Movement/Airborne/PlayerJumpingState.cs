@@ -88,7 +88,7 @@ namespace CC.Characters.States
 
             ResetVelocity();
 
-            _playerController.Rigidbody.AddForce(jumpForce, ForceMode.VelocityChange);
+            _playerController.Rigidbody.AddForce(jumpForce, ForceMode.Impulse);
         }
 
         private Vector3 GetJumpForceOnSlope(Vector3 jumpForce)

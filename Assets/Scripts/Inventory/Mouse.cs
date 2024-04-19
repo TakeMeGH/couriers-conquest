@@ -17,7 +17,11 @@ namespace CC.Inventory
         public ItemPanel sourceItemPanel;
         public int splitSize;
 
-        // Update is called once per frame
+        private void Start()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+
+        }
         void Update()
         {
             transform.position = Input.mousePosition;
@@ -41,6 +45,12 @@ namespace CC.Inventory
             }
             if (itemSlot.item != null)
             {
+                if (Input.GetKey(KeyCode.Mouse1))
+                {
+                    sourceItemPanel.RefreshInventory();
+                    return;
+                }
+
                 if (Input.GetAxis("Mouse ScrollWheel") > 0 && splitSize < itemSlot.stacks)
                 {
                     splitSize++;
@@ -49,6 +59,7 @@ namespace CC.Inventory
                 {
                     splitSize--;
                 }
+
                 stacksText.text = "" + splitSize;
                 if (splitSize == itemSlot.stacks) sourceItemPanel.stacksText.gameObject.SetActive(false);
                 else

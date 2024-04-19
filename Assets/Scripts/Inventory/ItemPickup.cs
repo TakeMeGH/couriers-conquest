@@ -9,6 +9,7 @@ namespace CC.Inventory
         [SerializeField] private ABaseItem _item;
         [SerializeField] private int _amount = 1;
         [SerializeField] ItemInventoryEventChannel _addItemToInventory;
+        [SerializeField] VoidEventChannelSO _onItemPickup;
         private bool isPickup = false;
 
         public bool isDropItem = false;
@@ -42,14 +43,14 @@ namespace CC.Inventory
         public void PickUpItem()
         {
             _amount = _addItemToInventory.RaiseEvent(_item, _amount);
-
+            _onItemPickup.RaiseEvent();
             if (isDropItem)
             {
                 if (_amount < 1) transform.parent.gameObject.SetActive(false); ;
             }
             else
             {
-                if (_amount < 1) Destroy(this.transform.root.gameObject);
+                if (_amount < 1) Destroy(this.transform.parent.gameObject);
             }
         }
 

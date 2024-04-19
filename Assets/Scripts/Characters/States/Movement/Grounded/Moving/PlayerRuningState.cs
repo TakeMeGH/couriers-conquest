@@ -33,6 +33,11 @@ namespace CC.Characters.States
         {
             base.Update();
 
+            if (!_playerController.PlayerCurrentData.ShouldWalk)
+            {
+                return;
+            }
+
             StopRunning();
         }
 
@@ -41,16 +46,25 @@ namespace CC.Characters.States
             if (_playerController.PlayerCurrentData.MovementInput == Vector2.zero)
             {
                 _playerController.SwitchState(_playerController.PlayerIdlingState);
-
-                // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.IDLING);
                 return;
             }
+            _playerController.SwitchState(_playerController.PlayerWalkingState);
+
 
         }
 
+        protected override void OnWalkToggleStarted()
+        {
+            base.OnWalkToggleStarted();
+
+            _playerController.SwitchState(_playerController.PlayerWalkingState);
+        }
+
+
         protected override void OnMovementCanceled()
         {
-            _playerController.SwitchState(_playerController.PlayerMediumStoppingState);
+            // Harusnya stoping -> for now idle
+            _playerController.SwitchState(_playerController.PlayerIdlingState);
             // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.MEDIUMSTOPPING);
             base.OnMovementCanceled();
         }

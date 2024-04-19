@@ -68,9 +68,11 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   <GroundedTargetRotationReachTime>k__BackingField: {x: 0, y: 0.14, z: 0}
+  <WalkSpeedModifier>k__BackingField: 0.225
   <RunSpeedModifier>k__BackingField: 1
   <SprintSpeedModifier>k__BackingField: 1.7
   <SprintToRunTime>k__BackingField: 1
+  <MediumDecelerationForce>k__BackingField: 6.5
   <DashSpeedModifier>k__BackingField: 2
   <DashTargetRotationReachTime>k__BackingField: {x: 0, y: 0.02, z: 0}
   <JumpToGroundRayDistance>k__BackingField: 2
@@ -168,7 +170,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   <JumpTargetRotationReachTime>k__BackingField: {x: 0, y: 0.02, z: 0}
-  <StationaryForce>k__BackingField: {x: 0, y: 5, z: 0}
-  <MediumForce>k__BackingField: {x: 3.5, y: 5, z: 3.5}
+  <StationaryForce>k__BackingField: {x: 0, y: 6.5, z: 0}
+  <MediumForce>k__BackingField: {x: 3.5, y: 6.5, z: 3.5}
   <DecelerationForce>k__BackingField: 1.5
   <FallSpeedLimit>k__BackingField: 10

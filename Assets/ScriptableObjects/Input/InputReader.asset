@@ -14,3 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   description: Centralised location where all input is read. Any object in need of
     reading input can reference this SO and just hook into its event delegates.
+  _enableCameraInputEvent: {fileID: 11400000, guid: 0fec79e06f543434fbbb5ab8c521ae85,
+    type: 2}
+  _disableCameraInputEvent: {fileID: 11400000, guid: d22ed104a5094f0489c57e20295489e3,
+    type: 2}
