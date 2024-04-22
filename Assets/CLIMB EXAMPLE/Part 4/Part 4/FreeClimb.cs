@@ -170,6 +170,7 @@ namespace SA
             RaycastHit hit;
             if (Physics.Raycast(origin, dir, out hit, dis))
             {
+                Debug.Log("CORNER");
                 //Check if it's a corner
                 return false;
             }

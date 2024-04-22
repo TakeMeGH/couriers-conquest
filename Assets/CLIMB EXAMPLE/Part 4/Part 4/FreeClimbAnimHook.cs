@@ -72,8 +72,8 @@ namespace SA
             {
                 goals.lh = isLeft;
                 goals.rh = !isLeft;
-                goals.lf = isLeft;
-                goals.rf = !isLeft;
+                goals.lf = !isLeft;
+                goals.rf = isLeft;
             }
             else
             {
@@ -85,8 +85,8 @@ namespace SA
 
                 goals.lh = isEnabled;
                 goals.rh = !isEnabled;
-                goals.lf = isEnabled;
-                goals.rf = !isEnabled;
+                goals.lf = !isEnabled;
+                goals.rf = isEnabled;
             }
         }
 
