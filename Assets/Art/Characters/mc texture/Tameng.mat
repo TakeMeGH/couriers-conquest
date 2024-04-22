@@ -27,8 +27,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _AmbientStrength: 0.25
-    - _FresnelSize: 0
-    - _Smoothness: 0
+    - _FresnelSize: 0.1
+    - _Smoothness: 1000
     m_Colors:
     - _DiffuseColor: {r: 1, g: 1, b: 1, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}

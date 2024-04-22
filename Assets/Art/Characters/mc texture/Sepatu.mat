@@ -26,11 +26,11 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _FresnelSize: 0
-    - _Smoothness: 0
+    - _FresnelSize: 0.1
+    - _Smoothness: 1000
     m_Colors:
-    - _DiffuseColor: {r: 0.69803923, g: 0.63529414, b: 0.5411765, a: 1}
-    - _SpecularColor: {r: 0.3019608, g: 0.3019608, b: 0.30980393, a: 1}
+    - _DiffuseColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecularColor: {r: 0.95660377, g: 0.95660377, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2975287536502944692
 MonoBehaviour:

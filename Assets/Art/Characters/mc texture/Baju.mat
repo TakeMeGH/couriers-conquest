@@ -26,10 +26,13 @@ Material:
     m_TexEnvs: []
     m_Ints: []
     m_Floats:
-    - _FresnelSize: 0
-    - _Smoothness: 0
+    - _AmbientStrength: 0.5
+    - _FalloffAmount: 0.1
+    - _FresnelSize: 0.05
+    - _LightingCutoff: 0
+    - _Smoothness: 10000
     m_Colors:
-    - _SpecularColor: {r: 0.3962264, g: 0.27603883, b: 0.05008899, a: 1}
+    - _SpecularColor: {r: 0.90943396, g: 0.90943396, b: 0.90943396, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &2975287536502944692
 MonoBehaviour:

@@ -45,14 +45,14 @@ Material:
     - _AmbientStrength: 0.25
     - _FalloffAmount: 0.05
     - _FresnelSize: 0
-    - _LightingCutoff: 0
+    - _LightingCutoff: 0.1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0
     m_Colors:
     - _DiffuseColor: {r: 1, g: 1, b: 1, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
-    - _SpecularColor: {r: 0.3962264, g: 0.27603883, b: 0.05008899, a: 1}
+    - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
 --- !u!114 &9137097191927234263
 MonoBehaviour:

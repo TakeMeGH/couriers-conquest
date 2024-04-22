@@ -44,11 +44,11 @@ Material:
     m_Floats:
     - _AmbientStrength: 0.25
     - _FalloffAmount: 0.05
-    - _FresnelSize: 0
+    - _FresnelSize: 0.1
     - _LightingCutoff: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothness: 0
+    - _Smoothness: 1000
     m_Colors:
     - _DiffuseColor: {r: 0.8000001, g: 0.6901961, b: 0.58431375, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
