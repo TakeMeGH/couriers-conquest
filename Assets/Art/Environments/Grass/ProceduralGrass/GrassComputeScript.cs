@@ -344,7 +344,7 @@ public class GrassComputeScript : MonoBehaviour
             m_ArgsBuffer?.Release();
             m_VisibleIDBuffer?.Release();
         }
-        _onCharacterSpawn.OnEventRaised += UpdateInteractor;
+        _onCharacterSpawn.OnEventRaised -= UpdateInteractor;
         m_Initialized = false;
     }
 
