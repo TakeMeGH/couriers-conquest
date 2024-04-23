@@ -94,6 +94,8 @@ public class AIController : MonoBehaviour
 
         if (!m_CaughtPlayer)
         {
+            Move(speedRun);
+            navMeshAgent.SetDestination(m_PlayerPosition);
 
             if (Vector3.Distance(transform.position, m_PlayerPosition) <= stopDistanceFromPlayer)
             {
@@ -103,12 +105,9 @@ public class AIController : MonoBehaviour
                 Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, 1, 0.0f);
                 transform.rotation = Quaternion.LookRotation(newDirection);
                 animator.SetBool("isAttack", true);
-                return;
             }
             else
             {
-                Move(speedRun);
-                navMeshAgent.SetDestination(m_PlayerPosition);
                 animator.SetBool("isChasing", true);
                 animator.SetBool("isAttack", false);
             }
