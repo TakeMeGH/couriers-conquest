@@ -19,11 +19,6 @@ public class AIController : MonoBehaviour
     public int edgeIterations = 4;
     public float edgeDistance = 0.5f;
     public float stoppingDistance = 0.01f;
-    public float stopDistanceFromPlayer = 2f;
-
-    //New Edition
-    public float rotationSpeed = 5f;
-    public float attackRange = 1.5f;
 
     public float maxWaitTime;
 
@@ -96,21 +91,6 @@ public class AIController : MonoBehaviour
         {
             Move(speedRun);
             navMeshAgent.SetDestination(m_PlayerPosition);
-
-            if (Vector3.Distance(transform.position, m_PlayerPosition) <= stopDistanceFromPlayer)
-            {
-                Stop();
-                Vector3 targetDirection = m_PlayerPosition - transform.position;
-                targetDirection = new Vector3(targetDirection.x, 0, targetDirection.z);
-                Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, 1, 0.0f);
-                transform.rotation = Quaternion.LookRotation(newDirection);
-                animator.SetBool("isAttack", true);
-            }
-            else
-            {
-                animator.SetBool("isChasing", true);
-                animator.SetBool("isAttack", false);
-            }
         }
         if (navMeshAgent.remainingDistance <= navMeshAgent.stoppingDistance)
         {
@@ -217,10 +197,6 @@ public class AIController : MonoBehaviour
                 m_WaitTime -= Time.deltaTime;
             }
         }
-
-        Vector3 direction = (player - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
     }
     void EnviromentView()
     {
