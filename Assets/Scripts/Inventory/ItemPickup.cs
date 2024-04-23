@@ -1,10 +1,11 @@
 using System.Collections;
 using CC.Events;
+using CC.Interaction;
 using UnityEngine;
 
 namespace CC.Inventory
 {
-    public class ItemPickup : MonoBehaviour
+    public class ItemPickup : MonoBehaviour, IInteraction
     {
         [SerializeField] private ABaseItem _item;
         [SerializeField] private int _amount = 1;
@@ -16,17 +17,6 @@ namespace CC.Inventory
 
         public ABaseItem item { set => _item = value; }
         public int amount { set => _amount = value; }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.tag == "Player")
-            {
-                if (!isPickup)
-                {
-                    PickUpItem();
-                }
-            }
-        }
 
         private void OnEnable()
         {
@@ -40,7 +30,7 @@ namespace CC.Inventory
             isPickup = false;
         }
 
-        public void PickUpItem()
+        public void Interact()
         {
             _amount = _addItemToInventory.RaiseEvent(_item, _amount);
             _onItemPickup.RaiseEvent();
