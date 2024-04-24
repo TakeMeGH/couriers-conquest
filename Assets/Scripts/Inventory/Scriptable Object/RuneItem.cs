@@ -8,7 +8,6 @@ namespace CC.Inventory{
     public class RuneItem : ABaseItem
     {
         public float runeDamage;
-        public float costSell;
         public override ItemType GetItemType()
         {
             return ItemType.Rune;

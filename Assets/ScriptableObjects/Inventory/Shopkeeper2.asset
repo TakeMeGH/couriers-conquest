@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a97f0daf2a2056a49af20e0b10268680, type: 3}
+  m_Name: Shopkeeper2
+  m_EditorClassIdentifier: 
+  _items:
+  - rid: 6825551020486034193
+  - rid: 6825551020486034194
+  inventorySize: 0
+  sellItem:
+  - {fileID: 11400000, guid: 422f8d7e01666b842a6c8cd38c85618d, type: 2}
+  - {fileID: 11400000, guid: 682e083349ed3b94e9494c5281401aef, type: 2}
+  - {fileID: 11400000, guid: a82e255da905aaa4f824eafb1d676a52, type: 2}
+  references:
+    version: 2
+    RefIds:
+    - rid: 6825551020486034193
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 11400000, guid: a82e255da905aaa4f824eafb1d676a52, type: 2}
+        name: 
+        stacks: 10
+    - rid: 6825551020486034194
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 11400000, guid: a82e255da905aaa4f824eafb1d676a52, type: 2}
+        name: 
+        stacks: 9
