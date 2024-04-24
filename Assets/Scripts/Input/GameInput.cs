@@ -152,6 +152,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ScrolIInteraction"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""5dd16f55-75d1-4d54-984c-32b2a0fd339a"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -352,6 +361,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""WalkToggle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""284bc7f1-4188-486f-963d-c5332cc7aab8"",
+                    ""path"": ""<Mouse>/scroll/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ScrolIInteraction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -422,6 +442,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_Block = m_Gameplay.FindAction("Block", throwIfNotFound: true);
         m_Gameplay_WalkToggle = m_Gameplay.FindAction("WalkToggle", throwIfNotFound: true);
+        m_Gameplay_ScrolIInteraction = m_Gameplay.FindAction("ScrolIInteraction", throwIfNotFound: true);
         // InventoryUI
         m_InventoryUI = asset.FindActionMap("InventoryUI", throwIfNotFound: true);
         m_InventoryUI_CloseInventory = m_InventoryUI.FindAction("CloseInventory", throwIfNotFound: true);
@@ -501,6 +522,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_Block;
     private readonly InputAction m_Gameplay_WalkToggle;
+    private readonly InputAction m_Gameplay_ScrolIInteraction;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -519,6 +541,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
         public InputAction @Block => m_Wrapper.m_Gameplay_Block;
         public InputAction @WalkToggle => m_Wrapper.m_Gameplay_WalkToggle;
+        public InputAction @ScrolIInteraction => m_Wrapper.m_Gameplay_ScrolIInteraction;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -570,6 +593,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @WalkToggle.started += instance.OnWalkToggle;
             @WalkToggle.performed += instance.OnWalkToggle;
             @WalkToggle.canceled += instance.OnWalkToggle;
+            @ScrolIInteraction.started += instance.OnScrolIInteraction;
+            @ScrolIInteraction.performed += instance.OnScrolIInteraction;
+            @ScrolIInteraction.canceled += instance.OnScrolIInteraction;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -616,6 +642,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @WalkToggle.started -= instance.OnWalkToggle;
             @WalkToggle.performed -= instance.OnWalkToggle;
             @WalkToggle.canceled -= instance.OnWalkToggle;
+            @ScrolIInteraction.started -= instance.OnScrolIInteraction;
+            @ScrolIInteraction.performed -= instance.OnScrolIInteraction;
+            @ScrolIInteraction.canceled -= instance.OnScrolIInteraction;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -703,6 +732,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
         void OnWalkToggle(InputAction.CallbackContext context);
+        void OnScrolIInteraction(InputAction.CallbackContext context);
     }
     public interface IInventoryUIActions
     {

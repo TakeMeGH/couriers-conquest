@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3866704553676540072}
   m_Layer: 0
   m_Name: item drop blue
-  m_TagString: Untagged
+  m_TagString: Pickable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
-  m_LocalScale: {x: 400, y: 400, z: 400}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5341086926237979396}
@@ -145,6 +145,7 @@ GameObject:
   - component: {fileID: 5341086926237979396}
   - component: {fileID: 8888074160309895056}
   - component: {fileID: 2802622479471698016}
+  - component: {fileID: 5814452327221123875}
   - component: {fileID: 7874667259928573920}
   m_Layer: 0
   m_Name: Tirgger
@@ -213,6 +214,36 @@ MonoBehaviour:
     type: 2}
   _onItemPickup: {fileID: 11400000, guid: 2c3bf9629d556b449953682080a0a0a3, type: 2}
   isDropItem: 0
+--- !u!114 &5814452327221123875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6928918718882325668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 084cd5e9fed2e84408119e525fc9f4ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 21300000, guid: dbc29ce57b14fdd4dbafbdb57c6a5992, type: 3}
+  _name: Apple
+  _amount: 1
+  functionTrigger:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2802622479471698016}
+        m_TargetAssemblyTypeName: CC.Inventory.ItemPickup, Assembly-CSharp
+        m_MethodName: Interact
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!65 &7874667259928573920
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace CC.Inventory
 {
-    public class ItemPickup : MonoBehaviour, IInteraction
+    public class ItemPickup : MonoBehaviour
     {
         [SerializeField] private ABaseItem _item;
         [SerializeField] private int _amount = 1;
@@ -14,13 +14,36 @@ namespace CC.Inventory
         private bool isPickup = false;
 
         public bool isDropItem = false;
+        CustomInterractables _customInteractables;
 
-        public ABaseItem item { set => _item = value; }
-        public int amount { set => _amount = value; }
+        public ABaseItem item
+        {
+            set
+            {
+                _item = value;
+                OnItemSet();
+            }
+        }
+        public int amount
+        {
+            set
+            {
+                _amount = value;
+                OnAmountSet();
+            }
+        }
 
         private void OnEnable()
         {
             Countdown();
+        }
+
+
+        private void Start()
+        {
+            _customInteractables = GetComponent<CustomInterractables>();
+            OnItemSet();
+            OnAmountSet();
         }
 
         private IEnumerator Countdown()
@@ -36,12 +59,30 @@ namespace CC.Inventory
             _onItemPickup.RaiseEvent();
             if (isDropItem)
             {
-                if (_amount < 1) transform.parent.gameObject.SetActive(false); ;
+                if (_amount < 1)
+                {
+                    transform.parent.gameObject.SetActive(false);
+                }
             }
             else
             {
-                if (_amount < 1) Destroy(this.transform.parent.gameObject);
+                if (_amount < 1)
+                {
+                    Destroy(this.transform.parent.gameObject);
+                }
             }
+        }
+
+        public void OnItemSet()
+        {
+            _customInteractables.SetName(_item.itemName);
+            _customInteractables.SetIcon(_item.itemSprite);
+
+        }
+
+        public void OnAmountSet()
+        {
+            _customInteractables.SetAmount(_amount);
         }
 
     }
