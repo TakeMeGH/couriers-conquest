@@ -3,6 +3,8 @@ using CC.Characters.DataBlueprint.Layers;
 using UnityEngine.Events;
 using System.Collections.Generic;
 using CC.Combats;
+using CC.Core.Data.Dynamic;
+using CC.Inventory;
 
 namespace CC.Characters
 {
@@ -21,6 +23,11 @@ namespace CC.Characters
 
         [field: Header("Collisions")]
         [field: SerializeField] public PlayerLayerData LayerData { get; private set; }
+
+        [field: Header("Player Stats")]
+        [field: SerializeField] public PlayerStatsSO playerStatsSO;
+        [field: SerializeField] public EquipmentItem equippedWeapon;
+        [field: SerializeField] public EquipmentItem equippedShield;
 
         [field: Header("Attack Combo")]
         [field: SerializeField] public AttackSO[] Attacks { get; private set; }
@@ -92,6 +99,17 @@ namespace CC.Characters
                 PlayerAttackingStates.Add(newAttackingState);
             }
         }
+
+        public float CalculateTotalShieldValue()
+        {
+            float totalShieldValue = playerStatsSO.GetValue(CC.Core.Data.Dynamic.mainStat.ShieldValue);
+        if (equippedShield != null)
+        {
+            totalShieldValue += equippedShield.shieldDamageReduction;
+        }
+        return totalShieldValue;
+        }
+
 
         private void Start()
         {

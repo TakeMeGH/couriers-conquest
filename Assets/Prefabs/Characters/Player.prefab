@@ -133,7 +133,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1396122595297228645}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 1.2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -201,6 +201,9 @@ MonoBehaviour:
     <GroundLayer>k__BackingField:
       serializedVersion: 2
       m_Bits: 64
+  playerStatsSO: {fileID: 11400000, guid: f3ee829ae9f91ee48b6a0fd3da31e4a9, type: 2}
+  equippedWeapon: {fileID: 11400000, guid: eeefb73c36e7e3843a06c4df2437434c, type: 2}
+  equippedShield: {fileID: 11400000, guid: 0dd8a24712edce245a6b26e0eb3937df, type: 2}
   <Attacks>k__BackingField:
   - {fileID: 11400000, guid: d715a816ba18baa419ed350e3c764a13, type: 2}
   - {fileID: 11400000, guid: 2d6947c20cd57d5418f267e0bab2f83d, type: 2}
@@ -270,7 +273,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468a449dacb52fb4a8bd69ad36b27740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 1000
+  damageReduction: 0
+  blockDamageReduction: 0
+  playerStatsSO: {fileID: 11400000, guid: f3ee829ae9f91ee48b6a0fd3da31e4a9, type: 2}
+  _playerController: {fileID: 5287785011498765637}
 --- !u!114 &4515505036904569531
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +350,7 @@ GameObject:
   - component: {fileID: 5991105588407924002}
   - component: {fileID: 115438056035982135}
   - component: {fileID: 1563500524733570176}
+  - component: {fileID: 3718427985181145292}
   - component: {fileID: 6329979075733777409}
   m_Layer: 8
   m_Name: WeaponLogic
@@ -402,6 +410,35 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCollider: {fileID: 5071636661809002210}
+  _playerController: {fileID: 3718427985181145292}
+--- !u!114 &3718427985181145292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2431665321111184179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d0d2c0f650b1b34684f4cc160d66e75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <InputReader>k__BackingField: {fileID: 0}
+  <PlayerMovementData>k__BackingField: {fileID: 0}
+  <TriggerOnMovementStateAnimationEnterEvent>k__BackingField: {fileID: 0}
+  <TriggerOnMovementStateAnimationExitEvent>k__BackingField: {fileID: 0}
+  <TriggerOnMovementStateAnimationTransitionEvent>k__BackingField: {fileID: 0}
+  <LayerData>k__BackingField:
+    <GroundLayer>k__BackingField:
+      serializedVersion: 2
+      m_Bits: 0
+  playerStatsSO: {fileID: 11400000, guid: f3ee829ae9f91ee48b6a0fd3da31e4a9, type: 2}
+  equippedWeapon: {fileID: 11400000, guid: eeefb73c36e7e3843a06c4df2437434c, type: 2}
+  equippedShield: {fileID: 0}
+  <Attacks>k__BackingField: []
+  <Weapon>k__BackingField: {fileID: 1563500524733570176}
+  <Block>k__BackingField: {fileID: 0}
+  <Health>k__BackingField: {fileID: 0}
 --- !u!54 &6329979075733777409
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -71,6 +71,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myCollider: {fileID: 8646336162114214455}
+  _playerController: {fileID: 0}
 --- !u!54 &7885596504828300879
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -110,6 +111,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c31f043bc9e73294d8b59bce22718960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageAmount: 20
+  damageRate: 1
 --- !u!1 &7845024810492706681
 GameObject:
   m_ObjectHideFlags: 0
@@ -231,6 +234,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
+  damageReduction: 0
+  blockDamageReduction: 0
+  playerStatsSO: {fileID: 0}
+  _playerController: {fileID: 0}
 --- !u!114 &2487199085779535649
 MonoBehaviour:
   m_ObjectHideFlags: 0

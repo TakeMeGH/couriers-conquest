@@ -17,7 +17,17 @@ namespace CC.Characters.States
         public override void Enter()
         {
             base.Enter();
-            _playerController.Weapon.SetAttack(attack.Damage);
+
+            // Get the attack value from the player's stats and the equipped weapon
+            float attackValue = _playerController.playerStatsSO.GetValue(CC.Core.Data.Dynamic.mainStat.AttackValue);
+            if (_playerController.equippedWeapon != null)
+            {
+                attackValue += _playerController.equippedWeapon.attackWeapon;
+            }
+
+            _playerController.Weapon.SetAttack(Mathf.RoundToInt(attackValue));  // Move this line outside of the if block
+
+            Debug.Log("Entering PlayerAttackingState. Attack value: " + attackValue);
             StartAnimation(attack.AnimationName);
 
             // stateMachine.Animator.CrossFadeInFixedTime(attack.AnimationName, attack.TransitionDuration);
@@ -25,6 +35,7 @@ namespace CC.Characters.States
             ResetVelocity();
             alreadyAppliedForce = false;
             previousFrameTime = 0;
+        
         }
 
         public override void Update()

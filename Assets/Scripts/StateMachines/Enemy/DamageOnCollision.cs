@@ -9,6 +9,27 @@ namespace CC.Combats
         private float nextDamageTime = 0f;
 
         private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && Time.time >= nextDamageTime)
+        {
+            Health playerHealth = collision.gameObject.GetComponent<Health>();
+            if (playerHealth != null)
+            {
+                playerHealth.DealDamage(Mathf.RoundToInt(damageAmount));
+                nextDamageTime = Time.time + 1f/damageRate;
+                Debug.Log("Damage Amount: " + damageAmount);
+                Debug.Log("Player Health: " + playerHealth.GetCurrentHealth());
+            }
+        }
+    }
+
+
+    }
+}
+
+
+
+/*private void OnCollisionStay(Collision collision)
         {
             if (collision.gameObject.CompareTag("Player") && Time.time >= nextDamageTime)
             {
@@ -22,12 +43,7 @@ namespace CC.Combats
                 }
             }
         }
-    }
-}
-
-
-
-
+        */
 /*using UnityEngine;
 
 namespace CC.Combats

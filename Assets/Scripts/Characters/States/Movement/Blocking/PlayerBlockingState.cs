@@ -15,7 +15,7 @@ namespace CC.Characters.States
 
         public override void Enter()
         {
-            _playerController.Health.SetInvunerable(true);
+            _playerController.Health.SetBlocking(true);
             base.Enter();
             ResetVelocity();
 
@@ -25,7 +25,7 @@ namespace CC.Characters.States
         public override void Exit()
         {
             base.Exit();
-            _playerController.Health.SetInvunerable(false);
+            _playerController.Health.SetBlocking(false);
             StopAnimation(blocking.AnimationName);
         }
 

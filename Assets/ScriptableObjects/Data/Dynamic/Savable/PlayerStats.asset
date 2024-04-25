@@ -16,15 +16,17 @@ MonoBehaviour:
     defaultValue:
       _serializedList:
       - Key: 0
-        Value: 100
+        Value: 1000
       - Key: 1
         Value: 100
       - Key: 2
-        Value: 25
+        Value: 5
       - Key: 3
-        Value: 10
+        Value: 20
       - Key: 4
-        Value: 2
+        Value: 0
+      - Key: 5
+        Value: 10
     instanceValue:
       _serializedList:
       - Key: 0
@@ -32,7 +34,15 @@ MonoBehaviour:
       - Key: 1
         Value: 100
     playerExp: 0
-  modifiers: []
+    damageReduction: 0
+  modifiers:
+  - isPercent: 0
+    statsToModify:
+      _serializedList:
+      - Key: 2
+        Value: 5
+      - Key: 5
+        Value: 10
   _defaultStatData:
     defaultValue:
       _serializedList:
@@ -41,11 +51,11 @@ MonoBehaviour:
       - Key: 1
         Value: 100
       - Key: 2
-        Value: 25
-      - Key: 3
         Value: 10
+      - Key: 3
+        Value: 20
       - Key: 4
-        Value: 2
+        Value: 0
     instanceValue:
       _serializedList:
       - Key: 0
@@ -53,3 +63,4 @@ MonoBehaviour:
       - Key: 1
         Value: 100
     playerExp: 0
+    damageReduction: 0

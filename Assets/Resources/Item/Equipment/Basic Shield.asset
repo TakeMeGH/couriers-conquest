@@ -17,8 +17,9 @@ MonoBehaviour:
   itemDescription: Aidan Basic Shield
   itemSprite: {fileID: 21300000, guid: a8c82c479c6f77f4e9fba6ae41bb54f9, type: 3}
   maxStacks: 1
-  weaponLevel: 0
+  weaponLevel: 1
   attackWeapon: 0
   healthWeapon: 0
   costSell: 0
-  specificType: 3
+  shieldDamageReduction: 30
+  specificType: 2

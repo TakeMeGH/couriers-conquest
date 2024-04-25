@@ -44,6 +44,11 @@ namespace CC.Core.Data.Dynamic
             }
         }
 
+        public float GetDamageReduction()
+        {
+            return statData.damageReduction;
+        }
+
         public override ISaveable Save()
         {
             return statData;
@@ -57,6 +62,30 @@ namespace CC.Core.Data.Dynamic
         {
             statData.CopyFrom(_defaultStatData);
         }
+
+         public void UpgradeWeapon(float increaseAmount, bool isPercent)
+        {
+            StatsModifier weaponUpgrade = new StatsModifier();
+            weaponUpgrade.isPercent = isPercent;
+            weaponUpgrade.statsToModify = new SerializedDictionary<mainStat, float>();
+            weaponUpgrade.statsToModify[mainStat.AttackValue] = increaseAmount;
+
+            modifiers.Add(weaponUpgrade);
+        }
+
+         public void UpgradeShield(float increaseAmount, bool isPercent, float damageReductionIncrease)
+        {
+            StatsModifier shieldUpgrade = new StatsModifier();
+            shieldUpgrade.isPercent = isPercent;
+            shieldUpgrade.statsToModify = new SerializedDictionary<mainStat, float>();
+            shieldUpgrade.statsToModify[mainStat.ShieldValue] = increaseAmount;
+
+            modifiers.Add(shieldUpgrade);
+
+            statData.damageReduction += damageReductionIncrease;  // Add this line
+        }
+
+
     }
     [System.Serializable]
     public class PlayerStats : ISaveable
@@ -64,12 +93,15 @@ namespace CC.Core.Data.Dynamic
         public SerializedDictionary<mainStat, float> defaultValue;
         public SerializedDictionary<mainStat, float> instanceValue;
         public int playerExp;
+        public float damageReduction;
+
         public void CopyFrom(ISaveable obj)
         {
             var target = (PlayerStats)obj;
             this.defaultValue = new(target.defaultValue);
             this.instanceValue = new(target.instanceValue);
             this.playerExp = target.playerExp;
+            this.damageReduction = target.damageReduction; 
         }
     }
 
@@ -80,5 +112,6 @@ namespace CC.Core.Data.Dynamic
         AttackValue,
         MovementSpeed,
         Defense,
+        ShieldValue,
     }
 }

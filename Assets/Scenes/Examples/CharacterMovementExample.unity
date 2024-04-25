@@ -1591,11 +1591,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 2405615945925097465, guid: cbc2406ee3b03594087dc78789ddea89,
-        type: 3}
-      propertyPath: damageReduction
-      value: 0.2
-      objectReference: {fileID: 0}
     - target: {fileID: 6703367670937219371, guid: cbc2406ee3b03594087dc78789ddea89,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1646,11 +1641,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7660474285708412853, guid: cbc2406ee3b03594087dc78789ddea89,
-        type: 3}
-      propertyPath: m_Mass
-      value: 1.2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1664,16 +1654,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2443898485366471126, guid: 880699b86117c7545a691afe803addd2,
-        type: 3}
-      propertyPath: damageRate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2443898485366471126, guid: 880699b86117c7545a691afe803addd2,
-        type: 3}
-      propertyPath: damageAmount
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 7845024810492706681, guid: 880699b86117c7545a691afe803addd2,
         type: 3}
       propertyPath: m_Name
