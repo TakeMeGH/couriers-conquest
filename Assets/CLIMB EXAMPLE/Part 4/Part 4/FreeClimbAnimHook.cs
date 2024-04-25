@@ -278,11 +278,10 @@ namespace SA
                     break;
             }
         }
-
-
         void OnAnimatorIK()
         {
             delta = Time.deltaTime;
+            Debug.Log("ANIMATOR IK");
 
             SetIKPos(AvatarIKGoal.LeftHand, lh, w_lh);
             SetIKPos(AvatarIKGoal.RightHand, rh, w_rh);
