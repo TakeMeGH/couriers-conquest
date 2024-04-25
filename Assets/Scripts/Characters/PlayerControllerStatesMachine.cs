@@ -2,6 +2,7 @@ using UnityEngine;
 using CC.Characters.DataBlueprint.Layers;
 using UnityEngine.Events;
 using System.Collections.Generic;
+using CC.Combats;
 
 namespace CC.Characters
 {
@@ -25,13 +26,19 @@ namespace CC.Characters
         [field: SerializeField] public AttackSO[] Attacks { get; private set; }
         [field: SerializeField] public WeaponDamage Weapon { get; private set; }
 
+        [field: Header("Blocking")]
+        [field: SerializeField] public BlockSO Block { get; private set; }
+
+        [field: Header("Health")]
+        [field: SerializeField] public Health Health { get; private set; }
+
         #region Component
         public Animator Animator { get; private set; }
         public Rigidbody Rigidbody { get; private set; }
         public Transform MainCameraTransform { get; private set; }
         public PlayerStateData PlayerCurrentData { get; private set; }
         public PlayerResizableCapsuleCollider ResizableCapsuleCollider { get; private set; }
-        
+
         #endregion
 
         #region Events
@@ -48,7 +55,11 @@ namespace CC.Characters
         public States.PlayerFallingState PlayerFallingState { get; private set; }
         public States.PlayerLightLandingState PlayerLightLandingState { get; private set; }
         public States.PlayerMediumStoppingState PlayerMediumStoppingState { get; private set; }
+        public States.PlayerBlockingState PlayerBlockingState { get; private set; }
+        public States.PlayerWalkingState PlayerWalkingState { get; private set; }
+
         public List<States.PlayerAttackingState> PlayerAttackingStates { get; private set; }
+
         #endregion
 
 
@@ -71,10 +82,13 @@ namespace CC.Characters
             PlayerFallingState = new States.PlayerFallingState(this);
             PlayerLightLandingState = new States.PlayerLightLandingState(this);
             PlayerMediumStoppingState = new States.PlayerMediumStoppingState(this);
+            PlayerBlockingState = new States.PlayerBlockingState(this);
+            PlayerWalkingState = new States.PlayerWalkingState(this);
 
             PlayerAttackingStates = new List<States.PlayerAttackingState>();
-            for(int i = 0; i < Attacks.Length; i++){
-                States.PlayerAttackingState newAttackingState = new States.PlayerAttackingState(this, i); 
+            for (int i = 0; i < Attacks.Length; i++)
+            {
+                States.PlayerAttackingState newAttackingState = new States.PlayerAttackingState(this, i);
                 PlayerAttackingStates.Add(newAttackingState);
             }
         }

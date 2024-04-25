@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
+using CC.Events;
 
 [CreateAssetMenu(fileName = "InputReader", menuName = "Game/Input Reader")]
 public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameInput.IInventoryUIActions
@@ -24,12 +25,20 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     public event UnityAction CancelEvent = delegate { };
     public event UnityAction AttackPerformed = delegate { };
     public event UnityAction AttackCanceled = delegate { };
-    public bool IsAttacking {get; private set;}
+    public event UnityAction BlockPerformed = delegate { };
+    public event UnityAction BlockCanceled = delegate { };
+    public event UnityAction WalkToggleStarted = delegate { };
+
+    public bool IsBlocking { get; private set; }
+    public bool IsAttacking { get; private set; }
 
 
     public event UnityAction OpenInventoryEvent = delegate { };
     public event UnityAction CloseInventoryEvent = delegate { };
     public event UnityAction DropItemPerformed = delegate { };
+    [SerializeField] VoidEventChannelSO _enableCameraInputEvent;
+
+    [SerializeField] VoidEventChannelSO _disableCameraInputEvent;
 
 
 
@@ -153,6 +162,22 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
 
     }
 
+    public void OnBlock(InputAction.CallbackContext context)
+    {
+        switch (context.phase)
+        {
+            case InputActionPhase.Performed:
+                BlockPerformed.Invoke();
+                IsBlocking = true;
+                break;
+            case InputActionPhase.Canceled:
+                BlockCanceled.Invoke();
+                IsBlocking = false;
+                break;
+        }
+
+    }
+
 
     public void OnOpenInventory(InputAction.CallbackContext context)
     {
@@ -176,14 +201,22 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     public void EnableGameplayInput()
     {
         _playerInput.Gameplay.Enable();
+        _enableCameraInputEvent.RaiseEvent();
+
         _playerInput.InventoryUI.Disable();
     }
 
     public void EnableInventoryUIInput()
     {
         _playerInput.Gameplay.Disable();
+        _disableCameraInputEvent.RaiseEvent();
+
         _playerInput.InventoryUI.Enable();
     }
 
-
+    public void OnWalkToggle(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+            WalkToggleStarted.Invoke();
+    }
 }

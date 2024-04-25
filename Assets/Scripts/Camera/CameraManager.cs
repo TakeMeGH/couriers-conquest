@@ -1,6 +1,7 @@
 using Cinemachine;
 using UnityEngine;
 using CC.RuntimeAnchors;
+using CC.Events;
 
 namespace CC.Camera
 {
@@ -9,17 +10,29 @@ namespace CC.Camera
 
         [SerializeField] TransformAnchor _playerTransformAnchor = default;
         [SerializeField] CinemachineVirtualCamera _playerCamera;
+        [SerializeField] VoidEventChannelSO _disableCameraInputEvent;
+        [SerializeField] VoidEventChannelSO _enableCameraInputEvent;
+        CinemachineInputProvider _cameraControlAction;  // Assign this in the Inspector
+
 
         private void OnEnable()
         {
             _playerTransformAnchor.OnAnchorProvided += SetupPlayerVirtualCamera;
+            _enableCameraInputEvent.OnEventRaised += EnableCameraControl;
+            _disableCameraInputEvent.OnEventRaised += DisableCameraControl;
 
         }
 
         private void OnDisable()
         {
             _playerTransformAnchor.OnAnchorProvided -= SetupPlayerVirtualCamera;
+            _enableCameraInputEvent.OnEventRaised -= EnableCameraControl;
+            _disableCameraInputEvent.OnEventRaised -= DisableCameraControl;
+        }
 
+        private void Awake()
+        {
+            _cameraControlAction = _playerCamera.GetComponent<CinemachineInputProvider>();
         }
 
         public void SetupPlayerVirtualCamera()
@@ -29,6 +42,20 @@ namespace CC.Camera
             _playerCamera.Follow = target;
             _playerCamera.LookAt = target;
         }
+
+        public void EnableCameraControl()
+        {
+            if (_cameraControlAction != null)
+                _cameraControlAction.enabled = true;
+        }
+
+        public void DisableCameraControl()
+        {
+            if (_cameraControlAction != null)
+                _cameraControlAction.enabled = false;
+        }
+
+
 
     }
 

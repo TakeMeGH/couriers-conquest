@@ -98,6 +98,7 @@ namespace CC.Characters.States
             _playerController.InputReader.MovePerformed += OnMovementPerformed;
             _playerController.InputReader.MoveCanceled += OnMovementCanceled;
             _playerController.InputReader.MoveEvent += ReadMovementInput;
+            _playerController.InputReader.WalkToggleStarted += OnWalkToggleStarted;
 
             _playerController.TriggerOnMovementStateAnimationEnterEvent.OnEventRaised += OnAnimationEnterEvent;
             _playerController.TriggerOnMovementStateAnimationExitEvent.OnEventRaised += OnAnimationExitEvent;
@@ -112,6 +113,8 @@ namespace CC.Characters.States
             _playerController.InputReader.MovePerformed -= OnMovementPerformed;
             _playerController.InputReader.MoveCanceled -= OnMovementCanceled;
             _playerController.InputReader.MoveEvent -= ReadMovementInput;
+            _playerController.InputReader.WalkToggleStarted -= OnWalkToggleStarted;
+
 
             _playerController.TriggerOnMovementStateAnimationEnterEvent.OnEventRaised -= OnAnimationEnterEvent;
             _playerController.TriggerOnMovementStateAnimationExitEvent.OnEventRaised -= OnAnimationExitEvent;
@@ -134,6 +137,12 @@ namespace CC.Characters.States
             _playerController.PlayerCurrentData.MovementInput = movement;
         }
 
+        protected virtual void OnWalkToggleStarted()
+        {
+            _playerController.PlayerCurrentData.ShouldWalk = !_playerController.PlayerCurrentData.ShouldWalk;
+        }
+
+
         private void Move()
         {
             if (_playerController.PlayerCurrentData.MovementInput == Vector2.zero || _playerController.PlayerCurrentData.MovementSpeedModifier == 0f)
@@ -151,7 +160,8 @@ namespace CC.Characters.States
 
             Vector3 currentPlayerHorizontalVelocity = GetPlayerHorizontalVelocity();
 
-            _playerController.Rigidbody.AddForce(targetRotationDirection * movementSpeed - currentPlayerHorizontalVelocity, ForceMode.VelocityChange);
+            _playerController.Rigidbody.AddForce(targetRotationDirection * movementSpeed - currentPlayerHorizontalVelocity * _playerController.Rigidbody.mass, ForceMode.Impulse);
+            _playerController.Animator.SetFloat("Velocity", _playerController.Rigidbody.velocity.magnitude);
         }
 
         protected Vector3 GetMovementInputDirection()
