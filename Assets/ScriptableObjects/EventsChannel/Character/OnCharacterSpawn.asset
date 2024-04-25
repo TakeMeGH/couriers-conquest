@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a22444c4eb2d80498fb466fb63ad843, type: 3}
-  m_Name: PlayerState
+  m_Script: {fileID: 11500000, guid: e576d582eda368a41893ad571f7b03ac, type: 3}
+  m_Name: OnCharacterSpawn
   m_EditorClassIdentifier: 
-  _state:
-    currentPosition: {x: -3.856, y: 0.5, z: -17.35}
-    finishedQuest: 
-  _defaultState:
-    currentPosition: {x: -3.856, y: 0.5, z: -17.35}
-    finishedQuest: 
+  description: 
