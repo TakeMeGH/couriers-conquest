@@ -103,7 +103,6 @@ public class AIController : MonoBehaviour
                 Vector3 newDirection = Vector3.RotateTowards(transform.forward, targetDirection, 1, 0.0f);
                 transform.rotation = Quaternion.LookRotation(newDirection);
                 animator.SetBool("isAttack", true);
-                return;
             }
             else
             {
