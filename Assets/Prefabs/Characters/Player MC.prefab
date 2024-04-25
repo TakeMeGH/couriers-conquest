@@ -3838,6 +3838,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inputReader: {fileID: 11400000, guid: 2c06813ec1504fb49916705513d476fd, type: 2}
+  _addInteractionEvent: {fileID: 11400000, guid: 616529d0a1aa5d54898a602cae3eda5b,
+    type: 2}
+  _removeInteractionEvent: {fileID: 11400000, guid: 493e43ddec45a364f8db6ab20546a153,
+    type: 2}
 --- !u!114 &3368100865873281120
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using System.Collections;
 using CC.Events;
+using CC.Interaction;
 using UnityEngine;
 
 namespace CC.Inventory
@@ -13,24 +14,36 @@ namespace CC.Inventory
         private bool isPickup = false;
 
         public bool isDropItem = false;
+        CustomInterractables _customInteractables;
 
-        public ABaseItem item { set => _item = value; }
-        public int amount { set => _amount = value; }
-
-        private void OnTriggerEnter(Collider other)
+        public ABaseItem item
         {
-            if (other.tag == "Player")
+            set
             {
-                if (!isPickup)
-                {
-                    PickUpItem();
-                }
+                _item = value;
+                OnItemSet();
+            }
+        }
+        public int amount
+        {
+            set
+            {
+                _amount = value;
+                OnAmountSet();
             }
         }
 
         private void OnEnable()
         {
             Countdown();
+        }
+
+
+        private void Start()
+        {
+            _customInteractables = GetComponent<CustomInterractables>();
+            OnItemSet();
+            OnAmountSet();
         }
 
         private IEnumerator Countdown()
@@ -40,18 +53,36 @@ namespace CC.Inventory
             isPickup = false;
         }
 
-        public void PickUpItem()
+        public void Interact()
         {
             _amount = _addItemToInventory.RaiseEvent(_item, _amount);
             _onItemPickup.RaiseEvent();
             if (isDropItem)
             {
-                if (_amount < 1) transform.parent.gameObject.SetActive(false); ;
+                if (_amount < 1)
+                {
+                    transform.parent.gameObject.SetActive(false);
+                }
             }
             else
             {
-                if (_amount < 1) Destroy(this.transform.parent.gameObject);
+                if (_amount < 1)
+                {
+                    Destroy(this.transform.parent.gameObject);
+                }
             }
+        }
+
+        public void OnItemSet()
+        {
+            _customInteractables.SetName(_item.itemName);
+            _customInteractables.SetIcon(_item.itemSprite);
+
+        }
+
+        public void OnAmountSet()
+        {
+            _customInteractables.SetAmount(_amount);
         }
 
     }
