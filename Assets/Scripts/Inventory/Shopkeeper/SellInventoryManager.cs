@@ -11,13 +11,15 @@ namespace CC.Inventory
 
         [Header("Inventory Menu Components")]
         [Space]
-        [SerializeField] private List<AItemPanel> _playerItemPanel = new List<AItemPanel>();
+        [SerializeField] private List<AItemPanel> _playerItemPanel;
         [SerializeField] private GameObject _playerInventoryPanelUI;
 
         [Space]
         [Header("Event Panel")]
         [SerializeField] ItemInventoryEventChannel _addItemToInventory;
         [SerializeField] SellItemEventChannel _onSellItemEvent;
+
+        bool _onInitializeFirstTime = false;
 
         public void ShowPanel()
         {
@@ -28,7 +30,6 @@ namespace CC.Inventory
             CloneInventoryData(_playerInventoryData);
 
             Debug.Log("Sell Panel Show");
-
             for (int i = 0; i < _inventoryData.items.Count; i++)
             {
                 if (_inventoryData.items[i].item)
@@ -84,19 +85,26 @@ namespace CC.Inventory
             _shopManager = shopManager;
             _itemSlotMouse = mousePanel;
             _inventoryManager = this;
-            _inventoryShopPanel.Clear();
-            _playerItemPanel.Clear();
 
-            AItemPanel[] playerPanel = _playerInventoryPanelUI.GetComponentsInChildren<PanelInventory>();
-            foreach (PanelInventory itemPanel in playerPanel)
+            if (!_onInitializeFirstTime)
             {
-                _playerItemPanel.Add(itemPanel);
-            }
+                _inventoryShopPanel.Clear();
+                _playerItemPanel.Clear();
 
-            AItemPanel[] shopPanel = _inventoryShopPanelUI.GetComponentsInChildren<PanelInventory>();
-            foreach (PanelInventory itemPanel in shopPanel)
-            {
-                _inventoryShopPanel.Add(itemPanel);
+                AItemPanel[] playerPanel = _playerInventoryPanelUI.GetComponentsInChildren<PanelInventory>();
+                foreach (PanelInventory itemPanel in playerPanel)
+                {
+                    _playerItemPanel.Add(itemPanel);
+                }
+
+
+                AItemPanel[] shopPanel = _inventoryShopPanelUI.GetComponentsInChildren<PanelInventory>();
+                foreach (PanelInventory itemPanel in shopPanel)
+                {
+                    _inventoryShopPanel.Add(itemPanel);
+                }
+
+                _onInitializeFirstTime = true;
             }
 
             SetPanelShop();
@@ -111,7 +119,7 @@ namespace CC.Inventory
                 if (playerData.items[i].item)
                 {
                     if (playerData.items[i].item.GetItemType() != ItemType.Equipment)
-                    _inventoryData.items.Add(new ItemSlotInfo(_playerInventoryData.items[i].item, _playerInventoryData.items[i].stacks));
+                        _inventoryData.items.Add(new ItemSlotInfo(_playerInventoryData.items[i].item, _playerInventoryData.items[i].stacks));
                 }
             }
         }

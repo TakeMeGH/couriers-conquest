@@ -204,16 +204,16 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     {
         _playerInput.Gameplay.Enable();
         _enableCameraInputEvent.RaiseEvent();
-
         _playerInput.InventoryUI.Disable();
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void EnableInventoryUIInput()
     {
         _playerInput.Gameplay.Disable();
         _disableCameraInputEvent.RaiseEvent();
-
         _playerInput.InventoryUI.Enable();
+        Cursor.lockState = CursorLockMode.Confined;
     }
 
     public void EnableScrollInteracionInput()

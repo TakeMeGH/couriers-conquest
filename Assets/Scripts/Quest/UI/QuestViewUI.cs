@@ -68,13 +68,13 @@ namespace CC.Quest.UI
         public void openView()
         {
             RefreshList();
-            Cursor.lockState = CursorLockMode.Confined;
+            // Cursor.lockState = CursorLockMode.Confined;
 
         }
 
         public void closeView()
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            // Cursor.lockState = CursorLockMode.Locked;
             _inputReader.EnableGameplayInput();
         }
     }

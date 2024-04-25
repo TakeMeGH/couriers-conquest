@@ -29,9 +29,6 @@ namespace CC.Inventory
         [Header("Weight System")]
         [SerializeField] private TextMeshProUGUI _textWeight;
         private float _weightValue;
-        [SerializeField] private InventoryDataEventChannel _shopEvent;
-        [SerializeField] private InventoryDataEventChannel _unShopEvent;
-
         private void OnEnable()
         {
             _inventoryData.addItemToInventory.OnEventRaised += _playerInventoryManagement.OnAddItem;
@@ -68,35 +65,18 @@ namespace CC.Inventory
         {
             inventoryMenuUI.SetActive(true);
 
-            Cursor.lockState = CursorLockMode.Confined;
             RefreshInventory();
             _inventoryData.inputReader.EnableInventoryUIInput();
 
-            ShowShopkeeper();
         }
 
         public void CloseInventory()
         {
             inventoryMenuUI.SetActive(false);
-
             _itemSlotMouse.EmptySlot();
-            Cursor.lockState = CursorLockMode.Confined;
             _inventoryData.inputReader.EnableGameplayInput();
-
-            UnShowShopkeeper();
         }
 
-        public void ShowShopkeeper()
-        {
-            _shopEvent.RaiseEvent(_aitemInventoryData);
-            _inventoryData.inputReader.DropItemPerformed -= _playerInventoryAction.OnDropItem;
-        }
-
-        public void UnShowShopkeeper()
-        {
-            _unShopEvent.RaiseEvent(_aitemInventoryData);
-            _inventoryData.inputReader.DropItemPerformed += _playerInventoryAction.OnDropItem;
-        }
 
         private void WeightCount()
         {

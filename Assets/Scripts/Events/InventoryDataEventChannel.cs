@@ -9,12 +9,12 @@ namespace CC.Events
     [CreateAssetMenu(menuName = "Game/Events/Inventory Data Channel")]
     public class InventoryDataEventChannel : DescriptionBaseSO
     {
-        public Action<AInventoryData> OnEventRaised;
+        public Action<AInventoryData, AInventoryData> OnEventRaised;
 
-        public void RaiseEvent(AInventoryData _inventoryData)
+        public void RaiseEvent(AInventoryData _playerInventory, AInventoryData _shopkeeperInventory)
         {
             if (OnEventRaised != null)
-                OnEventRaised.Invoke(_inventoryData);
+                OnEventRaised.Invoke(_playerInventory, _shopkeeperInventory);
         }
     }
 }

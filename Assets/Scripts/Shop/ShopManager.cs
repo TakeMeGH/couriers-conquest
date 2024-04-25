@@ -10,11 +10,9 @@ namespace CC.Inventory
 {
     public class ShopManager : MonoBehaviour
     {
-        [SerializeField] private AInventoryData _inventoryData;
+        [SerializeField] InputReader _inputReader;
+        private AInventoryData _inventoryData;
         private InventoryShopkeeper _inventoryShop;
-
-        [SerializeField] private AInventoryData _inventoryDataSell;
-
 
         [SerializeField] private ItemSlotMouse _itemSlotMouse;
         private BuyInventoryManager _shopInventoryManager;
@@ -48,33 +46,29 @@ namespace CC.Inventory
 
         [Header("Event Panel")]
         [SerializeField] private InventoryDataEventChannel _onEventInventory;
-        [SerializeField] private InventoryDataEventChannel _unEventInventory;
 
         private void OnEnable()
         {
             _onEventInventory.OnEventRaised += Initialize;
-            _unEventInventory.OnEventRaised += ClosePanel;
         }
 
         private void OnDisable()
         {
             _onEventInventory.OnEventRaised -= Initialize;
-            _unEventInventory.OnEventRaised -= ClosePanel;
         }
 
-        private void Initialize(AInventoryData playerData)
+        private void Initialize(AInventoryData playerData, AInventoryData shopkeeperInventoryData)
         {
+            _inventoryData = shopkeeperInventoryData;
             _shopCanvas.SetActive(true);
             GetAllPanel();
+            _inputReader.EnableInventoryUIInput();
+
 
             if (_shopInventoryManager == null)
             {
                 _shopInventoryManager = GetComponentInChildren<BuyInventoryManager>();
                 _sellInventoryManager = GetComponentInChildren<SellInventoryManager>();
-
-                _inventoryShop = (InventoryShopkeeper)_inventoryData;
-                _shopInventoryManager.Initialize(_inventoryData, this, _itemSlotMouse, playerData);
-                _sellInventoryManager.Initialize(_inventoryDataSell, this, _itemSlotMouse, playerData);
 
                 _buyButton.onClick.RemoveAllListeners();
                 _buyButton.onClick.AddListener(BuyItem);
@@ -86,17 +80,24 @@ namespace CC.Inventory
                 _sellButton.onClick.AddListener(SellItem);
             }
 
+            _inventoryShop = (InventoryShopkeeper)_inventoryData;
+            _shopInventoryManager.Initialize(_inventoryData, this, _itemSlotMouse, playerData);
+            _sellInventoryManager.Initialize(_inventoryData, this, _itemSlotMouse, playerData);
+
+
             ToogleMenu();
             ShowPanel();
 
         }
 
-        private void ClosePanel(AInventoryData playerData)
+        public void ClosePanel()
         {
             _isToogle = false;
             _shopInventoryManager.gameObject.SetActive(_isToogle);
             _sellInventoryManager.gameObject.SetActive(_isToogle);
             _shopCanvas.SetActive(_isToogle);
+            _inputReader.EnableGameplayInput();
+
         }
 
         private void GetAllPanel()

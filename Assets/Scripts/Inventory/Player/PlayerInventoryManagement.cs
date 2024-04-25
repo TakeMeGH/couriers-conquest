@@ -149,17 +149,31 @@ namespace CC.Inventory
 
         public void OnSellItem(ABaseItem itemSell, int amount)
         {
-            foreach(ItemSlotInfo i in _inventoryData.items)
+            int _currentAmmount = amount;
+            foreach (ItemSlotInfo i in _inventoryData.items)
             {
-                if(i.item == itemSell)
+                if (i.item == itemSell)
                 {
-                    i.stacks -= amount;
+                    if (i.stacks < _currentAmmount)
+                    {
+                        _currentAmmount -= i.stacks;
+                        i.stacks = 0;
+                    }
+                    else
+                    {
+                        i.stacks -= _currentAmmount;
+                        _currentAmmount = 0;
+
+                    }
                     if (i.stacks <= 0)
                     {
                         i.item = null;
+                    }
+
+                    if (_currentAmmount == 0)
+                    {
                         break;
                     }
-                    return;
                 }
             }
         }
