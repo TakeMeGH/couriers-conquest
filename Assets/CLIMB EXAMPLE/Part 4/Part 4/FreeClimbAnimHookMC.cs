@@ -67,7 +67,7 @@ namespace SA
         void UpdateGoals(Vector3 moveDir)
         {
             isLeft = (moveDir.x <= 0);
-            isMirror = false;
+            // isMirror = false;
 
             if (moveDir.x != 0)
             {
@@ -115,8 +115,16 @@ namespace SA
                             anim.SetBool("mirror", isMirror);
                         }
                     }
+                    if (isMirror)
+                    {
+                        anim.CrossFade("kiri_atas", 0.2f);
 
-                    anim.CrossFade("climb_up", 0.2f);
+                    }
+                    else
+                    {
+                        anim.CrossFade("kanan_atas", 0.2f);
+                    }
+                    // anim.CrossFade("climb_up", 0.2f);
                 }
             }
             else
