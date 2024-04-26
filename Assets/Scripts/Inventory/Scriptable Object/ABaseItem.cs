@@ -11,17 +11,10 @@ namespace CC.Inventory
         public string itemDescription;
         public Sprite itemSprite;
         public int maxStacks;
+        public float costSell;
 
         public abstract ItemType GetItemType();
         public abstract void UseItem();
     }
 
-    public enum ItemType
-    {
-        Materials,
-        Consumable,
-        Rune,
-        Equipment,
-        QuestItem,
-    }
 }
