@@ -16,6 +16,7 @@ namespace SA
         Vector3 targetPos;
         Quaternion startRot;
         Quaternion targetRot;
+        public Transform MCClimbOrigin;
         public float possitionOffset;
         public float offsetFromWall = 0.3f;
         public float speed_multiplier = 0.2f;
