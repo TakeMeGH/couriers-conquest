@@ -7,8 +7,9 @@ namespace SA
     public class FreeClimbAnimHookMC : MonoBehaviour
     {
         Animator anim;
-        [SerializeField] List<Transform> _avatarIk = new List<Transform>();
+        public Transform MCClimbOrigin;
 
+        [SerializeField] List<Transform> _avatarIk = new List<Transform>();
         IKSnapshot ikBase;
         IKSnapshot current = new IKSnapshot();
         IKSnapshot next = new IKSnapshot();
@@ -66,7 +67,7 @@ namespace SA
 
         void UpdateGoals(Vector3 moveDir)
         {
-            isLeft = (moveDir.x <= 0);
+            isLeft = moveDir.x <= 0;
             // isMirror = false;
 
             if (moveDir.x != 0)

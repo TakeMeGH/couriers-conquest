@@ -16,7 +16,6 @@ namespace SA
         Vector3 targetPos;
         Quaternion startRot;
         Quaternion targetRot;
-        public Transform MCClimbOrigin;
         public float possitionOffset;
         public float offsetFromWall = 0.3f;
         public float speed_multiplier = 0.2f;
@@ -186,9 +185,11 @@ namespace SA
             {
                 helper.position = PosWithOffset(origin, hit.point);
                 helper.rotation = Quaternion.LookRotation(-hit.normal);
+                Debug.Log("Towards Wall" + " " + -hit.normal + " " + helper.position);
                 return true;
             }
 
+            Debug.Log("AFTER TOWARDS WALL");
             origin = origin + (dir * dis2);
             dir = -moveDir;
             DebugLine.singleton.SetLine(origin, origin + dir, 1);
@@ -239,6 +240,7 @@ namespace SA
 
         Vector3 PosWithOffset(Vector3 origin, Vector3 target)
         {
+            // origin -= OffsetPosition;
             Vector3 direction = origin - target;
             direction.Normalize();
             Vector3 offset = direction * offsetFromWall;
