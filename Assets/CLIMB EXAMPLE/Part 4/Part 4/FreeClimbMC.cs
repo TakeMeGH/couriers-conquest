@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations.Rigging;
 
 namespace SA
 {
@@ -35,9 +36,11 @@ namespace SA
 
         Transform helper;
         float delta;
+        [SerializeField] LayerMask ignoreLayers;
+        LayerMask UsedLayer;
 
         [SerializeField] InputReader _inputReader;
-
+        public Rig Rig;
         private void OnEnable()
         {
             _inputReader.MoveEvent += UpdateMove;
@@ -58,6 +61,7 @@ namespace SA
         void Start()
         {
             Init();
+            UsedLayer = ~ignoreLayers;
         }
 
         public void Init()
@@ -65,42 +69,48 @@ namespace SA
             helper = new GameObject().transform;
             helper.name = "climb helper";
             a_hook.Init(this, helper);
-            CheckForClimb();
+            // CheckForClimb();
         }
 
-        public void CheckForClimb()
+        public bool CheckForClimb()
         {
             Vector3 origin = transform.position;
-            origin.y += 1.4f;
+            origin.y += 0.02f;
             Vector3 dir = transform.forward;
             RaycastHit hit;
-            if (Physics.Raycast(origin, dir, out hit, 5))
+            DebugLine.singleton.SetLine(origin, origin + dir * 0.5f, 0);
+            if (Physics.Raycast(origin, dir, out hit, 0.5f, UsedLayer))
             {
+                Debug.Log("KESINI");
                 helper.position = PosWithOffset(origin, hit.point);
                 InitForClimb(hit);
+                Rig.weight = 1;
+                return true;
             }
+            return false;
         }
 
         void InitForClimb(RaycastHit hit)
         {
             isClimbing = true;
-
+            a_hook.enabled = true;
             helper.transform.rotation = Quaternion.LookRotation(-hit.normal);
             startPos = transform.position;
             targetPos = hit.point + (hit.normal * offsetFromWall);
             t = 0;
             inPosition = false;
-            anim.CrossFade("climb_idle", 2);
+            anim.CrossFade("Climb Idle", 2);
         }
 
-        void Update()
-        {
-            delta = Time.deltaTime;
-            Tick(delta);
-        }
+        // void Update()
+        // {
+        //     delta = Time.deltaTime;
+        //     Tick(delta);
+        // }
 
-        public void Tick(float delta)
+        public void Tick(float d_time)
         {
+            this.delta = d_time;
             if (!inPosition)
             {
                 GetInPosition();
@@ -109,6 +119,17 @@ namespace SA
 
             if (!isLerping)
             {
+                // bool cancel = Input.GetKeyUp(KeyCode.X);
+
+                // if (cancel)
+
+                // {
+
+                //     CancelClimb();
+
+                //     return;
+
+                // }
                 horizontal = Input.GetAxis("Horizontal");
                 vertical = Input.GetAxis("Vertical");
                 float m = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
@@ -168,9 +189,9 @@ namespace SA
 
             //Raycast towards the direction you want to move
             RaycastHit hit;
-            if (Physics.Raycast(origin, dir, out hit, dis))
+            if (Physics.Raycast(origin, dir, out hit, dis, UsedLayer))
             {
-                Debug.Log("CORNER");
+                Debug.Log("CORNER " + hit.transform.gameObject.name);
                 //Check if it's a corner
                 return false;
             }
@@ -181,7 +202,7 @@ namespace SA
 
             //Raycast forward towards the wall
             DebugLine.singleton.SetLine(origin, origin + (dir * dis2), 1);
-            if (Physics.Raycast(origin, dir, out hit, dis2))
+            if (Physics.Raycast(origin, dir, out hit, dis2, UsedLayer))
             {
                 helper.position = PosWithOffset(origin, hit.point);
                 helper.rotation = Quaternion.LookRotation(-hit.normal);
@@ -193,7 +214,7 @@ namespace SA
             origin = origin + (dir * dis2);
             dir = -moveDir;
             DebugLine.singleton.SetLine(origin, origin + dir, 1);
-            if (Physics.Raycast(origin, dir, out hit, rayForwardTowardsWall))
+            if (Physics.Raycast(origin, dir, out hit, rayForwardTowardsWall, UsedLayer))
             {
                 helper.position = PosWithOffset(origin, hit.point);
                 helper.rotation = Quaternion.LookRotation(-hit.normal);
@@ -207,7 +228,7 @@ namespace SA
 
             DebugLine.singleton.SetLine(origin, origin + dir, 2);
             //  Debug.DrawRay(origin, dir, Color.yellow);
-            if (Physics.Raycast(origin, dir, out hit, dis2))
+            if (Physics.Raycast(origin, dir, out hit, dis2, UsedLayer))
             {
                 float angle = Vector3.Angle(-helper.forward, hit.normal);
                 if (angle < 40)
@@ -223,13 +244,14 @@ namespace SA
 
         void GetInPosition()
         {
-            t += delta;
+            t += delta * 10;
 
             if (t > 1)
             {
                 t = 1;
                 inPosition = true;
-
+                horizontal = 0;
+                vertical = 0;
                 a_hook.CreatePositions(targetPos, Vector3.zero, false);
             }
 

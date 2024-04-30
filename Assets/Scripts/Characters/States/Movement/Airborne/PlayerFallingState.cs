@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 namespace CC.Characters.States
@@ -18,6 +19,8 @@ namespace CC.Characters.States
 
             _playerController.PlayerCurrentData.MovementSpeedModifier = 0f;
 
+            _playerController.transform.eulerAngles = new Vector3(0, _playerController.transform.rotation.eulerAngles.y, 0);
+
             playerPositionOnEnter = _playerController.transform.position;
 
             ResetVerticalVelocity();
@@ -28,6 +31,28 @@ namespace CC.Characters.States
             base.Exit();
 
             StopAnimation("isFalling");
+            _playerController.PlayerCurrentData.CurrentDropTime = 0f;
+
+        }
+
+        public override void Update()
+        {
+            base.Update();
+
+            if (_playerController.PlayerCurrentData.CurrentDropTime <= 0f)
+            {
+                if (_playerController.FreeClimb.CheckForClimb())
+                {
+                    _playerController.Rigidbody.useGravity = false;
+                    _playerController.Rigidbody.isKinematic = true;
+                    _playerController.SwitchState(_playerController.PlayerClimbState);
+
+                }
+            }
+            else
+            {
+                _playerController.PlayerCurrentData.CurrentDropTime -= Time.deltaTime;
+            }
         }
 
         public override void PhysicsUpdate()

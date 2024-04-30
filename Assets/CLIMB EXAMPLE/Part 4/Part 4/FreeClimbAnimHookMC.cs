@@ -101,36 +101,36 @@ namespace SA
                     if (moveDir.x == 0)
                     {
                         isMirror = !isMirror;
-                        anim.SetBool("mirror", isMirror);
+                        // anim.SetBool("mirror", isMirror);
                     }
                     else
                     {
                         if (moveDir.y < 0)
                         {
                             isMirror = (moveDir.x > 0);
-                            anim.SetBool("mirror", isMirror);
+                            // anim.SetBool("mirror", isMirror);
                         }
                         else
                         {
                             isMirror = (moveDir.x < 0);
-                            anim.SetBool("mirror", isMirror);
+                            // anim.SetBool("mirror", isMirror);
                         }
                     }
                     if (isMirror)
                     {
-                        anim.CrossFade("kiri_atas", 0.2f);
+                        anim.CrossFade("Climb Left", 0.2f);
 
                     }
                     else
                     {
-                        anim.CrossFade("kanan_atas", 0.2f);
+                        anim.CrossFade("Climb Right", 0.2f);
                     }
                     // anim.CrossFade("climb_up", 0.2f);
                 }
             }
             else
             {
-                anim.CrossFade("climb_idle", 0.2f);
+                anim.CrossFade("Climb Idle", 0.2f);
             }
         }
 

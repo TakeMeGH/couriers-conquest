@@ -28,8 +28,8 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     public event UnityAction BlockPerformed = delegate { };
     public event UnityAction BlockCanceled = delegate { };
     public event UnityAction WalkToggleStarted = delegate { };
+    public event UnityAction DropClimbingPerformed = delegate { };
     public event UnityAction<float> ScrollInteracionPerformed = delegate { };
-
 
     public bool IsBlocking { get; private set; }
     public bool IsAttacking { get; private set; }
@@ -244,6 +244,15 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
         }
     }
 
+    public void OnDropClimbing(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            DropClimbingPerformed.Invoke();
+        }
+    }
+
+
     public void DisableSpecificAction(string _actionMapName, string _actionName)
     {
         InputActionMap _actionMap = _playerInput.asset.FindActionMap(_actionMapName);
@@ -279,7 +288,5 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
         }
         _action.Enable();
     }
-
-
 
 }
