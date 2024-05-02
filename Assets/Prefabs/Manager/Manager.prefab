@@ -247,6 +247,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 281603777596582153, guid: cb7b7b1c50530ba40b06e24fb2e37220,
         type: 3}
+      propertyPath: _playerPrefab
+      value: 
+      objectReference: {fileID: 1713287152588927198, guid: f4a3ce2bb0db9bd47a58ab3a254c777b,
+        type: 3}
+    - target: {fileID: 281603777596582153, guid: cb7b7b1c50530ba40b06e24fb2e37220,
+        type: 3}
       propertyPath: _characterSpawnEvent
       value: 
       objectReference: {fileID: 11400000, guid: d2cbba7d6eaea3140884dfaf009590de,
