@@ -23,8 +23,8 @@ namespace CC.DataBlueprint.Colliders
         public void UpdateColliderData()
         {
             ColliderCenterInLocalSpace = Collider.center;
-
             ColliderVerticalExtents = new Vector3(0f, Collider.bounds.extents.y, 0f);
+
         }
     }
 }

@@ -17,7 +17,7 @@ namespace CC.Characters.States
         public override void Enter()
         {
             base.Enter();
-            _playerController.Weapon.SetAttack(attack.Damage);
+            // _playerController.Weapon.SetAttack(attack.Damage);
             StartAnimation(attack.AnimationName);
 
             // stateMachine.Animator.CrossFadeInFixedTime(attack.AnimationName, attack.TransitionDuration);
