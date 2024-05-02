@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using CC.Event;
 using CC.Inventory;
 using CC.Quest.Example;
+using CC.NPC;
 using UnityEngine;
 
 namespace CC.Quest
@@ -15,6 +17,13 @@ namespace CC.Quest
         [SerializeField] ABaseItem itemToDeliver;
         [SerializeField] bool _pickedUp;
         List<GameObject> _instantiatedPrefabs = new();
+
+        [Header("Dialogue")]
+        [SerializeField] SenderDataEventChannelSO SendNPCQuestDialogue;
+        [SerializeField] SenderDataEventChannelSO ClearNPCQuestDialogue;
+        //[SerializeField] string _dialogueNode;
+        //[SerializeField] SenderDataEventChannelSO[] _extraEventsChannel;
+        [SerializeField] List<NPCQuestDialogueNodeTransfer> _npcList; //init npc with dialogues
         public override void OnQuestStarted(Component sender, object data)
         {
             var temp = Instantiate(pickupPrefab.prefab, pickupPrefab.position, Quaternion.identity);
@@ -29,6 +38,11 @@ namespace CC.Quest
             {
                 temp = Instantiate(prefab.prefab, prefab.position, Quaternion.identity);
                 if (temp != null) _instantiatedPrefabs.Add(temp);
+            }
+
+            foreach (var npc in _npcList)
+            {
+                SendNPCQuestDialogue?.raiseEvent(null,npc);
             }
 
             Debug.Log("quest has started");
@@ -51,6 +65,7 @@ namespace CC.Quest
 
         public void clearAllPrefab()
         {
+            _pickedUp = false;
             if (_instantiatedPrefabs != null)
             {
                 foreach (var temp in _instantiatedPrefabs)
@@ -59,6 +74,7 @@ namespace CC.Quest
                 }
                 _instantiatedPrefabs.Clear();
             }
+            ClearNPCQuestDialogue?.raiseEvent(null, null);
             //foreach (GameObject item in GameObject.FindGameObjectsWithTag("PayLoad"))
             //{
             // Destroy(item);
@@ -68,6 +84,8 @@ namespace CC.Quest
             // item.SetActive(false);
             //}
         }
+
+
 
         public bool IsPickedUp()
         {

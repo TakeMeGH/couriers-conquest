@@ -1,8 +1,8 @@
-title: Rusdi_Test_0
+title: Test00_Rusdi_Default_0
 tags:
 ---
-<<declare $HaveQuest = false>>
-<<declare $QuestNode = "" >>
+<<declare $RusdiHaveQuest = false>>
+<<declare $RusdiQuestNode = "" >>
 Rusdi : Greetings!
 <<jump Rusdi_Test_Choice_0>>
 ===
@@ -11,8 +11,8 @@ title: Rusdi_Test_Choice_0
 tags:
 ---
 Rusdi : What do you need?
--> I've accepted the quest you posted <<if $HaveQuest>>
-    //<<jump {$QuestNode}>>
+-> I've accepted the quest you posted <<if $RusdiHaveQuest>>
+    <<jump {$RusdiQuestNode}>>
     <<Close>>
 -> What are you doing here?
     <<jump Rusdi_Test_1>>

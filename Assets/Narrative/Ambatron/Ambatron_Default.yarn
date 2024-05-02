@@ -1,0 +1,29 @@
+﻿title: Test01_Ambatron_Default_0
+tags:
+---
+<<declare $AmbatronHaveQuest = false>>
+<<declare $AmbatronQuestNode = "" >>
+Ambatron : Yo, sup?
+<<jump Ambatron_Test_Choice_0>>
+===
+
+title: Ambatron_Test_Choice_0
+tags:
+---
+Ambatron :I'm Ambatron, What do you need?
+-> I'me here to deliver something.. <<if $AmbatronHaveQuest>>
+    <<jump {$AmbatronQuestNode}>>
+    <<Close>>
+-> What are you doing here?
+    <<jump Ambatron_Test_1>>
+-> Nothing, bye!
+    <<Close>>
+===
+
+title: Ambatron_Test_1
+tags:
+---
+Ambatron : I'm here yo inform you
+Ambatron : That i'm about to tron
+<<jump Ambatron_Test_Choice_0>>
+===
