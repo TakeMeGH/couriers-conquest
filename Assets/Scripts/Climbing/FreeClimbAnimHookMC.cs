@@ -46,8 +46,6 @@ namespace SA
             SetIKPos(AvatarIKMC.RightHand, rh, w_rh, 1000);
             SetIKPos(AvatarIKMC.LeftFoot, lf, w_lf, 1000);
             SetIKPos(AvatarIKMC.RightFoot, rf, w_rf, 1000);
-            Debug.Log("INIT");
-
         }
 
         public void CreatePositions(Vector3 origin, Vector3 moveDir, bool isMid)
