@@ -21,6 +21,7 @@ namespace CC.Characters.States
             base.Update();
 
             _playerController.FreeClimb.Tick(Time.deltaTime);
+            Debug.Log("TICK CLIMBING");
         }
 
         public override void Exit()
