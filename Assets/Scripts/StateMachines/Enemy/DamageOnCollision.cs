@@ -1,4 +1,6 @@
 using UnityEngine;
+using CC.Characters;
+using CC.Characters.States;
 
 namespace CC.Combats
 {
@@ -9,23 +11,29 @@ namespace CC.Combats
         private float nextDamageTime = 0f;
 
         private void OnCollisionStay(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player") && Time.time >= nextDamageTime)
         {
-            Health playerHealth = collision.gameObject.GetComponent<Health>();
-            if (playerHealth != null)
+            if (collision.gameObject.CompareTag("Player") && Time.time >= nextDamageTime)
             {
-                playerHealth.DealDamage(Mathf.RoundToInt(damageAmount));
-                nextDamageTime = Time.time + 1f/damageRate;
-                Debug.Log("Damage Amount: " + damageAmount);
-                Debug.Log("Player Health: " + playerHealth.GetCurrentHealth());
+                Health playerHealth = collision.gameObject.GetComponent<Health>();
+                PlayerControllerStatesMachine playerController = collision.gameObject.GetComponent<PlayerControllerStatesMachine>();
+                StaminaController staminaController = collision.gameObject.GetComponent<StaminaController>();
+                if (playerHealth != null && playerController != null && staminaController != null)
+                {
+                    playerHealth.DealDamage(Mathf.RoundToInt(damageAmount));
+                    if (playerController.IsCurrentState<PlayerBlockingState>())
+                    {
+                        staminaController.DecreaseStaminaByAmountWhenAttacked(5); //Stamina ngurang 5 poin/hit
+                    }
+                    nextDamageTime = Time.time + 1f/damageRate;
+                    Debug.Log("Damage Amount: " + damageAmount);
+                    Debug.Log("Player Health: " + playerHealth.GetCurrentHealth());
+                }
             }
         }
     }
-
-
-    }
 }
+
+
 
 
 

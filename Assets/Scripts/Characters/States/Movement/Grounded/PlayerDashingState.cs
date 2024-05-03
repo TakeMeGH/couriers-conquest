@@ -6,17 +6,26 @@ namespace CC.Characters.States
     public class PlayerDashingState : PlayerGroundedState
     {
         private float startTime;
-
         private int consecutiveDashesUsed;
-
         private bool shouldKeepRotating;
+        private StaminaController staminaController; 
 
-        public PlayerDashingState(PlayerControllerStatesMachine _playerController) : base(_playerController)
+        public PlayerDashingState(PlayerControllerStatesMachine _playerController, StaminaController staminaController) : base(_playerController) 
         {
+            this.staminaController = staminaController; 
         }
 
         public override void Enter()
         {
+            // Cek apa stamina lebih besar dari 0
+            if (_playerController.GetComponent<StaminaController>().GetCurrentStamina() <= 0)
+            {
+                // Kalau stamina ga lebih besar dari 0, jangan kasih player ngedash
+                Debug.Log("Not enough stamina to dash!");
+                OnAnimationTransitionEvent();
+                return;
+            }
+
             _playerController.PlayerCurrentData.MovementSpeedModifier = _playerController.PlayerMovementData.DashSpeedModifier;
 
             base.Enter();
@@ -32,6 +41,8 @@ namespace CC.Characters.States
             shouldKeepRotating = _playerController.PlayerCurrentData.MovementInput != Vector2.zero;
 
             startTime = Time.time;
+
+            staminaController.DecreaseStaminaByAmountWhenDashing(10); // Stamina ngurang 10 poin/dash
         }
 
         public override void Exit()
@@ -60,12 +71,10 @@ namespace CC.Characters.States
             if (_playerController.PlayerCurrentData.MovementInput == Vector2.zero)
             {
                 _playerController.SwitchState(_playerController.PlayerMediumStoppingState);
-                // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.MEDIUMSTOPPING);
                 return;
             }
 
             _playerController.SwitchState(_playerController.PlayerSprintingState);
-            // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.SPRINTING);
         }
 
         protected override void AddInputActions()
@@ -73,7 +82,6 @@ namespace CC.Characters.States
             base.AddInputActions();
 
             _playerController.InputReader.MovePerformed += OnMovementPerformed;
-
         }
 
         protected override void RemoveInputActions()
@@ -107,11 +115,10 @@ namespace CC.Characters.States
 
             _playerController.Rigidbody.velocity = dashDirection * GetMovementSpeed(false);
         }
+
         protected override void OnDashStarted()
         {
+            staminaController.DecreaseStaminaByAmountWhenDashing(5 * Time.deltaTime);
         }
-
     }
-
 }
-

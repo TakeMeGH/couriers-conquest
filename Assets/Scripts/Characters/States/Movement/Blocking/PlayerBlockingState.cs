@@ -7,20 +7,28 @@ namespace CC.Characters.States
         private BlockSO blocking;
         //private readonly int BlockHash = Animator.StringToHash("Block");
         //private const float CrossFadeDuration = 0.1f;
+        private StaminaController staminaController;
 
-        public PlayerBlockingState(PlayerControllerStatesMachine _playerController) : base(_playerController)
+        public PlayerBlockingState(PlayerControllerStatesMachine _playerController, StaminaController staminaController) : base(_playerController)
         {
             blocking = _playerController.Block;
+            this.staminaController = staminaController;
         }
 
         public override void Enter()
+    {
+        if (!staminaController.CanBlock)
         {
-            _playerController.Health.SetBlocking(true);
-            base.Enter();
-            ResetVelocity();
-
-            StartAnimation(blocking.AnimationName);
+            _playerController.SwitchState(_playerController.PlayerIdlingState);
+            return;
         }
+
+        _playerController.Health.SetBlocking(true);
+        base.Enter();
+        ResetVelocity();
+
+        StartAnimation(blocking.AnimationName);
+    }
 
         public override void Exit()
         {
@@ -30,15 +38,15 @@ namespace CC.Characters.States
         }
 
         public override void Update()
-        {
-            base.Update();
+    {
+        base.Update();
 
-            if (!_playerController.InputReader.IsBlocking)
-            {
-                _playerController.SwitchState(_playerController.PlayerIdlingState);
-                return;
-            }
+        if (!_playerController.InputReader.IsBlocking || !staminaController.CanBlock)
+        {
+            _playerController.SwitchState(_playerController.PlayerIdlingState);
+            return;
         }
+    }
 
         public override void PhysicsUpdate()
         {
@@ -46,3 +54,4 @@ namespace CC.Characters.States
         }
     }
 }
+

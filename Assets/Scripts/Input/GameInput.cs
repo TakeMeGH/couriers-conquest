@@ -256,8 +256,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""9b3e39f2-9646-497a-9f6b-01f8406321e8"",
-                    ""path"": ""<Keyboard>/leftShift"",
+                    ""id"": ""a57fb021-7be4-4e0d-808c-0c54b2685bd3"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -267,8 +267,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a57fb021-7be4-4e0d-808c-0c54b2685bd3"",
-                    ""path"": ""<Mouse>/rightButton"",
+                    ""id"": ""98aba709-1e51-49a6-b721-f78ffd556bad"",
+                    ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -289,7 +289,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""84b4ce0b-0a0b-44ab-899c-5dc5fe35f705"",
+                    ""id"": ""cab37ec2-8e82-458b-922a-0e03a4f1aca8"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",

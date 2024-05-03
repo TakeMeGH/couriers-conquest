@@ -2,18 +2,18 @@ using CC.Characters;
 using CC.Characters.States;
 using UnityEngine;
 
-
 namespace CC.Characters.States
 {
     public class PlayerSprintingState : PlayerMovingState
     {
         private float startTime;
-
         private bool keepSprinting;
         private bool shouldResetSprintState;
+        private StaminaController staminaController;
 
-        public PlayerSprintingState(PlayerControllerStatesMachine _playerController) : base(_playerController)
+        public PlayerSprintingState(PlayerControllerStatesMachine _playerController, StaminaController staminaController) : base(_playerController)
         {
+            this.staminaController = staminaController;
         }
 
         public override void Enter()
@@ -54,8 +54,16 @@ namespace CC.Characters.States
         {
             base.Update();
 
-            if (keepSprinting)
+            // Cek apa stamina lebih besar dari 0
+            if (_playerController.GetComponent<StaminaController>().GetCurrentStamina() <= 0)
             {
+                // Kalau stamina ga lebih besar dari 0, stop nge sprint
+                StopSprinting();
+                return;
+            }
+            else if (keepSprinting)
+            {
+                staminaController.DecreaseStaminaByAmountWhenSprinting(5 * Time.deltaTime); //Stamina ngurang 5 poin/detik
                 return;
             }
 
@@ -63,7 +71,6 @@ namespace CC.Characters.States
             {
                 return;
             }
-
 
             StopSprinting();
         }
@@ -73,12 +80,10 @@ namespace CC.Characters.States
             if (_playerController.PlayerCurrentData.MovementInput == Vector2.zero)
             {
                 _playerController.SwitchState(_playerController.PlayerIdlingState);
-                // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.IDLING);
                 return;
             }
 
             _playerController.SwitchState(_playerController.PlayerRuningState);
-            // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.RUNING);
         }
 
         protected override void AddInputActions()
@@ -105,7 +110,6 @@ namespace CC.Characters.States
         protected override void OnMovementCanceled()
         {
             _playerController.SwitchState(_playerController.PlayerMediumStoppingState);
-            // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.MEDIUMSTOPPING);
             base.OnMovementCanceled();
         }
 
@@ -122,9 +126,5 @@ namespace CC.Characters.States
 
             base.OnFall();
         }
-
-
     }
-
 }
-

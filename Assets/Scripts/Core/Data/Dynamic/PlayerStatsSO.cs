@@ -44,6 +44,14 @@ namespace CC.Core.Data.Dynamic
             }
         }
 
+        public void SetInstanceValue(mainStat key, float value)
+        {
+            if (statData.instanceValue.ContainsKey(key))
+            {
+                statData.instanceValue[key] = value;
+            }
+        }
+
         public float GetDamageReduction()
         {
             return statData.damageReduction;
@@ -61,6 +69,14 @@ namespace CC.Core.Data.Dynamic
         public override void SetDefaultValue()
         {
             statData.CopyFrom(_defaultStatData);
+        }
+
+        public void SetValue(mainStat key, float value)
+        {
+            if (statData.defaultValue.ContainsKey(key))
+            {
+                statData.defaultValue[key] = value;
+            }
         }
 
          public void UpgradeWeapon(float increaseAmount, bool isPercent)
@@ -82,7 +98,7 @@ namespace CC.Core.Data.Dynamic
 
             modifiers.Add(shieldUpgrade);
 
-            statData.damageReduction += damageReductionIncrease;  // Add this line
+            statData.damageReduction += damageReductionIncrease;
         }
 
 
@@ -109,6 +125,7 @@ namespace CC.Core.Data.Dynamic
     {
         Health,
         Stamina,
+        MaxStamina,
         AttackValue,
         MovementSpeed,
         Defense,

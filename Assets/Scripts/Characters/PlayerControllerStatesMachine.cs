@@ -39,6 +39,10 @@ namespace CC.Characters
         [field: Header("Health")]
         [field: SerializeField] public Health Health { get; private set; }
 
+        [field: Header("Stamina")]
+        [field: SerializeField] public StaminaController StaminaController { get; private set; }
+
+
         #region Component
         public Animator Animator { get; private set; }
         public Rigidbody Rigidbody { get; private set; }
@@ -66,9 +70,18 @@ namespace CC.Characters
         public States.PlayerWalkingState PlayerWalkingState { get; private set; }
 
         public List<States.PlayerAttackingState> PlayerAttackingStates { get; private set; }
-
+       
         #endregion
 
+        public bool IsCurrentState<T>()
+        {
+            return GetCurrentStateType() == typeof(T);
+        }
+
+        //public System.Type GetCurrentStateType()
+        //{
+            //return currentState.GetType();
+        //}
 
         private void Initialize()
         {
@@ -83,13 +96,13 @@ namespace CC.Characters
 
             PlayerIdlingState = new States.PlayerIdlingState(this);
             PlayerRuningState = new States.PlayerRuningState(this);
-            PlayerDashingState = new States.PlayerDashingState(this);
-            PlayerSprintingState = new States.PlayerSprintingState(this);
+            PlayerDashingState = new States.PlayerDashingState(this,  StaminaController);
+            PlayerSprintingState = new States.PlayerSprintingState(this,  StaminaController);
             PlayerJumpingState = new States.PlayerJumpingState(this);
             PlayerFallingState = new States.PlayerFallingState(this);
             PlayerLightLandingState = new States.PlayerLightLandingState(this);
             PlayerMediumStoppingState = new States.PlayerMediumStoppingState(this);
-            PlayerBlockingState = new States.PlayerBlockingState(this);
+            PlayerBlockingState = new States.PlayerBlockingState(this, StaminaController);
             PlayerWalkingState = new States.PlayerWalkingState(this);
 
             PlayerAttackingStates = new List<States.PlayerAttackingState>();
@@ -110,7 +123,6 @@ namespace CC.Characters
         return totalShieldValue;
         }
 
-
         private void Start()
         {
             Initialize();
@@ -126,6 +138,5 @@ namespace CC.Characters
         {
             TriggerExitEvent.Invoke(collider);
         }
-
     }
 }
