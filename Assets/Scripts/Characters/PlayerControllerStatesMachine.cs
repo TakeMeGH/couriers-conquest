@@ -3,6 +3,7 @@ using CC.Characters.DataBlueprint.Layers;
 using UnityEngine.Events;
 using System.Collections.Generic;
 using CC.Combats;
+using SA;
 
 namespace CC.Characters
 {
@@ -31,6 +32,10 @@ namespace CC.Characters
 
         [field: Header("Health")]
         [field: SerializeField] public Health Health { get; private set; }
+        [field: Header("Climbing")]
+
+        [field: SerializeField] public FreeClimbMC FreeClimb { get; private set; }
+
 
         #region Component
         public Animator Animator { get; private set; }
@@ -57,6 +62,8 @@ namespace CC.Characters
         public States.PlayerMediumStoppingState PlayerMediumStoppingState { get; private set; }
         public States.PlayerBlockingState PlayerBlockingState { get; private set; }
         public States.PlayerWalkingState PlayerWalkingState { get; private set; }
+        public States.PlayerClimbState PlayerClimbState { get; private set; }
+
 
         public List<States.PlayerAttackingState> PlayerAttackingStates { get; private set; }
 
@@ -84,6 +91,7 @@ namespace CC.Characters
             PlayerMediumStoppingState = new States.PlayerMediumStoppingState(this);
             PlayerBlockingState = new States.PlayerBlockingState(this);
             PlayerWalkingState = new States.PlayerWalkingState(this);
+            PlayerClimbState = new States.PlayerClimbState(this);
 
             PlayerAttackingStates = new List<States.PlayerAttackingState>();
             for (int i = 0; i < Attacks.Length; i++)
@@ -108,6 +116,5 @@ namespace CC.Characters
         {
             TriggerExitEvent.Invoke(collider);
         }
-
     }
 }

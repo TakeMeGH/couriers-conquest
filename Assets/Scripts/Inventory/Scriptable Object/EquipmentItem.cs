@@ -10,7 +10,6 @@ namespace CC.Inventory
         public int weaponLevel;
         public float attackWeapon;
         public float healthWeapon;
-        public float costSell;
         public ItemSlotType specificType;
 
         public override ItemType GetItemType()
