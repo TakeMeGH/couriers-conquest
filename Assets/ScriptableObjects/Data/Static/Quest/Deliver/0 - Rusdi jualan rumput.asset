@@ -10,21 +10,31 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3fc8af5ec0429eb41a03046326a0106e, type: 3}
-  m_Name: 4 - Real Quest
+  m_Name: 0 - Rusdi jualan rumput
   m_EditorClassIdentifier: 
-  _questID: 4
+  _questID: 0
   _questType: 1
-  _questName: Real Quest
-  _questDescription: Real Quest
+  _questName: Rusdi jualan rumput
+  _questDescription: Halo aku rusdi, aku jualan runput, ada yang beli tapi gaada
+    yang ngirim, ingfokan yang mau ngirim
   _questPrerequisitesID: 
   pickupPrefab:
     prefab: {fileID: 6618757732054344946, guid: 2d91994ca4c272f44b09906af30c2c7e,
       type: 3}
-    position: {x: -59, y: 0.5, z: -19}
+    position: {x: 0, y: 0, z: 0}
   dropPrefab:
     prefab: {fileID: 7398444736682334487, guid: a6f939b696e940a4997a1a0b76e85d2b,
       type: 3}
-    position: {x: -50, y: 0.5, z: 10}
+    position: {x: 0, y: 0, z: 0}
   _questPrefabs: []
   itemToDeliver: {fileID: 11400000, guid: ce83f5a78d4d3434e9bd48d8cce1b003, type: 2}
   _pickedUp: 0
+  SendNPCQuestDialogue: {fileID: 11400000, guid: acf930db98f4c3646a9449d6d1863992,
+    type: 2}
+  ClearNPCQuestDialogue: {fileID: 11400000, guid: 83cde709c0a1f4c4e8441bfe20c19bfe,
+    type: 2}
+  _npcList:
+  - targetNPC: Test00
+    dialogueNode: Test00_Rusdi_0_Sender_0
+    events:
+    - {fileID: 11400000, guid: e152843c24039274c84e4bd60d7d76fd, type: 2}
