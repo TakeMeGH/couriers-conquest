@@ -44,7 +44,7 @@ namespace CC.Core.Daytime
         private void Update()
         {
             updateTime();
-            updateCycle();
+            //updateCycle();
             rotateSkybox();
         }
 
