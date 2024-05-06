@@ -1,0 +1,180 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a5f0ce9a41a2947a2fa1ebe6260f6a, type: 3}
+  m_Name: PlayerInventory
+  m_EditorClassIdentifier: 
+  _items:
+  - rid: 6232470753903117168
+  - rid: 6232470753903117169
+  - rid: 6232470753903117170
+  - rid: 6232470753903117171
+  - rid: 6232470753903117172
+  - rid: 6232470753903117173
+  - rid: 6232470753903117174
+  - rid: 6232470753903117175
+  - rid: 6232470753903117176
+  - rid: 6232470753903117177
+  - rid: 6232470753903117178
+  - rid: 6232470753903117179
+  - rid: 6232470753903117180
+  - rid: 6232470753903117181
+  - rid: 6232470753903117182
+  - rid: 6232470753903117183
+  - rid: 6232470753903117184
+  - rid: 6232470753903117185
+  - rid: 6232470753903117186
+  - rid: 6232470753903117187
+  - rid: 6232470753903117188
+  inventorySize: 17
+  dropSpeed: 5
+  _inputReader: {fileID: 11400000, guid: 2c06813ec1504fb49916705513d476fd, type: 2}
+  pouchIndex: 16
+  _addItemToInventory: {fileID: 11400000, guid: 4611073ba66144c44ba509f62ea86853,
+    type: 2}
+  _removeItemEvent: {fileID: 11400000, guid: 766a1bd66c57f004c9da23725408ea2d, type: 2}
+  _itemCheckEvent: {fileID: 11400000, guid: 41611e7359646fa4aa396be77ab032bc, type: 2}
+  _onWeightUpdated: {fileID: 11400000, guid: 33b19aa9c0b983f4192af77f887fb053, type: 2}
+  _onItemPickup: {fileID: 11400000, guid: 2c3bf9629d556b449953682080a0a0a3, type: 2}
+  _onSellItem: {fileID: 11400000, guid: 700612af1dc11d74ca9a69ca96231039, type: 2}
+  _onUpdateCurrency: {fileID: 11400000, guid: 60a8e86410b7bfc47953ac08146e97aa, type: 2}
+  _onUpgradeEquipment: {fileID: 11400000, guid: bfacebafe03238141826d55d75cdddd0,
+    type: 2}
+  _playerGold: 85900
+  references:
+    version: 2
+    RefIds:
+    - rid: 6232470753903117168
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 11400000, guid: 422f8d7e01666b842a6c8cd38c85618d, type: 2}
+        name: '1: Apple'
+        stacks: 10
+    - rid: 6232470753903117169
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 0}
+        name: '2: -'
+        stacks: 0
+    - rid: 6232470753903117170
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 0}
+        name: '3: -'
+        stacks: 1
+    - rid: 6232470753903117171
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 0}
+        name: '4: -'
+        stacks: 0
+    - rid: 6232470753903117172
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 0}
+        name: '5: -'
+        stacks: 0
+    - rid: 6232470753903117173
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 0}
+        name: '6: -'
+        stacks: 0
+    - rid: 6232470753903117174
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 0}
+        name: '7: -'
+        stacks: 0
+    - rid: 6232470753903117175
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 0}
+        name: '8: -'
+        stacks: 0
+    - rid: 6232470753903117176
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 0}
+        name: '9: -'
+        stacks: 0
+    - rid: 6232470753903117177
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 0}
+        name: '10: -'
+        stacks: 0
+    - rid: 6232470753903117178
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 0}
+        name: '11: -'
+        stacks: 0
+    - rid: 6232470753903117179
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 0}
+        name: '12: -'
+        stacks: 0
+    - rid: 6232470753903117180
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 0}
+        name: '13: -'
+        stacks: 0
+    - rid: 6232470753903117181
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 0}
+        name: '14: -'
+        stacks: 0
+    - rid: 6232470753903117182
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 0}
+        name: '15: -'
+        stacks: 0
+    - rid: 6232470753903117183
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 0}
+        name: '16: -'
+        stacks: 0
+    - rid: 6232470753903117184
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 11400000, guid: 642fcf34f06480346bc2dacac957129c, type: 2}
+        name: '17: HP Potion'
+        stacks: 4
+    - rid: 6232470753903117185
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 11400000, guid: eeefb73c36e7e3843a06c4df2437434c, type: 2}
+        name: '18: Long Sword'
+        stacks: 1
+    - rid: 6232470753903117186
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 11400000, guid: 0d4930972d997194f8758cd8dc1f2c2f, type: 2}
+        name: '19: Basic Armor'
+        stacks: 1
+    - rid: 6232470753903117187
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 11400000, guid: 0dd8a24712edce245a6b26e0eb3937df, type: 2}
+        name: '20: Basic Shield'
+        stacks: 1
+    - rid: 6232470753903117188
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 0}
+        name: '21: -'
+        stacks: 0

@@ -1,6 +1,9 @@
+using CC.Core.Data.Dynamic;
+using CC.Inventory;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CC.Combats
 {
@@ -22,6 +25,8 @@ namespace CC.Combats
         {
             this.isInvunerable = isInvunerable;
         }
+
+        
 
         public void DealDamage(int damage)
         {

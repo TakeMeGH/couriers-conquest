@@ -28,6 +28,13 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     public event UnityAction BlockPerformed = delegate { };
     public event UnityAction BlockCanceled = delegate { };
     public event UnityAction WalkToggleStarted = delegate { };
+<<<<<<< Updated upstream
+=======
+    public event UnityAction<float> ScrollInteracionPerformed = delegate { };
+
+    public event UnityAction PouchPerformed = delegate { };
+
+>>>>>>> Stashed changes
 
     public bool IsBlocking { get; private set; }
     public bool IsAttacking { get; private set; }
@@ -219,4 +226,57 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
         if (context.phase == InputActionPhase.Started)
             WalkToggleStarted.Invoke();
     }
+<<<<<<< Updated upstream
+=======
+
+    public void OnScrolIInteraction(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+        {
+            ScrollInteracionPerformed.Invoke(context.ReadValue<float>());
+        }
+    }
+
+    public void DisableSpecificAction(string _actionMapName, string _actionName)
+    {
+        InputActionMap _actionMap = _playerInput.asset.FindActionMap(_actionMapName);
+
+        if (_actionMap == null)
+        {
+            Debug.LogError("Action Map not found");
+        }
+
+        InputAction _action = _actionMap.FindAction(_actionName);
+
+        if (_action == null)
+        {
+            Debug.LogError("Input Action not found");
+        }
+        _action.Disable();
+    }
+
+    public void EnableSpecificAction(string _actionMapName, string _actionName)
+    {
+        InputActionMap _actionMap = _playerInput.asset.FindActionMap(_actionMapName);
+
+        if (_actionMap == null)
+        {
+            Debug.LogError("Action Map not found");
+        }
+
+        InputAction _action = _actionMap.FindAction(_actionName);
+
+        if (_action == null)
+        {
+            Debug.LogError("Input Action not found");
+        }
+        _action.Enable();
+    }
+
+    public void OnPouch(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            PouchPerformed.Invoke();
+    }
+>>>>>>> Stashed changes
 }
