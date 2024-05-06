@@ -5,6 +5,8 @@ namespace CC.Characters
     public class PlayerStateData
     {
         public Vector2 MovementInput;
+        public Vector3 NewTransformPosition;
+        public bool IsUpdateNewTransform;
         public float MovementSpeedModifier = 1f;
         public float MovementOnSlopesSpeedModifier { get; set; } = 1f;
         public float MovementDecelerationForce { get; set; } = 1f;

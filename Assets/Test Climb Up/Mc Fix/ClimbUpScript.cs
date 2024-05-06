@@ -33,7 +33,6 @@ namespace CC
 
         void AddOffset()
         {
-            Debug.Log("MASUK");
             transform.position += _offsetPos;
         }
 

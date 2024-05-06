@@ -34,7 +34,10 @@ namespace CC.Characters
         [field: SerializeField] public Health Health { get; private set; }
         [field: Header("Climbing")]
 
+        [field: Header("Climbing")]
         [field: SerializeField] public FreeClimbMC FreeClimb { get; private set; }
+        [field: SerializeField] public Transform StandUpPoint { get; private set; }
+        public Vector3 OffsetStandUpPoint { get; private set; }
 
 
         #region Component
@@ -63,6 +66,7 @@ namespace CC.Characters
         public States.PlayerBlockingState PlayerBlockingState { get; private set; }
         public States.PlayerWalkingState PlayerWalkingState { get; private set; }
         public States.PlayerClimbState PlayerClimbState { get; private set; }
+        public States.PlayerClimbUpState PlayerClimbUpState { get; private set; }
 
 
         public List<States.PlayerAttackingState> PlayerAttackingStates { get; private set; }
@@ -92,6 +96,7 @@ namespace CC.Characters
             PlayerBlockingState = new States.PlayerBlockingState(this);
             PlayerWalkingState = new States.PlayerWalkingState(this);
             PlayerClimbState = new States.PlayerClimbState(this);
+            PlayerClimbUpState = new States.PlayerClimbUpState(this);
 
             PlayerAttackingStates = new List<States.PlayerAttackingState>();
             for (int i = 0; i < Attacks.Length; i++)
@@ -99,6 +104,8 @@ namespace CC.Characters
                 States.PlayerAttackingState newAttackingState = new States.PlayerAttackingState(this, i);
                 PlayerAttackingStates.Add(newAttackingState);
             }
+
+            OffsetStandUpPoint = StandUpPoint.transform.position - transform.position;
         }
 
         private void Start()
@@ -116,5 +123,6 @@ namespace CC.Characters
         {
             TriggerExitEvent.Invoke(collider);
         }
+
     }
 }
