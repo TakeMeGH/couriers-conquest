@@ -11,7 +11,6 @@ namespace CC.Inventory
         public float attackWeapon;
         public float deffWeapon;
         public float healthWeapon;
-        public float costSell;
         public ItemSlotType specificType;
         public List<UpgradeRequiriment> upgradeRequiriment = new List<UpgradeRequiriment>();
 

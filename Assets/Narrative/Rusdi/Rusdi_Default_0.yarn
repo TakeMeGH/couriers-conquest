@@ -1,0 +1,29 @@
+title: Test00_Rusdi_Default_0
+tags:
+---
+<<declare $RusdiHaveQuest = false>>
+<<declare $RusdiQuestNode = "" >>
+Rusdi : Greetings!
+<<jump Rusdi_Test_Choice_0>>
+===
+
+title: Rusdi_Test_Choice_0
+tags:
+---
+Rusdi : What do you need?
+-> I've accepted the quest you posted <<if $RusdiHaveQuest>>
+    <<jump {$RusdiQuestNode}>>
+    <<Close>>
+-> What are you doing here?
+    <<jump Rusdi_Test_1>>
+-> Nothing, bye!
+    <<Close>>
+===
+
+title: Rusdi_Test_1
+tags:
+---
+Rusdi : I'm here yo inform you
+Rusdi : That, the next milestone's deadline is near, so stop Procrastinating
+<<jump Rusdi_Test_Choice_0>>
+===

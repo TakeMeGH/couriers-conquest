@@ -36,6 +36,7 @@ namespace CC.Characters.States
         {
             if (_playerController.LayerData.IsGroundLayer(collider.gameObject.layer))
             {
+                Debug.Log("GROUND " + collider.gameObject.name);
                 OnContactWithGround(collider);
 
                 return;

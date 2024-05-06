@@ -152,14 +152,21 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-<<<<<<< Updated upstream
-=======
                 },
                 {
                     ""name"": ""ScrolIInteraction"",
                     ""type"": ""PassThrough"",
                     ""id"": ""5dd16f55-75d1-4d54-984c-32b2a0fd339a"",
                     ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DropClimbing"",
+                    ""type"": ""Button"",
+                    ""id"": ""2c968146-2eb1-4d34-a3bc-089c0a71f3f9"",
+                    ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
@@ -172,7 +179,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
->>>>>>> Stashed changes
                 }
             ],
             ""bindings"": [
@@ -310,17 +316,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""84b4ce0b-0a0b-44ab-899c-5dc5fe35f705"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Sprint"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""fc3f0251-a00a-4440-9429-01621f24fe6d"",
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
@@ -373,8 +368,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""WalkToggle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-<<<<<<< Updated upstream
-=======
                 },
                 {
                     ""name"": """",
@@ -389,6 +382,39 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""cc59fb3f-b7f9-4530-8d97-2e207ff66d57"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropClimbing"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e233ed4e-df7c-462f-a425-0e9d4e117e58"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8f508c52-ee15-4ece-beb0-fe43ee9f307b"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Block"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""2809ef1b-ee2a-4f53-b84e-3889c4d8bf35"",
                     ""path"": ""<Keyboard>/z"",
                     ""interactions"": """",
@@ -397,7 +423,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Pouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
->>>>>>> Stashed changes
                 }
             ]
         },
@@ -468,11 +493,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Gameplay_Attack = m_Gameplay.FindAction("Attack", throwIfNotFound: true);
         m_Gameplay_Block = m_Gameplay.FindAction("Block", throwIfNotFound: true);
         m_Gameplay_WalkToggle = m_Gameplay.FindAction("WalkToggle", throwIfNotFound: true);
-<<<<<<< Updated upstream
-=======
         m_Gameplay_ScrolIInteraction = m_Gameplay.FindAction("ScrolIInteraction", throwIfNotFound: true);
         m_Gameplay_Pouch = m_Gameplay.FindAction("Pouch", throwIfNotFound: true);
->>>>>>> Stashed changes
+        m_Gameplay_DropClimbing = m_Gameplay.FindAction("DropClimbing", throwIfNotFound: true);
         // InventoryUI
         m_InventoryUI = asset.FindActionMap("InventoryUI", throwIfNotFound: true);
         m_InventoryUI_CloseInventory = m_InventoryUI.FindAction("CloseInventory", throwIfNotFound: true);
@@ -552,11 +575,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_Attack;
     private readonly InputAction m_Gameplay_Block;
     private readonly InputAction m_Gameplay_WalkToggle;
-<<<<<<< Updated upstream
-=======
     private readonly InputAction m_Gameplay_ScrolIInteraction;
+    private readonly InputAction m_Gameplay_DropClimbing;
     private readonly InputAction m_Gameplay_Pouch;
->>>>>>> Stashed changes
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -575,11 +596,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Gameplay_Attack;
         public InputAction @Block => m_Wrapper.m_Gameplay_Block;
         public InputAction @WalkToggle => m_Wrapper.m_Gameplay_WalkToggle;
-<<<<<<< Updated upstream
-=======
         public InputAction @ScrolIInteraction => m_Wrapper.m_Gameplay_ScrolIInteraction;
+        public InputAction @DropClimbing => m_Wrapper.m_Gameplay_DropClimbing;
         public InputAction @Pouch => m_Wrapper.m_Gameplay_Pouch;
->>>>>>> Stashed changes
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -631,15 +650,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @WalkToggle.started += instance.OnWalkToggle;
             @WalkToggle.performed += instance.OnWalkToggle;
             @WalkToggle.canceled += instance.OnWalkToggle;
-<<<<<<< Updated upstream
-=======
             @ScrolIInteraction.started += instance.OnScrolIInteraction;
             @ScrolIInteraction.performed += instance.OnScrolIInteraction;
             @ScrolIInteraction.canceled += instance.OnScrolIInteraction;
+            @DropClimbing.started += instance.OnDropClimbing;
+            @DropClimbing.performed += instance.OnDropClimbing;
+            @DropClimbing.canceled += instance.OnDropClimbing;
             @Pouch.started += instance.OnPouch;
             @Pouch.performed += instance.OnPouch;
             @Pouch.canceled += instance.OnPouch;
->>>>>>> Stashed changes
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -686,15 +705,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @WalkToggle.started -= instance.OnWalkToggle;
             @WalkToggle.performed -= instance.OnWalkToggle;
             @WalkToggle.canceled -= instance.OnWalkToggle;
-<<<<<<< Updated upstream
-=======
             @ScrolIInteraction.started -= instance.OnScrolIInteraction;
             @ScrolIInteraction.performed -= instance.OnScrolIInteraction;
             @ScrolIInteraction.canceled -= instance.OnScrolIInteraction;
+            @DropClimbing.started -= instance.OnDropClimbing;
+            @DropClimbing.performed -= instance.OnDropClimbing;
+            @DropClimbing.canceled -= instance.OnDropClimbing;
             @Pouch.started -= instance.OnPouch;
             @Pouch.performed -= instance.OnPouch;
             @Pouch.canceled -= instance.OnPouch;
->>>>>>> Stashed changes
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -782,11 +801,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnBlock(InputAction.CallbackContext context);
         void OnWalkToggle(InputAction.CallbackContext context);
-<<<<<<< Updated upstream
-=======
         void OnScrolIInteraction(InputAction.CallbackContext context);
+        void OnDropClimbing(InputAction.CallbackContext context);
         void OnPouch(InputAction.CallbackContext context);
->>>>>>> Stashed changes
     }
     public interface IInventoryUIActions
     {
