@@ -42,13 +42,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _AmbientStrength: 0.25
+    - _AmbientStrength: 0.5
     - _FalloffAmount: 0.05
     - _FresnelSize: 0.1
     - _LightingCutoff: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothness: 1000
+    - _Smoothness: 100000
     m_Colors:
     - _DiffuseColor: {r: 1, g: 1, b: 1, a: 1}
     - _FresnelColor: {r: 1, g: 1, b: 1, a: 1}
