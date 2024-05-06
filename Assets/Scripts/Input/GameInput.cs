@@ -442,7 +442,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""DropItem"",
                     ""type"": ""Button"",
-                    ""id"": ""e27666b4-ac0c-4700-8853-b99d49abfe5b"",
+                    ""id"": ""d21d3652-3a35-44f9-8083-e03609446d69"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -463,7 +463,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f679ca20-c84f-440e-b996-4584e34bb7ed"",
+                    ""id"": ""5bbf8d76-981e-4a37-83d0-3621281090ee"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -494,8 +494,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Gameplay_Block = m_Gameplay.FindAction("Block", throwIfNotFound: true);
         m_Gameplay_WalkToggle = m_Gameplay.FindAction("WalkToggle", throwIfNotFound: true);
         m_Gameplay_ScrolIInteraction = m_Gameplay.FindAction("ScrolIInteraction", throwIfNotFound: true);
-        m_Gameplay_Pouch = m_Gameplay.FindAction("Pouch", throwIfNotFound: true);
         m_Gameplay_DropClimbing = m_Gameplay.FindAction("DropClimbing", throwIfNotFound: true);
+        m_Gameplay_Pouch = m_Gameplay.FindAction("Pouch", throwIfNotFound: true);
         // InventoryUI
         m_InventoryUI = asset.FindActionMap("InventoryUI", throwIfNotFound: true);
         m_InventoryUI_CloseInventory = m_InventoryUI.FindAction("CloseInventory", throwIfNotFound: true);

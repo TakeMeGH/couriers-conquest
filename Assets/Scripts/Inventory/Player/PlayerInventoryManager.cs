@@ -18,7 +18,7 @@ namespace CC.Inventory
 
         private InventoryData _inventoryData;
         public List<AItemPanel> existingPanels = new List<AItemPanel>();
-        
+
         private IInventoryManagement _playerInventoryManagement;
         private IInventoryAction _playerInventoryAction;
         private IInventoryWeight _playerInventoryWeight;
@@ -42,6 +42,7 @@ namespace CC.Inventory
             _inventoryData.onSellItem.OnEventRaised += _playerInventoryManagement.OnSellItem;
             _inventoryData.onUpdateCurrency.OnEventRaised += _playerInventoryManagement.OnUpdateCurrency;
             _inventoryData.onUpgradeEquipment.OnEventRaised += _playerInventoryAction.UpgradeItem;
+            _inventoryData.inputReader.DropItemPerformed += _playerInventoryAction.OnDropItem;
             _uiPlayerStatus.Initialize();
         }
 
@@ -54,6 +55,8 @@ namespace CC.Inventory
             _inventoryData.onSellItem.OnEventRaised -= _playerInventoryManagement.OnSellItem;
             _inventoryData.onUpdateCurrency.OnEventRaised -= _playerInventoryManagement.OnUpdateCurrency;
             _inventoryData.onUpgradeEquipment.OnEventRaised -= _playerInventoryAction.UpgradeItem;
+            _inventoryData.inputReader.DropItemPerformed -= _playerInventoryAction.OnDropItem;
+
         }
 
         private void Awake()

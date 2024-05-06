@@ -14,7 +14,7 @@ namespace CC.Inventory
         private bool isPickup = false;
 
         public bool isDropItem = false;
-        CustomInterractables _customInteractables;
+        [SerializeField] CustomInterractables _customInteractables;
 
         public ABaseItem item
         {
@@ -75,6 +75,8 @@ namespace CC.Inventory
 
         public void OnItemSet()
         {
+            if (_customInteractables == null) _customInteractables = GetComponent<CustomInterractables>();
+
             _customInteractables.SetName(_item.itemName);
             _customInteractables.SetIcon(_item.itemSprite);
 
@@ -82,6 +84,8 @@ namespace CC.Inventory
 
         public void OnAmountSet()
         {
+            if (_customInteractables == null) _customInteractables = GetComponent<CustomInterractables>();
+
             _customInteractables.SetAmount(_amount);
         }
 
