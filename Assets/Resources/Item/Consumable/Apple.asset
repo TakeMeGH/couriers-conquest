@@ -9,16 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba8a9da6ea335d04b9e3362266650be7, type: 3}
+  m_Script: {fileID: 11500000, guid: 4a2f303de17f81747aafd28ed5cf1e79, type: 3}
   m_Name: Apple
   m_EditorClassIdentifier: 
   itemName: Apple
-  itemWeight: 1
-  itemDescription: Restore HP
+  itemWeight: 0.5
+  itemDescription: 
   itemSprite: {fileID: 21300000, guid: dbc29ce57b14fdd4dbafbdb57c6a5992, type: 3}
   maxStacks: 10
-  costSell: 50
-  bonusHp: 1
-  bonusAttack: 1
-  bonusMagic: 1
-  bonusDeff: 1
+  costSell: 10
+  HealthPointRegenerationAmount: 10
+  durationEffect: 0.5

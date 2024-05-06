@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22a5f0ce9a41a2947a2fa1ebe6260f6a, type: 3}
+  m_Name: Blacksmith
+  m_EditorClassIdentifier: 
+  _items: []
+  inventorySize: 28
+  dropSpeed: 5
+  _inputReader: {fileID: 11400000, guid: 2c06813ec1504fb49916705513d476fd, type: 2}
+  _addItemToInventory: {fileID: 0}
+  _removeItemEvent: {fileID: 0}
+  _itemCheckEvent: {fileID: 0}
+  _onWeightUpdated: {fileID: 0}
+  _onItemPickup: {fileID: 0}
+  _onSellItem: {fileID: 0}
+  _onUpdateCurrency: {fileID: 0}
+  _playerGold: 0
+  references:
+    version: 2
+    RefIds: []

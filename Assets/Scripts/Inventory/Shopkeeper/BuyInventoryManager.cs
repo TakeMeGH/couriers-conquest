@@ -3,11 +3,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 namespace CC.Inventory
 {
-    public class BuyInventoryManager : AShopInventoryManagement, IInventoryManager
+    public class BuyInventoryManager : AInventoryManagement, IInventoryManager
     {
+        [SerializeField] private bool _firstInit = false;
+        private ShopManager _shopManager;
+
         [Header("Event Panel")]
         [SerializeField] private ItemInventoryEventChannel _addItemToInventory;
 
@@ -15,47 +19,45 @@ namespace CC.Inventory
         {
             UnShopPanel();
 
-            for (int i = 0; i < _inventoryShopPanel.Count; i++)
+            for (int i = 0; i < _inventoryItemPanel.Count; i++)
             {
                 if (!_playerInventoryData.items[i].item)
                 {
-                    _inventoryShopPanel[i].gameObject.SetActive(true);
-                    SetItemPanel(_inventoryShopPanel[i]);
+                    _inventoryItemPanel[i].gameObject.SetActive(true);
+                    SetItemPanel(_inventoryItemPanel[i], null);
                 }
             }
-        }
 
-        private void SetItemPanel(AItemPanel itemPanel)
-        {
-            itemPanel.mousePanel = _itemSlotMouse;
-            itemPanel.itemSlot = new ItemSlotInfo(null, 0);
-
-            itemPanel.inventory = this;
-            itemPanel.OnEnable();
+            RefreshInventory();
         }
 
         private void UnShopPanel()
         {
-            for (int i = 0; i < _inventoryShopPanel.Count; i++)
+            for (int i = 0; i < _inventoryItemPanel.Count; i++)
             {
-                 _inventoryShopPanel[i].gameObject.SetActive(false);
+                 _inventoryItemPanel[i].gameObject.SetActive(false);
             }
         }
 
         public void Initialize(AInventoryData inventoryData, ShopManager shopManager, ItemSlotMouse mousePanel, AInventoryData playerData)
         {
-            _inventoryData = inventoryData;
-            _shopManager = shopManager;
-            _itemSlotMouse = mousePanel;
-            _playerInventoryData = playerData;
-            _inventoryManager = this;
-
-            _inventoryShopPanel.Clear();
-            AItemPanel[] Script = _inventoryShopPanelUI.GetComponentsInChildren<PanelInventoryBuy>();
-
-            foreach (PanelInventoryBuy itemPanel in Script)
+            if (!_firstInit)
             {
-                _inventoryShopPanel.Add(itemPanel);
+                _inventoryData = inventoryData;
+                _shopManager = shopManager;
+                _itemSlotMouse = mousePanel;
+                _playerInventoryData = playerData;
+                _inventoryManager = this;
+
+                _inventoryItemPanel.Clear();
+                AItemPanel[] Script = _inventoryPanelUI.GetComponentsInChildren<PanelInventoryBuy>();
+
+                foreach (PanelInventoryBuy itemPanel in Script)
+                {
+                    _inventoryItemPanel.Add(itemPanel);
+                }
+
+                _firstInit = true;
             }
 
             UnShopPanel();
@@ -65,16 +67,16 @@ namespace CC.Inventory
 
         public void RefreshInventory()
         {
-            RefreshedInventory(_inventoryShopPanel);
+            RefreshedInventory(_inventoryItemPanel);
             UpdatePrice();
         }
 
         private void UpdatePrice()
         {
             float price = 0;
-            for (int i = 0; i < _inventoryShopPanel.Count; i++)
+            for (int i = 0; i < _inventoryItemPanel.Count; i++)
             {
-                ABaseItem item = _inventoryShopPanel[i]?.itemSlot?.item;
+                ABaseItem item = _inventoryItemPanel[i]?.itemSlot?.item;
                 if (item != null)
                 {
                     price += item.costSell * item.maxStacks;
@@ -87,13 +89,13 @@ namespace CC.Inventory
         public void BuyItem()
         {
             Debug.Log("One Time Buy");
-            for (int i = 0; i < _inventoryShopPanel.Count; i++)
+            for (int i = 0; i < _inventoryItemPanel.Count; i++)
             {
-                if (_inventoryShopPanel[i].itemSlot.item != null)
+                if (_inventoryItemPanel[i].itemSlot.item != null)
                 {
-                    _addItemToInventory.RaiseEvent(_inventoryShopPanel[i].itemSlot.item, _inventoryShopPanel[i].itemSlot.stacks);
-                    _inventoryShopPanel[i].itemSlot.item = null;
-                    _inventoryShopPanel[i].itemSlot.stacks = 0;
+                    _addItemToInventory.RaiseEvent(_inventoryItemPanel[i].itemSlot.item, _inventoryItemPanel[i].itemSlot.stacks);
+                    _inventoryItemPanel[i].itemSlot.item = null;
+                    _inventoryItemPanel[i].itemSlot.stacks = 0;
                 }
             }
 

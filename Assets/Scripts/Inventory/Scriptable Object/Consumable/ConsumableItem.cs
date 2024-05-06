@@ -2,15 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace CC.Inventory{
-
-    [CreateAssetMenu(fileName = "ConsumableItem", menuName = "Items/Consumable", order = 2)]
-    public class ConsumableItem : ABaseItem
+namespace CC.Inventory
+{
+    public abstract class ConsumableItem : ABaseItem
     {
-        public float bonusHp;
-        public float bonusAttack;
-        public float bonusMagic;
-        public float bonusDeff;
 
         public override ItemType GetItemType()
         {
@@ -21,5 +16,9 @@ namespace CC.Inventory{
         {
             Debug.Log("Use Consumbale");
         }
+
+        public abstract float GetAmount();
+        public abstract float DurationEffect();
+        public abstract ConsumableType GetConsumableType();
     }
 }

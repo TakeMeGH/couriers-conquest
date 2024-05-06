@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 namespace CC.Inventory
 {
@@ -125,7 +126,7 @@ namespace CC.Inventory
                     }
                     else
                     {
-                        Debug.Log(targetSlot.ToString() + " Not Added");
+                        //Debug.Log(targetSlot.ToString() + " Not Added");
                     }
                 }
             }
@@ -175,6 +176,11 @@ namespace CC.Inventory
                     }
                 }
             }
+        }
+
+        public void OnUpdateCurrency(float amount)
+        {
+            _inventoryData.playerGold += amount;
         }
     }
 }

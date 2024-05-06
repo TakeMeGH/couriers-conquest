@@ -148,6 +148,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Pouch",
+                    "type": "Button",
+                    "id": "ea27da48-2da5-41d0-af2e-a7e0c055e572",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -381,6 +390,17 @@
                     "action": "Block",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2809ef1b-ee2a-4f53-b84e-3889c4d8bf35",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -400,7 +420,7 @@
                 {
                     "name": "DropItem",
                     "type": "Button",
-                    "id": "e27666b4-ac0c-4700-8853-b99d49abfe5b",
+                    "id": "d21d3652-3a35-44f9-8083-e03609446d69",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -421,7 +441,7 @@
                 },
                 {
                     "name": "",
-                    "id": "f679ca20-c84f-440e-b996-4584e34bb7ed",
+                    "id": "5bbf8d76-981e-4a37-83d0-3621281090ee",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
