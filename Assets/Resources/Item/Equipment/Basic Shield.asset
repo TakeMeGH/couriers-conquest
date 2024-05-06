@@ -20,6 +20,7 @@ MonoBehaviour:
   costSell: 0
   weaponLevel: 0
   attackWeapon: 0
+  deffWeapon: 0
   healthWeapon: 0
   specificType: 3
   upgradeRequiriment:
@@ -27,3 +28,7 @@ MonoBehaviour:
     - itemRequiriment: {fileID: 11400000, guid: a82e255da905aaa4f824eafb1d676a52,
         type: 2}
       amount: 5
+    price: 0
+    bonusAttack: 0
+    bonusHealth: 0
+    bonusDeff: 0
