@@ -1,3 +1,5 @@
+using CC.Event;
+using CC.Inventory;
 using UnityEngine;
 
 namespace CC.Quest
@@ -9,10 +11,12 @@ namespace CC.Quest
         [SerializeField] string _questName;
         [TextArea] [SerializeField] string _questDescription;
         [SerializeField] int[] _questPrerequisitesID;
+        [SerializeField] SenderDataEventChannelSO _onSendReward;
+        [SerializeField] Reward _reward;
 
         public virtual void OnQuestStarted(Component sender, object data) { }
         public virtual void OnQuestProgress(Component sender, object data) { }
-        public virtual void OnQuestFinished(Component sender, object data) { }
+        public virtual void OnQuestFinished(Component sender, object data) { _onSendReward.raiseEvent(null, _reward); }
         public virtual void OnQuestCancelled(Component sender, object data) { }
 
         #region "Getter"
@@ -48,5 +52,12 @@ namespace CC.Quest
         Tutorial,
         Urgent,
         Side
+    }
+
+    public class Reward
+    {
+        public int gold;
+        public int exp;
+        public ABaseItem[] item;
     }
 }
