@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations.Rigging;
+using UnityEngine.Events;
 
 namespace SA
 {
@@ -9,7 +10,6 @@ namespace SA
     {
         public Animator anim;
         public bool isClimbing;
-
         bool inPosition;
         bool isLerping;
         float t;
@@ -22,25 +22,22 @@ namespace SA
         public float speed_multiplier = 0.2f;
         public float climbSpeed = 3;
         public float rotateSpeed = 5;
-
         public float rayTowardsMoveDir = 0.5f;
         public float rayForwardTowardsWall = 1;
 
         public float horizontal;
         public float vertical;
         public bool isMid;
-
         public IKSnapshot baseIKsnapshot;
-
         public FreeClimbAnimHookMC a_hook;
-
         Transform helper;
         float delta;
         [SerializeField] LayerMask ignoreLayers;
         LayerMask UsedLayer;
-
         [SerializeField] InputReader _inputReader;
         public Rig Rig;
+        public UnityAction OnAboveStandAble;
+        public float UpOffsetMultiplier = 1f;
         private void OnEnable()
         {
             _inputReader.MoveEvent += UpdateMove;
@@ -78,16 +75,24 @@ namespace SA
             origin.y += 0.02f;
             Vector3 dir = transform.forward;
             RaycastHit hit;
-            if(DebugLine.singleton != null) DebugLine.singleton.SetLine(origin, origin + dir * 0.5f, 0);
-            if (Physics.Raycast(origin, dir, out hit, 0.5f, UsedLayer))
+
+            if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin, origin + dir * 0.5f, 0);
+            if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin + Vector3.up, origin + Vector3.up + dir * 0.5f, 1);
+
+            if (Physics.Raycast(origin + Vector3.up, dir, 1f, UsedLayer))
             {
-                helper.position = PosWithOffset(origin, hit.point);
-                a_hook.Init(this, helper);
-                InitForClimb(hit);
-                Rig.weight = 1;
-                return true;
+                if (Physics.Raycast(origin, dir, out hit, 0.5f, UsedLayer))
+                {
+                    helper.position = PosWithOffset(origin, hit.point);
+                    a_hook.Init(this, helper);
+                    InitForClimb(hit);
+                    Rig.weight = 1;
+                    return true;
+                }
+                return false;
             }
             return false;
+
         }
 
         void InitForClimb(RaycastHit hit)
@@ -174,7 +179,7 @@ namespace SA
             float dis = rayTowardsMoveDir;
             Vector3 dir = moveDir;
 
-            if(DebugLine.singleton != null) DebugLine.singleton.SetLine(origin, origin + (dir * dis), 0);
+            if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin, origin + (dir * dis), 0);
 
             //Raycast towards the direction you want to move
             RaycastHit hit;
@@ -190,19 +195,29 @@ namespace SA
             float dis2 = rayForwardTowardsWall;
 
             //Raycast forward towards the wall
-            if(DebugLine.singleton != null) DebugLine.singleton.SetLine(origin, origin + (dir * dis2), 1);
+            if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin, origin + (dir * dis2), 1);
+
+            if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin + moveDir * UpOffsetMultiplier, origin + moveDir * UpOffsetMultiplier + (dir * dis2), 2);
+
+            if (!Physics.Raycast(origin + moveDir * UpOffsetMultiplier, dir, out hit, dis2, UsedLayer))
+            {
+                OnAboveStandAble.Invoke();
+                return false;
+            }
+
+
             if (Physics.Raycast(origin, dir, out hit, dis2, UsedLayer))
             {
                 helper.position = PosWithOffset(origin, hit.point);
                 helper.rotation = Quaternion.LookRotation(-hit.normal);
-                Debug.Log("Towards Wall" + " " + -hit.normal + " " + helper.position);
+                // Debug.Log("Towards Wall" + " " + -hit.normal + " " + helper.position);
                 return true;
             }
 
-            Debug.Log("AFTER TOWARDS WALL");
+            // Debug.Log("AFTER TOWARDS WALL");
             origin = origin + (dir * dis2);
             dir = -moveDir;
-            if(DebugLine.singleton != null) DebugLine.singleton.SetLine(origin, origin + dir, 1);
+            if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin, origin + dir, 1);
             if (Physics.Raycast(origin, dir, out hit, rayForwardTowardsWall, UsedLayer))
             {
                 helper.position = PosWithOffset(origin, hit.point);
@@ -215,7 +230,7 @@ namespace SA
             origin += dir * dis2;
             dir = -Vector3.up;
 
-            if(DebugLine.singleton != null) DebugLine.singleton.SetLine(origin, origin + dir, 2);
+            if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin, origin + dir, 2);
             //  Debug.DrawRay(origin, dir, Color.yellow);
             if (Physics.Raycast(origin, dir, out hit, dis2, UsedLayer))
             {
@@ -247,7 +262,6 @@ namespace SA
             Vector3 tp = Vector3.Lerp(startPos, targetPos, t);
             transform.position = tp;
             transform.rotation = Quaternion.Slerp(transform.rotation, helper.rotation, delta * rotateSpeed);
-            Debug.Log("KEUBAH ROTATIONNYA");
         }
 
         Vector3 PosWithOffset(Vector3 origin, Vector3 target)
