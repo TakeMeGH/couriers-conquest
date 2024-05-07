@@ -26,6 +26,7 @@ namespace CC.Quest
         [SerializeField] List<NPCQuestDialogueNodeTransfer> _npcList; //init npc with dialogues
         public override void OnQuestStarted(Component sender, object data)
         {
+            base.OnQuestStarted(sender, data);
             var temp = Instantiate(pickupPrefab.prefab, pickupPrefab.position, Quaternion.identity);
             if (temp != null) _instantiatedPrefabs.Add(temp);
             temp.GetComponent<ExPickupPoint>().Init(itemToDeliver);
@@ -49,16 +50,19 @@ namespace CC.Quest
         }
         public override void OnQuestProgress(Component sender, object data)
         {
+            base.OnQuestProgress(sender, data);
             _pickedUp = true;
             Debug.Log("picked up");
         }
         public override void OnQuestFinished(Component sender, object data)
         {
+            base.OnQuestFinished(sender,data);
             clearAllPrefab();
             Debug.Log("quest has finished");
         }
         public override void OnQuestCancelled(Component sender, object data)
         {
+            base.OnQuestCancelled(sender, data);
             clearAllPrefab();
             Debug.Log("quest has cancelled");
         }

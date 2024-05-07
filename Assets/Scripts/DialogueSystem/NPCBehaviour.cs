@@ -19,17 +19,22 @@ namespace CC.NPC
         [Header("Event")]
         public SenderDataEventChannelSO _npcAcceptedQuestEvent;
         public List<SenderDataEventChannelSO> _customEvents;
-        public UnityAction[] _specialAction;
+        public UnityEvent[] _specialAction;
         [Header("Dependency")]
         [SerializeField] InputReader _inputReader;
         [SerializeField] DialogueRunner _dialogueRunner;
         [SerializeField] VariableStorageBehaviour _dialogueVariable;
+        [SerializeField] bool _isCommandHandler;
         private void Start()
         {
-            if (_dialogueRunner == null) FindObjectOfType<DialogueRunner>();
-            _dialogueRunner.AddCommandHandler("Close",() => OnDialogueClosed());
-            //_dialogueRunner.AddCommandHandler("SpecialAction", (int index) => SpecialAction(index));
-            //_dialogueRunner.AddCommandHandler("CustomAction", (int index) => emitEvent(index));
+            if (_dialogueRunner == null) _dialogueRunner = FindObjectOfType<DialogueRunner>();
+            if (_dialogueVariable == null) _dialogueVariable = FindObjectOfType<VariableStorageBehaviour>();
+            if (_isCommandHandler)
+            {
+                _dialogueRunner.AddCommandHandler("Close", () => OnDialogueClosed());
+                _dialogueRunner.AddCommandHandler("SpecialAction", (int index) => SpecialAction(index));
+                _dialogueRunner.AddCommandHandler("CustomAction", (int index) => emitEvent(index));
+            }
         }
 
         public void OpenDialogue()
