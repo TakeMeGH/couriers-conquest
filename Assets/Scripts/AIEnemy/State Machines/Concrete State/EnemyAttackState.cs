@@ -7,7 +7,7 @@ namespace CC.Enemy.States
 {
 public class EnemyAttackState : EnemyState
 {
-    public EnemyAttackState(Enemy enemy) : base(enemy)
+    public EnemyAttackState(EnemyController enemy) : base(enemy)
     {
     }
 

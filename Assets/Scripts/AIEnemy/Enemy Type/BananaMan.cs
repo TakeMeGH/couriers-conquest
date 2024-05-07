@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CC.Enemy.States
 {
-    public class BananaMan : Enemy
+    public class BananaMan : EnemyController
     {
     }
 }

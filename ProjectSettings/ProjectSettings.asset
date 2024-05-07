@@ -806,7 +806,8 @@ PlayerSettings:
   webGLMemoryGeometricGrowthStep: 0.2
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
-  scriptingDefineSymbols: {}
+  scriptingDefineSymbols:
+    Standalone: -diag-temp-memory-leak-validation
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:
@@ -839,8 +840,8 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Courier's Conquest
-  metroPackageVersion: 
+  metroPackageName: CouriersConquest
+  metroPackageVersion: 1.0.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
@@ -848,7 +849,7 @@ PlayerSettings:
   metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: Courier's Conquest
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: Courier's Conquest
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0
