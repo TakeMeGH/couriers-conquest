@@ -73,10 +73,12 @@ namespace CC.Characters
        
         #endregion
 
+        /*
         public bool IsCurrentState<T>()
         {
             return GetCurrentStateType() == typeof(T);
         }
+        */
 
         //public System.Type GetCurrentStateType()
         //{

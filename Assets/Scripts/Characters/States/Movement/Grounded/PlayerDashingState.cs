@@ -42,7 +42,8 @@ namespace CC.Characters.States
 
             startTime = Time.time;
 
-            staminaController.DecreaseStaminaByAmountWhenDashing(10); // Stamina ngurang 10 poin/dash
+            float dashStaminaCost = _playerController.PlayerMovementData.DashStaminaCost;
+            staminaController.DecreaseStaminaByAmount(dashStaminaCost); // Stamina ngurang berdasar poin yang udah di set di PlayerMovementSO/dash
         }
 
         public override void Exit()
@@ -116,9 +117,10 @@ namespace CC.Characters.States
             _playerController.Rigidbody.velocity = dashDirection * GetMovementSpeed(false);
         }
 
-        protected override void OnDashStarted()
+        /*protected override void OnDashStarted()
         {
-            staminaController.DecreaseStaminaByAmountWhenDashing(5 * Time.deltaTime);
+            staminaController.DecreaseStaminaByAmount(5 * Time.deltaTime);
         }
+        */
     }
 }

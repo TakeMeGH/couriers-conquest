@@ -63,7 +63,8 @@ namespace CC.Characters.States
             }
             else if (keepSprinting)
             {
-                staminaController.DecreaseStaminaByAmountWhenSprinting(5 * Time.deltaTime); //Stamina ngurang 5 poin/detik
+                float sprintStaminaCost = _playerController.PlayerMovementData.SprintStaminaCost;
+                staminaController.DecreaseStaminaByAmount(sprintStaminaCost * Time.deltaTime); // Stamina ngurang per detik berdasar poin yang udah di set di PlayerMovementSO saat sprinting
                 return;
             }
 

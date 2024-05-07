@@ -20,9 +20,10 @@ namespace CC.Combats
                 if (playerHealth != null && playerController != null && staminaController != null)
                 {
                     playerHealth.DealDamage(Mathf.RoundToInt(damageAmount));
-                    if (playerController.IsCurrentState<PlayerBlockingState>())
+                    if (playerController.GetCurrentState() is PlayerBlockingState)
                     {
-                        staminaController.DecreaseStaminaByAmountWhenAttacked(5); //Stamina ngurang 5 poin/hit
+                        float blockStaminaCost = playerController.PlayerMovementData.BlockStaminaCost;
+                        staminaController.DecreaseStaminaByAmount(blockStaminaCost); // Stamina ngurang berdasar poin yang udah di set di PlayerMovementSO/attack diterima saat posisi blocking
                     }
                     nextDamageTime = Time.time + 1f/damageRate;
                     Debug.Log("Damage Amount: " + damageAmount);

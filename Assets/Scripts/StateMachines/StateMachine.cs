@@ -29,5 +29,10 @@ namespace CC.StateMachine
         {
             return currentState.GetType();
         }
+
+        public IState GetCurrentState()
+        {
+            return currentState;
+        }
     }
 }

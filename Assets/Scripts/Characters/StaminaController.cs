@@ -13,6 +13,7 @@ public class StaminaController : MonoBehaviour
     private float currentStamina;
     private bool isRegenerating;
     public bool CanBlock { get; private set; }
+    public float blockStaminaReq = 10f; //blockStaminaRequirement
 
     public float GetCurrentStamina()
     {
@@ -28,7 +29,7 @@ public class StaminaController : MonoBehaviour
     {
         HandleStamina();
 
-        CanBlock = currentStamina >= 10; 
+        CanBlock = currentStamina >= blockStaminaReq; 
     }
 
     private void HandleStamina()
@@ -39,21 +40,7 @@ public class StaminaController : MonoBehaviour
         }
     }
 
-    public void DecreaseStaminaByAmountWhenAttacked(float amount)
-    {
-        currentStamina -= amount;
-        currentStamina = Mathf.Max(currentStamina, 0);
-        playerStats.SetInstanceValue(mainStat.Stamina, currentStamina);
-    }
-
-    public void DecreaseStaminaByAmountWhenDashing(float amount)
-    {
-        currentStamina -= amount;
-        currentStamina = Mathf.Max(currentStamina, 0);
-        playerStats.SetInstanceValue(mainStat.Stamina, currentStamina);
-    }
-
-    public void DecreaseStaminaByAmountWhenSprinting(float amount)
+    public void DecreaseStaminaByAmount(float amount)
     {
         currentStamina -= amount;
         currentStamina = Mathf.Max(currentStamina, 0);
@@ -68,7 +55,9 @@ public class StaminaController : MonoBehaviour
         while (currentStamina < playerStats.GetValue(mainStat.MaxStamina))
         {
             // Stop regen stamina kalau player mulai sprinting, dashing, atau blocking lagi pas Stamina lagi diposisi regenerasi
-            if (playerController.IsCurrentState<PlayerSprintingState>() || playerController.IsCurrentState<PlayerDashingState>() || playerController.IsCurrentState<PlayerBlockingState>()) // Modify this line
+            var currentState = playerController.GetCurrentState();
+            if (currentState is PlayerSprintingState || currentState is PlayerDashingState || currentState is PlayerBlockingState)
+
             {
                 isRegenerating = false;
                 yield break;

@@ -56,6 +56,8 @@ namespace CC.Core.Data.Dynamic
         {
             return statData.damageReduction;
         }
+        
+        
 
         public override ISaveable Save()
         {
@@ -71,15 +73,16 @@ namespace CC.Core.Data.Dynamic
             statData.CopyFrom(_defaultStatData);
         }
 
-        public void SetValue(mainStat key, float value)
+        /*public void SetValue(mainStat key, float value)
         {
             if (statData.defaultValue.ContainsKey(key))
             {
                 statData.defaultValue[key] = value;
             }
         }
+        */
 
-         public void UpgradeWeapon(float increaseAmount, bool isPercent)
+        /* public void UpgradeWeapon(float increaseAmount, bool isPercent)
         {
             StatsModifier weaponUpgrade = new StatsModifier();
             weaponUpgrade.isPercent = isPercent;
@@ -100,6 +103,7 @@ namespace CC.Core.Data.Dynamic
 
             statData.damageReduction += damageReductionIncrease;
         }
+        */
 
 
     }
