@@ -17,6 +17,8 @@ namespace CC.Characters.States
 
             StartAnimation("isFalling");
 
+            EnableRigidbody();
+
             _playerController.PlayerCurrentData.MovementSpeedModifier = 0f;
 
             ResetRotationXZ();
@@ -47,8 +49,6 @@ namespace CC.Characters.States
             {
                 if (_playerController.FreeClimb.CheckForClimb())
                 {
-                    _playerController.Rigidbody.useGravity = false;
-                    _playerController.Rigidbody.isKinematic = true;
                     _playerController.SwitchState(_playerController.PlayerClimbState);
 
                 }

@@ -1,18 +1,24 @@
 using CC.Event;
 using CC.Events;
+using CC.UI;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static UnityEditor.Progress;
+using static UnityEditor.Timeline.Actions.MenuPriority;
 
 namespace CC.Inventory
 {
     public class PlayerInventoryManager : MonoBehaviour, IInventoryManager
     {
         [SerializeField] private AInventoryData _aitemInventoryData;
+        [SerializeField] private UIPlayerStatus _uiPlayerStatus;
+
         private InventoryData _inventoryData;
         public List<AItemPanel> existingPanels = new List<AItemPanel>();
+
         private IInventoryManagement _playerInventoryManagement;
         private IInventoryAction _playerInventoryAction;
         private IInventoryWeight _playerInventoryWeight;
@@ -34,6 +40,10 @@ namespace CC.Inventory
             _inventoryData.itemCheckEvent.OnEventRaised += _playerInventoryAction.CheckItem;
             _inventoryData.onItemPickup.OnEventRaised += WeightCount;
             _inventoryData.onSellItem.OnEventRaised += _playerInventoryManagement.OnSellItem;
+            _inventoryData.onUpdateCurrency.OnEventRaised += _playerInventoryManagement.OnUpdateCurrency;
+            _inventoryData.onUpgradeEquipment.OnEventRaised += _playerInventoryAction.UpgradeItem;
+            _inventoryData.inputReader.DropItemPerformed += _playerInventoryAction.OnDropItem;
+            _uiPlayerStatus.Initialize();
         }
 
         private void OnDisable()
@@ -43,6 +53,10 @@ namespace CC.Inventory
             _inventoryData.itemCheckEvent.OnEventRaised -= _playerInventoryAction.CheckItem;
             _inventoryData.onItemPickup.OnEventRaised -= WeightCount;
             _inventoryData.onSellItem.OnEventRaised -= _playerInventoryManagement.OnSellItem;
+            _inventoryData.onUpdateCurrency.OnEventRaised -= _playerInventoryManagement.OnUpdateCurrency;
+            _inventoryData.onUpgradeEquipment.OnEventRaised -= _playerInventoryAction.UpgradeItem;
+            _inventoryData.inputReader.DropItemPerformed -= _playerInventoryAction.OnDropItem;
+
         }
 
         private void Awake()
@@ -65,7 +79,7 @@ namespace CC.Inventory
 
             RefreshInventory();
             _inventoryData.inputReader.EnableInventoryUIInput();
-
+            _uiPlayerStatus.HidePouchPanel();
         }
 
         public void CloseInventory()
@@ -73,6 +87,7 @@ namespace CC.Inventory
             inventoryMenuUI.SetActive(false);
             _itemSlotMouse.EmptySlot();
             _inventoryData.inputReader.EnableGameplayInput();
+            _uiPlayerStatus.ShowPouchPanel();
         }
 
 

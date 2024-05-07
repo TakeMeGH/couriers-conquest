@@ -11,5 +11,6 @@ namespace CC.Inventory
         public void OnRemoveItem(Component _component, object _item);
 
         public void OnSellItem(ABaseItem itemSell, int amount);
+        public void OnUpdateCurrency(float amount);
     }
 }

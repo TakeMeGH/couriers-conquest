@@ -170,6 +170,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""ea27da48-2da5-41d0-af2e-a7e0c055e572"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -403,6 +412,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Block"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2809ef1b-ee2a-4f53-b84e-3889c4d8bf35"",
+                    ""path"": ""<Keyboard>/z"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -422,7 +442,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""DropItem"",
                     ""type"": ""Button"",
-                    ""id"": ""e27666b4-ac0c-4700-8853-b99d49abfe5b"",
+                    ""id"": ""d21d3652-3a35-44f9-8083-e03609446d69"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -443,7 +463,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f679ca20-c84f-440e-b996-4584e34bb7ed"",
+                    ""id"": ""5bbf8d76-981e-4a37-83d0-3621281090ee"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
@@ -475,6 +495,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Gameplay_WalkToggle = m_Gameplay.FindAction("WalkToggle", throwIfNotFound: true);
         m_Gameplay_ScrolIInteraction = m_Gameplay.FindAction("ScrolIInteraction", throwIfNotFound: true);
         m_Gameplay_DropClimbing = m_Gameplay.FindAction("DropClimbing", throwIfNotFound: true);
+        m_Gameplay_Pouch = m_Gameplay.FindAction("Pouch", throwIfNotFound: true);
         // InventoryUI
         m_InventoryUI = asset.FindActionMap("InventoryUI", throwIfNotFound: true);
         m_InventoryUI_CloseInventory = m_InventoryUI.FindAction("CloseInventory", throwIfNotFound: true);
@@ -556,6 +577,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_WalkToggle;
     private readonly InputAction m_Gameplay_ScrolIInteraction;
     private readonly InputAction m_Gameplay_DropClimbing;
+    private readonly InputAction m_Gameplay_Pouch;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -576,6 +598,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @WalkToggle => m_Wrapper.m_Gameplay_WalkToggle;
         public InputAction @ScrolIInteraction => m_Wrapper.m_Gameplay_ScrolIInteraction;
         public InputAction @DropClimbing => m_Wrapper.m_Gameplay_DropClimbing;
+        public InputAction @Pouch => m_Wrapper.m_Gameplay_Pouch;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -633,6 +656,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @DropClimbing.started += instance.OnDropClimbing;
             @DropClimbing.performed += instance.OnDropClimbing;
             @DropClimbing.canceled += instance.OnDropClimbing;
+            @Pouch.started += instance.OnPouch;
+            @Pouch.performed += instance.OnPouch;
+            @Pouch.canceled += instance.OnPouch;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -685,6 +711,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @DropClimbing.started -= instance.OnDropClimbing;
             @DropClimbing.performed -= instance.OnDropClimbing;
             @DropClimbing.canceled -= instance.OnDropClimbing;
+            @Pouch.started -= instance.OnPouch;
+            @Pouch.performed -= instance.OnPouch;
+            @Pouch.canceled -= instance.OnPouch;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -774,6 +803,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnWalkToggle(InputAction.CallbackContext context);
         void OnScrolIInteraction(InputAction.CallbackContext context);
         void OnDropClimbing(InputAction.CallbackContext context);
+        void OnPouch(InputAction.CallbackContext context);
     }
     public interface IInventoryUIActions
     {

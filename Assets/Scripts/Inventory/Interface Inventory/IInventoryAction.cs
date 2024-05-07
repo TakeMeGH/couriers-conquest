@@ -9,5 +9,7 @@ namespace CC.Inventory
         public void Initialize(InventoryData inventoryData, IInventoryManager playerInventoryManager, ItemSlotMouse itemSlotMouse);
         public void OnDropItem();
         public bool CheckItem(ABaseItem _item);
+
+        public void UpgradeItem(ABaseItem _item);
     }
 }

@@ -10,6 +10,7 @@ namespace CC.Inventory
         Weapon,
         Shield,
         Armor,
+        Equipment,
         Consumable,
         Rune
     }
@@ -21,5 +22,13 @@ namespace CC.Inventory
         Rune,
         Equipment,
         QuestItem,
+    }
+
+    public enum ConsumableType
+    {
+        HPRegeneration,
+        OnetimeATK,
+        OvertimeATK,
+        Stamina,
     }
 }
