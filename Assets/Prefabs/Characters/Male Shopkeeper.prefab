@@ -51,7 +51,7 @@ MonoBehaviour:
     type: 2}
   _shopkeeperInventoryData: {fileID: 11400000, guid: 8e3fd643f87a7dc43bc27cce8d2044f8,
     type: 2}
-  _shopEvent: {fileID: 11400000, guid: db12c7e45fe520e41a5e131522e76e63, type: 2}
+  _shopEvent: {fileID: 11400000, guid: 69985afacbdf420439d6728edf3d5706, type: 2}
 --- !u!1001 &2783989208737959437
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -138,6 +138,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: InterractableComponent
+      objectReference: {fileID: 0}
+    - target: {fileID: 2086170919217522864, guid: a756b7df96a7963499f43bbb9e12e803,
+        type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6095698382652315028, guid: a756b7df96a7963499f43bbb9e12e803,
         type: 3}
@@ -272,7 +277,7 @@ PrefabInstance:
     - target: {fileID: 3990998231559167454, guid: 7f671a054e041a24ab5a802ae22ca581,
         type: 3}
       propertyPath: m_Name
-      value: DialogueHandler
+      value: Prabowo
       objectReference: {fileID: 0}
     - target: {fileID: 5194993098429348849, guid: 7f671a054e041a24ab5a802ae22ca581,
         type: 3}

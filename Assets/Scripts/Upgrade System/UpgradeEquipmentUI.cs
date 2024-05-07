@@ -51,12 +51,14 @@ namespace CC.UpgradeEquipment
         {
             _shopCanvas.SetActive(true);
             _inputReader.EnableInventoryUIInput();
+            Debug.Log("SHOW");
         }
 
         public void HideUpgradeUI()
         {
             _shopCanvas.SetActive(false);
             _inputReader.EnableGameplayInput();
+            Debug.Log("HIDE");
         }
 
         public void SetButtonListener()
