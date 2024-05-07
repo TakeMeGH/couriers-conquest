@@ -13,6 +13,7 @@ namespace CC.Inventory
         [SerializeField] InputReader _inputReader;
         private AInventoryData _inventoryData;
         private InventoryShopkeeper _inventoryShop;
+        private InventoryData _playerData;
 
         [SerializeField] private ItemSlotMouse _itemSlotMouse;
         private BuyInventoryManager _shopInventoryManager;
@@ -41,11 +42,11 @@ namespace CC.Inventory
         [SerializeField] private Button _cancelSellButton;
 
         private bool _isToogle = false;
-        public float _money = 10000;
         private float _lastPrice = 0;
 
         [Header("Event Panel")]
-        [SerializeField] private InventoryDataEventChannel _onEventInventory;
+        [SerializeField] private PlayerInventoryDataChannel _onEventInventory;
+        [SerializeField] private OnUpdateCurrencyEventChannel _onUpdateCurrency;
 
         private void OnEnable()
         {
@@ -60,6 +61,7 @@ namespace CC.Inventory
         private void Initialize(AInventoryData playerData, AInventoryData shopkeeperInventoryData)
         {
             _inventoryData = shopkeeperInventoryData;
+            _playerData = (InventoryData)playerData;
             _shopCanvas.SetActive(true);
             GetAllPanel();
             _inputReader.EnableInventoryUIInput();
@@ -97,7 +99,6 @@ namespace CC.Inventory
             _sellInventoryManager.gameObject.SetActive(_isToogle);
             _shopCanvas.SetActive(_isToogle);
             _inputReader.EnableGameplayInput();
-
         }
 
         private void GetAllPanel()
@@ -162,31 +163,38 @@ namespace CC.Inventory
 
         public void UpdateBuyPrice(float amount)
         {
+            _lastPrice = 0;
             _lastPrice = amount;
-            SetButton(_money >= amount);
+            SetButton(_lastPrice != 0 && _playerData.playerGold >= amount);
 
-            _textPrice.text = _lastPrice.ToString();
-            _textMoney.text = _money.ToString();
+            _textPrice.text = " - " +  _lastPrice.ToString();
+            _textMoney.text = _playerData.playerGold.ToString();
         }
 
         public void UpdateSellPrice(float amount)
         {
-            _textSell.text = amount.ToString();
+            _lastPrice = 0;
+            _lastPrice = amount;
+            SetButton(_lastPrice != 0);
+
+            _textSell.text = " + " + amount.ToString();
         }
 
         private void SetButton(bool condition)
         {
             _buyButton.interactable = condition;
+            _sellButton.interactable = condition;
         }
 
         private void BuyItem()
         {
-            _money -= _lastPrice;
+            _onUpdateCurrency.RaiseEvent(-_lastPrice);
             _shopInventoryManager.BuyItem();
         }
 
         private void SellItem()
         {
+            _onUpdateCurrency.RaiseEvent(_lastPrice);
             _sellInventoryManager.SellItem();
         }
     }

@@ -65,7 +65,6 @@ namespace SA
 
             IKSnapshot ik = CreateSnapshot(origin);
             CopySnapshot(ref current, ik);
-            Debug.Log(current.lf + " " + current.rf + " " + current.lh + " " + current.rh);
 
             SetIKPosition(isMid, goals.lf, current.lf, AvatarIKMC.LeftFoot);
             SetIKPosition(isMid, goals.rf, current.rf, AvatarIKMC.RightFoot);

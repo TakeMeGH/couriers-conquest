@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 namespace CC.Characters.States
@@ -15,6 +16,7 @@ namespace CC.Characters.States
             base.Enter();
 
             _playerController.InputReader.DropClimbingPerformed += OnDrop;
+            _playerController.FreeClimb.OnAboveStandAble += OnAboveStandAble;
         }
         public override void Update()
         {
@@ -28,9 +30,7 @@ namespace CC.Characters.States
             base.Exit();
 
             _playerController.InputReader.DropClimbingPerformed -= OnDrop;
-
-            _playerController.Rigidbody.useGravity = true;
-            _playerController.Rigidbody.isKinematic = false;
+            _playerController.FreeClimb.OnAboveStandAble -= OnAboveStandAble;
 
             _playerController.FreeClimb.Rig.weight = 0;
         }
@@ -40,6 +40,12 @@ namespace CC.Characters.States
             _playerController.PlayerCurrentData.CurrentDropTime = _playerController.PlayerCurrentData.MaxDropTime;
 
             _playerController.SwitchState(_playerController.PlayerFallingState);
+        }
+
+        void OnAboveStandAble()
+        {
+            _playerController.SwitchState(_playerController.PlayerClimbUpState);
+
         }
 
     }

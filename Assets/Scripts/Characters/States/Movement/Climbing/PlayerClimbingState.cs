@@ -14,6 +14,8 @@ namespace CC.Characters.States
         {
             base.Enter();
 
+            DisableRigidbody();
+
             StartAnimation("Climbing");
         }
 

@@ -17,10 +17,13 @@ namespace CC.Characters.States
 
             StartAnimation("isFalling");
 
+            EnableRigidbody();
+
             _playerController.PlayerCurrentData.MovementSpeedModifier = 0f;
 
-            _playerController.transform.eulerAngles = new Vector3(0, _playerController.transform.rotation.eulerAngles.y, 0);
-
+            ResetRotationXZ();
+            // _playerController.transform.rotation = Quaternion.Euler(0, _playerController.transform.rotation.eulerAngles.y, 0);
+            // Debug.Log(_playerController.transform.eulerAngles + " ROTATION");
             playerPositionOnEnter = _playerController.transform.position;
 
             ResetVerticalVelocity();
@@ -38,13 +41,14 @@ namespace CC.Characters.States
         public override void Update()
         {
             base.Update();
+            ResetRotationXZ();
+
+            // Debug.Log(_playerController.transform.eulerAngles + " ROTATION");
 
             if (_playerController.PlayerCurrentData.CurrentDropTime <= 0f)
             {
                 if (_playerController.FreeClimb.CheckForClimb())
                 {
-                    _playerController.Rigidbody.useGravity = false;
-                    _playerController.Rigidbody.isKinematic = true;
                     _playerController.SwitchState(_playerController.PlayerClimbState);
 
                 }
@@ -84,6 +88,12 @@ namespace CC.Characters.States
         {
             _playerController.SwitchState(_playerController.PlayerLightLandingState);
             // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.LIGHTLANDING);
+        }
+
+        void ResetRotationXZ()
+        {
+            _playerController.transform.rotation = Quaternion.Euler(0, _playerController.transform.rotation.eulerAngles.y, 0);
+
         }
     }
 }

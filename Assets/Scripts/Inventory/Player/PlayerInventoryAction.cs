@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -72,6 +73,24 @@ namespace CC.Inventory
                 }
             }
             return false;
+        }
+
+        public void UpgradeItem(ABaseItem _item)
+        {
+            foreach (ItemSlotInfo i in _inventoryData.items)
+            {
+                if (_item == i.item)
+                {
+                    EquipmentItem equipment = (EquipmentItem)i.item;
+
+                    equipment.attackWeapon += equipment.upgradeRequiriment[equipment.weaponLevel].bonusAttack;
+                    equipment.deffWeapon += equipment.upgradeRequiriment[equipment.weaponLevel].bonusDeff;
+                    equipment.healthWeapon += equipment.upgradeRequiriment[equipment.weaponLevel].bonusHealth;
+
+                    equipment.weaponLevel++;
+                    return;
+                }
+            }
         }
     }
 }

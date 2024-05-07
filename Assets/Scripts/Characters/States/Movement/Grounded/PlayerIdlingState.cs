@@ -7,21 +7,27 @@ namespace CC.Characters.States
 {
     public class PlayerIdlingState : PlayerGroundedState
     {
+        bool _alreadyCalled;
+
         public PlayerIdlingState(PlayerControllerStatesMachine _playerController) : base(_playerController)
         {
         }
 
         public override void Enter()
         {
+            _alreadyCalled = false;
             _playerController.PlayerCurrentData.MovementSpeedModifier = 0f;
+
+
+
+            _playerController.PlayerCurrentData.CurrentJumpForce = _playerController.PlayerMovementData.StationaryForce;
+
+            ResetVelocity();
 
             base.Enter();
 
             StartAnimation("isIdling");
 
-            _playerController.PlayerCurrentData.CurrentJumpForce = _playerController.PlayerMovementData.StationaryForce;
-
-            ResetVelocity();
         }
 
         public override void Exit()
@@ -29,6 +35,9 @@ namespace CC.Characters.States
             base.Exit();
 
             StopAnimation("isIdling");
+
+            EnableRigidbody();
+
         }
 
         public override void Update()
@@ -53,6 +62,24 @@ namespace CC.Characters.States
             }
 
             ResetVelocity();
+        }
+
+        public override void OnAnimationEnterEvent()
+        {
+            base.OnAnimationEnterEvent();
+            if (_playerController.PlayerCurrentData.IsUpdateNewTransform)
+            {
+                _playerController.transform.position = _playerController.PlayerCurrentData.NewTransformPosition;
+                _playerController.PlayerCurrentData.IsUpdateNewTransform = false;
+            }
+
+        }
+        public override void OnAnimationTransitionEvent()
+        {
+            if (_alreadyCalled) return;
+            _alreadyCalled = true;
+
+            EnableRigidbody();
         }
     }
 }

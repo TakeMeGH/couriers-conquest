@@ -36,7 +36,6 @@ namespace CC.Characters.States
         {
             if (_playerController.LayerData.IsGroundLayer(collider.gameObject.layer))
             {
-                Debug.Log("GROUND " + collider.gameObject.name);
                 OnContactWithGround(collider);
 
                 return;
@@ -326,6 +325,17 @@ namespace CC.Characters.States
         protected bool IsMovingDown(float minimumVelocity = 0.1f)
         {
             return GetPlayerVerticalVelocity().y < -minimumVelocity;
+        }
+        protected void DisableRigidbody()
+        {
+            _playerController.Rigidbody.useGravity = false;
+            _playerController.Rigidbody.isKinematic = true;
+        }
+
+        protected void EnableRigidbody()
+        {
+            _playerController.Rigidbody.useGravity = true;
+            _playerController.Rigidbody.isKinematic = false;
         }
     }
 }
