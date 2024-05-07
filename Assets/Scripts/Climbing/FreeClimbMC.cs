@@ -79,7 +79,7 @@ namespace SA
             if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin, origin + dir * 0.5f, 0);
             if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin + Vector3.up, origin + Vector3.up + dir * 0.5f, 1);
 
-            if (Physics.Raycast(origin + Vector3.up, dir, 1f, UsedLayer))
+            if (Physics.Raycast(origin + Vector3.up, dir, 1.5f, UsedLayer))
             {
                 if (Physics.Raycast(origin, dir, out hit, 0.5f, UsedLayer))
                 {

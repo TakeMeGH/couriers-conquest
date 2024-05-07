@@ -18,20 +18,16 @@ namespace CC.Characters.States
             _alreadyCalled = false;
             _playerController.PlayerCurrentData.MovementSpeedModifier = 0f;
 
-            base.Enter();
 
-            StartAnimation("isIdling");
 
             _playerController.PlayerCurrentData.CurrentJumpForce = _playerController.PlayerMovementData.StationaryForce;
 
             ResetVelocity();
 
+            base.Enter();
 
-            if (_playerController.PlayerCurrentData.IsUpdateNewTransform)
-            {
-                _playerController.transform.position = _playerController.PlayerCurrentData.NewTransformPosition;
-                _playerController.PlayerCurrentData.IsUpdateNewTransform = false;
-           }
+            StartAnimation("isIdling");
+
         }
 
         public override void Exit()
@@ -66,6 +62,17 @@ namespace CC.Characters.States
             }
 
             ResetVelocity();
+        }
+
+        public override void OnAnimationEnterEvent()
+        {
+            base.OnAnimationEnterEvent();
+            if (_playerController.PlayerCurrentData.IsUpdateNewTransform)
+            {
+                _playerController.transform.position = _playerController.PlayerCurrentData.NewTransformPosition;
+                _playerController.PlayerCurrentData.IsUpdateNewTransform = false;
+            }
+
         }
         public override void OnAnimationTransitionEvent()
         {
