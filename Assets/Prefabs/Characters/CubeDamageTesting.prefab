@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 9015813652756013961}
   - component: {fileID: 8805188804241503588}
   - component: {fileID: 4669394539192666595}
-  - component: {fileID: 2660436835203711892}
-  - component: {fileID: 3814756156650714688}
   m_Layer: 0
   m_Name: CubeDamageTesting
   m_TagString: Untagged
@@ -126,47 +124,6 @@ MonoBehaviour:
   blockDamageReduction: 0
   playerStatsSO: {fileID: 11400000, guid: f3ee829ae9f91ee48b6a0fd3da31e4a9, type: 2}
   _playerController: {fileID: 0}
---- !u!114 &2660436835203711892
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2142269775583714512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eecfc86cba6ff648a9b630555de69b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponLogic: {fileID: 7747772462885127089}
---- !u!114 &3814756156650714688
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2142269775583714512}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d0d2c0f650b1b34684f4cc160d66e75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <InputReader>k__BackingField: {fileID: 0}
-  <PlayerMovementData>k__BackingField: {fileID: 0}
-  <TriggerOnMovementStateAnimationEnterEvent>k__BackingField: {fileID: 0}
-  <TriggerOnMovementStateAnimationExitEvent>k__BackingField: {fileID: 0}
-  <TriggerOnMovementStateAnimationTransitionEvent>k__BackingField: {fileID: 0}
-  <LayerData>k__BackingField:
-    <GroundLayer>k__BackingField:
-      serializedVersion: 2
-      m_Bits: 0
-  playerStatsSO: {fileID: 11400000, guid: f3ee829ae9f91ee48b6a0fd3da31e4a9, type: 2}
-  equippedWeapon: {fileID: 0}
-  equippedShield: {fileID: 0}
-  <Attacks>k__BackingField: []
-  <Weapon>k__BackingField: {fileID: 0}
-  <Block>k__BackingField: {fileID: 0}
-  <Health>k__BackingField: {fileID: 4669394539192666595}
 --- !u!1 &7747772462885127089
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +134,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1685090439951056051}
   - component: {fileID: 8683653467060147128}
-  - component: {fileID: 176743477992376920}
   - component: {fileID: 5922938649111359740}
   m_Layer: 0
   m_Name: DamageLogic
@@ -224,20 +180,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &176743477992376920
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7747772462885127089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae18e23f0cbe0b0418de056c8a0ebaf3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myCollider: {fileID: 8805188804241503588}
-  _playerController: {fileID: 0}
 --- !u!54 &5922938649111359740
 Rigidbody:
   m_ObjectHideFlags: 0

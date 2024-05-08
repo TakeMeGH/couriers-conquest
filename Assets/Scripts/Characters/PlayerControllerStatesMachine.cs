@@ -26,8 +26,8 @@ namespace CC.Characters
 
         [field: Header("Player Stats")]
         [field: SerializeField] public PlayerStatsSO playerStatsSO;
-        [field: SerializeField] public EquipmentItem equippedWeapon;
-        [field: SerializeField] public EquipmentItem equippedShield;
+        //[field: SerializeField] public EquipmentItem equippedWeapon;
+        //[field: SerializeField] public EquipmentItem equippedShield;
 
         [field: Header("Attack Combo")]
         [field: SerializeField] public AttackSO[] Attacks { get; private set; }
@@ -115,7 +115,7 @@ namespace CC.Characters
             }
         }
 
-        public float CalculateTotalShieldValue()
+        /*public float CalculateTotalShieldValue()
         {
             float totalShieldValue = playerStatsSO.GetValue(CC.Core.Data.Dynamic.mainStat.ShieldValue);
         if (equippedShield != null)
@@ -124,6 +124,7 @@ namespace CC.Characters
         }
         return totalShieldValue;
         }
+        */
 
         private void Start()
         {

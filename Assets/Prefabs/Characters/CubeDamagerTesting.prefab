@@ -125,8 +125,6 @@ GameObject:
   - component: {fileID: 5716815644039887854}
   - component: {fileID: 1537493713976650301}
   - component: {fileID: 8646336162114214455}
-  - component: {fileID: 8695530484979375949}
-  - component: {fileID: 2487199085779535649}
   m_Layer: 0
   m_Name: CubeDamagerTesting
   m_TagString: Untagged
@@ -221,33 +219,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8695530484979375949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7845024810492706681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 468a449dacb52fb4a8bd69ad36b27740, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  damageReduction: 0
-  blockDamageReduction: 0
-  playerStatsSO: {fileID: 0}
-  _playerController: {fileID: 0}
---- !u!114 &2487199085779535649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7845024810492706681}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eecfc86cba6ff648a9b630555de69b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  weaponLogic: {fileID: 1510464503656281682}

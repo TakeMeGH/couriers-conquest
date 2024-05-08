@@ -52,6 +52,18 @@ namespace CC.Core.Data.Dynamic
             }
         }
 
+        /*public void EquipmentStats(SerializedDictionary<mainStat, float> equipmentStats)
+        {
+            foreach (var stat in equipmentStats)
+            {
+                if (statData.defaultValue.ContainsKey(stat.Key))
+                {
+                    statData.defaultValue[stat.Key] += stat.Value;
+                }
+            }
+        }
+        */
+
         public float GetDamageReduction()
         {
             return statData.damageReduction;
@@ -72,6 +84,7 @@ namespace CC.Core.Data.Dynamic
         {
             statData.CopyFrom(_defaultStatData);
         }
+
 
         /*public void SetValue(mainStat key, float value)
         {

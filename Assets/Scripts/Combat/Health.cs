@@ -7,10 +7,10 @@ namespace CC.Combats
     public class Health : MonoBehaviour
     {
         [SerializeField] private int maxHealth = 100;
-        [SerializeField] private float damageReduction = 0f; // 20% damage reduction
-        [SerializeField] private float blockDamageReduction = 0f; // 50% additional reduction when blocking
+        //[SerializeField] private float damageReduction = 0f; // 20% damage reduction
+        //[SerializeField] private float blockDamageReduction = 0f; // 50% additional reduction when blocking
         [SerializeField] private PlayerStatsSO playerStatsSO;
-        [SerializeField] private PlayerControllerStatesMachine _playerController;
+        //[SerializeField] private PlayerControllerStatesMachine _playerController;
         
         //[SerializeField] private StaminaController staminaController;
 
@@ -43,7 +43,8 @@ namespace CC.Combats
 
             if (isBlocking)
             {
-                totalReduction += _playerController.CalculateTotalShieldValue() / 100f;
+                float shieldValue = playerStatsSO.GetValue(mainStat.ShieldValue);
+                totalReduction += shieldValue / 100f;
             }
             int calculatedDamage = Mathf.Min(Mathf.RoundToInt(damage * (1 - totalReduction)), health);
             health = Mathf.Max(health - calculatedDamage, 0);
