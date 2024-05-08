@@ -14,7 +14,6 @@ namespace CC.Enemy.States
         public override void Enter()
         {
             base.Enter();
-            
         }
 
         public override void Exit()
@@ -24,13 +23,18 @@ namespace CC.Enemy.States
 
         public override void Update()
         {
-            base.Update();
-            EnviromentView();
-
-            if (enemy.EnemyCurrentData.m_PlayerInRange)
             {
-                enemy.SwitchState(enemy.ChasingState);
-                Debug.Log("Chasing");
+                base.Update();
+                EnviromentView();
+
+                if (enemy.EnemyCurrentData.m_PlayerInRange)
+                {
+                    enemy.SwitchState(enemy.ChasingState);
+                    Debug.Log("Chasing");
+                    return;
+                }
+
+                Patroling(); 
             }
         }
 
@@ -46,6 +50,21 @@ namespace CC.Enemy.States
 
         private void Patroling()
         {
+            if (!enemy.EnemyCurrentData.m_PlayerNear)
+            {
+                if (enemy.m_TimeToRotate <= 0)
+                {
+                    Move(enemy.speedWalk);
+                    LookingPlayer(enemy.playerLastPosition);
+                }
+                else
+                {
+                    Stop();
+                    enemy.m_TimeToRotate -= Time.deltaTime;
+                }
+            }
+            else
+            {
                 if (enemy.EnemyCurrentData.navMeshAgent.remainingDistance <= enemy.EnemyCurrentData.navMeshAgent.stoppingDistance)
                 {
                     if (enemy.EnemyCurrentData.m_WaitTime <= 0)
@@ -60,6 +79,7 @@ namespace CC.Enemy.States
                         enemy.EnemyCurrentData.m_WaitTime -= Time.deltaTime;
                     }
                 }
+            }
         }
     }
 }

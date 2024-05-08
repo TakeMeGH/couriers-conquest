@@ -11,18 +11,8 @@ namespace CC.Interaction.ShoopKeeper
 
         [SerializeField] private AInventoryData _playerInventoryData;
         [SerializeField] private AInventoryData _shopkeeperInventoryData;
-        [SerializeField] private InventoryDataEventChannel _shopEvent;
+        [SerializeField] private PlayerInventoryDataChannel _shopEvent;
         // Start is called before the first frame update
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
 
         public void Interact()
         {

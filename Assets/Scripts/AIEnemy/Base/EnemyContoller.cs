@@ -105,13 +105,13 @@ namespace CC.Enemy
         void Start()
         {
             Initialize();
-            enemyState = new EnemyChasingState(this);
-            SwitchState(enemyState);
+            //enemyState = new EnemyChasingState(this);
+            SwitchState(IdleState);
         }
 
         void Update()
         {
-            enemyState.EnviromentView();
+            //enemyState.EnviromentView();
         }
 
         public void Damage(float damageAmount)

@@ -1,0 +1,35 @@
+﻿title: Shop02_FemaleShop_Default_0
+tags:
+---
+Mega : Welcome to my store, how may i help you?
+-> I want to buy some item..
+    <<jump Shop02_FemaleShop_Choice_0>>
+-> Who are you ?
+    <<jump Shop02_FemaleShop_Choice_1>>
+-> Do you perhaps, have any relation with Jokowi?
+    <<jump Shop02_FemaleShop_Choice_2>>
+-> Nothing, bye..
+    <<Close>>
+===
+
+title: Shop02_FemaleShop_Choice_0
+tags:
+---
+Mega : The item is from the people, by the people, for the people. So the prices is friendly !
+<<SpecialAction Mega 0>>
+===
+
+title: Shop02_FemaleShop_Choice_1
+tags:
+---
+Mega : My name is Mega Bullprincess, i'm the leader of the People's Deals Institution (PDI)
+<<jump Shop02_FemaleShop_Default_0>>
+===
+
+title: Shop02_FemaleShop_Choice_2
+tags:
+---
+Mega : Jokowi? the president of this town expedition company?
+Mega : Bet he can't do shit without me, hahaha..
+<<jump Shop02_FemaleShop_Default_0>>
+===

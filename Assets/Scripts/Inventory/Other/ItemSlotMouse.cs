@@ -13,6 +13,7 @@ namespace CC.Inventory
         public ItemSlotInfo itemSlot;
         public Image itemImage;
         public TextMeshProUGUI stacksText;
+        public ItemSlotType slotType;
 
         public AItemPanel sourceItemPanel;
         public int splitSize;
