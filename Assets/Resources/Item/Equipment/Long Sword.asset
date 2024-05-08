@@ -24,3 +24,12 @@ MonoBehaviour:
     - Key: 3
       Value: 10
   specificType: 1
+  upgradeRequiriment:
+  - materialRequiriment:
+    - itemRequiriment: {fileID: 11400000, guid: 682e083349ed3b94e9494c5281401aef,
+        type: 2}
+      amount: 1
+    price: 1000
+    bonusAttack: 10
+    bonusHealth: 0
+    bonusDeff: 2

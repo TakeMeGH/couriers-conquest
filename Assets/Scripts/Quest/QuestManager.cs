@@ -6,11 +6,9 @@ namespace CC.Quest
 {
     public class QuestManager : MonoBehaviour
     {
-
         [SerializeField] QuestDatabaseSO _database;
         [SerializeField] PlayerStateSO _playerState;
         [SerializeField] AQuest acceptedQuest;
-
         [Header("Events")]
         [SerializeField] SenderDataEventChannelSO _onQuestStart;
         [SerializeField] SenderDataEventChannelSO _onQuestCancel;

@@ -1,0 +1,33 @@
+﻿title: Shop01_MaleShop_Default_0
+tags:
+---
+Prabowo : Welcome to the store, how can i help?
+-> I want to buy some item..
+    <<jump Shop01_MaleShop_Choice_0>>
+-> Who are you ?
+    <<jump Shop01_MaleShop_Choice_1>>
+-> Do you serve free lunch ?
+    <<jump Shop01_MaleShop_Choice_2>>
+-> Nothing, bye..
+    <<Close>>
+===
+title: Shop01_MaleShop_Choice_0
+tags:
+---
+Prabowo : Buy what you want, don't forget about the taxes
+<<SpecialAction Prabowo 0>>
+===
+
+title: Shop01_MaleShop_Choice_1
+tags:
+---
+Prabowo : My name is Prabowo Yorkshire, i'm the leader of the Great Essentials Market Of Yorkshires (GEMOY)
+<<jump Shop01_MaleShop_Default_0>>
+===
+
+title: Shop01_MaleShop_Choice_2
+tags:
+---
+Prabowo : Free lunch available after 12pm !!
+<<jump Shop01_MaleShop_Default_0>>
+===

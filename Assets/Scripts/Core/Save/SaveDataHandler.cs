@@ -79,7 +79,7 @@ namespace CC.Core.Save
         {
             Debug.Log("Saving..");
             yield return null;
-            _OnBeforeSave?.raiseEvent(this, null);
+            _OnBeforeSave?.raiseEvent(this, slot);
             string path = Application.persistentDataPath + "/GameData/Save" + slot;
             Debug.Log(path);
             _gameData = new GameData();

@@ -32,7 +32,6 @@ namespace CC.Quest.Example
                 _onDrop?.raiseEvent(this, null);
                 _questItemRemoveEvent?.raiseEvent(this, _itemToDeliver);
             }
-
         }
     }
 }

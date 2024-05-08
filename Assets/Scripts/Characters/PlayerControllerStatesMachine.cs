@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using CC.Combats;
 using CC.Core.Data.Dynamic;
 using CC.Inventory;
+using SA;
 
 namespace CC.Characters
 {
@@ -38,6 +39,13 @@ namespace CC.Characters
 
         [field: Header("Health")]
         [field: SerializeField] public Health Health { get; private set; }
+        [field: Header("Climbing")]
+
+        [field: Header("Climbing")]
+        [field: SerializeField] public FreeClimbMC FreeClimb { get; private set; }
+        [field: SerializeField] public Transform StandUpPoint { get; private set; }
+        public Vector3 OffsetStandUpPoint { get; private set; }
+
 
         [field: Header("Stamina")]
         [field: SerializeField] public StaminaController StaminaController { get; private set; }
@@ -68,6 +76,9 @@ namespace CC.Characters
         public States.PlayerMediumStoppingState PlayerMediumStoppingState { get; private set; }
         public States.PlayerBlockingState PlayerBlockingState { get; private set; }
         public States.PlayerWalkingState PlayerWalkingState { get; private set; }
+        public States.PlayerClimbState PlayerClimbState { get; private set; }
+        public States.PlayerClimbUpState PlayerClimbUpState { get; private set; }
+
 
         public List<States.PlayerAttackingState> PlayerAttackingStates { get; private set; }
        
@@ -106,6 +117,8 @@ namespace CC.Characters
             PlayerMediumStoppingState = new States.PlayerMediumStoppingState(this);
             PlayerBlockingState = new States.PlayerBlockingState(this, StaminaController);
             PlayerWalkingState = new States.PlayerWalkingState(this);
+            PlayerClimbState = new States.PlayerClimbState(this);
+            PlayerClimbUpState = new States.PlayerClimbUpState(this);
 
             PlayerAttackingStates = new List<States.PlayerAttackingState>();
             for (int i = 0; i < Attacks.Length; i++)
@@ -113,18 +126,9 @@ namespace CC.Characters
                 States.PlayerAttackingState newAttackingState = new States.PlayerAttackingState(this, i);
                 PlayerAttackingStates.Add(newAttackingState);
             }
-        }
 
-        /*public float CalculateTotalShieldValue()
-        {
-            float totalShieldValue = playerStatsSO.GetValue(CC.Core.Data.Dynamic.mainStat.ShieldValue);
-        if (equippedShield != null)
-        {
-            totalShieldValue += equippedShield.shieldDamageReduction;
+            OffsetStandUpPoint = StandUpPoint.transform.position - transform.position;
         }
-        return totalShieldValue;
-        }
-        */
 
         private void Start()
         {

@@ -326,5 +326,16 @@ namespace CC.Characters.States
         {
             return GetPlayerVerticalVelocity().y < -minimumVelocity;
         }
+        protected void DisableRigidbody()
+        {
+            _playerController.Rigidbody.useGravity = false;
+            _playerController.Rigidbody.isKinematic = true;
+        }
+
+        protected void EnableRigidbody()
+        {
+            _playerController.Rigidbody.useGravity = true;
+            _playerController.Rigidbody.isKinematic = false;
+        }
     }
 }

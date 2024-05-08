@@ -4,6 +4,7 @@ using UnityEngine;
 using AYellowpaper.SerializedCollections;
 using Newtonsoft.Json.Linq;
 using CC.Core.Data.Stable;
+using UnityEngine.InputSystem;
 
 namespace CC.Core.Data.Dynamic
 {
@@ -119,7 +120,25 @@ namespace CC.Core.Data.Dynamic
         */
 
 
+
+
+        //TODO : TAMBAH DARAH
+        public void ChangeHPValue(mainStat key, float amount)
+        {
+            if (statData.instanceValue.TryGetValue(key, out float currentValue))
+            {
+                float updatedValue = currentValue + amount;
+                if(updatedValue >= GetValue(mainStat.Health))
+                {
+                    updatedValue = GetValue(mainStat.Health);
+                }
+
+                statData.instanceValue[key] = updatedValue;
+            }
+        }
+
     }
+
     [System.Serializable]
     public class PlayerStats : ISaveable
     {

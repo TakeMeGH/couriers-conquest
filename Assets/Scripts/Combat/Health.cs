@@ -1,4 +1,7 @@
+using CC.Core.Data.Dynamic;
+using CC.Inventory;
 using UnityEngine;
+using UnityEngine.UI;
 using CC.Core.Data.Dynamic;
 using CC.Characters;
 
@@ -32,6 +35,8 @@ namespace CC.Combats
         {
             this.isBlocking = isBlocking;
         }
+
+        
 
         public int DealDamage(int damage)
         {  

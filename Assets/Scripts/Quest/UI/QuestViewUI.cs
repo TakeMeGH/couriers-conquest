@@ -69,7 +69,6 @@ namespace CC.Quest.UI
         {
             RefreshList();
             Cursor.lockState = CursorLockMode.Confined;
-
         }
 
         public void closeView()
