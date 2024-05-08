@@ -15,7 +15,6 @@ namespace CC.Enemy.States
         {
             base.Enter();
             Debug.Log("Chasing");
-            Chasing();
         }
 
         public override void Exit()
@@ -39,6 +38,9 @@ namespace CC.Enemy.States
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
+
+            Chasing();
+
         }
 
         public override void OnAnimationEnterEvent()
@@ -53,11 +55,11 @@ namespace CC.Enemy.States
 
             if (!enemy.m_CaughtPlayer)
             {
-                if (Vector3.Distance(enemy.transform.position, enemy.m_PlayerPosition) <= enemy.stopDistanceFromPlayer)
+                if (Vector3.Distance(enemy.transform.position, enemy.EnemyCurrentData.m_PlayerPosition) <= enemy.stopDistanceFromPlayer)
                 {
                     Debug.Log("Chasing12");
                     Stop();
-                    Vector3 targetDirection = enemy.m_PlayerPosition - enemy.transform.position;
+                    Vector3 targetDirection = enemy.EnemyCurrentData.m_PlayerPosition - enemy.transform.position;
                     targetDirection = new Vector3(targetDirection.x, 0, targetDirection.z);
                     Vector3 newDirection = Vector3.RotateTowards(enemy.transform.forward, targetDirection, 1, 0.0f);
                     enemy.transform.rotation = Quaternion.LookRotation(newDirection);
@@ -67,7 +69,7 @@ namespace CC.Enemy.States
                 {
                     Debug.Log("Chasing123");
                     Move(enemy.speedRun);
-                    enemy.navMeshAgent.SetDestination(enemy.m_PlayerPosition);
+                    enemy.navMeshAgent.SetDestination(enemy.EnemyCurrentData.m_PlayerPosition);
                     enemy.Animator.SetBool("isChasing", true);
                     enemy.Animator.SetBool("isAttack", false);
                 }

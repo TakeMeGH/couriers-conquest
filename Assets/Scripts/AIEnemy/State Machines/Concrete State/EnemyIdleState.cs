@@ -13,11 +13,12 @@ namespace CC.Enemy.States
             base.Enter();
             if (ShouldStartChasing())
             {
-                Debug.Log("Idle...");
+                Debug.Log("Chasing");
                 enemy.SwitchState(enemy.ChasingState);
             }
             else if (ShouldStartPatroling())
             {
+                Debug.Log("Patroling");
                 enemy.SwitchState(enemy.PatrolingState);
             }
         }

@@ -18,12 +18,12 @@ namespace CC.Enemy.States
 
         public virtual void Enter()
         {
-            
+
         }
 
         public virtual void Exit()
         {
-            
+
         }
 
         public virtual void Update()
@@ -104,11 +104,12 @@ namespace CC.Enemy.States
         }
         public void EnviromentView()
         {
-            Collider[] playerInRange = Physics.OverlapSphere(enemy.transform.position, enemy.EnemyCurrentData.viewRadius, enemy.EnemyCurrentData.playerMask);
-
+            Collider[] playerInRange = Physics.OverlapSphere(enemy.transform.position, enemy.EnemyCurrentData.viewRadius, enemy.playerMask);
+            Debug.Log(playerInRange.Length + " " + enemy.playerMask.value + " " + enemy.transform.position + " " + enemy.EnemyCurrentData.viewRadius + " DEBUG");
             for (int i = 0; i < playerInRange.Length; i++)
             {
                 Transform player = playerInRange[i].transform;
+                Debug.Log(playerInRange[i].transform.gameObject.name + " NAME");
                 Vector3 dirToPlayer = (player.position - enemy.transform.position).normalized;
                 if (Vector3.Angle(enemy.transform.forward, dirToPlayer) < enemy.EnemyCurrentData.viewAngle / 2)
                 {

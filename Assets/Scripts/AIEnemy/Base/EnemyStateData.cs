@@ -15,7 +15,7 @@ namespace CC.Enemy
         public float timetoRotate = 2;
         public float speedWalk = 6;
         public float speedRun = 9;
-        public float viewRadius = 15;
+        public float viewRadius = 2;
         public float viewAngle = 90;
         public float meshResolution = 1f;
         public int edgeIterations = 4;

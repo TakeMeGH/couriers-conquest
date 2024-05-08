@@ -38,7 +38,7 @@ namespace CC.Enemy
         public bool m_CaughtPlayer;
         public int m_CurrentWaypointIndex = 0;
 
-        public float CurrentHealth { get;  private set; }
+        public float CurrentHealth { get; private set; }
 
         #region Component
         public Animator Animator { get; private set; }
@@ -51,10 +51,10 @@ namespace CC.Enemy
 
         #region State Machine Variables
         private StateMachine.StateMachine stateMachine;
-        public States.EnemyIdleState IdleState { get; private set; }
-        public States.EnemyPatrolingState PatrolingState { get; private set; }
-        public States.EnemyChasingState ChasingState { get; private set; }
-        public States.EnemyAttackState AttackState { get; private set; }
+        public EnemyIdleState IdleState { get; private set; }
+        public EnemyPatrolingState PatrolingState { get; private set; }
+        public EnemyChasingState ChasingState { get; private set; }
+        public EnemyAttackState AttackState { get; private set; }
         #endregion
 
         public void Initialize()
@@ -66,11 +66,11 @@ namespace CC.Enemy
             EnemyCurrentData = new EnemyStateData();
             EnemyCurrentData.navMeshAgent = GetComponent<NavMeshAgent>();
 
-            IdleState = new States.EnemyIdleState(this);
+            IdleState = new EnemyIdleState(this);
 
-            PatrolingState = new States.EnemyPatrolingState(this);
-            ChasingState = new States.EnemyChasingState(this);
-            AttackState = new States.EnemyAttackState(this);
+            PatrolingState = new EnemyPatrolingState(this);
+            ChasingState = new EnemyChasingState(this);
+            AttackState = new EnemyAttackState(this);
 
             EnemyCurrentData.m_PlayerPosition = Vector3.zero;
             EnemyCurrentData.m_IsPatrol = true;
@@ -105,20 +105,20 @@ namespace CC.Enemy
         void Start()
         {
             Initialize();
-            enemyState = new EnemyChasingState(this);
-            SwitchState(enemyState);
+            // enemyState = IdleState;
+            SwitchState(IdleState);
         }
 
-        void Update()
-        {
-            enemyState.EnviromentView();
-        }
+        // void Update()
+        // {
+        //     enemyState.EnviromentView();
+        // }
 
         public void Damage(float damageAmount)
         {
             CurrentHealth -= damageAmount;
 
-            if(CurrentHealth < 0)
+            if (CurrentHealth < 0)
             {
                 Die();
             }
@@ -126,7 +126,7 @@ namespace CC.Enemy
 
         public void Die()
         {
-        
+
         }
     }
 }
