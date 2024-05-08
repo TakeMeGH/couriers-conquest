@@ -90,7 +90,6 @@ namespace CC.Inventory
             _uiPlayerStatus.ShowPouchPanel();
         }
 
-
         private void WeightCount()
         {
             _weightValue = _playerInventoryWeight.GetWeight();
@@ -105,7 +104,6 @@ namespace CC.Inventory
 
         public void RefreshInventory()
         {
-
             int index = 0;
             foreach (ItemSlotInfo i in _inventoryData.items)
             {

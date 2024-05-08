@@ -33,12 +33,12 @@ namespace CC.Inventory
                 _playerInventoryManager.existingPanels.AddRange(itemPanelsInGrid);
             }
 
-            _inventoryData.items.Clear();
+            /*_inventoryData.items.Clear();
             for (int i = 0; i < _playerInventoryManager.existingPanels.Count; i++)
             {
                 _inventoryData.items.Add(new ItemSlotInfo(null, 0));
                 _playerInventoryManager.existingPanels[i].mousePanel = _itemSlotMouse;
-            }
+            }*/
         }
 
         private void SetDefaultEquipment()
