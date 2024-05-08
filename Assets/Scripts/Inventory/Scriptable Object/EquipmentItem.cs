@@ -10,10 +10,6 @@ namespace CC.Inventory
     public class EquipmentItem : ABaseItem
     {
         public int equipmentLevel;
-        //public float attackWeapon;
-        //public float healthWeapon;
-        public float costSell;
-        //public float shieldDamageReduction;
         public SerializedDictionary<mainStat, float> EquipmentStats;
         public ItemSlotType specificType;
         public List<UpgradeRequiriment> upgradeRequiriment = new List<UpgradeRequiriment>();
@@ -34,9 +30,7 @@ namespace CC.Inventory
     {
         public List<UpgradeMaterialRequiriment> materialRequiriment = new List<UpgradeMaterialRequiriment>();
         public float price;
-        public float bonusAttack;
-        public float bonusHealth;
-        public float bonusDeff;
+        public SerializedDictionary<mainStat, float> EquipmentStats;
     }
 
     [System.Serializable]

@@ -83,24 +83,12 @@ namespace CC.Characters
         public List<States.PlayerAttackingState> PlayerAttackingStates { get; private set; }
        
         #endregion
-
-        /*
-        public bool IsCurrentState<T>()
-        {
-            return GetCurrentStateType() == typeof(T);
-        }
-        */
-
-        //public System.Type GetCurrentStateType()
-        //{
-            //return currentState.GetType();
-        //}
-
         private void Initialize()
         {
             Rigidbody = GetComponent<Rigidbody>();
             ResizableCapsuleCollider = GetComponent<PlayerResizableCapsuleCollider>();
             Animator = GetComponentInChildren<Animator>();
+            StaminaController = GetComponent<StaminaController>();
 
             PlayerCurrentData = new PlayerStateData();
 
@@ -109,13 +97,13 @@ namespace CC.Characters
 
             PlayerIdlingState = new States.PlayerIdlingState(this);
             PlayerRuningState = new States.PlayerRuningState(this);
-            PlayerDashingState = new States.PlayerDashingState(this,  StaminaController);
-            PlayerSprintingState = new States.PlayerSprintingState(this,  StaminaController);
+            PlayerDashingState = new States.PlayerDashingState(this);
+            PlayerSprintingState = new States.PlayerSprintingState(this);
             PlayerJumpingState = new States.PlayerJumpingState(this);
             PlayerFallingState = new States.PlayerFallingState(this);
             PlayerLightLandingState = new States.PlayerLightLandingState(this);
             PlayerMediumStoppingState = new States.PlayerMediumStoppingState(this);
-            PlayerBlockingState = new States.PlayerBlockingState(this, StaminaController);
+            PlayerBlockingState = new States.PlayerBlockingState(this);
             PlayerWalkingState = new States.PlayerWalkingState(this);
             PlayerClimbState = new States.PlayerClimbState(this);
             PlayerClimbUpState = new States.PlayerClimbUpState(this);

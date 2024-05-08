@@ -18,9 +18,9 @@ namespace CC.Characters.States
         {
             base.Enter();
 
-            _playerController.Weapon.SetAttack();
+            // _playerController.Weapon.SetAttack();
 
-            Debug.Log("Entering PlayerAttackingState. Attack value: " + _playerController.Weapon.GetDamage());
+            // Debug.Log("Entering PlayerAttackingState. Attack value: " + _playerController.Weapon.GetDamage());
             StartAnimation(attack.AnimationName);
 
             // stateMachine.Animator.CrossFadeInFixedTime(attack.AnimationName, attack.TransitionDuration);

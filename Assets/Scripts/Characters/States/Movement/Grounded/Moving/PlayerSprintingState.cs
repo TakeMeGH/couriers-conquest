@@ -9,11 +9,9 @@ namespace CC.Characters.States
         private float startTime;
         private bool keepSprinting;
         private bool shouldResetSprintState;
-        private StaminaController staminaController;
 
-        public PlayerSprintingState(PlayerControllerStatesMachine _playerController, StaminaController staminaController) : base(_playerController)
+        public PlayerSprintingState(PlayerControllerStatesMachine _playerController) : base(_playerController)
         {
-            this.staminaController = staminaController;
         }
 
         public override void Enter()
@@ -55,7 +53,7 @@ namespace CC.Characters.States
             base.Update();
 
             // Cek apa stamina lebih besar dari 0
-            if (_playerController.GetComponent<StaminaController>().GetCurrentStamina() <= 0)
+            if (_playerController.StaminaController.GetCurrentStamina() <= 0)
             {
                 // Kalau stamina ga lebih besar dari 0, stop nge sprint
                 StopSprinting();
@@ -64,7 +62,7 @@ namespace CC.Characters.States
             else if (keepSprinting)
             {
                 float sprintStaminaCost = _playerController.PlayerMovementData.SprintStaminaCost;
-                staminaController.DecreaseStaminaByAmount(sprintStaminaCost * Time.deltaTime); // Stamina ngurang per detik berdasar poin yang udah di set di PlayerMovementSO saat sprinting
+                _playerController.StaminaController.DecreaseStaminaByAmount(sprintStaminaCost * Time.deltaTime); // Stamina ngurang per detik berdasar poin yang udah di set di PlayerMovementSO saat sprinting
                 return;
             }
 

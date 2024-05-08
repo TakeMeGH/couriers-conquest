@@ -17,10 +17,17 @@ MonoBehaviour:
   itemDescription: Basic Armor Aiden
   itemSprite: {fileID: 21300000, guid: 43b8af4802ca0e64dac68e716ebdd4b0, type: 3}
   maxStacks: 1
-  equipmentLevel: 0
   costSell: 0
+  equipmentLevel: 0
   EquipmentStats:
     _serializedList:
     - Key: 5
       Value: 10
   specificType: 3
+  upgradeRequiriment:
+  - materialRequiriment: []
+    price: 100
+    EquipmentStats:
+      _serializedList:
+      - Key: 5
+        Value: 10

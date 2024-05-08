@@ -283,17 +283,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""a57fb021-7be4-4e0d-808c-0c54b2685bd3"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""98aba709-1e51-49a6-b721-f78ffd556bad"",
                     ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": """",

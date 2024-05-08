@@ -8,17 +8,15 @@ namespace CC.Characters.States
         private float startTime;
         private int consecutiveDashesUsed;
         private bool shouldKeepRotating;
-        private StaminaController staminaController; 
 
-        public PlayerDashingState(PlayerControllerStatesMachine _playerController, StaminaController staminaController) : base(_playerController) 
+        public PlayerDashingState(PlayerControllerStatesMachine _playerController) : base(_playerController)
         {
-            this.staminaController = staminaController; 
         }
 
         public override void Enter()
         {
             // Cek apa stamina lebih besar dari 0
-            if (_playerController.GetComponent<StaminaController>().GetCurrentStamina() <= 0)
+            if (_playerController.StaminaController.GetCurrentStamina() <= 0)
             {
                 // Kalau stamina ga lebih besar dari 0, jangan kasih player ngedash
                 Debug.Log("Not enough stamina to dash!");
@@ -43,7 +41,7 @@ namespace CC.Characters.States
             startTime = Time.time;
 
             float dashStaminaCost = _playerController.PlayerMovementData.DashStaminaCost;
-            staminaController.DecreaseStaminaByAmount(dashStaminaCost); // Stamina ngurang berdasar poin yang udah di set di PlayerMovementSO/dash
+            _playerController.StaminaController.DecreaseStaminaByAmount(dashStaminaCost); // Stamina ngurang berdasar poin yang udah di set di PlayerMovementSO/dash
         }
 
         public override void Exit()

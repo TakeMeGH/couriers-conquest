@@ -25,7 +25,7 @@ namespace CC.Combats
                         float blockStaminaCost = playerController.PlayerMovementData.BlockStaminaCost;
                         staminaController.DecreaseStaminaByAmount(blockStaminaCost); // Stamina ngurang berdasar poin yang udah di set di PlayerMovementSO/attack diterima saat posisi blocking
                     }
-                    nextDamageTime = Time.time + 1f/damageRate;
+                    nextDamageTime = Time.time + 1f / damageRate;
                     Debug.Log("Damage Amount: " + damageAmount);
                     Debug.Log("Player Health: " + playerHealth.GetCurrentHealth());
                 }
