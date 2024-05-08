@@ -27,5 +27,15 @@ namespace CC.StateMachine
             if (!_onSwitchState) currentState?.PhysicsUpdate();
 
         }
+
+        public System.Type GetCurrentStateType()
+        {
+            return currentState.GetType();
+        }
+
+        public IState GetCurrentState()
+        {
+            return currentState;
+        }
     }
 }

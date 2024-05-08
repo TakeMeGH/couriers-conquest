@@ -18,20 +18,28 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: 43b8af4802ca0e64dac68e716ebdd4b0, type: 3}
   maxStacks: 1
   costSell: 0
-  weaponLevel: 0
-  attackWeapon: 0
-  deffWeapon: 0
-  healthWeapon: 0
-  specificType: 2
+  equipmentLevel: 1
+  EquipmentStats:
+    _serializedList:
+    - Key: 5
+      Value: 30
+    - Key: 0
+      Value: 0
+    - Key: 1
+      Value: 0
+    - Key: 2
+      Value: 0
+    - Key: 3
+      Value: 0
+    - Key: 4
+      Value: 0
+    - Key: 6
+      Value: 0
+  specificType: 3
   upgradeRequiriment:
-  - materialRequiriment:
-    - itemRequiriment: {fileID: 11400000, guid: 682e083349ed3b94e9494c5281401aef,
-        type: 2}
-      amount: 2
-    - itemRequiriment: {fileID: 11400000, guid: a82e255da905aaa4f824eafb1d676a52,
-        type: 2}
-      amount: 2
-    price: 0
-    bonusAttack: 0
-    bonusHealth: 0
-    bonusDeff: 0
+  - materialRequiriment: []
+    price: 100
+    EquipmentStats:
+      _serializedList:
+      - Key: 5
+        Value: 10

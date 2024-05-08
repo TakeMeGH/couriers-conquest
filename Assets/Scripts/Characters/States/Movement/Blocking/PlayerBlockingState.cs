@@ -7,7 +7,6 @@ namespace CC.Characters.States
         private BlockSO blocking;
         //private readonly int BlockHash = Animator.StringToHash("Block");
         //private const float CrossFadeDuration = 0.1f;
-
         public PlayerBlockingState(PlayerControllerStatesMachine _playerController) : base(_playerController)
         {
             blocking = _playerController.Block;
@@ -15,7 +14,13 @@ namespace CC.Characters.States
 
         public override void Enter()
         {
-            _playerController.Health.SetInvunerable(true);
+            if (!_playerController.StaminaController.CanBlock)
+            {
+                _playerController.SwitchState(_playerController.PlayerIdlingState);
+                return;
+            }
+
+            _playerController.Health.SetBlocking(true);
             base.Enter();
             ResetVelocity();
 
@@ -25,7 +30,7 @@ namespace CC.Characters.States
         public override void Exit()
         {
             base.Exit();
-            _playerController.Health.SetInvunerable(false);
+            _playerController.Health.SetBlocking(false);
             StopAnimation(blocking.AnimationName);
         }
 
@@ -33,7 +38,7 @@ namespace CC.Characters.States
         {
             base.Update();
 
-            if (!_playerController.InputReader.IsBlocking)
+            if (!_playerController.InputReader.IsBlocking || !_playerController.StaminaController.CanBlock)
             {
                 _playerController.SwitchState(_playerController.PlayerIdlingState);
                 return;
@@ -46,3 +51,4 @@ namespace CC.Characters.States
         }
     }
 }
+
