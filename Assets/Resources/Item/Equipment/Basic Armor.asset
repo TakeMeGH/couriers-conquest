@@ -18,11 +18,23 @@ MonoBehaviour:
   itemSprite: {fileID: 21300000, guid: 43b8af4802ca0e64dac68e716ebdd4b0, type: 3}
   maxStacks: 1
   costSell: 0
-  equipmentLevel: 0
+  equipmentLevel: 1
   EquipmentStats:
     _serializedList:
     - Key: 5
-      Value: 10
+      Value: 30
+    - Key: 0
+      Value: 0
+    - Key: 1
+      Value: 0
+    - Key: 2
+      Value: 0
+    - Key: 3
+      Value: 0
+    - Key: 4
+      Value: 0
+    - Key: 6
+      Value: 0
   specificType: 3
   upgradeRequiriment:
   - materialRequiriment: []

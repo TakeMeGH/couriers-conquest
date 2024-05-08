@@ -624,6 +624,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player MC
       objectReference: {fileID: 0}
+    - target: {fileID: 1968939700130690617, guid: f4a3ce2bb0db9bd47a58ab3a254c777b,
+        type: 3}
+      propertyPath: <Attacks>k__BackingField.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4116597097574829069, guid: f4a3ce2bb0db9bd47a58ab3a254c777b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -677,11 +682,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1713287152588927198, guid: f4a3ce2bb0db9bd47a58ab3a254c777b,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1280915378}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4a3ce2bb0db9bd47a58ab3a254c777b, type: 3}
 --- !u!4 &1157745519 stripped
 Transform:
@@ -861,41 +862,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!1 &1280915366 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1713287152588927198, guid: f4a3ce2bb0db9bd47a58ab3a254c777b,
-    type: 3}
-  m_PrefabInstance: {fileID: 971265467}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1280915373 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1968939700130690617, guid: f4a3ce2bb0db9bd47a58ab3a254c777b,
-    type: 3}
-  m_PrefabInstance: {fileID: 971265467}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1280915366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d0d2c0f650b1b34684f4cc160d66e75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1280915378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1280915366}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62fcdad757d2f874cba5bf0f16323260, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerStats: {fileID: 11400000, guid: f3ee829ae9f91ee48b6a0fd3da31e4a9, type: 2}
-  playerController: {fileID: 1280915373}
-  staminaIncreaseRate: 5
-  staminaRegenDelay: 3
-  blockStaminaReq: 10
 --- !u!1 &1457813762
 GameObject:
   m_ObjectHideFlags: 0
