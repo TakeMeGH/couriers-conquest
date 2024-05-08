@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using CC.Core.Data.Dynamic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -83,11 +85,23 @@ namespace CC.Inventory
                 {
                     EquipmentItem equipment = (EquipmentItem)i.item;
 
-                    equipment.attackWeapon += equipment.upgradeRequiriment[equipment.weaponLevel].bonusAttack;
-                    equipment.deffWeapon += equipment.upgradeRequiriment[equipment.weaponLevel].bonusDeff;
-                    equipment.healthWeapon += equipment.upgradeRequiriment[equipment.weaponLevel].bonusHealth;
+                    foreach (mainStat stat in Enum.GetValues(typeof(mainStat)))
+                    {
+                        float additionValue = 0;
+                        if (equipment.EquipmentStats.TryGetValue(stat, out float value) &&
+                            equipment.upgradeRequiriment[equipment.equipmentLevel].EquipmentStats.TryGetValue(stat, out additionValue)) { }
+                        {
+                            equipment.EquipmentStats[stat] = value + additionValue;
+                        }
+                    }
 
-                    equipment.weaponLevel++;
+                    // TODO : FIX
+                    // for(int i = 0;i < equipment.EquipmentStats.co)
+                    // equipment.attackWeapon += equipment.upgradeRequiriment[equipment.equipmentLevel].bonusAttack;
+                    // equipment.deffWeapon += equipment.upgradeRequiriment[equipment.equipmentLevel].bonusDeff;
+                    // equipment.healthWeapon += equipment.upgradeRequiriment[equipment.equipmentLevel].bonusHealth;
+
+                    equipment.equipmentLevel++;
                     return;
                 }
             }

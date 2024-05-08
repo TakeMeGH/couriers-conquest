@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using AYellowpaper.SerializedCollections;
+using CC.Core.Data.Dynamic;
 using UnityEngine;
 
 namespace CC.Inventory
@@ -7,10 +9,8 @@ namespace CC.Inventory
     [CreateAssetMenu(fileName = "EquipmentItem", menuName = "Items/Equipment", order = 3)]
     public class EquipmentItem : ABaseItem
     {
-        public int weaponLevel;
-        public float attackWeapon;
-        public float deffWeapon;
-        public float healthWeapon;
+        public int equipmentLevel;
+        public SerializedDictionary<mainStat, float> EquipmentStats;
         public ItemSlotType specificType;
         public List<UpgradeRequiriment> upgradeRequiriment = new List<UpgradeRequiriment>();
 
@@ -30,9 +30,7 @@ namespace CC.Inventory
     {
         public List<UpgradeMaterialRequiriment> materialRequiriment = new List<UpgradeMaterialRequiriment>();
         public float price;
-        public float bonusAttack;
-        public float bonusHealth;
-        public float bonusDeff;
+        public SerializedDictionary<mainStat, float> EquipmentStats;
     }
 
     [System.Serializable]

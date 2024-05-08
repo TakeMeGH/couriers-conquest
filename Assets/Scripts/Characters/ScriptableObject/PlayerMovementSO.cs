@@ -60,6 +60,20 @@ namespace CC.Characters
         #endregion
 
         #endregion
+        
+       #region StaminaCostData
+        [SerializeField, Header("Stamina Cost Data"), Range(0f, 100f)]
+        public float SprintStaminaCost = 5f;
+
+        [SerializeField, Range(0f, 100f)]
+        public float DashStaminaCost = 10f;
+
+        [SerializeField, Range(0f, 100f)]
+        public float BlockStaminaCost = 5f;
+        #endregion
+
+
+
 
 
         // [field: SerializeField] public List<PlayerCameraRecenteringData> SidewaysCameraRecenteringData { get; private set; }

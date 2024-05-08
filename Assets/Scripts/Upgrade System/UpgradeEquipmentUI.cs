@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using AYellowpaper.SerializedCollections;
+using CC.Core.Data.Dynamic;
+
 
 namespace CC.UpgradeEquipment
 {
@@ -72,21 +75,35 @@ namespace CC.UpgradeEquipment
             _upgradeButton.interactable = condition;
         }
 
-        public void SetStatsPanelBeforeUpgrade(Sprite img, int level, float att, float deff, float weight)
+        public void SetStatsPanelBeforeUpgrade(Sprite img, int level, SerializedDictionary<mainStat, float> EquipmentStats, float weight)
         {
             _imageBeforeEq.sprite = img;
             _textLevelBefore.text = "Equpment Level - " + level.ToString();
-            _textAttackBefore.text = att.ToString();
-            _textDefenseBefore.text = deff.ToString();
+
+            float attackvalue = 0;
+            EquipmentStats.TryGetValue(mainStat.AttackValue, out attackvalue);
+
+            float deffenseValue = 0;
+            EquipmentStats.TryGetValue(mainStat.Defense, out deffenseValue);
+
+            _textAttackBefore.text = attackvalue.ToString();
+            _textDefenseBefore.text = deffenseValue.ToString();
             _textWeightBefore.text = weight.ToString();
         }
 
-        public void SetStatsPanelAfterUpgrade(Sprite img, int level, float att, float deff, float weight)
+        public void SetStatsPanelAfterUpgrade(Sprite img, int level, SerializedDictionary<mainStat, float> EquipmentStats, float weight)
         {
             _imageAfterEq.sprite = img;
             _textLevelAfter.text = "Equpment Level - " + level.ToString();
-            _textAttackAfter.text = att.ToString();
-            _textDefenseAfter.text = deff.ToString();
+
+            float attackvalue = 0;
+            EquipmentStats.TryGetValue(mainStat.AttackValue, out attackvalue);
+
+            float deffenseValue = 0;
+            EquipmentStats.TryGetValue(mainStat.Defense, out deffenseValue);
+
+            _textAttackAfter.text = attackvalue.ToString();
+            _textDefenseAfter.text = deffenseValue.ToString();
             _textWeightAfter.text = weight.ToString();
 
             _panelSucces.SetActive(true);
