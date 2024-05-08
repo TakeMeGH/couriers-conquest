@@ -17,7 +17,10 @@ namespace CC.Characters.States
         public override void Enter()
         {
             base.Enter();
-            // _playerController.Weapon.SetAttack(attack.Damage);
+
+            // _playerController.Weapon.SetAttack();
+
+            // Debug.Log("Entering PlayerAttackingState. Attack value: " + _playerController.Weapon.GetDamage());
             StartAnimation(attack.AnimationName);
 
             // stateMachine.Animator.CrossFadeInFixedTime(attack.AnimationName, attack.TransitionDuration);
@@ -25,6 +28,7 @@ namespace CC.Characters.States
             ResetVelocity();
             alreadyAppliedForce = false;
             previousFrameTime = 0;
+        
         }
 
         public override void Update()

@@ -3,6 +3,8 @@ using CC.Characters.DataBlueprint.Layers;
 using UnityEngine.Events;
 using System.Collections.Generic;
 using CC.Combats;
+using CC.Core.Data.Dynamic;
+using CC.Inventory;
 using SA;
 
 namespace CC.Characters
@@ -23,6 +25,11 @@ namespace CC.Characters
         [field: Header("Collisions")]
         [field: SerializeField] public PlayerLayerData LayerData { get; private set; }
 
+        [field: Header("Player Stats")]
+        [field: SerializeField] public PlayerStatsSO playerStatsSO;
+        //[field: SerializeField] public EquipmentItem equippedWeapon;
+        //[field: SerializeField] public EquipmentItem equippedShield;
+
         [field: Header("Attack Combo")]
         [field: SerializeField] public AttackSO[] Attacks { get; private set; }
         [field: SerializeField] public WeaponDamage Weapon { get; private set; }
@@ -38,6 +45,10 @@ namespace CC.Characters
         [field: SerializeField] public FreeClimbMC FreeClimb { get; private set; }
         [field: SerializeField] public Transform StandUpPoint { get; private set; }
         public Vector3 OffsetStandUpPoint { get; private set; }
+
+
+        [field: Header("Stamina")]
+        [field: SerializeField] public StaminaController StaminaController { get; private set; }
 
 
         #region Component
@@ -70,15 +81,14 @@ namespace CC.Characters
 
 
         public List<States.PlayerAttackingState> PlayerAttackingStates { get; private set; }
-
+       
         #endregion
-
-
         private void Initialize()
         {
             Rigidbody = GetComponent<Rigidbody>();
             ResizableCapsuleCollider = GetComponent<PlayerResizableCapsuleCollider>();
             Animator = GetComponentInChildren<Animator>();
+            StaminaController = GetComponent<StaminaController>();
 
             PlayerCurrentData = new PlayerStateData();
 
@@ -123,6 +133,5 @@ namespace CC.Characters
         {
             TriggerExitEvent.Invoke(collider);
         }
-
     }
 }
