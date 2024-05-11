@@ -17,11 +17,12 @@ MonoBehaviour:
   itemDescription: Long Sword Aiden Father
   itemSprite: {fileID: 21300000, guid: 51e767e714c05dd44bee54bf9163a3bf, type: 3}
   maxStacks: 1
-  costSell: 1
-  weaponLevel: 1
-  attackWeapon: 150
-  deffWeapon: 30
-  healthWeapon: 100
+  costSell: 5
+  equipmentLevel: 0
+  EquipmentStats:
+    _serializedList:
+    - Key: 3
+      Value: 10
   specificType: 1
   upgradeRequiriment:
   - materialRequiriment:
@@ -29,6 +30,7 @@ MonoBehaviour:
         type: 2}
       amount: 1
     price: 1000
-    bonusAttack: 10
-    bonusHealth: 0
-    bonusDeff: 2
+    EquipmentStats:
+      _serializedList:
+      - Key: 3
+        Value: 20
