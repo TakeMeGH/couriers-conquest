@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using System.Linq;
 using CC.Enemy.States;
 
 
@@ -8,125 +7,85 @@ namespace CC.Enemy
 {
     public class EnemyController : StateMachine.StateMachine
     {
-        [field: SerializeField] public float MaxHealth { get; set; } = 100f;
-        [SerializeField] public LayerMask playerMask;
-        [SerializeField] public NavMeshAgent navMeshAgent;
 
-        [SerializeField] public float timetoRotate = 2;
-        [SerializeField] public float speedWalk = 6;
-        [SerializeField] public float startWaitTime = 4;
-        [SerializeField] public float speedRun = 9;
-        [SerializeField] public float viewRadius = 15;
-        [SerializeField] public float viewAngle = 90;
-        [SerializeField] public float meshResolution = 1f;
-        [SerializeField] public int edgeIterations = 4;
-        [SerializeField] public float edgeDistance = 0.5f;
-        [SerializeField] public float stoppingDistance = 0.01f;
-        [SerializeField] public float stopDistanceFromPlayer = 2f;
-        [SerializeField] public float rotationSpeed = 5f;
-        [SerializeField] public float attackRange = 1.5f;
-        [SerializeField] public float maxWaitTime;
-
-        public Vector3 playerLastPosition = Vector3.zero;
-        public Vector3 m_PlayerPosition;
-
-        public float m_WaitTime;
-        public float m_TimeToRotate;
-        public bool m_PlayerInRange;
-        public bool m_PlayerNear;
-        public bool m_IsPatrol;
-        public bool m_CaughtPlayer;
-        public int m_CurrentWaypointIndex = 0;
-
-        public float CurrentHealth { get; private set; }
-
+        public EnemyControllerDataSO EnemyPersistenceData;
+        public Transform[] PatrolWaypoints;
         #region Component
+        public NavMeshAgent NavMeshAgent { get; private set; }
         public Animator Animator { get; private set; }
         public Rigidbody Rigidbody { get; private set; }
         public EnemyStateData EnemyCurrentData { get; private set; }
-        public EnemyState enemyState { get; private set; }
         #endregion
 
-        public Transform[] waypoints;
 
         #region State Machine Variables
-        private StateMachine.StateMachine stateMachine;
-        public EnemyIdleState IdleState { get; private set; }
         public EnemyPatrolingState PatrolingState { get; private set; }
+        public EnemyCheckingState CheckingState { get; private set; }
         public EnemyChasingState ChasingState { get; private set; }
+        public EnemyTauntState TauntState { get; private set; }
+        public EnemyIdleState IdleState { get; private set; }
+        public EnemyStepBackState StepBackState { get; private set; }
         public EnemyAttackState AttackState { get; private set; }
         #endregion
 
         public void Initialize()
         {
-            CurrentHealth = MaxHealth;
             Rigidbody = GetComponent<Rigidbody>();
             Animator = GetComponentInChildren<Animator>();
+            NavMeshAgent = GetComponent<NavMeshAgent>();
 
             EnemyCurrentData = new EnemyStateData();
-            EnemyCurrentData.navMeshAgent = GetComponent<NavMeshAgent>();
+
+            PatrolingState = new EnemyPatrolingState(this);
+            CheckingState = new EnemyCheckingState(this);
+            ChasingState = new EnemyChasingState(this);
+            TauntState = new EnemyTauntState(this);
+            AttackState = new EnemyAttackState(this);
+            StepBackState = new EnemyStepBackState(this);
 
             IdleState = new EnemyIdleState(this);
 
-            PatrolingState = new EnemyPatrolingState(this);
-            ChasingState = new EnemyChasingState(this);
-            AttackState = new EnemyAttackState(this);
+            // NavMeshAgent.stoppingDistance = EnemyPersistenceData.StoppingDistance;
 
-            EnemyCurrentData.m_PlayerPosition = Vector3.zero;
-            EnemyCurrentData.m_IsPatrol = true;
-            EnemyCurrentData.m_CaughtPlayer = false;
-            EnemyCurrentData.m_PlayerInRange = false;
-            EnemyCurrentData.m_WaitTime = EnemyCurrentData.startWaitTime;
-            EnemyCurrentData.m_TimeToRotate = EnemyCurrentData.timetoRotate;
+            // NavMeshAgent.isStopped = false;
+            // NavMeshAgent.speed = EnemyPersistenceData.SpeedWalk;
+            // NavMeshAgent.SetDestination(Waypoints[EnemyCurrentData.CurrentWaypointIndex].position);
 
-            EnemyCurrentData.m_CurrentWaypointIndex = 0;
-            EnemyCurrentData.navMeshAgent = GetComponent<NavMeshAgent>();
-            EnemyCurrentData.navMeshAgent.stoppingDistance = EnemyCurrentData.stoppingDistance;
+            // EnemyCurrentData.CurrentWaitTime = Random.Range(0f, EnemyPersistenceData.MaxWaitTime);
+            // Waypoints = GameObject.FindGameObjectsWithTag("Waypoint").Select(obj => obj.transform).ToArray();
 
-            EnemyCurrentData.navMeshAgent.isStopped = false;
-            EnemyCurrentData.navMeshAgent.speed = EnemyCurrentData.speedWalk;
-            EnemyCurrentData.navMeshAgent.SetDestination(waypoints[EnemyCurrentData.m_CurrentWaypointIndex].position);
+            // if (Waypoints.Length > 0)
+            // {
+            //     NavMeshAgent.SetDestination(Waypoints[EnemyCurrentData.CurrentWaypointIndex].position);
+            // }
+            // else
+            // {
+            //     Debug.LogError("No waypoints found!");
+            // }
 
-            EnemyCurrentData.m_WaitTime = Random.Range(0f, EnemyCurrentData.maxWaitTime);
-            waypoints = GameObject.FindGameObjectsWithTag("Waypoint").Select(obj => obj.transform).ToArray();
-
-            if (waypoints.Length > 0)
-            {
-                EnemyCurrentData.navMeshAgent.SetDestination(waypoints[EnemyCurrentData.m_CurrentWaypointIndex].position);
-            }
-            else
-            {
-                Debug.LogError("No waypoints found!");
-            }
-
-            EnemyCurrentData.m_WaitTime = Random.Range(0f, EnemyCurrentData.maxWaitTime);
+            // EnemyCurrentData.CurrentWaitTime = Random.Range(0f, EnemyPersistenceData.MaxWaitTime);
         }
 
         void Start()
         {
             Initialize();
-            // enemyState = IdleState;
-            SwitchState(IdleState);
+            SwitchState(PatrolingState);
         }
 
-        // void Update()
-        // {
-        //     enemyState.EnviromentView();
-        // }
-
-        public void Damage(float damageAmount)
+        public void OnAnimationEnterEvent()
         {
-            CurrentHealth -= damageAmount;
-
-            if (CurrentHealth < 0)
-            {
-                Die();
-            }
+            currentState.OnAnimationEnterEvent();
         }
 
-        public void Die()
+        public void OnAnimationExitEvent()
         {
-
+            currentState.OnAnimationExitEvent();
         }
+
+        public void OnAnimationTransitionEvent()
+        {
+            currentState.OnAnimationTransitionEvent();
+        }
+
     }
 }

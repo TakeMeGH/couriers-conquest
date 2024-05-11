@@ -1,37 +1,49 @@
-using System.Collections;
-using System.Collections.Generic;
-using CC.Enemy;
 using UnityEngine;
+using System;
+using UnityEngine.AI;
+
 
 namespace CC.Enemy.States
 {
-    public class EnemyPatrolingState : EnemyState
+    public class EnemyPatrolingState : EnemyControllerState
     {
-        public EnemyPatrolingState(EnemyController enemy) : base(enemy)
+        public NavMeshPath navMeshPath;
+
+        public EnemyPatrolingState(EnemyController _enemyController) : base(_enemyController)
         {
         }
 
         public override void Enter()
         {
             base.Enter();
-            
-        }
 
-        public override void Exit()
-        {
-            base.Exit();
+            StartAnimation("isPatroling");
+
+            _enemyController.NavMeshAgent.isStopped = false;
+            _enemyController.NavMeshAgent.speed = _enemyController.EnemyPersistenceData.PatrolSpeed;
+            _enemyController.NavMeshAgent.stoppingDistance = _enemyController.EnemyPersistenceData.PatrolStopDistance;
+            _enemyController.NavMeshAgent.SetDestination(GetRandomWayPointDestination());
+
+            _enemyController.EnemyCurrentData.IsPlayerInRange = false;
+            // navMeshPath = new NavMeshPath();
+            // Debug.Log(_enemyController.NavMeshAgent.pathStatus + " DEBUG");
+            // Debug.Log(_enemyController.NavMeshAgent.CalculatePath(GetRandomWayPointDestination(), navMeshPath) + " " + navMeshPath.status);
         }
 
         public override void Update()
         {
             base.Update();
-            EnviromentView();
 
-            if (enemy.EnemyCurrentData.m_PlayerInRange)
+            if (_enemyController.EnemyCurrentData.IsPlayerInRange)
             {
-                enemy.SwitchState(enemy.ChasingState);
-                Debug.Log("Chasing");
+                _enemyController.SwitchState(_enemyController.ChasingState);
             }
+
+            if (IsStoping())
+            {
+                _enemyController.SwitchState(_enemyController.CheckingState);
+            }
+
         }
 
         public override void PhysicsUpdate()
@@ -39,27 +51,49 @@ namespace CC.Enemy.States
             base.PhysicsUpdate();
         }
 
-        public override void OnAnimationEnterEvent()
+        public override void Exit()
         {
-            base.OnAnimationEnterEvent();
+            base.Exit();
+            StopAnimation("isPatroling");
+
         }
 
-        private void Patroling()
+        private Vector3 GetRandomWayPointDestination()
         {
-                if (enemy.EnemyCurrentData.navMeshAgent.remainingDistance <= enemy.EnemyCurrentData.navMeshAgent.stoppingDistance)
-                {
-                    if (enemy.EnemyCurrentData.m_WaitTime <= 0)
-                    {
-                        NextPoint();
-                        Move(enemy.EnemyCurrentData.speedWalk);
-                        enemy.EnemyCurrentData.m_WaitTime = Random.Range(0f, enemy.EnemyCurrentData.maxWaitTime);
-                    }
-                    else
-                    {
-                        Stop();
-                        enemy.EnemyCurrentData.m_WaitTime -= Time.deltaTime;
-                    }
-                }
+            System.Random random = new System.Random();
+            int randomIndex = random.Next(_enemyController.PatrolWaypoints.Length);
+
+            while (Vector3.Distance(_enemyController.PatrolWaypoints[randomIndex].position,
+                _enemyController.transform.position) <= _enemyController.NavMeshAgent.stoppingDistance)
+            {
+                randomIndex = random.Next(_enemyController.PatrolWaypoints.Length);
+            }
+
+            return _enemyController.PatrolWaypoints[randomIndex].position;
         }
+
+
+        // public override void OnAnimationEnterEvent()
+        // {
+        //     base.OnAnimationEnterEvent();
+        // }
+
+        // private void Patroling()
+        // {
+        //         if (enemy.EnemyCurrentData.navMeshAgent.remainingDistance <= enemy.EnemyCurrentData.navMeshAgent.stoppingDistance)
+        //         {
+        //             if (enemy.EnemyCurrentData.m_WaitTime <= 0)
+        //             {
+        //                 NextPoint();
+        //                 Move(enemy.EnemyCurrentData.speedWalk);
+        //                 enemy.EnemyCurrentData.m_WaitTime = Random.Range(0f, enemy.EnemyCurrentData.maxWaitTime);
+        //             }
+        //             else
+        //             {
+        //                 Stop();
+        //                 enemy.EnemyCurrentData.m_WaitTime -= Time.deltaTime;
+        //             }
+        //         }
+        // }
     }
 }

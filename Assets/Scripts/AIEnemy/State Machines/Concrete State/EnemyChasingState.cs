@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using CC.Enemy;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace CC.Enemy.States
 {
-    public class EnemyChasingState : EnemyState
+    public class EnemyChasingState : EnemyControllerState
     {
+        float timeToSetDestination = 0;
+        bool isOutOfRange = false;
         public EnemyChasingState(EnemyController enemy) : base(enemy)
         {
         }
@@ -14,88 +17,81 @@ namespace CC.Enemy.States
         public override void Enter()
         {
             base.Enter();
-            Debug.Log("Chasing");
+
+            StartAnimation("isChasing");
+            _enemyController.Animator.SetFloat("isFastChase", 1);
+
+            isOutOfRange = false;
+            CheckChase();
+
+            _enemyController.NavMeshAgent.isStopped = false;
+            _enemyController.NavMeshAgent.angularSpeed = _enemyController.EnemyPersistenceData.DefaultAnggularSpeed;
+            _enemyController.NavMeshAgent.speed = _enemyController.EnemyPersistenceData.FastChaseSpeed;
+            _enemyController.NavMeshAgent.stoppingDistance = _enemyController.EnemyPersistenceData.ChaseStopingDistancce;
         }
 
-        public override void Exit()
-        {
-            base.Exit();
-        }
 
         public override void Update()
         {
             base.Update();
-            Debug.Log("Chasing3");
-            // EnviromentView();
 
-            // if (!enemy.m_PlayerNear)
-            // {
-            //     Debug.Log("Chasing2");
-            //     Chasing();
-            // }
         }
 
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
 
-            Chasing();
-
-        }
-
-        public override void OnAnimationEnterEvent()
-        {
-            base.OnAnimationEnterEvent();
-        }
-        private void Chasing()
-        {
-            Debug.Log("Chasing...");
-            enemy.m_PlayerNear = false;
-            enemy.playerLastPosition = Vector3.zero;
-
-            if (!enemy.m_CaughtPlayer)
+            timeToSetDestination -= Time.deltaTime;
+            if (timeToSetDestination <= 0)
             {
-                if (Vector3.Distance(enemy.transform.position, enemy.EnemyCurrentData.m_PlayerPosition) <= enemy.stopDistanceFromPlayer)
+
+                CheckChase();
+                timeToSetDestination = _enemyController.EnemyPersistenceData.TimeToReChase;
+            }
+
+            float distance = Vector3.Distance(_enemyController.transform.position,
+                _enemyController.EnemyCurrentData.PlayerTransform.transform.position);
+
+            if (distance < _enemyController.EnemyPersistenceData.TooCloseDistance)
+            {
+                _enemyController.SwitchState(_enemyController.StepBackState);
+            }
+
+
+            if (IsStoping())
+            {
+                _enemyController.SwitchState(_enemyController.AttackState);
+            }
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+
+            StopAnimation("isChasing");
+
+        }
+
+        void CheckChase()
+        {
+            NavMeshHit hit;
+            if (NavMesh.SamplePosition(_enemyController.EnemyCurrentData.PlayerTransform.position, out hit, 1.0f, NavMesh.AllAreas))
+            {
+                _enemyController.NavMeshAgent.SetDestination(_enemyController.EnemyCurrentData.PlayerTransform.position);
+                isOutOfRange = false;
+            }
+            else
+            {
+                if (!isOutOfRange && NavMesh.SamplePosition(_enemyController.EnemyCurrentData.PlayerTransform.position, out hit, 10.0f, NavMesh.AllAreas))
                 {
-                    Debug.Log("Chasing12");
-                    Stop();
-                    Vector3 targetDirection = enemy.EnemyCurrentData.m_PlayerPosition - enemy.transform.position;
-                    targetDirection = new Vector3(targetDirection.x, 0, targetDirection.z);
-                    Vector3 newDirection = Vector3.RotateTowards(enemy.transform.forward, targetDirection, 1, 0.0f);
-                    enemy.transform.rotation = Quaternion.LookRotation(newDirection);
-                    enemy.Animator.SetBool("isAttack", true);
-                }
-                else
-                {
-                    Debug.Log("Chasing123");
-                    Move(enemy.speedRun);
-                    enemy.navMeshAgent.SetDestination(enemy.EnemyCurrentData.m_PlayerPosition);
-                    enemy.Animator.SetBool("isChasing", true);
-                    enemy.Animator.SetBool("isAttack", false);
+                    _enemyController.NavMeshAgent.SetDestination(hit.position);
+                    isOutOfRange = true;
                 }
             }
-            if (enemy.navMeshAgent.remainingDistance <= enemy.navMeshAgent.stoppingDistance)
+
+            if (isOutOfRange && !_enemyController.NavMeshAgent.pathPending && _enemyController.NavMeshAgent.remainingDistance <= _enemyController.NavMeshAgent.stoppingDistance)
             {
-                Debug.Log("Chasing23");
-                if (enemy.m_WaitTime <= 0 && !enemy.m_CaughtPlayer && Vector3.Distance(enemy.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 6f)
-                {
-                    Debug.Log("Chasing234");
-                    enemy.m_IsPatrol = true;
-                    enemy.m_PlayerNear = false;
-                    Move(enemy.speedWalk);
-                    enemy.m_TimeToRotate = enemy.timetoRotate;
-                    enemy.m_WaitTime = enemy.startWaitTime;
-                    enemy.navMeshAgent.SetDestination(enemy.waypoints[enemy.m_CurrentWaypointIndex].position);
-                }
-                else
-                {
-                    Debug.Log("Chasing321");
-                    if (Vector3.Distance(enemy.transform.position, GameObject.FindGameObjectWithTag("Player").transform.position) >= 2.5f)
-                    {
-                        Stop();
-                        enemy.m_WaitTime -= Time.deltaTime;
-                    }
-                }
+                _enemyController.SwitchState(_enemyController.TauntState);
             }
         }
     }
