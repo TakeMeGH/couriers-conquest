@@ -6,45 +6,51 @@ using UnityEngine.UI;
 
 public class PauseMenu : MonoBehaviour
 {
+    [SerializeField] InputReader _inputReader;
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
     public Button mainMenuButton;
     public Button resumeButton;
 
 
-    private void Start() 
+    private void Start()
     {
         mainMenuButton.onClick.AddListener(MainMenu);
         resumeButton.onClick.AddListener(Resume);
     }
-    void Update() 
+    void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(GameIsPaused)
+            if (GameIsPaused)
             {
                 Resume();
+
             }
             else
             {
-                Pause();
+                StartCoroutine(Pause());
             }
         }
     }
 
     void Resume()
     {
-        pauseMenuUI.SetActive(false);
         Time.timeScale = 1f;
+        _inputReader.EnableGameplayInput();
         GameIsPaused = false;
-    }   
+        pauseMenuUI.SetActive(false);
+    }
 
-    void Pause()
+    IEnumerator Pause()
     {
+        _inputReader.EnableInventoryUIInput();
+        yield return null;
         pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
         GameIsPaused = true;
-    } 
+        Time.timeScale = 0f;
+
+    }
 
     public void MainMenu()
     {

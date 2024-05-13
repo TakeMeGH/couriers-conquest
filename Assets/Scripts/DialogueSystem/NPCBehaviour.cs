@@ -39,7 +39,6 @@ namespace CC.NPC
 
         public void OpenDialogue()
         {
-            Cursor.lockState = CursorLockMode.Confined;
             _inputReader.EnableInventoryUIInput();
             _dialogueVariable.SetValue("$" + _NPCName + "HaveQuest", Quest_dialogue_node != "");
             _dialogueVariable.SetValue("$" + _NPCName + "QuestNode",Quest_dialogue_node);
@@ -68,7 +67,6 @@ namespace CC.NPC
 
         public void OnDialogueClosed()
         {
-            Cursor.lockState = CursorLockMode.Locked;
             _inputReader.EnableGameplayInput();
         }
 

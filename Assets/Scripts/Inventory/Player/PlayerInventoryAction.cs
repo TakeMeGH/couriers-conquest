@@ -5,6 +5,7 @@ using CC.Core.Data.Dynamic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using CC.Inventory.Item;
 
 namespace CC.Inventory
 {
