@@ -8,15 +8,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu/MainMenu.unity
     guid: fc177ba24559e5d42a8d07fcad0f5235
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/MainMenu/Loading.unity
     guid: 8d79de47fdab0a44da7094845e0d1cfa
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/World/Milestone1 WorldScene.unity
     guid: cf34e80727733324daca477ad250904b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/World/Milestone2 WorldScene.unity
     guid: 1fd7ba3db6ab096449698adecd624c34
+  - enabled: 0
+    path: Assets/Scenes/Examples/Paused Menu.unity
+    guid: f2ab43cee13756944bf18dd3ecc08647
+  - enabled: 1
+    path: Assets/Scenes/MainMenu/Paused Menu.unity
+    guid: d5fcfad93d2dd464cb677ac5c6f79feb
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: b664347f20a7f7b48848f6d73cc45bdf,
       type: 2}
