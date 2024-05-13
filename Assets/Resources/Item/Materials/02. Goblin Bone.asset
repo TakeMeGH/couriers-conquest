@@ -9,14 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a2f303de17f81747aafd28ed5cf1e79, type: 3}
-  m_Name: Potion
+  m_Script: {fileID: 11500000, guid: 63a219fb2f8dbba498e689ee155500a2, type: 3}
+  m_Name: 02. Goblin Bone
   m_EditorClassIdentifier: 
-  itemName: HP Potion
+  itemName: Iron
+  idItem: D002
   itemWeight: 1
-  itemDescription: 
-  itemSprite: {fileID: 21300000, guid: 2164a9b95d3beba439d976aadb9e0390, type: 3}
-  maxStacks: 5
-  costSell: 50
-  HealthPointRegenerationAmount: 5
-  durationEffect: 5
+  itemDescription: 'Iron '
+  itemSprite: {fileID: 21300000, guid: c023e2bc72e59ce43af0b5a45d0e663c, type: 3}
+  maxStacks: 10
+  costSell: 250

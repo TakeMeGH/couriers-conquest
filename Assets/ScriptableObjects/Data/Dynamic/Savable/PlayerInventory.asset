@@ -12,8 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f1d37556430a9c4eb501f6f2a6261a9, type: 3}
   m_Name: PlayerInventory
   m_EditorClassIdentifier: 
-  saveData:
-    defaultValue:
+  _saveInventoryData:
+    dataValue:
+    - key: E001
+      amount: 1
+    - key: E002
+      amount: 1
+    - key: E003
+      amount: 1
+    equipmentLevel:
+      _serializedList: []
+  _playerInventory: {fileID: 11400000, guid: 8a4eab9fce0693d45bf28a92fc853498, type: 2}
+  _defaultInventoryData:
+    dataValue:
+    - key: E001
+      amount: 1
+    - key: E002
+      amount: 1
+    - key: E003
+      amount: 1
+    equipmentLevel:
       _serializedList:
-      - Key: 
+      - Key: C001
         Value: 0
+      - Key: C002
+        Value: 0
+      - Key: C003
+        Value: 0
+  _listItemID: {fileID: 11400000, guid: 3b953422f9393254cb26578637893519, type: 2}
+  _addItemToInventory: {fileID: 0}

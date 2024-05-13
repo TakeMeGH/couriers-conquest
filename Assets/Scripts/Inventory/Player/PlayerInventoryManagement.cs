@@ -33,19 +33,16 @@ namespace CC.Inventory
                 _playerInventoryManager.existingPanels.AddRange(itemPanelsInGrid);
             }
 
-            /*_inventoryData.items.Clear();
+            //_inventoryData.items.Clear();
             for (int i = 0; i < _playerInventoryManager.existingPanels.Count; i++)
             {
-                _inventoryData.items.Add(new ItemSlotInfo(null, 0));
+                //_inventoryData.items.Add(new ItemSlotInfo(null, 0));
                 _playerInventoryManager.existingPanels[i].mousePanel = _itemSlotMouse;
-            }*/
+            }
         }
 
         private void SetDefaultEquipment()
         {
-            OnAddItem(_itemDictionary.GetValueByKey("Long Sword"), 1);
-            OnAddItem(_itemDictionary.GetValueByKey("Basic Armor"), 1);
-            OnAddItem(_itemDictionary.GetValueByKey("Basic Shield"), 1);
 
             for (int i = _inventoryData.inventorySize; i < _playerInventoryManager.existingPanels.Count; i++)
             {

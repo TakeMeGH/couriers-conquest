@@ -35,6 +35,12 @@ namespace CC.Inventory
         private float _weightValue;
         private void OnEnable()
         {
+            _inventoryData = (InventoryData)_aitemInventoryData;
+            _playerInventoryWeight = new PlayerInventoryWeight();
+            _playerInventoryManagement = new PlayerInventoryManagement();
+            _playerInventoryAction = new PlayerInventoryAction();
+            Initalize();
+
             _inventoryData.addItemToInventory.OnEventRaised += _playerInventoryManagement.OnAddItem;
             _inventoryData.removeItemEvent.OnEventRaised.AddListener(_playerInventoryManagement.OnRemoveItem);
             _inventoryData.itemCheckEvent.OnEventRaised += _playerInventoryAction.CheckItem;
@@ -59,17 +65,10 @@ namespace CC.Inventory
 
         }
 
-        private void Awake()
+        public void Initalize()
         {
-            _inventoryData = (InventoryData)_aitemInventoryData;
-
-            _playerInventoryWeight = new PlayerInventoryWeight();
             _playerInventoryWeight.Initialize(_inventoryData);
-
-            _playerInventoryManagement = new PlayerInventoryManagement();
             _playerInventoryManagement.Initialize(_inventoryData, this, _itemSlotMouse);
-
-            _playerInventoryAction = new PlayerInventoryAction();
             _playerInventoryAction.Initialize(_inventoryData, this, _itemSlotMouse);
         }
 
