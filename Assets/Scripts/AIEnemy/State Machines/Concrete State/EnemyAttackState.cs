@@ -21,6 +21,7 @@ namespace CC.Enemy.States
             StartAnimation("isAttacking");
             _enemyController.Animator.SetFloat("isHeavyAttack", _enemyController.EnemyCurrentData.IsHeavyAttack);
 
+            _enemyController.WeaponDamage.SetAttack();
 
             _enemyController.NavMeshAgent.speed = 0;
             _enemyController.NavMeshAgent.isStopped = true;

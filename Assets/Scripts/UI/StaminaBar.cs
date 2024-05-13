@@ -10,7 +10,7 @@ public class StaminaBar : MonoBehaviour
     private void Update()
     {
         float currentStamina = playerStats.GetInstanceValue(mainStat.Stamina);
-        float maxStamina = playerStats.GetValue(mainStat.MaxStamina);
+        float maxStamina = playerStats.GetValue(mainStat.Stamina);
         staminaBar.fillAmount = currentStamina / maxStamina;
     }
 }

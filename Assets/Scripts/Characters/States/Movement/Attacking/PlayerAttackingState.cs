@@ -1,3 +1,6 @@
+using System;
+using Cinemachine.Utility;
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -5,9 +8,15 @@ namespace CC.Characters.States
 {
     public class PlayerAttackingState : PlayerAttackState
     {
+        float _currentTimeToRotate = 0;
+        float _timeToRotate = 0.2f;
+        bool _isFullyRotated = false;
+        bool _noNearestEnemy = false;
+        float searchRadius = 3.0f;
+
         private float previousFrameTime;
         private bool alreadyAppliedForce;
-
+        Vector3 _nearestEnemy;
         private AttackSO attack;
         public PlayerAttackingState(PlayerControllerStatesMachine _playerController, int attackIndex) : base(_playerController)
         {
@@ -20,20 +29,26 @@ namespace CC.Characters.States
 
             _playerController.Weapon.SetAttack();
 
-            Debug.Log("Entering PlayerAttackingState. Attack value: " + _playerController.Weapon.GetDamage());
             StartAnimation(attack.AnimationName);
 
-            //stateMachine.Animator.CrossFadeInFixedTime(attack.AnimationName, attack.TransitionDuration);
-            
             ResetVelocity();
+
+            _noNearestEnemy = false;
+
+            _nearestEnemy = GetNearestEnemy();
+
+            _currentTimeToRotate = 0;
+            _isFullyRotated = false;
+
             alreadyAppliedForce = false;
             previousFrameTime = 0;
-        
+
         }
 
         public override void Update()
         {
             // base.Update();
+            RotatePlayer();
 
             float normalizedTime = GetNormalizedTime();
 
@@ -52,14 +67,6 @@ namespace CC.Characters.States
             else if (normalizedTime >= 1f)
             {
                 _playerController.SwitchState(_playerController.PlayerIdlingState);
-                // if (stateMachine.Targeter.CurrentTarget != null)
-                // {
-                //     stateMachine.SwitchState(new PlayerTargetingState(stateMachine));
-                // }
-                // else
-                // {
-                //     stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
-                // }
             }
             previousFrameTime = normalizedTime;
         }
@@ -113,5 +120,53 @@ namespace CC.Characters.States
                 return 0f;
             }
         }
+
+        Vector3 GetNearestEnemy()
+        {
+            Vector3 position = _playerController.transform.position;
+
+            Collider[] enemyColliders = Physics.OverlapSphere(position, searchRadius, 1 << 13);
+            float closestDistance = Mathf.Infinity;
+            Vector3 _nearestEnemy = _playerController.transform.position;
+
+            _noNearestEnemy = true;
+            foreach (var enemyColider in enemyColliders)
+            {
+                float distance = (enemyColider.transform.position - position).sqrMagnitude;
+                if (distance < closestDistance)
+                {
+                    closestDistance = distance;
+                    _nearestEnemy = enemyColider.transform.position;
+                    _noNearestEnemy = false;
+                }
+            }
+
+            _nearestEnemy = new Vector3(_nearestEnemy.x, _playerController.transform.position.y,
+                _nearestEnemy.z);
+
+            return _nearestEnemy;
+        }
+
+        void RotatePlayer()
+        {
+            if (_isFullyRotated || _noNearestEnemy) return;
+            // Draw();
+            _currentTimeToRotate += Time.deltaTime;
+            Vector3 direction = (_nearestEnemy - _playerController.transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            _playerController.transform.rotation = Quaternion.Slerp(_playerController.transform.rotation, lookRotation, Math.Min(_currentTimeToRotate / _timeToRotate, 1));
+
+            if (_currentTimeToRotate >= _timeToRotate) _isFullyRotated = true;
+        }
+
+        // void Draw()
+        // {
+        //     for (int i = 0; i < 360; i += 20)
+        //     {
+        //         Vector3 dir = Quaternion.Euler(0, i, 0) * Vector3.forward;
+        //         Debug.DrawRay(_playerController.transform.position, dir * searchRadius, Color.red);
+        //     }
+        // }
+
     }
 }

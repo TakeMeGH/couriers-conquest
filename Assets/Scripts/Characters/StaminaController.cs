@@ -6,7 +6,6 @@ using System.Collections;
 
 public class StaminaController : MonoBehaviour
 {
-    public PlayerStatsSO playerStats;
     public PlayerControllerStatesMachine playerController;
     public float staminaIncreaseRate = 5f;
     public float staminaRegenDelay = 3f; // 3 detik delay irl
@@ -14,22 +13,33 @@ public class StaminaController : MonoBehaviour
     private bool isRegenerating;
     public bool CanBlock { get; private set; }
     public float blockStaminaReq = 10f; //blockStaminaRequirement
+    PlayerStatsSO _statsSO;
 
     public float GetCurrentStamina()
     {
         return currentStamina;
     }
 
-    private void Start()
+    public void SetStats(PlayerStatsSO statsSO)
     {
-        currentStamina = playerStats.GetInstanceValue(mainStat.Stamina);
+        _statsSO = statsSO;
+        Init();
     }
+
+
+    private void Init()
+    {
+        currentStamina = _statsSO.GetInstanceValue(mainStat.Stamina);
+    }
+
 
     private void Update()
     {
+        if (_statsSO == null) return;
+
         HandleStamina();
 
-        CanBlock = currentStamina >= blockStaminaReq; 
+        CanBlock = currentStamina >= blockStaminaReq;
     }
 
     private void HandleStamina()
@@ -44,7 +54,7 @@ public class StaminaController : MonoBehaviour
     {
         currentStamina -= amount;
         currentStamina = Mathf.Max(currentStamina, 0);
-        playerStats.SetInstanceValue(mainStat.Stamina, currentStamina);
+        _statsSO.SetInstanceValue(mainStat.Stamina, currentStamina);
     }
 
     private IEnumerator RegenerateStamina()
@@ -52,7 +62,7 @@ public class StaminaController : MonoBehaviour
         isRegenerating = true;
         yield return new WaitForSeconds(staminaRegenDelay);
 
-        while (currentStamina < playerStats.GetValue(mainStat.MaxStamina))
+        while (currentStamina < _statsSO.GetValue(mainStat.Stamina))
         {
             // Stop regen stamina kalau player mulai sprinting, dashing, atau blocking lagi pas Stamina lagi diposisi regenerasi
             var currentState = playerController.GetCurrentState();
@@ -64,8 +74,8 @@ public class StaminaController : MonoBehaviour
             }
 
             currentStamina += staminaIncreaseRate * Time.deltaTime;
-            currentStamina = Mathf.Min(currentStamina, playerStats.GetValue(mainStat.MaxStamina));
-            playerStats.SetInstanceValue(mainStat.Stamina, currentStamina);
+            currentStamina = Mathf.Min(currentStamina, _statsSO.GetValue(mainStat.Stamina));
+            _statsSO.SetInstanceValue(mainStat.Stamina, currentStamina);
             yield return null;
         }
 

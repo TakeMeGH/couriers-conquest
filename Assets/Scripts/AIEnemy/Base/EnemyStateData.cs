@@ -14,7 +14,7 @@ namespace CC.Enemy
         public int IsHeavyAttack;
         public float CurrentWaitTime;
         public float CurrentTimeToRotate;
-        public bool IsPlayerInRange;
+        public bool IsPlayerInRange = false;
         public bool IsPlayerNear;
         public bool IsPatrol;
         public bool IsCaughtPlayer;

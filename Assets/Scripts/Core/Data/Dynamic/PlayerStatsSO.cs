@@ -69,8 +69,8 @@ namespace CC.Core.Data.Dynamic
         {
             return statData.damageReduction;
         }
-        
-        
+
+
 
         public override ISaveable Save()
         {
@@ -128,7 +128,7 @@ namespace CC.Core.Data.Dynamic
             if (statData.instanceValue.TryGetValue(key, out float currentValue))
             {
                 float updatedValue = currentValue + amount;
-                if(updatedValue >= GetValue(mainStat.Health))
+                if (updatedValue >= GetValue(mainStat.Health))
                 {
                     updatedValue = GetValue(mainStat.Health);
                 }
@@ -153,7 +153,7 @@ namespace CC.Core.Data.Dynamic
             this.defaultValue = new(target.defaultValue);
             this.instanceValue = new(target.instanceValue);
             this.playerExp = target.playerExp;
-            this.damageReduction = target.damageReduction; 
+            this.damageReduction = target.damageReduction;
         }
     }
 
@@ -161,7 +161,6 @@ namespace CC.Core.Data.Dynamic
     {
         Health,
         Stamina,
-        MaxStamina,
         AttackValue,
         MovementSpeed,
         Defense,

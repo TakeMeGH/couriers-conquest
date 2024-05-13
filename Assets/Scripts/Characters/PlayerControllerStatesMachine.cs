@@ -26,9 +26,7 @@ namespace CC.Characters
         [field: SerializeField] public PlayerLayerData LayerData { get; private set; }
 
         [field: Header("Player Stats")]
-        [field: SerializeField] public PlayerStatsSO playerStatsSO;
-        //[field: SerializeField] public EquipmentItem equippedWeapon;
-        //[field: SerializeField] public EquipmentItem equippedShield;
+        [field: SerializeField] public PlayerStatsSO PlayerStatsSO { get; private set; }
 
         [field: Header("Attack Combo")]
         [field: SerializeField] public AttackSO[] Attacks { get; private set; }
@@ -45,7 +43,6 @@ namespace CC.Characters
         [field: SerializeField] public FreeClimbMC FreeClimb { get; private set; }
         [field: SerializeField] public Transform StandUpPoint { get; private set; }
         public Vector3 OffsetStandUpPoint { get; private set; }
-
 
         [field: Header("Stamina")]
         [field: SerializeField] public StaminaController StaminaController { get; private set; }
@@ -81,7 +78,7 @@ namespace CC.Characters
 
 
         public List<States.PlayerAttackingState> PlayerAttackingStates { get; private set; }
-       
+
         #endregion
         private void Initialize()
         {
@@ -116,12 +113,22 @@ namespace CC.Characters
             }
 
             OffsetStandUpPoint = StandUpPoint.transform.position - transform.position;
+
+            Weapon.SetStats(PlayerStatsSO);
+            Health.SetStats(PlayerStatsSO);
+            StaminaController.SetStats(PlayerStatsSO);
+
         }
 
         private void Start()
         {
             Initialize();
             SwitchState(PlayerIdlingState);
+        }
+
+        public void OnDead()
+        {
+            Destroy(gameObject);
         }
 
         private void OnTriggerEnter(Collider collider)

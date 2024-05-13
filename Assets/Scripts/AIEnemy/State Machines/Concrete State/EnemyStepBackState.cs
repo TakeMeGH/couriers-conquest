@@ -70,7 +70,6 @@ namespace CC.Enemy.States
                 _enemyController.EnemyCurrentData.PlayerTransform.position;
 
             Vector3 backwardDirection = directionToPlayer.normalized;
-            Debug.Log(backwardDirection + " DIR");
             Vector3 backwardPosition = _enemyController.transform.position + backwardDirection;
 
             NavMeshHit hit;

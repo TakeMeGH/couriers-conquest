@@ -58,7 +58,7 @@ namespace CC.Enemy.States
             }
 
 
-            if (IsStoping())
+            if (!isOutOfRange && IsStoping())
             {
                 _enemyController.SwitchState(_enemyController.AttackState);
             }
