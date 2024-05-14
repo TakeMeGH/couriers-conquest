@@ -46,13 +46,19 @@ namespace CC.Camera
         public void EnableCameraControl()
         {
             if (_cameraControlAction != null)
+            {
+                _playerCamera.enabled = true;
                 _cameraControlAction.enabled = true;
+            }
         }
 
         public void DisableCameraControl()
         {
             if (_cameraControlAction != null)
+            {
+                _playerCamera.enabled = false;
                 _cameraControlAction.enabled = false;
+            }
         }
 
 

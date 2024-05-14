@@ -1,0 +1,13 @@
+﻿title: Jeane_Default
+tags:
+---
+<<declare $JeaneNPCHaveQuest = false>>
+<<declare $JeaneNPCQuestNode = "" >>
+
+<<if $JeaneNPCHaveQuest>>
+    <<jump {$JeaneNPCQuestNode}>>
+<<endif>>
+
+Jeane : Dimanakah suamiku
+<<Close>>
+===

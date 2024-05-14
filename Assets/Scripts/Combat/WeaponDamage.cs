@@ -1,42 +1,65 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using CC.Characters;
+using CC.Core.Data.Dynamic;
 
 namespace CC.Combats
 {
     public class WeaponDamage : MonoBehaviour
     {
-        [SerializeField] private Collider myCollider;
+        [SerializeField] LayerMask _targetLayer;
+        PlayerStatsSO _statsSO;
 
-        private int damage;
+        int _damage;
+        Collider _collider;
+        private List<Collider> _alreadyCollidedWith = new List<Collider>();
 
-        private List<Collider> alreadyCollidedWith = new List<Collider>();
+
+        void Start()
+        {
+            _collider = GetComponent<Collider>();
+        }
+        public void SetStats(PlayerStatsSO statsSO)
+        {
+            _statsSO = statsSO;
+        }
+
+        public void EnableWeapon()
+        {
+            _alreadyCollidedWith.Clear();
+            _collider.enabled = true;
+        }
+
+        public void DisableWeapon()
+        {
+            _collider.enabled = false;
+        }
+
 
         private void OnEnable()
         {
-            alreadyCollidedWith.Clear();
+            _alreadyCollidedWith.Clear();
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other == myCollider) { return; }
+            if ((_targetLayer & (1 << other.gameObject.layer)) == 0) { return; }
 
-            if (alreadyCollidedWith.Contains(other)) { return; }
+            if (_alreadyCollidedWith.Contains(other)) { return; }
 
-            alreadyCollidedWith.Add(other);
+            _alreadyCollidedWith.Add(other);
 
-            if (other.TryGetComponent<Health>(out Health health))
+            if (other.TryGetComponent(out Health health))
             {
-                health.DealDamage(damage);
+                health.DealDamage(_damage);
             }
         }
 
-        public void SetAttack(int damage)
+        public void SetAttack()
         {
-            this.damage = damage;
+            _damage = Mathf.RoundToInt(_statsSO.GetValue(mainStat.AttackValue));
         }
+
     }
-
 }
-

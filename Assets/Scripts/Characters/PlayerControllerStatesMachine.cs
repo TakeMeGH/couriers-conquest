@@ -3,6 +3,9 @@ using CC.Characters.DataBlueprint.Layers;
 using UnityEngine.Events;
 using System.Collections.Generic;
 using CC.Combats;
+using CC.Core.Data.Dynamic;
+using CC.Inventory;
+using SA;
 
 namespace CC.Characters
 {
@@ -22,6 +25,9 @@ namespace CC.Characters
         [field: Header("Collisions")]
         [field: SerializeField] public PlayerLayerData LayerData { get; private set; }
 
+        [field: Header("Player Stats")]
+        [field: SerializeField] public PlayerStatsSO PlayerStatsSO { get; private set; }
+
         [field: Header("Attack Combo")]
         [field: SerializeField] public AttackSO[] Attacks { get; private set; }
         [field: SerializeField] public WeaponDamage Weapon { get; private set; }
@@ -31,6 +37,15 @@ namespace CC.Characters
 
         [field: Header("Health")]
         [field: SerializeField] public Health Health { get; private set; }
+
+        [field: Header("Climbing")]
+        [field: SerializeField] public FreeClimbMC FreeClimb { get; private set; }
+        [field: SerializeField] public Transform StandUpPoint { get; private set; }
+        public Vector3 OffsetStandUpPoint { get; private set; }
+
+        [field: Header("Stamina")]
+        [field: SerializeField] public StaminaController StaminaController { get; private set; }
+
 
         #region Component
         public Animator Animator { get; private set; }
@@ -57,17 +72,19 @@ namespace CC.Characters
         public States.PlayerMediumStoppingState PlayerMediumStoppingState { get; private set; }
         public States.PlayerBlockingState PlayerBlockingState { get; private set; }
         public States.PlayerWalkingState PlayerWalkingState { get; private set; }
+        public States.PlayerClimbState PlayerClimbState { get; private set; }
+        public States.PlayerClimbUpState PlayerClimbUpState { get; private set; }
+
 
         public List<States.PlayerAttackingState> PlayerAttackingStates { get; private set; }
 
         #endregion
-
-
         private void Initialize()
         {
             Rigidbody = GetComponent<Rigidbody>();
             ResizableCapsuleCollider = GetComponent<PlayerResizableCapsuleCollider>();
             Animator = GetComponentInChildren<Animator>();
+            StaminaController = GetComponent<StaminaController>();
 
             PlayerCurrentData = new PlayerStateData();
 
@@ -84,6 +101,8 @@ namespace CC.Characters
             PlayerMediumStoppingState = new States.PlayerMediumStoppingState(this);
             PlayerBlockingState = new States.PlayerBlockingState(this);
             PlayerWalkingState = new States.PlayerWalkingState(this);
+            PlayerClimbState = new States.PlayerClimbState(this);
+            PlayerClimbUpState = new States.PlayerClimbUpState(this);
 
             PlayerAttackingStates = new List<States.PlayerAttackingState>();
             for (int i = 0; i < Attacks.Length; i++)
@@ -91,12 +110,24 @@ namespace CC.Characters
                 States.PlayerAttackingState newAttackingState = new States.PlayerAttackingState(this, i);
                 PlayerAttackingStates.Add(newAttackingState);
             }
+
+            OffsetStandUpPoint = StandUpPoint.transform.position - transform.position;
+
+            Weapon.SetStats(PlayerStatsSO);
+            Health.SetStats(PlayerStatsSO);
+            StaminaController.SetStats(PlayerStatsSO);
+
         }
 
         private void Start()
         {
             Initialize();
             SwitchState(PlayerIdlingState);
+        }
+
+        public void OnDead()
+        {
+            Destroy(gameObject);
         }
 
         private void OnTriggerEnter(Collider collider)
@@ -108,6 +139,5 @@ namespace CC.Characters
         {
             TriggerExitEvent.Invoke(collider);
         }
-
     }
 }

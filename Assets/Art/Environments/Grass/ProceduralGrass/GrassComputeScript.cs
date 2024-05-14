@@ -4,6 +4,7 @@
 // for the base setup for compute shaders
 using System.Collections.Generic;
 using System.Linq;
+using CC.Events;
 using UnityEditor;
 using UnityEngine;
 
@@ -18,6 +19,8 @@ public class GrassComputeScript : MonoBehaviour
 
     // grass settings to send to the compute shader
     public SO_GrassSettings currentPresets;
+    public CharacterEventChannelSO _onCharacterSpawn;
+
 
     // interactors
     ShaderInteractor[] interactors;
@@ -145,7 +148,7 @@ public class GrassComputeScript : MonoBehaviour
         {
             OnDisable();
         }
-
+        _onCharacterSpawn.OnEventRaised += UpdateInteractor;
         MainSetup(true);
     }
 
@@ -341,6 +344,7 @@ public class GrassComputeScript : MonoBehaviour
             m_ArgsBuffer?.Release();
             m_VisibleIDBuffer?.Release();
         }
+        _onCharacterSpawn.OnEventRaised += UpdateInteractor;
         m_Initialized = false;
     }
 
@@ -498,6 +502,11 @@ public class GrassComputeScript : MonoBehaviour
             }
         }
 
+    }
+
+    void UpdateInteractor(GameObject _character)
+    {
+        interactors = (ShaderInteractor[])FindObjectsOfType(typeof(ShaderInteractor));
     }
 }
 
