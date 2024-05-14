@@ -22,6 +22,7 @@ namespace CC.Inventory
         Rune,
         Equipment,
         QuestItem,
+        DropMonster
     }
 
     public enum ConsumableType

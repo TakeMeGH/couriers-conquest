@@ -10,9 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b1e000dc388328a43a763d6142549454, type: 3}
-  m_Name: Basic Shield
+  m_Name: 02. Aiden Shield
   m_EditorClassIdentifier: 
-  itemName: Basic Shield
+  itemName: Aiden Shield
+  idItem: E002
   itemWeight: 0
   itemDescription: Aidan Basic Shield
   itemSprite: {fileID: 21300000, guid: a8c82c479c6f77f4e9fba6ae41bb54f9, type: 3}
@@ -42,4 +43,6 @@ MonoBehaviour:
     EquipmentStats:
       _serializedList:
       - Key: 6
+        Value: 10
+      - Key: 1
         Value: 10

@@ -7,6 +7,7 @@ namespace CC.Inventory
     public abstract class ABaseItem : ScriptableObject
     {
         public string itemName;
+        public string idItem;
         public float itemWeight;
         public string itemDescription;
         public Sprite itemSprite;
