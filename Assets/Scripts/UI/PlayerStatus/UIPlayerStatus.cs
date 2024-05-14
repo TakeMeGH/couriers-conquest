@@ -23,6 +23,16 @@ namespace CC.UI
 
         private ItemsActionPlayerStats _playerStatItemsAction;
 
+        void Start()
+        {
+            Initialize();
+        }
+
+        void Update()
+        {
+            // TODO : Update health must be called from Player Health Controller
+            UpdateHealthUI();
+        }
         public void Initialize()
         {
             _playerInventoryData.inputReader.PouchPerformed += AttempToUsePouch;
@@ -94,7 +104,7 @@ namespace CC.UI
 
         private void CheckItemEffectType(ConsumableItem item)
         {
-            if(item.GetConsumableType() == ConsumableType.HPRegeneration)
+            if (item.GetConsumableType() == ConsumableType.HPRegeneration)
             {
                 _playerStatItemsAction.AttempToOvertimeRegeneration(item.GetAmount(), item.DurationEffect());
             }

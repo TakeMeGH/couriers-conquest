@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using CC.Combats;
 using UnityEngine;
 
 public class WeaponHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject weaponLogic;
+    [SerializeField] WeaponDamage weaponLogic;
 
     public void EnableWeapon()
     {
-        weaponLogic.SetActive(true);
+        weaponLogic.EnableWeapon();
     }
 
     public void DisableWeapon()
     {
-        weaponLogic.SetActive(false);
+        weaponLogic.DisableWeapon();
     }
 }

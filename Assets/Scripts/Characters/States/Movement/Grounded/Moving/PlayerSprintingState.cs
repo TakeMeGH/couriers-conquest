@@ -52,10 +52,8 @@ namespace CC.Characters.States
         {
             base.Update();
 
-            // Cek apa stamina lebih besar dari 0
             if (_playerController.StaminaController.GetCurrentStamina() <= 0)
             {
-                // Kalau stamina ga lebih besar dari 0, stop nge sprint
                 StopSprinting();
                 return;
             }

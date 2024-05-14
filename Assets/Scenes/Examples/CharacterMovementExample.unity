@@ -624,11 +624,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player MC
       objectReference: {fileID: 0}
-    - target: {fileID: 1968939700130690617, guid: f4a3ce2bb0db9bd47a58ab3a254c777b,
-        type: 3}
-      propertyPath: <Attacks>k__BackingField.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 4116597097574829069, guid: f4a3ce2bb0db9bd47a58ab3a254c777b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1732,6 +1727,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: CubeDamageTesting
       objectReference: {fileID: 0}
+    - target: {fileID: 2142269775583714512, guid: a6142194d202ae842a9d17f2aaa80c84,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4669394539192666595, guid: a6142194d202ae842a9d17f2aaa80c84,
+        type: 3}
+      propertyPath: _statsSO
+      value: 
+      objectReference: {fileID: 11400000, guid: f3ee829ae9f91ee48b6a0fd3da31e4a9,
+        type: 2}
     - target: {fileID: 6038058960954360614, guid: a6142194d202ae842a9d17f2aaa80c84,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1781,6 +1787,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747772462885127089, guid: a6142194d202ae842a9d17f2aaa80c84,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1868,6 +1879,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 910889936410976615, guid: 880699b86117c7545a691afe803addd2,
+        type: 3}
+      propertyPath: _statsSO
+      value: 
+      objectReference: {fileID: 11400000, guid: f3ee829ae9f91ee48b6a0fd3da31e4a9,
+        type: 2}
+    - target: {fileID: 910889936410976615, guid: 880699b86117c7545a691afe803addd2,
+        type: 3}
+      propertyPath: _targetLayer.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
     - target: {fileID: 7845024810492706681, guid: 880699b86117c7545a691afe803addd2,
         type: 3}
       propertyPath: m_Name

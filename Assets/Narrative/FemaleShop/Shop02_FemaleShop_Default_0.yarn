@@ -1,35 +1,58 @@
 ﻿title: Shop02_FemaleShop_Default_0
 tags:
 ---
-Mega : Welcome to my store, how may i help you?
--> I want to buy some item..
+<<declare $EveHaveQuest = false>>
+<<declare $EveQuestNode = "" >>
+
+Eve : Halo, senang bertemu dengan mu nak! 
+Eve : Selamat datang di Advent's Shop
+Eve : Tempat dimana kamu bisa membeli barang untuk bertualang, dan...
+Eve : Kamu juga bisa menjual barang temuan mu dari memburu monster
+Eve : Ngomong-ngomong, adakah yang sedang kamu butuhkan disini?
+-> Aku ingin meminta saran terkait item untuk menyembuhkan atau melindungi sebagai seorang petualang <<if $EveHaveQuest>>
     <<jump Shop02_FemaleShop_Choice_0>>
--> Who are you ?
+-> Aku ingin mendengarkan cerita petualangan mu
     <<jump Shop02_FemaleShop_Choice_1>>
--> Do you perhaps, have any relation with Jokowi?
+-> Aku ingin membeli sesuatu
     <<jump Shop02_FemaleShop_Choice_2>>
--> Nothing, bye..
-    <<Close>>
+-> Aku ingin menjual sesuatu
+    <<jump Shop02_FemaleShop_Choice_3>>
+-> Tidak ada, aku hanya ingin bertemu dengan mu...
+    <<jump Shop02_FemaleShop_Choice_4>>
 ===
 
 title: Shop02_FemaleShop_Choice_0
 tags:
 ---
 Mega : The item is from the people, by the people, for the people. So the prices is friendly !
-<<SpecialAction Mega 0>>
+<<SpecialAction Evellyn 0>>
 ===
 
 title: Shop02_FemaleShop_Choice_1
 tags:
 ---
-Mega : My name is Mega Bullprincess, i'm the leader of the People's Deals Institution (PDI)
-<<jump Shop02_FemaleShop_Default_0>>
+Eve : Tidak ada cerita, sampai jumpa di pertemuan berikutnya...
+<<Close>>
 ===
 
 title: Shop02_FemaleShop_Choice_2
 tags:
 ---
-Mega : Jokowi? the president of this town expedition company?
-Mega : Bet he can't do shit without me, hahaha..
-<<jump Shop02_FemaleShop_Default_0>>
+Eve : Tentu saja, kami menjual barang-barang yang berkualitas untuk orang sepertimu|
+<<SpecialAction Evellyn 0>>
+===
+
+title: Shop02_FemaleShop_Choice_3
+tags:
+---
+Eve : Tentu saja, kami akan membelinya dengan harga yang tidak akan membuat mu kecewa!
+<<SpecialAction Evellyn 0>>
+===
+
+title: Shop02_FemaleShop_Choice_4
+tags:
+---
+Eve : Hahahaha, kamu bisa saja, aku sudah berkeluarga loh, jadi kamu tidak akan memiliki kesempatan
+Eve : Jika tidak ada lagi, sampai jumpa di pertemuan berikutnya...
+<<Close>>
 ===

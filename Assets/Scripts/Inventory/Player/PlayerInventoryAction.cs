@@ -5,6 +5,7 @@ using CC.Core.Data.Dynamic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using CC.Inventory.Item;
 
 namespace CC.Inventory
 {
@@ -38,6 +39,11 @@ namespace CC.Inventory
                 return;
             }
 
+            if (item.GetItemType() == ItemType.QuestItem)
+            {
+                RemoveQuestItemEvent((QuestItem)item);
+
+            }
             Transform camTransform = UnityEngine.Camera.main.transform;
             Transform _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
             GameObject dropPrefab = ObjectPooling.SharedInstance.GetPooledObject(PoolObjectType.Item);
@@ -69,7 +75,7 @@ namespace CC.Inventory
         {
             foreach (ItemSlotInfo i in _inventoryData.items)
             {
-                if (_item == i.item)
+                if (_item.idItem == i.item.idItem)
                 {
                     return true;
                 }
@@ -94,17 +100,15 @@ namespace CC.Inventory
                             equipment.EquipmentStats[stat] = value + additionValue;
                         }
                     }
-
-                    // TODO : FIX
-                    // for(int i = 0;i < equipment.EquipmentStats.co)
-                    // equipment.attackWeapon += equipment.upgradeRequiriment[equipment.equipmentLevel].bonusAttack;
-                    // equipment.deffWeapon += equipment.upgradeRequiriment[equipment.equipmentLevel].bonusDeff;
-                    // equipment.healthWeapon += equipment.upgradeRequiriment[equipment.equipmentLevel].bonusHealth;
-
                     equipment.equipmentLevel++;
                     return;
                 }
             }
         }
+        public void RemoveQuestItemEvent(QuestItem item)
+        {
+            item.ReduceItemQualityOnDrop();
+        }
+
     }
 }

@@ -1,0 +1,12 @@
+Setup:
+
+1. On your URP Settings asset, enable "Opaque Texture" and "Depth Texture".
+1. On your URP Settings asset, set "Depth Bias" and "Normal Bias" to 0.
+1. On your URP Renderer asset, set "Immediate Texture" to "Always".
+2. On your URP Renderer asset, select Add Renderer Feature and add the Water_Volume feature. If your screen goes glitchy, update your unity version to 2021.1 or later.
+3. Drag the "Water_Plane" object into the scene and adjust the height to your liking.
+4. To adjust the water, either navigate to "WaterWorks/Materials/SSR_Water.material" or "WaterWorks/Materials/SSR_Water_Bright.material" or create a new material with the SSR_Water shader and assign it to the water plane.
+
+
+Please consider leaving a review for the asset as it really helps :)
+For any questions, or to show what you have made with my asset, email me at wgappster@gmail.com

@@ -6,8 +6,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEditor.Progress;
-using static UnityEditor.Timeline.Actions.MenuPriority;
 
 namespace CC.Inventory
 {
@@ -35,6 +33,12 @@ namespace CC.Inventory
         private float _weightValue;
         private void OnEnable()
         {
+            _inventoryData = (InventoryData)_aitemInventoryData;
+            _playerInventoryWeight = new PlayerInventoryWeight();
+            _playerInventoryManagement = new PlayerInventoryManagement();
+            _playerInventoryAction = new PlayerInventoryAction();
+            Initalize();
+
             _inventoryData.addItemToInventory.OnEventRaised += _playerInventoryManagement.OnAddItem;
             _inventoryData.removeItemEvent.OnEventRaised.AddListener(_playerInventoryManagement.OnRemoveItem);
             _inventoryData.itemCheckEvent.OnEventRaised += _playerInventoryAction.CheckItem;
@@ -59,17 +63,10 @@ namespace CC.Inventory
 
         }
 
-        private void Awake()
+        public void Initalize()
         {
-            _inventoryData = (InventoryData)_aitemInventoryData;
-
-            _playerInventoryWeight = new PlayerInventoryWeight();
             _playerInventoryWeight.Initialize(_inventoryData);
-
-            _playerInventoryManagement = new PlayerInventoryManagement();
             _playerInventoryManagement.Initialize(_inventoryData, this, _itemSlotMouse);
-
-            _playerInventoryAction = new PlayerInventoryAction();
             _playerInventoryAction.Initialize(_inventoryData, this, _itemSlotMouse);
         }
 
@@ -90,7 +87,6 @@ namespace CC.Inventory
             _uiPlayerStatus.ShowPouchPanel();
         }
 
-
         private void WeightCount()
         {
             _weightValue = _playerInventoryWeight.GetWeight();
@@ -105,7 +101,6 @@ namespace CC.Inventory
 
         public void RefreshInventory()
         {
-
             int index = 0;
             foreach (ItemSlotInfo i in _inventoryData.items)
             {

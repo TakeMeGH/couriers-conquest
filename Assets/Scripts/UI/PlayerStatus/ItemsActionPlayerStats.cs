@@ -31,7 +31,9 @@ namespace CC.Inventory
 
         public void StartOvertimeRegenerationHP()
         {
-            _playerStats.ChangeHPValue(mainStat.Health, amountRegeneration);
+            float _newPlayerHP = _playerStats.GetInstanceValue(mainStat.Health);
+            float _maxHp = _playerStats.GetValue(mainStat.Health);
+            _playerStats.SetInstanceValue(mainStat.Health, _newPlayerHP + _maxHp);
             _uiPlayerStats.UpdateHealthUI();
         }
 

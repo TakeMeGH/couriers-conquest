@@ -3,7 +3,7 @@ using CC.Events;
 using CC.Interaction;
 using UnityEngine;
 
-namespace CC.Inventory
+namespace CC.Inventory.Item
 {
     public class ItemPickup : MonoBehaviour
     {

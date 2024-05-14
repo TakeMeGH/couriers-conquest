@@ -1,33 +1,58 @@
 ﻿title: Shop01_MaleShop_Default_0
 tags:
 ---
-Prabowo : Welcome to the store, how can i help?
--> I want to buy some item..
+Rey : Halo kak, senang bertemu denganmu!
+Rey : Selamat datang di GoodCompany Shop
+Rey : Disini kamu bisa menemukan berbagai barang premium yang tidak akan bisa kamu temukan di tempat lain
+Rey : Tentunya harganya sedikit mahal, hahaha
+Rey : Tapi kualitasnya aku berani jamin, tidak akan ada yang bisa mengalahkannya
+Rey : Jadi, adakah yang kamu butuhkan disini sekarang kak?
+-> Aku memiliki kisah petualangan
     <<jump Shop01_MaleShop_Choice_0>>
--> Who are you ?
+-> Aku ingin membeli sesuatu
     <<jump Shop01_MaleShop_Choice_1>>
--> Do you serve free lunch ?
+-> Aku ingin menjual sesuatu
     <<jump Shop01_MaleShop_Choice_2>>
--> Nothing, bye..
-    <<Close>>
+-> Bisakah kita membuat sebuah kontrak?
+    <<jump Shop01_MaleShop_Choice_3>>
+-> Tidak ada, aku sudah punya apa yang kubutuhkan
+    <<jump Shop01_MaleShop_Choice_4>>
 ===
 title: Shop01_MaleShop_Choice_0
 tags:
 ---
-Prabowo : Buy what you want, don't forget about the taxes
-<<SpecialAction Prabowo 0>>
+Rey : Tidak tertarik
+<<Close>>
 ===
 
 title: Shop01_MaleShop_Choice_1
 tags:
 ---
-Prabowo : My name is Prabowo Yorkshire, i'm the leader of the Great Essentials Market Of Yorkshires (GEMOY)
-<<jump Shop01_MaleShop_Default_0>>
+Rey : Jika berbicara quality, kamu tidak akan menyesal jika membelinya disini
+<<SpecialAction Reymond 0>>
 ===
 
 title: Shop01_MaleShop_Choice_2
 tags:
 ---
-Prabowo : Free lunch available after 12pm !!
+Rey : Aku benci sekali harta rampasan, tapi karna aku pedagang, aku juga akan membelinya
+<<SpecialAction Reymond 0>>
+===
+
+title: Shop01_MaleShop_Choice_3
+tags:
+---
+Rey : Hah? kontrak? kamu gila ya?
+Rey : Kontrak itu sakral, dan kamu tidak boleh melanggarnya, bahkan pelanggaran kecil saja tidak dibolehkan
+Rey : Jadi jawaban ku tidak, yang kulihat kamu sekarang masih bukan siapa-siapa
+Rey : Kembangkan dirimu dulu, baru setelahnya aku mungkin akan mempertimbangkan untuk membuat kontrak sponsor dengan mu
+Rey : Selain itu, adakah yang kamu butuhkan lagi disini>
 <<jump Shop01_MaleShop_Default_0>>
+===
+
+title: Shop01_MaleShop_Choice_4
+tags:
+---
+Rey : Baiklah kalau begitu, sampai nanti lagi kak....
+<<Close>>
 ===

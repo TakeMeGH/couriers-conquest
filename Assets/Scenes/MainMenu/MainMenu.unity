@@ -296,7 +296,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -1264,11 +1264,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2067016057}
     m_Modifications:
-    - target: {fileID: 1809329868794987389, guid: 5270566cd8f31314ab5926275b8f315c,
-        type: 3}
-      propertyPath: slot
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2354980168500475971, guid: 5270566cd8f31314ab5926275b8f315c,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1373,16 +1368,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SaveData Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 4000483277015383286, guid: 5270566cd8f31314ab5926275b8f315c,
-        type: 3}
-      propertyPath: slot
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8785020634211132609, guid: 5270566cd8f31314ab5926275b8f315c,
-        type: 3}
-      propertyPath: slot
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

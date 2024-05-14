@@ -11,7 +11,6 @@ namespace CC.Quest
         [SerializeField] InputReader _inputReader;
         public void showQuest()
         {
-            Cursor.lockState = CursorLockMode.Confined;
             _inputReader.EnableInventoryUIInput();
             _onInteract?.raiseEvent(this, null);
         }

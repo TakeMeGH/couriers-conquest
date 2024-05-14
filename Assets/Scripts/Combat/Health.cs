@@ -1,60 +1,71 @@
 using CC.Core.Data.Dynamic;
-using CC.Inventory;
+using CC.Events;
 using UnityEngine;
-using UnityEngine.UI;
-using CC.Core.Data.Dynamic;
-using CC.Characters;
+using UnityEngine.Events;
 
 namespace CC.Combats
 {
     public class Health : MonoBehaviour
     {
-        [SerializeField] private int maxHealth = 100;
-        //[SerializeField] private float damageReduction = 0f; // 20% damage reduction
-        //[SerializeField] private float blockDamageReduction = 0f; // 50% additional reduction when blocking
-        [SerializeField] private PlayerStatsSO playerStatsSO;
-        //[SerializeField] private PlayerControllerStatesMachine _playerController;
-        
-        //[SerializeField] private StaminaController staminaController;
+        [SerializeField] VoidEventChannelSO _onCharacterDamaged;
+        public UnityEvent OnHealthReachedZero;
+        [SerializeField] float _health;
+        PlayerStatsSO _statsSO;
+        bool _isBlocking;
 
-        private int health;
-        private bool isBlocking;
-
-        private void Start()
+        public void SetStats(PlayerStatsSO statsSO)
         {
-            health = maxHealth;
-            Debug.Log("Initial Player Health: " + health);
+            _statsSO = statsSO;
+            Init();
         }
 
-        public int GetCurrentHealth()
+        private void Init()
         {
-            return health;
+            _health = _statsSO.GetInstanceValue(mainStat.Health);
+        }
+
+
+        public float GetCurrentHealth()
+        {
+            return _health;
         }
 
         public void SetBlocking(bool isBlocking)
         {
-            this.isBlocking = isBlocking;
+            _isBlocking = isBlocking;
         }
 
-        
 
-        public int DealDamage(int damage)
-        {  
+
+        public float DealDamage(int damage)
+        {
             Debug.Log("Received Damage: " + damage);
 
-            if (health == 0) { return 0; }
+            if (_health == 0) { return 0; }
 
-            float totalReduction = playerStatsSO.GetDamageReduction(); 
+            float totalReduction = _statsSO.GetDamageReduction();
 
-            if (isBlocking)
+            if (_isBlocking)
             {
-                float shieldValue = playerStatsSO.GetValue(mainStat.ShieldValue);
+                float shieldValue = _statsSO.GetValue(mainStat.ShieldValue);
                 totalReduction += shieldValue / 100f;
             }
-            int calculatedDamage = Mathf.Min(Mathf.RoundToInt(damage * (1 - totalReduction)), health);
-            health = Mathf.Max(health - calculatedDamage, 0);
+            float calculatedDamage = Mathf.Min(Mathf.RoundToInt(damage * (1 - totalReduction)), _health);
+
+            if (calculatedDamage > 0)
+            {
+                _onCharacterDamaged?.RaiseEvent();
+            }
+
+            _health = Mathf.Max(_health - calculatedDamage, 0);
+            _statsSO.SetInstanceValue(mainStat.Health, _health);
+            if (_health == 0)
+            {
+                OnHealthReachedZero.Invoke();
+            }
+
             Debug.Log("Calculated Damage after Reduction: " + calculatedDamage);
-            Debug.Log("Player Health after Damage: " + health);
+            Debug.Log("Player Health after Damage: " + _health);
 
             return calculatedDamage;
         }

@@ -522,7 +522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aacff2aa99184e2409a8d2f6aaa85460, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetSceneName: Milestone2 WorldScene
+  _targetSceneName: OverWorld Milestone2
 --- !u!1 &1899949132
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,11 +845,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SaveData Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 7432079337940991232, guid: 5270566cd8f31314ab5926275b8f315c,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

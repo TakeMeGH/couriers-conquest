@@ -5,6 +5,7 @@ using AYellowpaper.SerializedCollections;
 using Newtonsoft.Json.Linq;
 using CC.Core.Data.Stable;
 using UnityEngine.InputSystem;
+using System;
 
 namespace CC.Core.Data.Dynamic
 {
@@ -49,28 +50,13 @@ namespace CC.Core.Data.Dynamic
         {
             if (statData.instanceValue.ContainsKey(key))
             {
-                statData.instanceValue[key] = value;
+                statData.instanceValue[key] = Math.Min(GetValue(key), value);
             }
         }
-
-        /*public void EquipmentStats(SerializedDictionary<mainStat, float> equipmentStats)
-        {
-            foreach (var stat in equipmentStats)
-            {
-                if (statData.defaultValue.ContainsKey(stat.Key))
-                {
-                    statData.defaultValue[stat.Key] += stat.Value;
-                }
-            }
-        }
-        */
-
         public float GetDamageReduction()
         {
             return statData.damageReduction;
         }
-        
-        
 
         public override ISaveable Save()
         {
@@ -84,57 +70,6 @@ namespace CC.Core.Data.Dynamic
         public override void SetDefaultValue()
         {
             statData.CopyFrom(_defaultStatData);
-        }
-
-
-        /*public void SetValue(mainStat key, float value)
-        {
-            if (statData.defaultValue.ContainsKey(key))
-            {
-                statData.defaultValue[key] = value;
-            }
-        }
-        */
-
-        /* public void UpgradeWeapon(float increaseAmount, bool isPercent)
-        {
-            StatsModifier weaponUpgrade = new StatsModifier();
-            weaponUpgrade.isPercent = isPercent;
-            weaponUpgrade.statsToModify = new SerializedDictionary<mainStat, float>();
-            weaponUpgrade.statsToModify[mainStat.AttackValue] = increaseAmount;
-
-            modifiers.Add(weaponUpgrade);
-        }
-
-         public void UpgradeShield(float increaseAmount, bool isPercent, float damageReductionIncrease)
-        {
-            StatsModifier shieldUpgrade = new StatsModifier();
-            shieldUpgrade.isPercent = isPercent;
-            shieldUpgrade.statsToModify = new SerializedDictionary<mainStat, float>();
-            shieldUpgrade.statsToModify[mainStat.ShieldValue] = increaseAmount;
-
-            modifiers.Add(shieldUpgrade);
-
-            statData.damageReduction += damageReductionIncrease;
-        }
-        */
-
-
-
-
-        //TODO : TAMBAH DARAH
-        public void ChangeHPValue(mainStat key, float amount)
-        {
-            if (statData.instanceValue.TryGetValue(key, out float currentValue))
-            {
-                float updatedValue = currentValue + amount;
-                if(updatedValue >= GetValue(mainStat.Health))
-                {
-                    updatedValue = GetValue(mainStat.Health);
-                }
-
-                statData.instanceValue[key] = updatedValue;
-            }
         }
 
     }
@@ -153,7 +88,7 @@ namespace CC.Core.Data.Dynamic
             this.defaultValue = new(target.defaultValue);
             this.instanceValue = new(target.instanceValue);
             this.playerExp = target.playerExp;
-            this.damageReduction = target.damageReduction; 
+            this.damageReduction = target.damageReduction;
         }
     }
 
@@ -161,7 +96,6 @@ namespace CC.Core.Data.Dynamic
     {
         Health,
         Stamina,
-        MaxStamina,
         AttackValue,
         MovementSpeed,
         Defense,
