@@ -27,13 +27,18 @@ namespace CC.Quest.Example
         public void Init(ABaseItem _itemToDeliver)
         {
             this._itemToDeliver = _itemToDeliver;
+            if (_itemToDeliver.GetItemType() == ItemType.QuestItem)
+            {
+                ((QuestItem)this._itemToDeliver).SetDefaultQuality();
+            }
+
         }
         public void doPickup()
         {
-            if(_isPickup) return;
+            if (_isPickup) return;
             _isPickup = true;
             _onPickup?.raiseEvent(this, null);
-            foreach(var npc in _nextNpcList) SendNPCQuestDialogue?.raiseEvent(this, npc);
+            foreach (var npc in _nextNpcList) SendNPCQuestDialogue?.raiseEvent(this, npc);
             _addItemToInventory.RaiseEvent(_itemToDeliver, 1);
             // Destroy(gameObject);
         }

@@ -26,6 +26,11 @@ namespace CC.Inventory
             Debug.Log("Use Item Quest " + itemName);
         }
 
+        public void SetDefaultQuality()
+        {
+            CurrentQuality = DefaultQuality;
+        }
+
         public void EnableDamageEvent()
         {
             _onPlayerGetDamaged.OnEventRaised += ReduceItemQualityOnDamaged;
