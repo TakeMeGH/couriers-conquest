@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3fc8af5ec0429eb41a03046326a0106e, type: 3}
-  m_Name: 1 - Awal Perjalanan
+  m_Name: 1 - Paket Hutan
   m_EditorClassIdentifier: 
-  _questID: 0
+  _questID: 1
   _questType: 1
   _questName: Awal Perjalanan
   _questDescription: Awal Perjalanan Aiden
@@ -34,7 +34,7 @@ MonoBehaviour:
   ClearNPCQuestDialogue: {fileID: 11400000, guid: 83cde709c0a1f4c4e8441bfe20c19bfe,
     type: 2}
   _npcList:
-  - targetNPC: Evellyn
-    dialogueNode: Shop02_FemaleShop_Default_0
+  - targetNPC: NPC001
+    dialogueNode: TownNPC_Quest
     events:
     - {fileID: 11400000, guid: e152843c24039274c84e4bd60d7d76fd, type: 2}

@@ -15537,7 +15537,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -48729,6 +48729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468a449dacb52fb4a8bd69ad36b27740, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _onCharacterDamaged: {fileID: 0}
   OnHealthReachedZero:
     m_PersistentCalls:
       m_Calls:
@@ -48744,6 +48745,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _health: 0
 --- !u!136 &8260946206363769057
 CapsuleCollider:
   m_ObjectHideFlags: 0

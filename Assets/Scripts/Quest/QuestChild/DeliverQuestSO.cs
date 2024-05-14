@@ -43,7 +43,7 @@ namespace CC.Quest
 
             foreach (var npc in _npcList)
             {
-                SendNPCQuestDialogue?.raiseEvent(null,npc);
+                SendNPCQuestDialogue?.raiseEvent(null, npc);
             }
 
             Debug.Log("quest has started");
@@ -56,7 +56,7 @@ namespace CC.Quest
         }
         public override void OnQuestFinished(Component sender, object data)
         {
-            base.OnQuestFinished(sender,data);
+            base.OnQuestFinished(sender, data);
             clearAllPrefab();
             Debug.Log("quest has finished");
         }

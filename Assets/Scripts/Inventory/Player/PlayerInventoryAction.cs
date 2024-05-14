@@ -75,7 +75,7 @@ namespace CC.Inventory
         {
             foreach (ItemSlotInfo i in _inventoryData.items)
             {
-                if (_item == i.item)
+                if (_item.idItem == i.item.idItem)
                 {
                     return true;
                 }

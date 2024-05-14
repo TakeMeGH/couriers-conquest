@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3873669286631801398}
   - component: {fileID: 2454921053779937761}
   m_Layer: 0
-  m_Name: Jeane
+  m_Name: TownNPC
   m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,9 +122,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3efbcccfb07006c458d19df5513e4922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _NPCID: NPC01
-  _NPCName: Jeane
-  Default_dialogue_node: 
+  _NPCID: NPC001
+  _NPCName: TownNPC
+  Default_dialogue_node: TownNPC_Default
   Quest_dialogue_node: 
   _npcAcceptedQuestEvent: {fileID: 11400000, guid: 3df483288739d704d877a289f5da640b,
     type: 2}
@@ -266,7 +266,7 @@ PrefabInstance:
     - target: {fileID: 8291912193875205263, guid: a756b7df96a7963499f43bbb9e12e803,
         type: 3}
       propertyPath: _name
-      value: Ambatron
+      value: TownNPC
       objectReference: {fileID: 0}
     - target: {fileID: 8291912193875205263, guid: a756b7df96a7963499f43bbb9e12e803,
         type: 3}

@@ -27,6 +27,12 @@ namespace CC.UI
         {
             Initialize();
         }
+
+        void Update()
+        {
+            // TODO : Update health must be called from Player Health Controller
+            UpdateHealthUI();
+        }
         public void Initialize()
         {
             _playerInventoryData.inputReader.PouchPerformed += AttempToUsePouch;

@@ -41,16 +41,16 @@ namespace CC.NPC
         {
             _inputReader.EnableInventoryUIInput();
             _dialogueVariable.SetValue("$" + _NPCName + "HaveQuest", Quest_dialogue_node != "");
-            _dialogueVariable.SetValue("$" + _NPCName + "QuestNode",Quest_dialogue_node);
+            _dialogueVariable.SetValue("$" + _NPCName + "QuestNode", Quest_dialogue_node);
             _dialogueRunner.StartDialogue(Default_dialogue_node);
         }
 
         public void OnQuestListen(Component sender, object data)
         {
-            //if (!(sender.GetType() == typeof(AQuest))) return;
             if (data is NPCQuestDialogueNodeTransfer)
             {
                 NPCQuestDialogueNodeTransfer temp = (NPCQuestDialogueNodeTransfer)data;
+                Debug.Log("QUEST LISTEN" + (data is NPCQuestDialogueNodeTransfer) + temp.targetNPC + _NPCID + isThisNPCCalled(temp.targetNPC));
                 if (!isThisNPCCalled(temp.targetNPC)) return;
                 Debug.Log("npc " + _NPCName + " is listening quest");
                 Quest_dialogue_node = temp.dialogueNode;

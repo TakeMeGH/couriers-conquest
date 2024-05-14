@@ -58,7 +58,7 @@ namespace CC.Combats
             }
 
             _health = Mathf.Max(_health - calculatedDamage, 0);
-
+            _statsSO.SetInstanceValue(mainStat.Health, _health);
             if (_health == 0)
             {
                 OnHealthReachedZero.Invoke();

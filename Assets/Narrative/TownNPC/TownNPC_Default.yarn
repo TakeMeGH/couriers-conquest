@@ -1,0 +1,13 @@
+﻿title: TownNPC_Default
+tags:
+---
+<<declare $TownNPCHaveQuest = false>>
+<<declare $TownNPCQuestNode = "" >>
+
+<<if $TownNPCHaveQuest>>
+    <<jump {$TownNPCQuestNode}>>
+<<endif>>
+
+Town NPC : Nikmatilah kota ini.
+<<Close>>
+===
