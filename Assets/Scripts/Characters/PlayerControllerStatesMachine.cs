@@ -37,7 +37,6 @@ namespace CC.Characters
 
         [field: Header("Health")]
         [field: SerializeField] public Health Health { get; private set; }
-        [field: Header("Climbing")]
 
         [field: Header("Climbing")]
         [field: SerializeField] public FreeClimbMC FreeClimb { get; private set; }

@@ -38,6 +38,7 @@ namespace SA
         public Rig Rig;
         public UnityAction OnAboveStandAble;
         public float UpOffsetMultiplier = 1f;
+        public UnityAction OnMCMove;
         private void OnEnable()
         {
             _inputReader.MoveEvent += UpdateMove;
@@ -66,7 +67,6 @@ namespace SA
             helper = new GameObject().transform;
             helper.name = "climb helper";
             a_hook.Init(this, helper);
-            // CheckForClimb();
         }
 
         public bool CheckForClimb()
@@ -106,13 +106,6 @@ namespace SA
             inPosition = false;
             anim.CrossFade("Climb Idle", 2);
         }
-
-        // void Update()
-        // {
-        //     delta = Time.deltaTime;
-        //     Tick(delta);
-        // }
-
         public void Tick(float d_time)
         {
             this.delta = d_time;
@@ -126,7 +119,6 @@ namespace SA
             {
                 horizontal = Input.GetAxis("Horizontal");
                 vertical = Input.GetAxis("Vertical");
-                float m = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
 
                 Vector3 h = helper.right * horizontal;
                 Vector3 v = helper.up * vertical;
@@ -153,8 +145,8 @@ namespace SA
                 float d = Vector3.Distance(helper.position, startPos) / 2;
                 tp *= possitionOffset;
                 tp += transform.position;
-                targetPos = (isMid) ? tp : helper.position;
-
+                targetPos = isMid ? tp : helper.position;
+                OnMCMove.Invoke();
                 a_hook.CreatePositions(targetPos, moveDir, isMid);
 
             }
@@ -181,12 +173,12 @@ namespace SA
 
             if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin, origin + (dir * dis), 0);
 
-            //Raycast towards the direction you want to move
+            // Raycast towards the direction you want to move
             RaycastHit hit;
             if (Physics.Raycast(origin, dir, out hit, dis, UsedLayer))
             {
                 Debug.Log("CORNER " + hit.transform.gameObject.name);
-                //Check if it's a corner
+                // Check if it's a corner
                 return false;
             }
 
@@ -194,7 +186,7 @@ namespace SA
             dir = helper.forward;
             float dis2 = rayForwardTowardsWall;
 
-            //Raycast forward towards the wall
+            // Raycast forward towards the wall
             if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin, origin + (dir * dis2), 1);
 
             if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin + moveDir * UpOffsetMultiplier, origin + moveDir * UpOffsetMultiplier + (dir * dis2), 2);
@@ -214,7 +206,6 @@ namespace SA
                 return true;
             }
 
-            // Debug.Log("AFTER TOWARDS WALL");
             origin = origin + (dir * dis2);
             dir = -moveDir;
             if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin, origin + dir, 1);
@@ -225,13 +216,10 @@ namespace SA
                 return true;
             }
 
-            // return false;
-
             origin += dir * dis2;
             dir = -Vector3.up;
 
             if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin, origin + dir, 2);
-            //  Debug.DrawRay(origin, dir, Color.yellow);
             if (Physics.Raycast(origin, dir, out hit, dis2, UsedLayer))
             {
                 float angle = Vector3.Angle(-helper.forward, hit.normal);

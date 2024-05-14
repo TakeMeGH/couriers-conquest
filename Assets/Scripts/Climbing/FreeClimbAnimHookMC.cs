@@ -6,6 +6,7 @@ namespace SA
 {
     public class FreeClimbAnimHookMC : MonoBehaviour
     {
+
         Animator anim;
         public Transform MCClimbOrigin;
 
@@ -28,6 +29,8 @@ namespace SA
 
         float delta;
         public float LerpSpeed = 1;
+        float epsilon = 1e-10f;
+
         public void Init(FreeClimbMC c, Transform helper)
         {
             anim = c.anim;
@@ -80,9 +83,7 @@ namespace SA
         void UpdateGoals(Vector3 moveDir)
         {
             isLeft = moveDir.x <= 0;
-            // isMirror = false;
-
-            if (moveDir.x != 0)
+            if (moveDir.x >= epsilon || moveDir.x <= -epsilon)
             {
                 goals.lh = isLeft;
                 goals.rh = !isLeft;
@@ -96,7 +97,6 @@ namespace SA
                 {
                     isEnabled = !isEnabled;
                 }
-
                 goals.lh = isEnabled;
                 goals.rh = !isEnabled;
                 goals.lf = !isEnabled;
@@ -110,22 +110,19 @@ namespace SA
             {
                 if (moveDir.y != 0)
                 {
-                    if (moveDir.x == 0)
+                    if (moveDir.x <= epsilon && moveDir.x >= -epsilon)
                     {
                         isMirror = !isMirror;
-                        // anim.SetBool("mirror", isMirror);
                     }
                     else
                     {
                         if (moveDir.y < 0)
                         {
-                            isMirror = (moveDir.x > 0);
-                            // anim.SetBool("mirror", isMirror);
+                            isMirror = moveDir.x > 0;
                         }
                         else
                         {
-                            isMirror = (moveDir.x < 0);
-                            // anim.SetBool("mirror", isMirror);
+                            isMirror = moveDir.x < 0;
                         }
                     }
                     if (isMirror)
@@ -137,7 +134,6 @@ namespace SA
                     {
                         anim.CrossFade("Climb Right", 0.2f);
                     }
-                    // anim.CrossFade("climb_up", 0.2f);
                 }
             }
             else

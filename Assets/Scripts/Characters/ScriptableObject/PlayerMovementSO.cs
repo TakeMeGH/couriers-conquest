@@ -60,8 +60,8 @@ namespace CC.Characters
         #endregion
 
         #endregion
-        
-       #region StaminaCostData
+
+        #region StaminaCostData
         [SerializeField, Header("Stamina Cost Data"), Range(0f, 100f)]
         public float SprintStaminaCost = 5f;
 
@@ -70,6 +70,9 @@ namespace CC.Characters
 
         [SerializeField, Range(0f, 100f)]
         public float BlockStaminaCost = 5f;
+        [SerializeField, Range(0f, 100f)]
+        public float ClimbStaminaCost = 2f;
+
         #endregion
 
 

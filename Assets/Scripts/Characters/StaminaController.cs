@@ -3,6 +3,9 @@ using CC.Core.Data.Dynamic;
 using CC.Characters;
 using CC.Characters.States;
 using System.Collections;
+using CC.StateMachine;
+using System;
+using System.Collections.Generic;
 
 public class StaminaController : MonoBehaviour
 {
@@ -14,6 +17,13 @@ public class StaminaController : MonoBehaviour
     public bool CanBlock { get; private set; }
     public float blockStaminaReq = 10f; //blockStaminaRequirement
     PlayerStatsSO _statsSO;
+    List<Type> activeStates = new List<Type> {
+        typeof(PlayerSprintingState),
+        typeof(PlayerDashingState),
+        typeof(PlayerBlockingState),
+        typeof(PlayerClimbState),
+    };
+
 
     public float GetCurrentStamina()
     {
@@ -64,15 +74,16 @@ public class StaminaController : MonoBehaviour
 
         while (currentStamina < _statsSO.GetValue(mainStat.Stamina))
         {
-            // Stop regen stamina kalau player mulai sprinting, dashing, atau blocking lagi pas Stamina lagi diposisi regenerasi
+            // Stop regen stamina kalau player berada di state activeStates
             var currentState = playerController.GetCurrentState();
-            if (currentState is PlayerSprintingState || currentState is PlayerDashingState || currentState is PlayerBlockingState)
-
+            foreach (var state in activeStates)
             {
-                isRegenerating = false;
-                yield break;
+                if (currentState.GetType() == state)
+                {
+                    isRegenerating = false;
+                    yield break;
+                }
             }
-
             currentStamina += staminaIncreaseRate * Time.deltaTime;
             currentStamina = Mathf.Min(currentStamina, _statsSO.GetValue(mainStat.Stamina));
             _statsSO.SetInstanceValue(mainStat.Stamina, currentStamina);
