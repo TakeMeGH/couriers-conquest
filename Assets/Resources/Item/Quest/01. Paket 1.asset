@@ -10,10 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 886f6160a6139bb4593bbcabf067f839, type: 3}
-  m_Name: Paket 1
+  m_Name: 01. Paket 1
   m_EditorClassIdentifier: 
   itemName: Paket 1
+  idItem: 
   itemWeight: 1
   itemDescription: Paket 1
   itemSprite: {fileID: 21300000, guid: d85591aef1e0c744db7fcdc673013a78, type: 3}
   maxStacks: 1
+  costSell: 0
+  _onPlayerGetDamaged: {fileID: 11400000, guid: 2d6ad549611d5a74ab9b67dfcf4273eb,
+    type: 2}
+  _onItemDestroyed: {fileID: 11400000, guid: cf9e6b8ee0f3084419daedb752861645, type: 2}
+  CurrentQuality: 100
+  DefaultQuality: 100
+  _valueReducePerDamage: 2
+  _valueReducePerDrop: 20

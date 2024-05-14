@@ -14,23 +14,44 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _saveInventoryData:
     dataValue:
+    - key: Q001
+      amount: 1
+      quality: 30
     - key: E001
       amount: 1
+      quality: 0
     - key: E002
       amount: 1
+      quality: 0
     - key: E003
       amount: 1
+      quality: 0
+    - key: Q001
+      amount: 1
+      quality: 100
     equipmentLevel:
-      _serializedList: []
+      _serializedList:
+      - Key: C001
+        Value: 0
+      - Key: C002
+        Value: 0
+      - Key: C003
+        Value: 0
   _playerInventory: {fileID: 11400000, guid: 8a4eab9fce0693d45bf28a92fc853498, type: 2}
   _defaultInventoryData:
     dataValue:
+    - key: Q001
+      amount: 1
+      quality: 100
     - key: E001
       amount: 1
+      quality: 0
     - key: E002
       amount: 1
+      quality: 0
     - key: E003
       amount: 1
+      quality: 0
     equipmentLevel:
       _serializedList:
       - Key: C001
@@ -40,4 +61,5 @@ MonoBehaviour:
       - Key: C003
         Value: 0
   _listItemID: {fileID: 11400000, guid: 3b953422f9393254cb26578637893519, type: 2}
-  _addItemToInventory: {fileID: 0}
+  _addItemToInventory: {fileID: 11400000, guid: 4611073ba66144c44ba509f62ea86853,
+    type: 2}

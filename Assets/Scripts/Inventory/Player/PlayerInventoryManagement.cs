@@ -22,6 +22,7 @@ namespace CC.Inventory
 
             DefaultItem();
             SetDefaultEquipment();
+            AddAllQuestItemEvent();
         }
 
         private void DefaultItem()
@@ -177,6 +178,25 @@ namespace CC.Inventory
         public void OnUpdateCurrency(float amount)
         {
             _inventoryData.playerGold += amount;
+        }
+
+        public void AddAllQuestItemEvent()
+        {
+            for (int i = 0; i < _inventoryData.items.Count; i++)
+            {
+                if (_inventoryData.items[i].item == null) continue;
+
+                AddQuestItemEvent(i);
+            }
+        }
+
+        public void AddQuestItemEvent(int indexItem)
+        {
+            if (_inventoryData.items[indexItem].item.GetItemType() == ItemType.QuestItem)
+            {
+                Debug.Log("ENABLE DAMAGE EVENT");
+                ((QuestItem)_inventoryData.items[indexItem].item).EnableDamageEvent();
+            }
         }
     }
 }

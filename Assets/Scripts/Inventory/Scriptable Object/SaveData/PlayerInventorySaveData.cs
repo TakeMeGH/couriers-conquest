@@ -1,18 +1,10 @@
-using CC.Core.Data.Dynamic;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using CC.Core.Save;
 using AYellowpaper.SerializedCollections;
 using Newtonsoft.Json.Linq;
 using CC.Inventory;
 using CC.Items;
-using System;
 using CC.Events;
-using static UnityEditor.Timeline.Actions.MenuPriority;
-using static UnityEditor.Progress;
-using UnityEditorInternal.VersionControl;
-using UnityEngine.InputSystem;
 
 namespace CC.Core.Save
 {
@@ -54,8 +46,13 @@ namespace CC.Core.Save
             {
                 string key = kvp.key;
                 int value = kvp.amount;
+                float quality = kvp.quality;
 
                 ABaseItem item = _listItemID.GetItemByID(key);
+                if (item.GetItemType() == ItemType.QuestItem)
+                {
+                    ((QuestItem)item).CurrentQuality = quality;
+                }
                 Debug.Log("ID Item " + kvp.key + " : " + kvp.amount + " - " + item.itemName);
                 OnAddItem(item, value);
             }
@@ -115,6 +112,10 @@ namespace CC.Core.Save
 
                     data.key = i.item.idItem;
                     data.amount = i.stacks;
+                    if (i.item.GetItemType() == ItemType.QuestItem)
+                    {
+                        data.quality = ((QuestItem)i.item).CurrentQuality;
+                    }
                     _saveInventoryData.dataValue.Add(data);
                     Debug.Log("Add : " + i.item.itemName);
                 }
@@ -148,8 +149,10 @@ namespace CC.Core.Save
     }
 
     [System.Serializable]
-    public class RawInventorySaveData{
+    public class RawInventorySaveData
+    {
         public string key;
         public int amount;
+        public float quality;
     }
 }

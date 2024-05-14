@@ -1,4 +1,5 @@
 using CC.Core.Data.Dynamic;
+using CC.Events;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -6,12 +7,11 @@ namespace CC.Combats
 {
     public class Health : MonoBehaviour
     {
+        [SerializeField] VoidEventChannelSO _onCharacterDamaged;
         public UnityEvent OnHealthReachedZero;
-        float _health;
+        [SerializeField] float _health;
         PlayerStatsSO _statsSO;
         bool _isBlocking;
-
-
 
         public void SetStats(PlayerStatsSO statsSO)
         {
@@ -22,7 +22,6 @@ namespace CC.Combats
         private void Init()
         {
             _health = _statsSO.GetInstanceValue(mainStat.Health);
-            Debug.Log("Initial Player Health: " + _health);
         }
 
 
@@ -52,6 +51,12 @@ namespace CC.Combats
                 totalReduction += shieldValue / 100f;
             }
             float calculatedDamage = Mathf.Min(Mathf.RoundToInt(damage * (1 - totalReduction)), _health);
+
+            if (calculatedDamage > 0)
+            {
+                _onCharacterDamaged?.RaiseEvent();
+            }
+
             _health = Mathf.Max(_health - calculatedDamage, 0);
 
             if (_health == 0)
