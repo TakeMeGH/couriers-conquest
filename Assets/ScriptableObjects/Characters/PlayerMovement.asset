@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerMovement
   m_EditorClassIdentifier: 
   <BaseSpeed>k__BackingField: 5
-  <TargetRotationReachTime>k__BackingField: {x: 0, y: 0.14, z: 0}
+  <TargetRotationReachTime>k__BackingField: {x: 0, y: 0.1, z: 0}
   <GroundedBaseSpeed>k__BackingField: 5
   <GroundToFallRayDistance>k__BackingField: 1
   <SlopeSpeedAngles>k__BackingField:
@@ -67,7 +67,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  <GroundedTargetRotationReachTime>k__BackingField: {x: 0, y: 0.14, z: 0}
+  <GroundedTargetRotationReachTime>k__BackingField: {x: 0, y: 0.1, z: 0}
   <WalkSpeedModifier>k__BackingField: 0.225
   <RunSpeedModifier>k__BackingField: 1
   <SprintSpeedModifier>k__BackingField: 1.7
@@ -177,3 +177,4 @@ MonoBehaviour:
   SprintStaminaCost: 5
   DashStaminaCost: 10
   BlockStaminaCost: 5
+  ClimbStaminaCost: 2

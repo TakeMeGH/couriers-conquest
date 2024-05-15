@@ -159,10 +159,10 @@ MonoBehaviour:
   a_hook: {fileID: 5412843389224612012}
   ignoreLayers:
     serializedVersion: 2
-    m_Bits: 1280
+    m_Bits: 66816
   _inputReader: {fileID: 11400000, guid: 2c06813ec1504fb49916705513d476fd, type: 2}
   Rig: {fileID: 3909680839807219293}
-  UpOffsetMultiplier: 1
+  UpOffsetMultiplier: 0.4
 --- !u!54 &1855160456544552901
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -868,6 +868,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  _health: 0
 --- !u!136 &7427144683471969171
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -903,7 +904,7 @@ GameObject:
   - component: {fileID: 5012093843185906234}
   - component: {fileID: 7023401299673270880}
   - component: {fileID: 1149497327884641052}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: WeaponLogic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
