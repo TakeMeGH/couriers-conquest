@@ -19,7 +19,6 @@ namespace CC.Characters.States
             if (_playerController.StaminaController.GetCurrentStamina() <= 0)
             {
                 // Kalau stamina ga lebih besar dari 0, jangan kasih player ngedash
-                Debug.Log("Not enough stamina to dash!");
                 OnAnimationTransitionEvent();
                 return;
             }

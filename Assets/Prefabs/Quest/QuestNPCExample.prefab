@@ -193,6 +193,11 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 8291912193875205263, guid: a756b7df96a7963499f43bbb9e12e803,
         type: 3}
+      propertyPath: _name
+      value: Papan Misi
+      objectReference: {fileID: 0}
+    - target: {fileID: 8291912193875205263, guid: a756b7df96a7963499f43bbb9e12e803,
+        type: 3}
       propertyPath: functionTrigger.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3956473738341170773}
@@ -228,7 +233,7 @@ PrefabInstance:
     - target: {fileID: 3990998231559167454, guid: 7f671a054e041a24ab5a802ae22ca581,
         type: 3}
       propertyPath: m_Name
-      value: Jokowi
+      value: QuestBoard
       objectReference: {fileID: 0}
     - target: {fileID: 5194993098429348849, guid: 7f671a054e041a24ab5a802ae22ca581,
         type: 3}
@@ -282,8 +287,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6105894126065767224, guid: 7f671a054e041a24ab5a802ae22ca581,
         type: 3}
+      propertyPath: _NPCID
+      value: Quest000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6105894126065767224, guid: 7f671a054e041a24ab5a802ae22ca581,
+        type: 3}
+      propertyPath: _NPCName
+      value: QuestBoard
+      objectReference: {fileID: 0}
+    - target: {fileID: 6105894126065767224, guid: 7f671a054e041a24ab5a802ae22ca581,
+        type: 3}
       propertyPath: Default_dialogue_node
-      value: Quest00_Handler_Default_0
+      value: Quest000_QuestBoard_Default_0
       objectReference: {fileID: 0}
     - target: {fileID: 6105894126065767224, guid: 7f671a054e041a24ab5a802ae22ca581,
         type: 3}
@@ -328,7 +343,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3990998231559167454, guid: 7f671a054e041a24ab5a802ae22ca581,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2567246471895818743}
   m_SourcePrefab: {fileID: 100100000, guid: 7f671a054e041a24ab5a802ae22ca581, type: 3}
 --- !u!4 &3047840797162165916 stripped
 Transform:
@@ -342,9 +361,60 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 7085369187387305325}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 6140260083742552243}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3efbcccfb07006c458d19df5513e4922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6140260083742552243 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3990998231559167454, guid: 7f671a054e041a24ab5a802ae22ca581,
+    type: 3}
+  m_PrefabInstance: {fileID: 7085369187387305325}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2567246471895818743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6140260083742552243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc664d1b263d3c4caade25e036d29be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listeners:
+  - channel: {fileID: 11400000, guid: acf930db98f4c3646a9449d6d1863992, type: 2}
+    eventToCall:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3956473738341170773}
+          m_TargetAssemblyTypeName: CC.NPC.NPCBehaviour, Assembly-CSharp
+          m_MethodName: OnQuestListen
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - channel: {fileID: 11400000, guid: 83cde709c0a1f4c4e8441bfe20c19bfe, type: 2}
+    eventToCall:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3956473738341170773}
+          m_TargetAssemblyTypeName: CC.NPC.NPCBehaviour, Assembly-CSharp
+          m_MethodName: clearQuestDialogue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

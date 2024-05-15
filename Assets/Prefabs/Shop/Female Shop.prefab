@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 572665959627944320}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 28.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -91,10 +91,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -590560074535215521, guid: 6d376ecc20c187943b9e1bcc405ab487,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -10.42
+      objectReference: {fileID: 0}
+    - target: {fileID: -590560074535215521, guid: 6d376ecc20c187943b9e1bcc405ab487,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.023811042
+      objectReference: {fileID: 0}
+    - target: {fileID: -590560074535215521, guid: 6d376ecc20c187943b9e1bcc405ab487,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 7.08
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6d376ecc20c187943b9e1bcc405ab487,
         type: 3}
       propertyPath: m_Name
       value: shop cewek3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618790217434022268, guid: 6d376ecc20c187943b9e1bcc405ab487,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.66568464
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618790217434022268, guid: 6d376ecc20c187943b9e1bcc405ab487,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.29
+      objectReference: {fileID: 0}
+    - target: {fileID: 2618790217434022268, guid: 6d376ecc20c187943b9e1bcc405ab487,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.771474
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -115,6 +145,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2289456421021623060}
     m_Modifications:
+    - target: {fileID: 3123800765364273993, guid: 06a42a946dc9e814fb33110e29be9acc,
+        type: 3}
+      propertyPath: _isCommandHandler
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3578207193914465664, guid: 06a42a946dc9e814fb33110e29be9acc,
         type: 3}
       propertyPath: m_Name

@@ -1,6 +1,4 @@
 using CC.Event;
-using CC.Quest;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -83,6 +81,7 @@ namespace CC.NPC
         [YarnCommand("SpecialAction")]
         public void SpecialAction(int index)
         {
+            Debug.Log("SPECIAL");
             _specialAction[index].Invoke();
         }
     }

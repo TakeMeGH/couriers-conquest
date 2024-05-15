@@ -16,7 +16,7 @@ namespace CC.Quest
 
         public virtual void OnQuestStarted(Component sender, object data) { }
         public virtual void OnQuestProgress(Component sender, object data) { }
-        public virtual void OnQuestFinished(Component sender, object data) { _onSendReward.raiseEvent(null, _reward); }
+        public virtual void OnQuestFinished(Component sender, object data) { _onSendReward?.raiseEvent(null, _reward); }
         public virtual void OnQuestCancelled(Component sender, object data) { }
 
         #region "Getter"
@@ -54,6 +54,7 @@ namespace CC.Quest
         Side
     }
 
+    [System.Serializable]
     public class Reward
     {
         public int gold;

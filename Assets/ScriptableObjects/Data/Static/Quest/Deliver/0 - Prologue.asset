@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fc8af5ec0429eb41a03046326a0106e, type: 3}
+  m_Name: 0 - Prologue
+  m_EditorClassIdentifier: 
+  _questID: 0
+  _questType: 1
+  _questName: Prologue
+  _questDescription: Prologue
+  _questPrerequisitesID: 
+  _onSendReward: {fileID: 0}
+  _reward:
+    gold: 0
+    exp: 0
+    item: []
+  pickupPrefab:
+    prefab: {fileID: 6618757732054344946, guid: 0e96020387a36884a940b117cbf4caea,
+      type: 3}
+    position: {x: 0, y: 0, z: 0}
+  dropPrefab:
+    prefab: {fileID: 7398444736682334487, guid: 9d9260031bbd21443b5b11d1d7fcf5d9,
+      type: 3}
+    position: {x: 0, y: 0, z: 0}
+  _questPrefabs: []
+  itemToDeliver: {fileID: 0}
+  _pickedUp: 0
+  SendNPCQuestDialogue: {fileID: 11400000, guid: acf930db98f4c3646a9449d6d1863992,
+    type: 2}
+  ClearNPCQuestDialogue: {fileID: 11400000, guid: 83cde709c0a1f4c4e8441bfe20c19bfe,
+    type: 2}
+  _npcList:
+  - targetNPC: NPC001
+    dialogueNode: NPC001_Richard_Quest_0
+    events:
+    - {fileID: 11400000, guid: e152843c24039274c84e4bd60d7d76fd, type: 2}
+  - targetNPC: Quest000
+    dialogueNode: Quest000_QuestBoard_NoQuest
+    events: []
