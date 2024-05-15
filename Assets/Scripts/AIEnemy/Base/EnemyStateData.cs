@@ -9,7 +9,7 @@ namespace CC.Enemy
     public class EnemyStateData
     {
 
-        public int CurrentWaypointIndex;
+        public int CurrentWaypointIndex = -1;
         public Transform PlayerTransform;
         public int IsHeavyAttack;
         public float CurrentWaitTime;

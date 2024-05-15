@@ -63,12 +63,11 @@ namespace CC.Enemy.States
             System.Random random = new System.Random();
             int randomIndex = random.Next(_enemyController.PatrolWaypoints.Length);
 
-            while (Vector3.Distance(_enemyController.PatrolWaypoints[randomIndex].position,
-                _enemyController.transform.position) <= _enemyController.NavMeshAgent.stoppingDistance)
+            while (randomIndex == _enemyController.EnemyCurrentData.CurrentWaypointIndex)
             {
                 randomIndex = random.Next(_enemyController.PatrolWaypoints.Length);
             }
-
+            _enemyController.EnemyCurrentData.CurrentWaypointIndex = randomIndex;
             return _enemyController.PatrolWaypoints[randomIndex].position;
         }
 
