@@ -130,6 +130,33 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ScrolIInteraction",
+                    "type": "PassThrough",
+                    "id": "5dd16f55-75d1-4d54-984c-32b2a0fd339a",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DropClimbing",
+                    "type": "Button",
+                    "id": "2c968146-2eb1-4d34-a3bc-089c0a71f3f9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Pouch",
+                    "type": "Button",
+                    "id": "ea27da48-2da5-41d0-af2e-a7e0c055e572",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -234,19 +261,8 @@
                 },
                 {
                     "name": "",
-                    "id": "9b3e39f2-9646-497a-9f6b-01f8406321e8",
+                    "id": "98aba709-1e51-49a6-b721-f78ffd556bad",
                     "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a57fb021-7be4-4e0d-808c-0c54b2685bd3",
-                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -258,17 +274,6 @@
                     "name": "",
                     "id": "ac32f214-ee95-4dc0-97b5-e40fa2175a6f",
                     "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Sprint",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "84b4ce0b-0a0b-44ab-899c-5dc5fe35f705",
-                    "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -330,6 +335,61 @@
                     "action": "WalkToggle",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "284bc7f1-4188-486f-963d-c5332cc7aab8",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScrolIInteraction",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cc59fb3f-b7f9-4530-8d97-2e207ff66d57",
+                    "path": "<Keyboard>/x",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DropClimbing",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e233ed4e-df7c-462f-a425-0e9d4e117e58",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8f508c52-ee15-4ece-beb0-fe43ee9f307b",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Block",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2809ef1b-ee2a-4f53-b84e-3889c4d8bf35",
+                    "path": "<Keyboard>/z",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pouch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -349,7 +409,7 @@
                 {
                     "name": "DropItem",
                     "type": "Button",
-                    "id": "e27666b4-ac0c-4700-8853-b99d49abfe5b",
+                    "id": "d21d3652-3a35-44f9-8083-e03609446d69",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -370,7 +430,7 @@
                 },
                 {
                     "name": "",
-                    "id": "f679ca20-c84f-440e-b996-4584e34bb7ed",
+                    "id": "5bbf8d76-981e-4a37-83d0-3621281090ee",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",

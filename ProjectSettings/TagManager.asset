@@ -9,6 +9,8 @@ TagManager:
   - Pickable
   - AudioEmitter
   - PayLoad
+  - ErraRenderer
+  - Waypoint
   layers:
   - Default
   - TransparentFX
@@ -20,22 +22,18 @@ TagManager:
   - GroundCheck
   - Player
   - Obstacle
-  - 
-  - 
-  - 
-  - 
+  - Cloak
+  - PlayerDamageable
+  - EnemyDamageable
+  - Enemy
   - Interractables
   - Grass
+  - Weapon
   - 
   - 
+  - HeightDef
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Waypoint
   - 
   - 
   - 

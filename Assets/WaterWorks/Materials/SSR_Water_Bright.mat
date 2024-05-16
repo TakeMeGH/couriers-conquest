@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3039236170095403706
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 639247ca83abc874e893eb93af2b5e44, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 0
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SSR_Water_Bright
+  m_Shader: {fileID: -6465566751694194690, guid: 0ba09e3043034d64eba4c886a0dc5959,
+    type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _SURFACE_TYPE_TRANSPARENT
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 1
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaClip: 0
+    - _BUILTIN_QueueControl: 0
+    - _BUILTIN_QueueOffset: 0
+    - _Blend: 0
+    - _CastShadows: 1
+    - _Caustic_Strength: 2
+    - _Cull: 0
+    - _Cutoff: 0
+    - _CutoffSpeed: -0.4
+    - _Displacement_Amount: 0
+    - _Displacement_Scale: 1
+    - _Displacement_Speed: 0.1
+    - _DstBlend: 10
+    - _Edge_Offset: 20
+    - _Foam_Cutoff: 0.6
+    - _Frequency: 15
+    - _MaxCutoff: 0
+    - _MaxDist: 250
+    - _MaxWaveDist: 250
+    - _NormalStrength: 0.1
+    - _Normal_Strength: 0.1
+    - _Offset: 0.9
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _ScreenSpaceReflections: 1
+    - _Speed: 0.2
+    - _SrcBlend: 5
+    - _Surface: 1
+    - _Tiling: 0.2
+    - _Transparency: 0.9
+    - _UseFoam: 1
+    - _Use_Foam: 1
+    - _WaveDist: 5
+    - _WaveFrequency: 3
+    - _WaveSpeed: 0.1
+    - _Wave_Speed: 2
+    - _WorkflowMode: 1
+    - _ZTest: 4
+    - _ZWrite: 1
+    - _ZWriteControl: 1
+    m_Colors:
+    - _Color: {r: 0, g: 0.25911346, b: 0.38679248, a: 1}
+    - _EdgeColor: {r: 0.0485938, g: 0.49056602, b: 0.4076798, a: 1}
+    - _Edge_Color: {r: 0.2507565, g: 0.3301887, b: 0.28799033, a: 1}
+    - _FoamColor: {r: 4, g: 4, b: 4, a: 1}
+    - _Foam_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_BuildTextureStacks: []
+--- !u!114 &684404215947078111
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7

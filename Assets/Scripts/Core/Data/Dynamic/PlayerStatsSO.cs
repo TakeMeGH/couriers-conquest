@@ -4,6 +4,8 @@ using UnityEngine;
 using AYellowpaper.SerializedCollections;
 using Newtonsoft.Json.Linq;
 using CC.Core.Data.Stable;
+using UnityEngine.InputSystem;
+using System;
 
 namespace CC.Core.Data.Dynamic
 {
@@ -44,6 +46,18 @@ namespace CC.Core.Data.Dynamic
             }
         }
 
+        public void SetInstanceValue(mainStat key, float value)
+        {
+            if (statData.instanceValue.ContainsKey(key))
+            {
+                statData.instanceValue[key] = Math.Min(GetValue(key), value);
+            }
+        }
+        public float GetDamageReduction()
+        {
+            return statData.damageReduction;
+        }
+
         public override ISaveable Save()
         {
             return statData;
@@ -57,19 +71,24 @@ namespace CC.Core.Data.Dynamic
         {
             statData.CopyFrom(_defaultStatData);
         }
+
     }
+
     [System.Serializable]
     public class PlayerStats : ISaveable
     {
         public SerializedDictionary<mainStat, float> defaultValue;
         public SerializedDictionary<mainStat, float> instanceValue;
         public int playerExp;
+        public float damageReduction;
+
         public void CopyFrom(ISaveable obj)
         {
             var target = (PlayerStats)obj;
             this.defaultValue = new(target.defaultValue);
             this.instanceValue = new(target.instanceValue);
             this.playerExp = target.playerExp;
+            this.damageReduction = target.damageReduction;
         }
     }
 
@@ -80,5 +99,6 @@ namespace CC.Core.Data.Dynamic
         AttackValue,
         MovementSpeed,
         Defense,
+        ShieldValue,
     }
 }

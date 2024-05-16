@@ -1,0 +1,4 @@
+Setup and Use:
+
+Use either the pre-created material or create your own and assign to the terrain. The textures are blended based on the normals of the terrain.
+The material works using a geometry shader, extruding alpha-clipped planes from the mesh.

@@ -1,0 +1,13 @@
+﻿title: NPC001_Richard_Default_0
+tags:
+---
+<<declare $RichardHaveQuest = false>>
+<<declare $RichardQuestNode = "" >>
+
+<<if $RichardHaveQuest>>
+    <<jump {$RichardQuestNode}>>
+<<endif>>
+
+Richard : Nikmatilah kota ini.
+<<Close>>
+===

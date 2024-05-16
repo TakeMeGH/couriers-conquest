@@ -71,7 +71,6 @@ namespace CC.Characters.States
         protected void Float()
         {
             Vector3 capsuleColliderCenterInWorldSpace = _playerController.ResizableCapsuleCollider.CapsuleColliderData.Collider.bounds.center;
-
             Ray downwardsRayFromCapsuleCenter = new Ray(capsuleColliderCenterInWorldSpace, Vector3.down);
 
             if (Physics.Raycast(downwardsRayFromCapsuleCenter, out RaycastHit hit, _playerController.ResizableCapsuleCollider.SlopeData.FloatRayDistance, _playerController.LayerData.GroundLayer, QueryTriggerInteraction.Ignore))
@@ -84,14 +83,15 @@ namespace CC.Characters.States
                 {
                     return;
                 }
-
-                float distanceToFloatingPoint = _playerController.ResizableCapsuleCollider.CapsuleColliderData.ColliderCenterInLocalSpace.y * _playerController.transform.localScale.y - hit.distance;
-
+                // + 1 because offset 1 in player pivot
+                float distanceToFloatingPoint = (_playerController.ResizableCapsuleCollider.CapsuleColliderData.ColliderCenterInLocalSpace.y + 1) * _playerController.transform.localScale.y - hit.distance;
+                // Debug.Log(_playerController.ResizableCapsuleCollider.CapsuleColliderData.ColliderCenterInLocalSpace.y + " " + _playerController.transform.localScale.y);
                 if (distanceToFloatingPoint == 0f)
                 {
                     return;
                 }
 
+                // Debug.Log(distanceToFloatingPoint + " " + hit.distance);
                 float amountToLift = distanceToFloatingPoint * _playerController.ResizableCapsuleCollider.SlopeData.StepReachForce - GetPlayerVerticalVelocity().y;
 
                 Vector3 liftForce = new Vector3(0f, amountToLift, 0f);

@@ -1,0 +1,176 @@
+﻿title: Shop01_MaleShop_Default_0
+tags:
+---
+Reymond : Halo kak, senang bertemu denganmu!
+Reymond : Selamat datang di GoodCompany Shop
+Reymond : Disini kamu bisa menemukan berbagai barang premium yang tidak akan bisa kamu temukan di tempat lain
+Reymond : Tentunya harganya sedikit mahal, hahaha
+Reymond : Tapi kualitasnya aku berani jamin, tidak akan ada yang bisa mengalahkannya
+Reymond : Jadi, adakah yang kamu butuhkan disini sekarang kak?
+<<jump Shop01_MaleShop_All_Choice>>
+===
+
+title: Shop01_MaleShop_All_Choice
+tags:
+---
+-> Aku memiliki kisah petualangan
+    <<jump Shop01_MaleShop_Choice_0>>
+-> Aku ingin membeli atau menjual sesuatu
+    <<jump Shop01_MaleShop_Choice_1>>
+-> Bisakah kita membuat sebuah kontrak?
+    <<jump Shop01_MaleShop_Choice_2>>
+-> Tidak ada, aku sudah punya apa yang kubutuhkan
+    <<jump Shop01_MaleShop_Choice_3>>
+===
+
+title: Shop01_MaleShop_Choice_0
+tags:
+---
+
+Reymond: Apa-apa-apa? Kisah petualangan? Kamu bercanda? Dengan tubuhmu yang seperti itu? Hahaha!
+
+Reymond: Tapi, karena kamu bilang kamu punya cerita, aku akan bersedia untuk mendengarkannya. Tapi jika itu jelek, aku tidak akan menjual barang kepadamu lagi...
+
+-> Aiden: Aku akan menceritakan bagaimana kisah pertama ku mengantarkan barang.
+    <<jump Shop01_MaleShop_Story_0>>
+-> Aiden: Aku akan menceritakan tentang sebuah gua yang aneh.
+    <<jump Shop01_MaleShop_Story_1>>
+===
+
+title: Shop01_MaleShop_Story_0
+tags:
+---
+    Reymond: Hei, aku ingin mendengarkan cerita petualanganmu, bukan cerita mengantarkan barang.
+
+    Aiden: Dengarkan dulu, walaupun ini kisah tentangku mengantarkan barang, tapi juga ada hal seru di dalamnya, sama seperti petualangan.
+
+    Reymond: Baiklah-baiklah, kamu bisa langsung menceritakannya.
+
+    Aiden: Setelah aku lulus dari tes Postman, aku sudah bisa mengambil misi yang tersedia di mading. Karena tidak tahu, aku langsung mengambil misi secara acak.
+
+    Aiden: Ternyata misi tersebut cukup berbahaya, yaitu mengantarkan barang sampai ke hutan.
+
+    Aiden: Awalnya aku ragu, apakah aku bisa mengantarkannya, tapi yah, apa sih hal buruk yang akan terjadi.
+
+    Aiden: Setelah aku sampai di bibir hutan, aku langsung bertemu dengan beberapa bandit.
+
+    Reymond: Lalu-lalu, setelah itu apa yang kamu lakukan?
+
+    Aiden: Sabar-sabar, biarkan aku menyelesaikan perkataanku dulu.
+
+    Aiden: Karena aku cukup bisa bela diri, aku sedikit menyerang mereka, dan langsung kabur.
+
+    Aiden: Setelahnya, aku malah bertemu dengan goblin. Setelah aku berhasil membunuh satu dari mereka, aku langsung kabur lagi, karena itu sangat melelahkan.
+
+    Aiden: Aku terus berlari sampai ke tempat pengantaran barang. Untung saja aku diizinkan beristirahat di sana, dan entah kenapa tempat mereka sangat aman, dan terlihat tidak ada tanda-tanda monster yang pernah ke sana.
+
+    Aiden: Padahal aku saja bertemu bandit dan goblin, tapi tempat itu yang berada sedikit lebih dalam terlihat seperti tidak pernah diserang. Itu sangat aneh.
+
+    Aiden: Tapi setelah beristirahat, aku langsung pergi, dan untungnya saat pulang aku tidak bertemu dengan bandit dan goblin lagi.
+
+    Aiden: Jadi gimana kisah awal petualanganku? Keren bukan?
+
+    Reymond: Yah, cukup seru sih, tapi sedikit membosankan juga.
+
+    Reymond: Seharusnya kamu melawan bandit dan goblin itu, bukan malah lari.
+
+    Reymond: Di sini terlihat bahwa kamu sedikit lari seperti pengecut.
+
+    Reymond: Tapi cerita tersebut bisa sedikit mengisi waktu luangku, walaupun yah, sedikit membosankan.
+
+    Reymond: Jadi setelah kamu menceritakan kisah tersebut, adakah yang kamu ingin lakukan lagi di sini?
+
+    <<jump Shop01_MaleShop_All_Choice>>
+
+===
+
+title: Shop01_MaleShop_Story_1
+tags:
+---
+    Reymond: Gua yang aneh? Apa itu? Terdengar tidak menarik sama sekali.
+
+    Aiden: Dengarkan dulu ceritaku, baru setelahnya kamu bisa komplain.
+
+    Reymond: Baiklah, kamu bisa langsung mulai kalau begitu.
+
+    Aiden: Dulu sekali, aku pernah diceritakan kisah ini oleh ayahku...
+
+    Reymond: Hah? Ayah? Jadi bukan kamu yang mengalaminya?
+
+    Aiden: Aku memang tidak mengalaminya. Ini merupakan kisah ayahku, tapi kamu pasti akan suka dengan kisah tersebut.
+
+    Reymond: Awas saja ya kalau kisah ini membosankan, aku pastikan tidak akan mendengarkan cerita kamu lagi lain kali.
+
+    Aiden: Iya-iya, untuk sekarang dengarkan dulu.
+
+    Aiden: Jadi waktu itu, ayahku sedang menjelajahi sebuah hutan yang sangat jauh dari kota ini.
+
+    Aiden: Di hutan itu, anehnya hanya ada satu tipe monster. Dia membawa sabit dan terbang mengelilingi pohon-pohon dan hutan, tidak ada yang lain, bahkan bandit pun juga tidak ada.
+
+    Aiden: Ayahku penasaran dan terus menjelajahi hutan tersebut sampai ke dalam, dan terus mengalahkan monster yang dia temui itu.
+
+    Aiden: Semakin masuk, monster itu semakin kuat, tapi yang aneh, monster itu selalu bergerak sendiri-sendiri, tidak berkelompok.
+
+    Aiden: Semakin dalam, dan semakin dalam, akhirnya ayahku menemukan sebuah gua yang sangat besar. Dan di sekitar gua tersebut, semua pohonnya telah menyatu dengan kristal. Tidak ada pohon yang tidak menyatu dengan kristal.
+
+    Aiden: Ayahku masuk dan bertemu monster itu lagi. Tanpa lama-lama, dia membunuhnya, dan akhirnya dia menjelajahi gua tersebut.
+
+    Aiden: Gua itu sangat besar, dan juga banyak sekali kristal yang menghiasi gua itu. Yang aneh, bahkan kristal tersebut memiliki berbagai macam warna, tidak seperti yang kita ketahui sekarang.
+
+    Aiden: Bahkan ada satu tempat yang isinya penuh dengan kristal berbagai macam warna tersebut.
+
+    Aiden: Setelah tidak ada yang bisa dijelajahi, akhirnya ayahku keluar dari gua. Tapi yang aneh, tiba-tiba ada sebuah gempa, dan dari dalam gua muncul lagi monster tersebut.
+
+    Aiden: Padahal ayahku sudah mengelilinginya, dan tidak ada monster itu lagi. Setelahnya, dia bertarung dengan monster tersebut, dan berhasil mengalahkannya.
+
+    Aiden: Ayahku mendapatkan sedikit luka dari bertarung melawan monster terakhir itu, tetapi dia penasaran untuk masuk ke dalam gua lagi, dan akhirnya dia menemukan sebuah hal aneh yang terjadi di dalam gua tersebut.
+
+    Aiden: Hal tersebut yang membuat adanya monster tadi ada, dan hal tersebut adalah....
+
+    Aiden: Aku tidak tahu juga itu apa, hahahaha.
+
+    Reymond: HAAHHHH? GIMANA? BAGAIMANA KELANJUTANNYA?
+
+    Reymond: Kamu tidak bisa hanya menggantungkan ceritanya begitu saja.
+
+    Aiden: Yahhh, mau bagaimana lagi. Ayahku juga menceritakannya sampai situ saja, dan dia bilang jika aku ingin tahu, aku harus mencarinya sendiri.
+
+    Aiden: Jadi yah, hanya sampai situ saja aku juga bisa menceritakannya, hahaha.
+
+    Reymond: Dasar kamu, padahal itu cerita yang menarik, tapi kamu malah tidak menyelesaikannya.
+
+    Reymond: Aku perintahkan kamu harus mencari tahu hal tersebut. Jika kamu bisa, mungkin aku akan memberikanmu hadiah nanti.
+
+    Aiden: Tenang-tenang, aku juga sudah pasti akan mencarinya kok, karena aku juga penasaran.
+
+    Reymond: Baiklah-baiklah. Setelah kamu menceritakan cerita yang menggantung tersebut, adakah yang ingin kamu lakukan lagi?
+    
+    <<jump Shop01_MaleShop_All_Choice>>
+
+===
+
+
+title: Shop01_MaleShop_Choice_1
+tags:
+---
+Reymond : Silahkan pilih barang yang ingin kamu beli, aku pasti menjual barang dengan kualitas bagus. Tidak hanya itu, aku juga menerima barang rampasan, walaupun aku sendiri benci dengan bagaimana kamu mendapatkannya
+<<SpecialAction Reymond 0>>
+===
+
+title: Shop01_MaleShop_Choice_2
+tags:
+---
+Reymondmond : Hah? kontrak? kamu gila ya?
+Reymondmond : Kontrak itu sakral, dan kamu tidak boleh melanggarnya, bahkan pelanggaran kecil saja tidak dibolehkan
+Reymondmond : Jadi jawaban ku tidak, yang kulihat kamu sekarang masih bukan siapa-siapa
+Reymondmond : Kembangkan dirimu dulu, baru setelahnya aku mungkin akan mempertimbangkan untuk membuat kontrak sponsor dengan mu
+Reymondmond : Selain itu, adakah yang kamu butuhkan lagi disini>
+<<jump Shop01_MaleShop_All_Choice>>
+===
+
+title: Shop01_MaleShop_Choice_3
+tags:
+---
+Reymondmondmond : Baiklah kalau begitu, sampai nanti lagi kak....
+<<Close>>
+===

@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 
 namespace CC.Characters.States
@@ -16,8 +17,11 @@ namespace CC.Characters.States
 
             StartAnimation("isFalling");
 
+            EnableRigidbody();
+
             _playerController.PlayerCurrentData.MovementSpeedModifier = 0f;
 
+            ResetRotationXZ();
             playerPositionOnEnter = _playerController.transform.position;
 
             ResetVerticalVelocity();
@@ -28,6 +32,28 @@ namespace CC.Characters.States
             base.Exit();
 
             StopAnimation("isFalling");
+            _playerController.PlayerCurrentData.CurrentDropTime = 0f;
+
+        }
+
+        public override void Update()
+        {
+            base.Update();
+            ResetRotationXZ();
+
+            if (_playerController.StaminaController.GetCurrentStamina() > 0 &&
+                _playerController.PlayerCurrentData.CurrentDropTime <= 0f)
+            {
+                if (_playerController.FreeClimb.CheckForClimb())
+                {
+                    _playerController.SwitchState(_playerController.PlayerClimbState);
+
+                }
+            }
+            else
+            {
+                _playerController.PlayerCurrentData.CurrentDropTime -= Time.deltaTime;
+            }
         }
 
         public override void PhysicsUpdate()
@@ -59,6 +85,12 @@ namespace CC.Characters.States
         {
             _playerController.SwitchState(_playerController.PlayerLightLandingState);
             // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.LIGHTLANDING);
+        }
+
+        void ResetRotationXZ()
+        {
+            _playerController.transform.rotation = Quaternion.Euler(0, _playerController.transform.rotation.eulerAngles.y, 0);
+
         }
     }
 }
