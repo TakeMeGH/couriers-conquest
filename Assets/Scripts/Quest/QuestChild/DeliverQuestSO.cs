@@ -29,11 +29,11 @@ namespace CC.Quest
             base.OnQuestStarted(sender, data);
             var temp = Instantiate(pickupPrefab.prefab, pickupPrefab.position, Quaternion.identity);
             if (temp != null) _instantiatedPrefabs.Add(temp);
-            temp.GetComponent<ExPickupPoint>().Init(itemToDeliver);
+            temp.GetComponent<PickupPoint>().Init(itemToDeliver);
 
             temp = Instantiate(dropPrefab.prefab, dropPrefab.position, Quaternion.identity);
             if (temp != null) _instantiatedPrefabs.Add(temp);
-            temp.GetComponent<ExDropPoint>().Init(itemToDeliver);
+            temp.GetComponent<DropPoint>().Init(itemToDeliver);
 
             foreach (var prefab in _questPrefabs)
             {

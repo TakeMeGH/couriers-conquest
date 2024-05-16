@@ -96,9 +96,9 @@ Transform:
   - {fileID: 2485139708255085105}
   - {fileID: 4399574795542463181}
   - {fileID: 6377005717254621505}
-  - {fileID: 5701009526945610179}
   - {fileID: 6789423134323146900}
   - {fileID: 1940018902329026561}
+  - {fileID: 5701009526945610179}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2573470603300443154
@@ -376,8 +376,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5263545883881159340, guid: 81544da4101d48945b2948bafacc6381,
         type: 3}
+      propertyPath: m_ConnectedBody
+      value: 
+      objectReference: {fileID: 719065848835775187}
+    - target: {fileID: 5263545883881159340, guid: 81544da4101d48945b2948bafacc6381,
+        type: 3}
       propertyPath: m_ConnectedAnchor.x
       value: 0.000028778324
+      objectReference: {fileID: 0}
+    - target: {fileID: 5263545883881159340, guid: 81544da4101d48945b2948bafacc6381,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: -0.017530045
+      objectReference: {fileID: 0}
+    - target: {fileID: 5263545883881159340, guid: 81544da4101d48945b2948bafacc6381,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: 0.0013096104
       objectReference: {fileID: 0}
     - target: {fileID: 6784196968339626531, guid: 81544da4101d48945b2948bafacc6381,
         type: 3}
@@ -454,6 +469,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81544da4101d48945b2948bafacc6381, type: 3}
+--- !u!54 &719065848835775187 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 2292805070261722801, guid: 81544da4101d48945b2948bafacc6381,
+    type: 3}
+  m_PrefabInstance: {fileID: 1597384254475633762}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1940018902329026561 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 920801876596747363, guid: 81544da4101d48945b2948bafacc6381,
@@ -597,11 +618,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_ConnectedAnchor.z
       value: -0.0000000012890178
-      objectReference: {fileID: 0}
-    - target: {fileID: 5263545883881159340, guid: 81544da4101d48945b2948bafacc6381,
-        type: 3}
-      propertyPath: m_ConnectedAnchor.x
-      value: 0.000028778324
       objectReference: {fileID: 0}
     - target: {fileID: 6784196968339626531, guid: 81544da4101d48945b2948bafacc6381,
         type: 3}
@@ -834,8 +850,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5263545883881159340, guid: 81544da4101d48945b2948bafacc6381,
         type: 3}
+      propertyPath: m_ConnectedBody
+      value: 
+      objectReference: {fileID: 5561406932448932422}
+    - target: {fileID: 5263545883881159340, guid: 81544da4101d48945b2948bafacc6381,
+        type: 3}
       propertyPath: m_ConnectedAnchor.x
       value: 0.000028778324
+      objectReference: {fileID: 0}
+    - target: {fileID: 5263545883881159340, guid: 81544da4101d48945b2948bafacc6381,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.y
+      value: -0.017530045
+      objectReference: {fileID: 0}
+    - target: {fileID: 5263545883881159340, guid: 81544da4101d48945b2948bafacc6381,
+        type: 3}
+      propertyPath: m_ConnectedAnchor.z
+      value: 0.0013096104
       objectReference: {fileID: 0}
     - target: {fileID: 6784196968339626531, guid: 81544da4101d48945b2948bafacc6381,
         type: 3}
@@ -917,6 +948,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 81544da4101d48945b2948bafacc6381, type: 3}
+--- !u!54 &5561406932448932422 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 2292805070261722801, guid: 81544da4101d48945b2948bafacc6381,
+    type: 3}
+  m_PrefabInstance: {fileID: 5980701363584724215}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6789423134323146900 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 920801876596747363, guid: 81544da4101d48945b2948bafacc6381,

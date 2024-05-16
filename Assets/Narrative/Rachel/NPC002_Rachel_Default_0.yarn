@@ -1,0 +1,13 @@
+﻿title: NPC002_Rachel_Default_0
+tags:
+---
+<<declare $RachelHaveQuest = false>>
+<<declare $RachelQuestNode = "" >>
+
+<<if $RachelHaveQuest>>
+    <<jump {$RachelQuestNode}>>
+<<endif>>
+
+Rachel : Dimanakah suamiku
+<<Close>>
+===

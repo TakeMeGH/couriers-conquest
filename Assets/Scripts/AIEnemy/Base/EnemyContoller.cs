@@ -95,7 +95,6 @@ namespace CC.Enemy
             {
                 transform.position = Vector3.Lerp(startPosition, startPosition - Vector3.up * sinkSpeed, timer / sinkDuration);
                 timer += Time.deltaTime;
-                Debug.Log(timer); ;
                 yield return null;
             }
 

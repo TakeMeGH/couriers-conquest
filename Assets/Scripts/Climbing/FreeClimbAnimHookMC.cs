@@ -29,7 +29,7 @@ namespace SA
 
         float delta;
         public float LerpSpeed = 1;
-        float epsilon = 1e-10f;
+        float epsilon = 1e-5f;
 
         public void Init(FreeClimbMC c, Transform helper)
         {

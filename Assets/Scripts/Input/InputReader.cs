@@ -221,7 +221,6 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     {
         DisableSpecificAction("Gameplay", "Zoom");
         EnableSpecificAction("Gameplay", "ScrolIInteraction");
-        Debug.Log("ENABLE GA");
     }
 
     public void DisableScrollInteracionInput()

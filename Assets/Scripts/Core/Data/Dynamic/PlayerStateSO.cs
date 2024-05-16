@@ -34,6 +34,12 @@ namespace CC.Core.Data.Dynamic
         {
             return _state.finishedQuest.ToArray();
         }
+
+        public bool IsFinishedQuest(int index)
+        {
+            return _state.finishedQuest.Contains(index);
+        }
+
         public Vector3 GetSavedPosition()
         {
             return _state.currentPosition;

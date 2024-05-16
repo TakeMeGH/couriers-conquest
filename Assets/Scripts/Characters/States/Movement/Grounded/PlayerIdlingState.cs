@@ -16,9 +16,8 @@ namespace CC.Characters.States
         public override void Enter()
         {
             _alreadyCalled = false;
+
             _playerController.PlayerCurrentData.MovementSpeedModifier = 0f;
-
-
 
             _playerController.PlayerCurrentData.CurrentJumpForce = _playerController.PlayerMovementData.StationaryForce;
 
@@ -42,6 +41,11 @@ namespace CC.Characters.States
 
         public override void Update()
         {
+            if (_playerController.PlayerCurrentData.IsUpdateNewTransform)
+            {
+                return;
+            }
+
             base.Update();
 
             if (_playerController.PlayerCurrentData.MovementInput == Vector2.zero)
@@ -54,6 +58,11 @@ namespace CC.Characters.States
 
         public override void PhysicsUpdate()
         {
+            if (_playerController.PlayerCurrentData.IsUpdateNewTransform)
+            {
+                return;
+            }
+
             base.PhysicsUpdate();
 
             if (!IsMovingHorizontally())

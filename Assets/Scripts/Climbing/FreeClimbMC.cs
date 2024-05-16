@@ -39,6 +39,9 @@ namespace SA
         public UnityAction OnAboveStandAble;
         public float UpOffsetMultiplier = 1f;
         public UnityAction OnMCMove;
+        Vector3 _lastMoveDir;
+        float epsilon = 1e-5f;
+
         private void OnEnable()
         {
             _inputReader.MoveEvent += UpdateMove;
@@ -123,6 +126,7 @@ namespace SA
                 Vector3 h = helper.right * horizontal;
                 Vector3 v = helper.up * vertical;
                 Vector3 moveDir = (h + v).normalized;
+                _lastMoveDir = moveDir;
 
                 if (isMid)
                 {
@@ -158,7 +162,7 @@ namespace SA
                     t = 1;
                     isLerping = false;
                 }
-
+                CheckUp(_lastMoveDir);
                 Vector3 cp = Vector3.Lerp(startPos, targetPos, t);
                 transform.position = cp;
                 transform.rotation = Quaternion.Slerp(transform.rotation, helper.rotation, delta * rotateSpeed);
@@ -189,14 +193,10 @@ namespace SA
             // Raycast forward towards the wall
             if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin, origin + (dir * dis2), 1);
 
-            if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin + moveDir * UpOffsetMultiplier, origin + moveDir * UpOffsetMultiplier + (dir * dis2), 2);
-
-            if (!Physics.Raycast(origin + moveDir * UpOffsetMultiplier, dir, out hit, dis2, UsedLayer))
+            if (!CheckUp(moveDir))
             {
-                OnAboveStandAble.Invoke();
                 return false;
             }
-
 
             if (Physics.Raycast(origin, dir, out hit, dis2, UsedLayer))
             {
@@ -259,6 +259,33 @@ namespace SA
             direction.Normalize();
             Vector3 offset = direction * offsetFromWall;
             return target + offset;
+        }
+
+        bool CheckUp(Vector3 moveDir)
+        {
+            // Kalau turun tidak dipedulikan
+            if (moveDir.y <= -epsilon) return true;
+            Vector3 origin = transform.position;
+            float dis = rayTowardsMoveDir;
+
+            origin += moveDir * dis;
+            Vector3 dir = helper.forward;
+            float dis2 = rayForwardTowardsWall;
+
+            RaycastHit hit;
+
+            if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin + moveDir * UpOffsetMultiplier, origin + moveDir * UpOffsetMultiplier + (dir * dis2), 2);
+            if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin + moveDir * UpOffsetMultiplier + (dir * dis2), origin + moveDir * UpOffsetMultiplier + (dir * dis2) + -helper.up * dis2, 3);
+
+            if (!Physics.Raycast(origin + moveDir * UpOffsetMultiplier, dir, out hit, dis2, UsedLayer))
+            {
+                if (Physics.Raycast(origin + moveDir * UpOffsetMultiplier + (dir * dis2), -helper.up, out hit, dis2, UsedLayer))
+                {
+                    OnAboveStandAble.Invoke();
+                    return false;
+                }
+            }
+            return true;
         }
 
     }

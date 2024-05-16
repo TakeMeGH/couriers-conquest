@@ -1,6 +1,4 @@
 using CC.Event;
-using CC.Quest;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -50,7 +48,6 @@ namespace CC.NPC
             if (data is NPCQuestDialogueNodeTransfer)
             {
                 NPCQuestDialogueNodeTransfer temp = (NPCQuestDialogueNodeTransfer)data;
-                Debug.Log("QUEST LISTEN" + (data is NPCQuestDialogueNodeTransfer) + temp.targetNPC + _NPCID + isThisNPCCalled(temp.targetNPC));
                 if (!isThisNPCCalled(temp.targetNPC)) return;
                 Debug.Log("npc " + _NPCName + " is listening quest");
                 Quest_dialogue_node = temp.dialogueNode;
@@ -83,6 +80,7 @@ namespace CC.NPC
         [YarnCommand("SpecialAction")]
         public void SpecialAction(int index)
         {
+            Debug.Log("SPECIAL");
             _specialAction[index].Invoke();
         }
     }
