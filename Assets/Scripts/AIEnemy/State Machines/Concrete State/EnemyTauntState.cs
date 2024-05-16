@@ -22,6 +22,7 @@ namespace CC.Enemy.States
             _tauntCount = 0;
 
             _enemyController.NavMeshAgent.speed = 0;
+            _enemyController.NavMeshAgent.velocity = Vector3.zero;
             _enemyController.NavMeshAgent.isStopped = true;
 
             _enemyController.transform.LookAt(_enemyController.EnemyCurrentData.PlayerTransform.position);
@@ -32,6 +33,9 @@ namespace CC.Enemy.States
         public override void Update()
         {
             base.Update();
+
+            _enemyController.NavMeshAgent.velocity = Vector3.zero;
+
 
             if (_enemyController.EnemyCurrentData.IsPlayerInRange)
             {

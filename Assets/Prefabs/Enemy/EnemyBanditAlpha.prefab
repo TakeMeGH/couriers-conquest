@@ -654,7 +654,7 @@ GameObject:
   - component: {fileID: 9148175744914004737}
   - component: {fileID: 2889603465426730020}
   - component: {fileID: 1685878124494544438}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Machete_Mat_Machete_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18163,7 +18163,7 @@ GameObject:
   - component: {fileID: 811494557552411328}
   - component: {fileID: 788011032818509788}
   - component: {fileID: 7241836295396140959}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: WeaponDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21599,12 +21599,12 @@ CharacterJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4657249542698630940}
-  m_ConnectedBody: {fileID: 2384760667942765216}
+  m_ConnectedBody: {fileID: 16187314788607312}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0, z: 0}
+  m_ConnectedAnchor: {x: 0.000048462236, y: -0.00010591592, z: -0.010835524}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 1, z: 0}
   m_TwistLimitSpring:
@@ -32128,6 +32128,7 @@ MonoBehaviour:
   excludeLayer:
     serializedVersion: 2
     m_Bits: 2686903
+  _isTesting: 0
 --- !u!1 &7182235526801282271
 GameObject:
   m_ObjectHideFlags: 0

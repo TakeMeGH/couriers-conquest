@@ -12,6 +12,7 @@ namespace CC
         [SerializeField] SenderDataEventChannelSO _activateQuestEvent;
         [SerializeField] PlayerStateSO _playerStateData;
         [SerializeField] int _prologueQuestId;
+        [SerializeField] InputReader _inputReader;
 
         private void Start()
         {
@@ -19,6 +20,8 @@ namespace CC
             {
                 _activateQuestEvent.raiseEvent(this, _prologueQuestId);
             }
+
+            _inputReader.EnableGameplayInput();
         }
     }
 }

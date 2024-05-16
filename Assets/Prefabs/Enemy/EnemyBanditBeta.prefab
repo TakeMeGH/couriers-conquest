@@ -6175,7 +6175,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 920801876596747363}
-  - component: {fileID: 1875942057561641344}
   - component: {fileID: 1053687113793923996}
   - component: {fileID: 3835602115720981947}
   - component: {fileID: 1348153232126101753}
@@ -6203,29 +6202,6 @@ Transform:
   - {fileID: 8751184258713065659}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1875942057561641344
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1527448735038063335}
-  m_Material: {fileID: 13400000, guid: ab666cde5c64be14fb9a9478071943bf, type: 2}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.34
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.0188, z: 0}
 --- !u!54 &1053687113793923996
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6249,7 +6225,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1
@@ -15422,7 +15398,7 @@ GameObject:
   - component: {fileID: 9144560738497686286}
   - component: {fileID: 274821285772979987}
   - component: {fileID: 7344317309309238534}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Pisau
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22747,6 +22723,7 @@ MonoBehaviour:
   excludeLayer:
     serializedVersion: 2
     m_Bits: 2686903
+  _isTesting: 0
 --- !u!1 &4350855757869172379
 GameObject:
   m_ObjectHideFlags: 0
@@ -23841,12 +23818,12 @@ CharacterJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4640706230039750061}
-  m_ConnectedBody: {fileID: 2292805070261722801}
+  m_ConnectedBody: {fileID: 9041572087124953571}
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: -0.017530045, z: 0.0013096104}
+  m_ConnectedAnchor: {x: 0.000048462225, y: -0.0005331042, z: -0.010822919}
   serializedVersion: 2
   m_SwingAxis: {x: 0, y: 0, z: 0}
   m_TwistLimitSpring:

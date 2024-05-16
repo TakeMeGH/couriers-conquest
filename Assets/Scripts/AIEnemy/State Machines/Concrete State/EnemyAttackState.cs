@@ -24,6 +24,7 @@ namespace CC.Enemy.States
             _enemyController.WeaponDamage.SetAttack();
 
             _enemyController.NavMeshAgent.speed = 0;
+            _enemyController.NavMeshAgent.velocity = Vector3.zero;
             _enemyController.NavMeshAgent.isStopped = true;
 
             _enemyController.transform.LookAt(_enemyController.EnemyCurrentData.PlayerTransform.position);
@@ -33,6 +34,8 @@ namespace CC.Enemy.States
         public override void Update()
         {
             base.Update();
+
+            _enemyController.NavMeshAgent.velocity = Vector3.zero;
         }
 
         public override void PhysicsUpdate()
