@@ -4,7 +4,7 @@ using UnityEngine.Events;
 using System.Collections.Generic;
 using CC.Combats;
 using CC.Core.Data.Dynamic;
-using CC.Inventory;
+using CC.Events;
 using SA;
 
 namespace CC.Characters
@@ -18,9 +18,12 @@ namespace CC.Characters
         [field: SerializeField] public PlayerMovementSO PlayerMovementData { get; private set; }
 
         [field: Header("Animation Events")]
-        [field: SerializeField] public Events.VoidEventChannelSO TriggerOnMovementStateAnimationEnterEvent { get; private set; }
-        [field: SerializeField] public Events.VoidEventChannelSO TriggerOnMovementStateAnimationExitEvent { get; private set; }
-        [field: SerializeField] public Events.VoidEventChannelSO TriggerOnMovementStateAnimationTransitionEvent { get; private set; }
+        [field: SerializeField] public VoidEventChannelSO TriggerOnMovementStateAnimationEnterEvent { get; private set; }
+        [field: SerializeField] public VoidEventChannelSO TriggerOnMovementStateAnimationExitEvent { get; private set; }
+        [field: SerializeField] public VoidEventChannelSO TriggerOnMovementStateAnimationTransitionEvent { get; private set; }
+
+        [field: Header("Animation Events")]
+        [field: SerializeField] public VoidEventChannelSO _onPlayerDead { get; private set; }
 
         [field: Header("Collisions")]
         [field: SerializeField] public PlayerLayerData LayerData { get; private set; }
@@ -128,6 +131,7 @@ namespace CC.Characters
         public void OnDead()
         {
             Destroy(gameObject);
+            _onPlayerDead.RaiseEvent();
         }
 
         private void OnTriggerEnter(Collider collider)
