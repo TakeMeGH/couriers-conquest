@@ -15,14 +15,14 @@ public class AudioManager : MonoBehaviour
         }
 
     [Header("Volume")]
-    [Range(0, 1)]
 
+    [Range(0, 1)]
     public float masterVolume = 1;
-    [Range(0, 1)]
 
+    [Range(0, 1)]
     public float musicVolume = 1;
-    [Range(0, 1)]
 
+    [Range(0, 1)]
     public float SFXVolume = 1;
 
 
@@ -40,6 +40,10 @@ public class AudioManager : MonoBehaviour
         musicBus = RuntimeManager.GetBus("bus:/Music");
         sfxBus = RuntimeManager.GetBus("bus:/Sound Effects");
 
+        masterBus.getVolume(out masterVolume);
+        musicBus.getVolume(out musicVolume);
+        sfxBus.getVolume(out SFXVolume);
+
     }
 
     public void AudioPlayOneShot(EventReference sound, Vector3 worldPos){
@@ -53,9 +57,5 @@ public class AudioManager : MonoBehaviour
         sfxBus.setVolume(SFXVolume);
     }
 
-    public void setMusicVolume()
-    {
-
-    }
 
 }
