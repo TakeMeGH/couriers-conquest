@@ -20,7 +20,7 @@ namespace CC.Ragdoll
             colliders = GetComponentsInChildren<Collider>();
 
             if (!_isTesting) SetRagdoll(false, true, true);
-            else SetRagdoll(true, false);
+            else SetRagdoll(true, false, true);
         }
 
         public void SetRagdoll(bool state, bool animatorState, bool isFirstTime = false)
@@ -28,7 +28,6 @@ namespace CC.Ragdoll
             foreach (var rb in rigidbodies)
             {
                 rb.isKinematic = !state;
-                // Debug.Log((rb.gameObject.layer & _weaponMask) + " " + rb.gameObject.name + " " + rb.gameObject.layer);
                 if (((1 << rb.gameObject.layer) & _weaponMask) == 0 && isFirstTime)
                 {
                     rb.includeLayers = includeLayer;

@@ -179,6 +179,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""054650e5-48be-43ae-818c-23c18dffe1e7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -412,6 +421,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Pouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc652d38-66fa-472d-9544-2fd633e166c3"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -485,6 +505,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Gameplay_ScrolIInteraction = m_Gameplay.FindAction("ScrolIInteraction", throwIfNotFound: true);
         m_Gameplay_DropClimbing = m_Gameplay.FindAction("DropClimbing", throwIfNotFound: true);
         m_Gameplay_Pouch = m_Gameplay.FindAction("Pouch", throwIfNotFound: true);
+        m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
         // InventoryUI
         m_InventoryUI = asset.FindActionMap("InventoryUI", throwIfNotFound: true);
         m_InventoryUI_CloseInventory = m_InventoryUI.FindAction("CloseInventory", throwIfNotFound: true);
@@ -567,6 +588,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_ScrolIInteraction;
     private readonly InputAction m_Gameplay_DropClimbing;
     private readonly InputAction m_Gameplay_Pouch;
+    private readonly InputAction m_Gameplay_Pause;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -588,6 +610,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @ScrolIInteraction => m_Wrapper.m_Gameplay_ScrolIInteraction;
         public InputAction @DropClimbing => m_Wrapper.m_Gameplay_DropClimbing;
         public InputAction @Pouch => m_Wrapper.m_Gameplay_Pouch;
+        public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -648,6 +671,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Pouch.started += instance.OnPouch;
             @Pouch.performed += instance.OnPouch;
             @Pouch.canceled += instance.OnPouch;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -703,6 +729,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Pouch.started -= instance.OnPouch;
             @Pouch.performed -= instance.OnPouch;
             @Pouch.canceled -= instance.OnPouch;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -793,6 +822,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnScrolIInteraction(InputAction.CallbackContext context);
         void OnDropClimbing(InputAction.CallbackContext context);
         void OnPouch(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IInventoryUIActions
     {

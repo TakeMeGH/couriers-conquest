@@ -31,6 +31,8 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     public event UnityAction DropClimbingPerformed = delegate { };
     public event UnityAction<float> ScrollInteracionPerformed = delegate { };
     public event UnityAction PouchPerformed = delegate { };
+    public event UnityAction PausePerformed = delegate { };
+
 
     public bool IsBlocking { get; private set; }
     public bool IsAttacking { get; private set; }
@@ -293,5 +295,11 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     {
         if (context.phase == InputActionPhase.Performed)
             PouchPerformed.Invoke();
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            PausePerformed.Invoke();
     }
 }

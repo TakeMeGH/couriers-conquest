@@ -13,15 +13,32 @@ namespace CC.Combats
         PlayerStatsSO _statsSO;
         bool _isBlocking;
 
+        private void OnEnable()
+        {
+            if (_statsSO != null)
+            {
+                _statsSO.OnStatChange += SetHealth;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (_statsSO != null)
+            {
+                _statsSO.OnStatChange -= SetHealth;
+            }
+        }
+
         public void SetStats(PlayerStatsSO statsSO)
         {
             _statsSO = statsSO;
+            _statsSO.OnStatChange += SetHealth;
             Init();
         }
 
         private void Init()
         {
-            _health = _statsSO.GetInstanceValue(mainStat.Health);
+            SetHealth();
         }
 
 
@@ -33,6 +50,11 @@ namespace CC.Combats
         public void SetBlocking(bool isBlocking)
         {
             _isBlocking = isBlocking;
+        }
+
+        public void SetHealth()
+        {
+            _health = _statsSO.GetInstanceValue(mainStat.Health);
         }
 
 
