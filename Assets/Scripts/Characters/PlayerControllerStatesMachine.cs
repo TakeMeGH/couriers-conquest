@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using CC.Characters.DataBlueprint.Layers;
 using UnityEngine.Events;
 using System.Collections.Generic;
@@ -56,7 +58,6 @@ namespace CC.Characters
         public Transform MainCameraTransform { get; private set; }
         public PlayerStateData PlayerCurrentData { get; private set; }
         public PlayerResizableCapsuleCollider ResizableCapsuleCollider { get; private set; }
-
         #endregion
 
         #region Events
@@ -119,7 +120,6 @@ namespace CC.Characters
             Weapon.SetStats(PlayerStatsSO);
             Health.SetStats(PlayerStatsSO);
             StaminaController.SetStats(PlayerStatsSO);
-
         }
 
         private void Start()
@@ -132,6 +132,7 @@ namespace CC.Characters
         {
             Destroy(gameObject);
             _onPlayerDead.RaiseEvent();
+            
         }
 
         private void OnTriggerEnter(Collider collider)
