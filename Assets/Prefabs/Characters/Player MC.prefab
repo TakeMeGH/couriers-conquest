@@ -872,6 +872,8 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   _health: 0
+  _floatingDamageOffset: {x: 0, y: 0, z: 1}
+  _floatingDamageRandomOffset: {x: 0.25, y: 0.25, z: 0}
 --- !u!136 &7427144683471969171
 CapsuleCollider:
   m_ObjectHideFlags: 0

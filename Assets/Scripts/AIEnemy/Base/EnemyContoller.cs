@@ -5,7 +5,7 @@ using CC.Combats;
 using CC.Core.Data.Dynamic;
 using CC.Ragdoll;
 using System.Collections;
-
+using CC.UI;
 
 namespace CC.Enemy
 {
@@ -20,6 +20,7 @@ namespace CC.Enemy
         [SerializeField] PlayerStatsSO _enemyStatsSO;
         [SerializeField] Health _healthController;
         [SerializeField] float _multiplier;
+        [SerializeField] EnemyHealthUIController _healthBar;
 
         #region Component
         public NavMeshAgent NavMeshAgent { get; private set; }
@@ -60,6 +61,8 @@ namespace CC.Enemy
 
             _healthController.SetStats(_enemyStatsSO);
             WeaponDamage.SetStats(_enemyStatsSO);
+            _healthBar.SetStats(_enemyStatsSO);
+
         }
 
         void Start()
@@ -74,6 +77,7 @@ namespace CC.Enemy
             Rigidbody.useGravity = false;
             NavMeshAgent.enabled = false;
             currentState = null;
+            Destroy(_healthBar.gameObject);
 
             _ragdollController.SetRagdoll(true, false);
             StartCoroutine(SinkAndFade());
@@ -114,6 +118,5 @@ namespace CC.Enemy
         {
             currentState.OnAnimationTransitionEvent();
         }
-
     }
 }
