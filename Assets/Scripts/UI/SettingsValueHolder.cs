@@ -9,7 +9,6 @@ namespace CC
     public class SettingsValueHolder : ScriptableObject
     {
 
-        
         public float MasterVolumeValue;
         public float MusicVolumeValue;
         public float SFXVolumeValue;
