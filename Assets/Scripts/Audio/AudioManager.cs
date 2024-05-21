@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
+using CC;
 
 
 
@@ -25,6 +26,8 @@ public class AudioManager : MonoBehaviour
     [Range(0, 1)]
     public float SFXVolume = 1;
 
+    [SerializeField]
+    private SettingsValueHolder settingValue;
 
     private Bus masterBus;
     private Bus musicBus;
@@ -40,14 +43,48 @@ public class AudioManager : MonoBehaviour
         musicBus = RuntimeManager.GetBus("bus:/Music");
         sfxBus = RuntimeManager.GetBus("bus:/Sound Effects");
 
-        masterBus.getVolume(out masterVolume);
-        musicBus.getVolume(out musicVolume);
-        sfxBus.getVolume(out SFXVolume);
+        // masterBus.getVolume(out masterVolume);
+        // musicBus.getVolume(out musicVolume);
+        // sfxBus.getVolume(out SFXVolume);
+
+        masterVolume = settingValue.MasterVolumeValue;
+        musicVolume = settingValue.MusicVolumeValue;
+        SFXVolume = settingValue.SFXVolumeValue;
+        
+        
+        // masterBus.setVolume(settingValue.MasterVolumeValue);
+        // musicBus.setVolume(settingValue.MusicVolumeValue);
+        // sfxBus.setVolume(settingValue.SFXVolumeValue);        
+
+        
 
     }
 
+    
     public void AudioPlayOneShot(EventReference sound, Vector3 worldPos){
         RuntimeManager.PlayOneShot(sound, worldPos);
+    }
+
+    
+    public void saveConfirmedVolume(){
+        masterBus.getVolume(out settingValue.MasterVolumeValue);
+        musicBus.getVolume(out settingValue.MusicVolumeValue);
+        sfxBus.getVolume(out settingValue.SFXVolumeValue);
+    }
+    
+    public void discardConfirmedVolume(){
+
+
+        masterVolume = settingValue.MasterVolumeValue;
+        musicVolume = settingValue.MusicVolumeValue;
+        SFXVolume = settingValue.SFXVolumeValue;
+
+        
+        masterBus.setVolume(settingValue.MasterVolumeValue);
+        musicBus.setVolume(settingValue.MusicVolumeValue);
+        sfxBus.setVolume(settingValue.SFXVolumeValue);
+
+
     }
 
     private void Update()
