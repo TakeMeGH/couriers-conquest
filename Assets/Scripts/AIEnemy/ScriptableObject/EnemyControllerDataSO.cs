@@ -29,6 +29,8 @@ namespace CC
         #region Idle Attack Data
         [field: SerializeField, Header("Idle Attack Data")] public float MaxIdleTime = 3f;
         [field: SerializeField] public float MinIdleTime = 0.5f;
+        [field: SerializeField] public float IdleAttackLimitDistance = 4f;
+        [field: SerializeField] public float TauntChance = 0.2f;
         #endregion
 
         #region Attack Data

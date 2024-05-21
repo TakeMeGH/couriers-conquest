@@ -26,12 +26,21 @@ MonoBehaviour:
   TimetoRotate: 2
   PatrolSpeed: 1.8
   PatrolStopDistance: 0.33
-  FastChaseSpeed: 10
-  SlowChaseSpeed: 6
+  FastChaseSpeed: 12
+  SlowChaseSpeed: 10
   ChaseStopingDistance: 1.7
   TimeToReChase: 0.3
+  MaxIdleTime: 1.5
+  MinIdleTime: 0.2
+  IdleAttackLimitDistance: 7
+  TauntChance: 0.2
+  LightAttackChance: 0.7
+  HeavyAttackChance: 0.3
+  AttackChaseDistancce: 1.4
   TauntCount: 1
   StepBackSpeed: 1.5
-  StepBackDistance: 3
+  StepBackDistance: 5
+  StepBackMaxTime: 3
+  TimeToReStepBack: 0.2
   ViewRadius: 10
   ViewAngle: 240

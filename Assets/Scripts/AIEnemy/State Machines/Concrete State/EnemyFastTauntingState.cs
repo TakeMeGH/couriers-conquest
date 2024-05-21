@@ -45,7 +45,7 @@ namespace CC.Enemy.States
 
         public override void OnAnimationExitEvent()
         {
-            _enemyController.SwitchState(_enemyController.ChasingState);
+            _enemyController.SwitchState(_enemyController.IdleAttackState);
         }
 
     }
