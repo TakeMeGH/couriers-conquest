@@ -36,7 +36,6 @@ namespace CC
                         _text.color.g,
                         _text.color.b,
                         Mathf.Lerp(1, 0, (_currentTime - _startDisappearTime) / _disappearTime));
-                    Debug.Log(Mathf.Lerp(1, 0, (_currentTime - _startDisappearTime) / _disappearTime) + " " + _text.color);
                 }
                 else
                 {

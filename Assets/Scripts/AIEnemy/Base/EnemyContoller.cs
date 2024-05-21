@@ -32,9 +32,12 @@ namespace CC.Enemy
         #region State Machine Variables
         public EnemyPatrolingState PatrolingState { get; private set; }
         public EnemyCheckingState CheckingState { get; private set; }
+        public EnemyFastTauntingState FastTauntingState { get; private set; }
         public EnemyChasingState ChasingState { get; private set; }
+        public EnemyFastChasingState FastChasingState { get; private set; }
+
         public EnemyTauntState TauntState { get; private set; }
-        public EnemyIdleState IdleState { get; private set; }
+        public EnemyIdleAttackState IdleAttackState { get; private set; }
         public EnemyStepBackState StepBackState { get; private set; }
         public EnemyAttackState AttackState { get; private set; }
         #endregion
@@ -49,12 +52,13 @@ namespace CC.Enemy
 
             PatrolingState = new EnemyPatrolingState(this);
             CheckingState = new EnemyCheckingState(this);
+            FastTauntingState = new EnemyFastTauntingState(this);
             ChasingState = new EnemyChasingState(this);
+            FastChasingState = new EnemyFastChasingState(this);
             TauntState = new EnemyTauntState(this);
             AttackState = new EnemyAttackState(this);
             StepBackState = new EnemyStepBackState(this);
-
-            IdleState = new EnemyIdleState(this);
+            IdleAttackState = new EnemyIdleAttackState(this);
 
             var CloneStats = Instantiate(_enemyStatsSO);
             _enemyStatsSO = CloneStats;

@@ -11,7 +11,7 @@ namespace CC.Enemy
 
         public int CurrentWaypointIndex = -1;
         public Transform PlayerTransform;
-        public int IsHeavyAttack;
+        public bool IsHeavyAttack;
         public float CurrentWaitTime;
         public float CurrentTimeToRotate;
         public bool IsPlayerInRange = false;

@@ -25,11 +25,6 @@ namespace CC.Enemy.States
         public virtual void Update()
         {
             EnviromentView();
-
-            // if (enemy.Animator != null)
-            // {
-            //     enemy.Animator.SetFloat("Speed", enemy.EnemyCurrentData.navMeshAgent.velocity.magnitude);
-            // }
         }
 
         public virtual void PhysicsUpdate()

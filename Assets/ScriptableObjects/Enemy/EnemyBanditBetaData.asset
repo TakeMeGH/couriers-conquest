@@ -28,20 +28,10 @@ MonoBehaviour:
   PatrolStopDistance: 0.33
   FastChaseSpeed: 10
   SlowChaseSpeed: 6
-  ChaseStopingDistancce: 1.7
-  TooCloseDistance: 1.5
+  ChaseStopingDistance: 1.7
+  TimeToReChase: 0.3
   TauntCount: 1
   StepBackSpeed: 1.5
-  StepBackDistance: 1.7
-  SpeedWalk: 6
-  SpeedRun: 9
+  StepBackDistance: 3
   ViewRadius: 10
   ViewAngle: 240
-  MeshResolution: 1
-  EdgeIterations: 4
-  EdgeDistance: 0.5
-  StoppingDistance: 0.01
-  StopDistanceFromPlayer: 2
-  RotationSpeed: 5
-  AttackRange: 1.5
-  MaxWaitTime: 0

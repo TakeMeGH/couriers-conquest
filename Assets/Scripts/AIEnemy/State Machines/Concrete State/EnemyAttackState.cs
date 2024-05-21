@@ -15,11 +15,15 @@ namespace CC.Enemy.States
         {
             base.Enter();
 
-            int randomValue = Random.Range(0, 2);
-            _enemyController.EnemyCurrentData.IsHeavyAttack = randomValue;
 
-            StartAnimation("isAttacking");
-            _enemyController.Animator.SetFloat("isHeavyAttack", _enemyController.EnemyCurrentData.IsHeavyAttack);
+            if (_enemyController.EnemyCurrentData.IsHeavyAttack)
+            {
+                StartAnimation("isHeavyAttack");
+            }
+            else
+            {
+                StartAnimation("isLightAttack");
+            }
 
             _enemyController.WeaponDamage.SetAttack();
 
@@ -47,25 +51,21 @@ namespace CC.Enemy.States
         {
             base.Exit();
 
-            StopAnimation("isAttacking");
+            if (_enemyController.EnemyCurrentData.IsHeavyAttack)
+            {
+                StopAnimation("isHeavyAttack");
+            }
+            else
+            {
+                StopAnimation("isLightAttack");
+            }
 
         }
         public override void OnAnimationExitEvent()
         {
             base.OnAnimationExitEvent();
 
-            float distance = Vector3.Distance(_enemyController.transform.position,
-    _enemyController.EnemyCurrentData.PlayerTransform.transform.position);
-
-            if (distance < _enemyController.EnemyPersistenceData.TooCloseDistance)
-            {
-                _enemyController.SwitchState(_enemyController.StepBackState);
-                return;
-            }
-
             _enemyController.SwitchState(_enemyController.ChasingState);
         }
-
-
     }
 }
