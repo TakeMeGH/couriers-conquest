@@ -432,6 +432,24 @@
                     "id": "d21d3652-3a35-44f9-8083-e03609446d69",
                     "expectedControlType": "Button",
                     "processors": "",
+                    "interactions": "Hold",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "EquipItem",
+                    "type": "Button",
+                    "id": "889bd8a3-e3cd-42a4-902b-1f147d61df56",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ConsumeItem",
+                    "type": "Button",
+                    "id": "3128a277-39ee-4839-9bcc-62e960df3269",
+                    "expectedControlType": "Button",
+                    "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 }
@@ -451,11 +469,33 @@
                 {
                     "name": "",
                     "id": "5bbf8d76-981e-4a37-83d0-3621281090ee",
-                    "path": "<Mouse>/leftButton",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "DropItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "86ccd131-e109-4a46-aca5-36dea5736ef5",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "EquipItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "84fdc9ab-e774-45b3-bddb-b9aaf525abc2",
+                    "path": "<Keyboard>/c",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ConsumeItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -16,12 +16,13 @@ namespace CC.Inventory
 
         protected void PickupItem()
         {
+            Debug.Log("Select Item");
             _mousePanel.itemSlot = _itemSlot;
             _mousePanel.sourceItemPanel = _inventoryPanel;
             SetSlotType();
-            if (Input.GetKey(KeyCode.LeftShift) && _itemSlot.stacks > 1) _mousePanel.splitSize = _itemSlot.stacks / 2;
-            else _mousePanel.splitSize = _itemSlot.stacks;
             _mousePanel.SetUI();
+
+
         }
 
         protected void FadeOut()

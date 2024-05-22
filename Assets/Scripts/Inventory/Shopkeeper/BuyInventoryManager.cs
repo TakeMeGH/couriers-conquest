@@ -103,6 +103,16 @@ namespace CC.Inventory
             RefreshInventory();
         }
 
+        public void ClearSlotInventoryBuy()
+        {
+            foreach (AItemPanel item in _inventoryItemPanel)
+            {
+                item.itemSlot.item = null;
+                item.itemSlot.stacks = 0;
+            }
+            RefreshInventory(); 
+        }
+
         public void ClearSlot(ItemSlotInfo slot)
         {
             slot.item = null;
