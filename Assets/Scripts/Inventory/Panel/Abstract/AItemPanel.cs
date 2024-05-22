@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 namespace CC.Inventory
 {
-    public abstract class AItemPanel : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IDragHandler, IDropHandler, IBeginDragHandler, IEndDragHandler
+    public abstract class AItemPanel : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
     {
         [SerializeField] private ItemSlotType _slotType;
         public IInventoryManager inventory;
@@ -16,13 +16,11 @@ namespace CC.Inventory
         public ItemSlotInfo itemSlot;
         public Image itemImage;
         public TextMeshProUGUI stacksText;
+        public GameObject equipedPanel;
+        public bool isNull = true;
 
         public abstract void OnPointerClick(PointerEventData eventData);
         public abstract void OnPointerEnter(PointerEventData eventData);
-        public abstract void OnBeginDrag(PointerEventData eventData);
-        public abstract void OnEndDrag(PointerEventData eventData);
-        public abstract void OnDrag(PointerEventData eventData);
-        public abstract void OnDrop(PointerEventData eventData);
 
         public ItemSlotType GetSlotType()
         {
@@ -31,6 +29,11 @@ namespace CC.Inventory
 
         public abstract void RefreshInventory();
 
-        public abstract void OnEnable();
+        public virtual void ShowEquipedPanel(bool condition)
+        {
+            equipedPanel.SetActive(condition);
+        } 
+
+        public abstract void Initialize(IInventoryManager inventory);
     }
 }
