@@ -11,7 +11,6 @@ namespace CC.Inventory.Item
         [SerializeField] private int _amount = 1;
         [SerializeField] ItemInventoryEventChannel _addItemToInventory;
         [SerializeField] VoidEventChannelSO _onItemPickup;
-        private bool isPickup = false;
 
         public bool isDropItem = false;
         [SerializeField] CustomInterractables _customInteractables;
@@ -33,12 +32,6 @@ namespace CC.Inventory.Item
             }
         }
 
-        private void OnEnable()
-        {
-            Countdown();
-        }
-
-
         private void Start()
         {
             _customInteractables = GetComponent<CustomInterractables>();
@@ -46,16 +39,11 @@ namespace CC.Inventory.Item
             OnAmountSet();
         }
 
-        private IEnumerator Countdown()
-        {
-            isPickup = true;
-            yield return new WaitForSeconds(1);
-            isPickup = false;
-        }
 
         public void Interact()
         {
             _amount = _addItemToInventory.RaiseEvent(_item, _amount);
+
             _onItemPickup.RaiseEvent();
             if (isDropItem)
             {

@@ -434,6 +434,24 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""id"": ""d21d3652-3a35-44f9-8083-e03609446d69"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquipItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""889bd8a3-e3cd-42a4-902b-1f147d61df56"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ConsumeItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""3128a277-39ee-4839-9bcc-62e960df3269"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 }
@@ -453,11 +471,33 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5bbf8d76-981e-4a37-83d0-3621281090ee"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""DropItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""86ccd131-e109-4a46-aca5-36dea5736ef5"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84fdc9ab-e774-45b3-bddb-b9aaf525abc2"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ConsumeItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -489,6 +529,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_InventoryUI = asset.FindActionMap("InventoryUI", throwIfNotFound: true);
         m_InventoryUI_CloseInventory = m_InventoryUI.FindAction("CloseInventory", throwIfNotFound: true);
         m_InventoryUI_DropItem = m_InventoryUI.FindAction("DropItem", throwIfNotFound: true);
+        m_InventoryUI_EquipItem = m_InventoryUI.FindAction("EquipItem", throwIfNotFound: true);
+        m_InventoryUI_ConsumeItem = m_InventoryUI.FindAction("ConsumeItem", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -726,12 +768,16 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private List<IInventoryUIActions> m_InventoryUIActionsCallbackInterfaces = new List<IInventoryUIActions>();
     private readonly InputAction m_InventoryUI_CloseInventory;
     private readonly InputAction m_InventoryUI_DropItem;
+    private readonly InputAction m_InventoryUI_EquipItem;
+    private readonly InputAction m_InventoryUI_ConsumeItem;
     public struct InventoryUIActions
     {
         private @GameInput m_Wrapper;
         public InventoryUIActions(@GameInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @CloseInventory => m_Wrapper.m_InventoryUI_CloseInventory;
         public InputAction @DropItem => m_Wrapper.m_InventoryUI_DropItem;
+        public InputAction @EquipItem => m_Wrapper.m_InventoryUI_EquipItem;
+        public InputAction @ConsumeItem => m_Wrapper.m_InventoryUI_ConsumeItem;
         public InputActionMap Get() { return m_Wrapper.m_InventoryUI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -747,6 +793,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @DropItem.started += instance.OnDropItem;
             @DropItem.performed += instance.OnDropItem;
             @DropItem.canceled += instance.OnDropItem;
+            @EquipItem.started += instance.OnEquipItem;
+            @EquipItem.performed += instance.OnEquipItem;
+            @EquipItem.canceled += instance.OnEquipItem;
+            @ConsumeItem.started += instance.OnConsumeItem;
+            @ConsumeItem.performed += instance.OnConsumeItem;
+            @ConsumeItem.canceled += instance.OnConsumeItem;
         }
 
         private void UnregisterCallbacks(IInventoryUIActions instance)
@@ -757,6 +809,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @DropItem.started -= instance.OnDropItem;
             @DropItem.performed -= instance.OnDropItem;
             @DropItem.canceled -= instance.OnDropItem;
+            @EquipItem.started -= instance.OnEquipItem;
+            @EquipItem.performed -= instance.OnEquipItem;
+            @EquipItem.canceled -= instance.OnEquipItem;
+            @ConsumeItem.started -= instance.OnConsumeItem;
+            @ConsumeItem.performed -= instance.OnConsumeItem;
+            @ConsumeItem.canceled -= instance.OnConsumeItem;
         }
 
         public void RemoveCallbacks(IInventoryUIActions instance)
@@ -798,5 +856,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     {
         void OnCloseInventory(InputAction.CallbackContext context);
         void OnDropItem(InputAction.CallbackContext context);
+        void OnEquipItem(InputAction.CallbackContext context);
+        void OnConsumeItem(InputAction.CallbackContext context);
     }
 }
