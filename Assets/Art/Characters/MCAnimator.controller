@@ -513,29 +513,6 @@ AnimatorStateMachine:
   m_EntryTransitions:
   - {fileID: 5989525701523878746}
   m_StateMachineTransitions:
-  - first: {fileID: 7087449220638828030}
-    second:
-    - {fileID: 9193873135300811135}
-    - {fileID: 3319286963255030939}
-    - {fileID: -3451852560970123702}
-    - {fileID: 905123880722416176}
-    - {fileID: -8878763520320545891}
-    - {fileID: 6402720379192643575}
-  - first: {fileID: 2230196498896714068}
-    second:
-    - {fileID: -4488034193552660153}
-    - {fileID: 4166545766740169219}
-    - {fileID: 3920721974796599748}
-    - {fileID: 1618093448629301644}
-    - {fileID: -5621738604173050590}
-  - first: {fileID: 8773561333142189634}
-    second:
-    - {fileID: -5791447965640748248}
-    - {fileID: 3300361847574751656}
-    - {fileID: -3541681476247260291}
-    - {fileID: 3805697252298924798}
-    - {fileID: -8471630665257616155}
-    - {fileID: 8218372042311236978}
   - first: {fileID: 1484573135500636090}
     second:
     - {fileID: 3373760176882847874}
@@ -545,6 +522,29 @@ AnimatorStateMachine:
     - {fileID: 4546541846039033919}
     - {fileID: -9175136042585290399}
     - {fileID: -6440759182987930777}
+  - first: {fileID: 2230196498896714068}
+    second:
+    - {fileID: -4488034193552660153}
+    - {fileID: 4166545766740169219}
+    - {fileID: 3920721974796599748}
+    - {fileID: 1618093448629301644}
+    - {fileID: -5621738604173050590}
+  - first: {fileID: 7087449220638828030}
+    second:
+    - {fileID: 9193873135300811135}
+    - {fileID: 3319286963255030939}
+    - {fileID: -3451852560970123702}
+    - {fileID: 905123880722416176}
+    - {fileID: -8878763520320545891}
+    - {fileID: 6402720379192643575}
+  - first: {fileID: 8773561333142189634}
+    second:
+    - {fileID: -5791447965640748248}
+    - {fileID: 3300361847574751656}
+    - {fileID: -3541681476247260291}
+    - {fileID: 3805697252298924798}
+    - {fileID: -8471630665257616155}
+    - {fileID: 8218372042311236978}
   - first: {fileID: 8857995725983288004}
     second:
     - {fileID: 6830221593893828465}
@@ -3412,9 +3412,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.5
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0.0017129368
+  m_ExitTime: 0.99515826
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0

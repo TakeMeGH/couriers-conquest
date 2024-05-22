@@ -28,7 +28,7 @@ namespace CC.Inventory
 
         private void Start()
         {
-            Cursor.lockState = CursorLockMode.Locked;
+            // Cursor.lockState = CursorLockMode.Locked;
 
         }
         void Update()

@@ -252,6 +252,7 @@ namespace CC.Inventory
                 if (i.item != null) i.name += ": " + i.item.itemName;
                 else i.name += ": -";
 
+                Debug.Log(index + " INDEX");
                 //Update our Panels
                 AItemPanel panel = existingPanels[index];
                 panel.name = i.name + " Panel";

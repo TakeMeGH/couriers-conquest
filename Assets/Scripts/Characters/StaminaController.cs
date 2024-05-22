@@ -17,6 +17,8 @@ public class StaminaController : MonoBehaviour
     public bool CanBlock { get; private set; }
     public float blockStaminaReq = 10f; //blockStaminaRequirement
     PlayerStatsSO _statsSO;
+    private Coroutine _regenerateCourutine;
+
     List<Type> activeStates = new List<Type> {
         typeof(PlayerSprintingState),
         typeof(PlayerDashingState),
@@ -54,14 +56,21 @@ public class StaminaController : MonoBehaviour
 
     private void HandleStamina()
     {
-        if (!isRegenerating)
+        if (_regenerateCourutine == null)
         {
-            StartCoroutine(RegenerateStamina());
+            _regenerateCourutine = StartCoroutine(RegenerateStamina());
         }
     }
 
     public void DecreaseStaminaByAmount(float amount)
     {
+        if (_regenerateCourutine != null)
+        {
+            StopCoroutine(_regenerateCourutine);
+            _regenerateCourutine = null;
+
+        }
+
         currentStamina -= amount;
         currentStamina = Mathf.Max(currentStamina, 0);
         _statsSO.SetInstanceValue(mainStat.Stamina, currentStamina);

@@ -205,7 +205,8 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
         if (context.phase == InputActionPhase.Performed)
         {
             DropItemPerformed.Invoke();
-        }else if(context.phase == InputActionPhase.Canceled)
+        }
+        else if (context.phase == InputActionPhase.Canceled)
         {
             DropItemCanceled.Invoke();
         }
