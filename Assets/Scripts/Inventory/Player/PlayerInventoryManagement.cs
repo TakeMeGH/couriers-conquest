@@ -48,10 +48,10 @@ namespace CC.Inventory
                 _playerInventoryManager.existingPanels[i].mousePanel = _itemSlotMouse;
             }
 
-            for(int i = _inventoryData.items.Count; i < _playerInventoryManager.existingPanels.Count; i++)
+            /*for(int i = _inventoryData.items.Count; i < _playerInventoryManager.existingPanels.Count; i++)
             {
                 _inventoryData.items.Add(new ItemSlotInfo(null, 0));
-            }
+            }*/
         }
 
         private void SetDefaultEquipment()
