@@ -38,6 +38,12 @@ namespace CC.Combats
             Init();
         }
 
+        public void SetAttackEvent(VoidEventChannelSO attackEvent)
+        {
+            _onCharacterDamaged = attackEvent;
+        }
+
+
         private void Init()
         {
             SetHealth();
@@ -100,8 +106,8 @@ namespace CC.Combats
             GameObject tmp = ObjectPooling.SharedInstance.GetPooledObject(PoolObjectType.FloatingDamageText);
             tmp.transform.position = transform.position;
             tmp.transform.position += _floatingDamageOffset;
-            tmp.transform.position += new Vector3(Random.Range(-_floatingDamageRandomOffset.x, _floatingDamageRandomOffset.x), 
-                Random.Range(-_floatingDamageRandomOffset.y, _floatingDamageRandomOffset.y), 
+            tmp.transform.position += new Vector3(Random.Range(-_floatingDamageRandomOffset.x, _floatingDamageRandomOffset.x),
+                Random.Range(-_floatingDamageRandomOffset.y, _floatingDamageRandomOffset.y),
                 Random.Range(-_floatingDamageRandomOffset.z, _floatingDamageRandomOffset.z));
             tmp.SetActive(true);
 

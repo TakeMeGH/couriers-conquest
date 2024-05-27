@@ -1,6 +1,3 @@
-using CC.Characters;
-using CC.Characters.States;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CC.Characters.States
