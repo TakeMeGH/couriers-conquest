@@ -16,11 +16,13 @@ namespace CC.UI.Notification
         {
             if(data is string)
             {
-
+                textBannerHandler temp = Instantiate(_prefabs[0],_layout).GetComponent<textBannerHandler>();
+                temp.Set((string)data);
             }
             if(data is BGBannerData)
             {
-
+                BGBannerHandler temp = Instantiate(_prefabs[1], _layout).GetComponent<BGBannerHandler>();
+                temp.Set((BGBannerData)data);
             }
         }
     }
