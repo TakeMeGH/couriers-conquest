@@ -1865,11 +1865,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1648250469063587691, guid: a6142194d202ae842a9d17f2aaa80c84,
-        type: 3}
-      propertyPath: vfxHitPrefab
-      value: 
-      objectReference: {fileID: 2790351473483734856}
     - target: {fileID: 2142269775583714512, guid: a6142194d202ae842a9d17f2aaa80c84,
         type: 3}
       propertyPath: m_Name
@@ -2003,12 +1998,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbc2406ee3b03594087dc78789ddea89, type: 3}
---- !u!1 &2790351473483734856 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5928410700655722335, guid: 559446c034fc8554d87c46af18437934,
-    type: 3}
-  m_PrefabInstance: {fileID: 7414808108081311925}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4583244483002706236
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2139,21 +2128,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SlashImpactBandit
-      objectReference: {fileID: 0}
-    - target: {fileID: 4236466022077716811, guid: 3d3dd832ccb017146a49cddffc91ab0e,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4236466022077716811, guid: 3d3dd832ccb017146a49cddffc91ab0e,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4236466022077716811, guid: 3d3dd832ccb017146a49cddffc91ab0e,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

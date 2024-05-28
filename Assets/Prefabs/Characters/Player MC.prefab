@@ -1103,6 +1103,7 @@ GameObject:
   - component: {fileID: 5012093843185906234}
   - component: {fileID: 7023401299673270880}
   - component: {fileID: 1149497327884641052}
+  - component: {fileID: 9102761575389805058}
   m_Layer: 8
   m_Name: WeaponLogic
   m_TagString: Weapon
@@ -1162,6 +1163,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myCollider: {fileID: 6996020628530029114}
   _playerController: {fileID: 1968939700130690617}
+  hitPause: {fileID: 9102761575389805058}
 --- !u!54 &1149497327884641052
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1189,6 +1191,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &9102761575389805058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6839657509875483949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9141bc6839881946af682f84fca9cfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseDuration: 0.2
 --- !u!1 &7076162578742942040
 GameObject:
   m_ObjectHideFlags: 0
