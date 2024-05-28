@@ -17,18 +17,8 @@ namespace CC.UI
         private PlayerInventoryManager _playerInventoryManager;
 
         [Header("UI Component")]
-        [SerializeField] private Slider _healthSlider;
-        [SerializeField] private Image _itemIcon;
-        [SerializeField] private TextMeshProUGUI _textStack;
         [SerializeField] private GameObject _pouchPanel;
-
         private ItemsActionPlayerStats _playerStatItemsAction;
-
-        void Update()
-        {
-            // TODO : Update health must be called from Player Health Controller
-            UpdateHealthUI();
-        }
         public void Initialize(PlayerInventoryManager playerInventoryManaer, InventoryData _inventoryData)
         {
             _playerInventoryManager = playerInventoryManaer;
@@ -36,9 +26,7 @@ namespace CC.UI
             _playerInventoryData.inputReader.PouchPerformed += OnPouchAction;
 
             _playerStatItemsAction = GetComponent<ItemsActionPlayerStats>();
-            _playerStatItemsAction.Initialize(this, _playerStats, _playerInventoryData);
-            SetDefaultStats();
-            //UpdatePouchUI();
+            _playerStatItemsAction.Initialize(_playerStats, _playerInventoryData);
         }
 
         private void OnDisable()
@@ -49,12 +37,6 @@ namespace CC.UI
         private void OnPouchAction()
         {
             AttempToUsePouch(_playerInventoryData.indexPouchEquiped);
-        }
-
-        private void SetDefaultStats()
-        {
-            _healthSlider.maxValue = _playerStats.GetValue(mainStat.Health);
-            _healthSlider.value = _playerStats.GetInstanceValue(mainStat.Health);
         }
 
         public void AttempToUsePouch(int targetIndex)
@@ -73,40 +55,15 @@ namespace CC.UI
                 Debug.Log("Empty Pouch");
             }
         }
-        public void UpdateHealthUI()
-        {
-            _healthSlider.value = _playerStats.GetInstanceValue(mainStat.Health);
-        }
 
-        /*public void UpdatePouchUI()
-        {
-            if (_playerInventoryData.items[_playerInventoryData.pouchIndex].item != null && _playerInventoryData.items[_playerInventoryData.pouchIndex].stacks > 0)
-            {
-                PouchUI(true);
-                _itemIcon.sprite = _playerInventoryData.items[_playerInventoryData.pouchIndex].item.itemSprite;
-                _textStack.text = _playerInventoryData.items[_playerInventoryData.pouchIndex].stacks.ToString();
-            }
-            else
-            {
-                PouchUI(false);
-            }
-        }*/
-
-        private void PouchUI(bool condition)
-        {
-            _itemIcon.gameObject.SetActive(condition);
-            _textStack.gameObject.SetActive(condition);
-        }
         public void ShowPouchPanel()
         {
             _pouchPanel.SetActive(true);
-            //UpdatePouchUI();
         }
 
         public void HidePouchPanel()
         {
             _pouchPanel.SetActive(false);
-            //UpdatePouchUI();
         }
 
         private void CheckItemEffectType(ConsumableItem item, int index)
