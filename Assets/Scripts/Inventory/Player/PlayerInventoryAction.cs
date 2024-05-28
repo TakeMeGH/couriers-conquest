@@ -1,11 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using CC.Core.Data.Dynamic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using CC.Inventory.Item;
 using UnityEngine.UI;
 
 namespace CC.Inventory
