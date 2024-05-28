@@ -22,14 +22,13 @@ MonoBehaviour:
   NavmeshRayMaxDistance: 1
   DefaultAnggularSpeed: 360
   DefaultStopingDistance: 0.33
-  StartWaitTime: 4
-  TimetoRotate: 2
-  PatrolSpeed: 1.8
+  AttackedLimitBeforeStuned: 2
+  PatrolSpeed: 0.8
   PatrolStopDistance: 0.33
-  FastChaseSpeed: 10
-  SlowChaseSpeed: 8
-  ChaseStopingDistance: 1.7
-  TimeToReChase: 0.3
+  FastChaseSpeed: 9
+  SlowChaseSpeed: 6
+  ChaseStopingDistance: 2.5
+  TimeToReChase: 0.1
   MaxIdleTime: 1.5
   MinIdleTime: 0.2
   IdleAttackLimitDistance: 7

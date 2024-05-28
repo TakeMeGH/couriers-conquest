@@ -12,12 +12,9 @@ namespace CC.Enemy
         public int CurrentWaypointIndex = -1;
         public Transform PlayerTransform;
         public bool IsHeavyAttack;
-        public float CurrentWaitTime;
-        public float CurrentTimeToRotate;
         public bool IsPlayerInRange = false;
         public bool IsPlayerNear;
-        public bool IsPatrol;
-        public bool IsCaughtPlayer;
+        public int AttackedCount = 0;
 
     }
 }

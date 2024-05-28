@@ -24,14 +24,14 @@ namespace CC.Enemy.States
             {
                 StartAnimation("isLightAttack");
             }
-
+            
+            _enemyController.transform.LookAt(_enemyController.EnemyCurrentData.PlayerTransform.position);
             _enemyController.WeaponDamage.SetAttack();
 
             _enemyController.NavMeshAgent.speed = 0;
             _enemyController.NavMeshAgent.velocity = Vector3.zero;
             _enemyController.NavMeshAgent.isStopped = true;
 
-            _enemyController.transform.LookAt(_enemyController.EnemyCurrentData.PlayerTransform.position);
         }
 
 

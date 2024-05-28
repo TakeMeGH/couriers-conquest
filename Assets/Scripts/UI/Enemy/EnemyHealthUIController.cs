@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using CC.Core.Data.Dynamic;
+using CC.Events;
 using UnityEngine;
 using UnityEngine.UI;
 
