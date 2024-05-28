@@ -9,7 +9,8 @@ namespace CC.Items
     [CreateAssetMenu(fileName = "ConsumableItem", menuName = "Items/Consumable/Regeneration HP", order = 0)]
     public class RegenerationHP : ConsumableItem
     {
-        [Space][Header("Item Effect")]
+        [Space]
+        [Header("Item Effect")]
         public float HealthPointRegenerationAmount;
         public float durationEffect;
 

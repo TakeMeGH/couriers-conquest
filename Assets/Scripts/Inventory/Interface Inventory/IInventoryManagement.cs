@@ -8,6 +8,7 @@ namespace CC.Inventory
     {
         public void Initialize(InventoryData inventoryData, IInventoryManager inventoryManager, ItemSlotMouse itemSlotMouse);
         public int OnAddItem(ABaseItem item, int amount);
+        public void OnEquipRune();
         public void OnRemoveItem(Component _component, object _item);
 
         public void OnSellItem(ABaseItem itemSell, int amount);

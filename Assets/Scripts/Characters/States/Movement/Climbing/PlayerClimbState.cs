@@ -17,6 +17,7 @@ namespace CC.Characters.States
 
             _playerController.InputReader.DropClimbingPerformed += OnDrop;
             _playerController.FreeClimb.OnAboveStandAble += OnAboveStandAble;
+            _playerController.FreeClimb.OnMCMove += OnClimbMove;
         }
         public override void Update()
         {
@@ -31,6 +32,8 @@ namespace CC.Characters.States
 
             _playerController.InputReader.DropClimbingPerformed -= OnDrop;
             _playerController.FreeClimb.OnAboveStandAble -= OnAboveStandAble;
+            _playerController.FreeClimb.OnMCMove -= OnClimbMove;
+
 
             _playerController.FreeClimb.Rig.weight = 0;
         }
@@ -46,6 +49,18 @@ namespace CC.Characters.States
         {
             _playerController.SwitchState(_playerController.PlayerClimbUpState);
 
+        }
+
+        void OnClimbMove()
+        {
+            if (_playerController.StaminaController.GetCurrentStamina() <= 0)
+            {
+                OnDrop();
+                return;
+            }
+
+            _playerController.StaminaController.DecreaseStaminaByAmount(
+                    _playerController.PlayerMovementData.ClimbStaminaCost);
         }
 
     }

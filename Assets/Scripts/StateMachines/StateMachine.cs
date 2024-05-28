@@ -5,7 +5,7 @@ namespace CC.StateMachine
 {
     public abstract class StateMachine : MonoBehaviour
     {
-        private IState currentState;
+        protected IState currentState;
         bool _onSwitchState = false;
 
         public void SwitchState(IState newState)
@@ -26,6 +26,16 @@ namespace CC.StateMachine
         {
             if (!_onSwitchState) currentState?.PhysicsUpdate();
 
+        }
+
+        public System.Type GetCurrentStateType()
+        {
+            return currentState.GetType();
+        }
+
+        public IState GetCurrentState()
+        {
+            return currentState;
         }
     }
 }

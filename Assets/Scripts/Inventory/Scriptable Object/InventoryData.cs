@@ -14,6 +14,13 @@ namespace CC.Inventory
         [SerializeField] private InputReader _inputReader;
         public int pouchIndex = 16;
 
+
+        [SerializeField] public bool isRuneEquiped = false;
+        [SerializeField] public bool isPouchEquiped = false;
+        [SerializeField] public int indexRuneEquiped;
+        [SerializeField] public int indexPouchEquiped;
+
+
         [Space]
         [Header("Event System")]
         [SerializeField] private ItemInventoryEventChannel _addItemToInventory;

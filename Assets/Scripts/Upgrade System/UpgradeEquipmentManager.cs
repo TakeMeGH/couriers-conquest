@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Cinemachine.DocumentationSortingAttribute;
-using static UnityEditor.Progress;
 
 namespace CC.UpgradeEquipment
 {
@@ -55,7 +54,7 @@ namespace CC.UpgradeEquipment
                 _upgradeEquipmentUI = GetComponent<UpgradeEquipmentUI>();
 
                 _upgradeSlot.inventory = _tempPlayerInventory;
-                _upgradeSlot.OnEnable();
+                //_upgradeSlot.Initialize();
                 _upgradeEquipmentUI.Initialize(this);
                 _upgradeEquipmentUI.SetButtonListener();
                 SetRequirimentItemSlot();
@@ -75,7 +74,7 @@ namespace CC.UpgradeEquipment
             foreach (AItemPanel itemPanel in _requirimentItemSlot)
             {
                 itemPanel.inventory = _tempPlayerInventory;
-                itemPanel.OnEnable();
+                //itemPanel.Initialize();
             }
         }
 
@@ -99,13 +98,13 @@ namespace CC.UpgradeEquipment
 
         public bool CheckMaxLevelCondition(EquipmentItem item)
         {
-            if(item == null)
+            if (item == null)
             {
                 _upgradeEquipmentUI.SetMaxLevelLabelPanel(false);
                 return false;
             }
 
-            if(item.weaponLevel < item.upgradeRequiriment.Count)
+            if (item.equipmentLevel < item.upgradeRequiriment.Count)
             {
                 _upgradeEquipmentUI.SetMaxLevelLabelPanel(false);
                 return false;
@@ -128,7 +127,7 @@ namespace CC.UpgradeEquipment
             }
 
             _currentEquipmentItem = item;
-            int level = item.weaponLevel;
+            int level = item.equipmentLevel;
             bool isUpgradeable = true;
             _lastPrice = item.upgradeRequiriment[level].price;
             _upgradeEquipmentUI.UpdateTextPrice(_lastPrice);
@@ -167,12 +166,12 @@ namespace CC.UpgradeEquipment
 
         private void UseMaterialRequiriment()
         {
-            int weaponLevel = _currentEquipmentItem.weaponLevel;
-            for (int i = 0; i < _currentEquipmentItem.upgradeRequiriment[weaponLevel].materialRequiriment.Count; i++)
+            int equipmentLevel = _currentEquipmentItem.equipmentLevel;
+            for (int i = 0; i < _currentEquipmentItem.upgradeRequiriment[equipmentLevel].materialRequiriment.Count; i++)
             {
                 if (_requirimentItemSlot[i].itemSlot.item != null)
                 {
-                    _onSellItemEvent.RaiseEvent(_requirimentItemSlot[i].itemSlot.item, _currentEquipmentItem.upgradeRequiriment[weaponLevel].materialRequiriment[i].amount);
+                    _onSellItemEvent.RaiseEvent(_requirimentItemSlot[i].itemSlot.item, _currentEquipmentItem.upgradeRequiriment[equipmentLevel].materialRequiriment[i].amount);
                 }
             }
         }
@@ -184,9 +183,16 @@ namespace CC.UpgradeEquipment
 
         private void SuccesfullUpgrade()
         {
-            _upgradeEquipmentUI.SetStatsPanelBeforeUpgrade(_currentEquipmentItem.itemSprite, _currentEquipmentItem.weaponLevel + 1, _currentEquipmentItem.attackWeapon, _currentEquipmentItem.deffWeapon, _currentEquipmentItem.itemWeight);
+            // TODO : FIX
+            _upgradeEquipmentUI.SetStatsPanelBeforeUpgrade(_currentEquipmentItem.itemSprite, 
+                _currentEquipmentItem.equipmentLevel, _currentEquipmentItem.EquipmentStats, 
+                _currentEquipmentItem.itemWeight);
+
             UpgradeLevelEquipment();
-            _upgradeEquipmentUI.SetStatsPanelAfterUpgrade(_currentEquipmentItem.itemSprite, _currentEquipmentItem.weaponLevel + 1, _currentEquipmentItem.attackWeapon, _currentEquipmentItem.deffWeapon, _currentEquipmentItem.itemWeight);
+            
+            _upgradeEquipmentUI.SetStatsPanelAfterUpgrade(_currentEquipmentItem.itemSprite, 
+                _currentEquipmentItem.equipmentLevel, _currentEquipmentItem.EquipmentStats, 
+                _currentEquipmentItem.itemWeight);
         }
     }
 }

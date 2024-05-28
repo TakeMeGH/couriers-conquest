@@ -1,35 +1,91 @@
 ﻿title: Shop02_FemaleShop_Default_0
 tags:
 ---
-Mega : Welcome to my store, how may i help you?
--> I want to buy some item..
+<<declare $EveHaveQuest = false>>
+<<declare $EveQuestNode = "" >>
+
+Evellyn : Halo, senang bertemu dengan mu nak! 
+Evellyn : Selamat datang di Advent's Shop
+Evellyn : Tempat dimana kamu bisa membeli barang untuk bertualang, dan...
+Evellyn : Kamu juga bisa menjual barang temuan mu dari memburu monster
+Evellyn : Ngomong-ngomong, adakah yang sedang kamu butuhkan disini?
+<<jump Shop02_FemaleShop_All_Choice>>
+===
+
+title: Shop02_FemaleShop_All_Choice
+tags:
+---
+-> Aku ingin mendengarkan cerita petualangan mu
     <<jump Shop02_FemaleShop_Choice_0>>
--> Who are you ?
+-> Aku ingin membeli atau menjual sesuatu
     <<jump Shop02_FemaleShop_Choice_1>>
--> Do you perhaps, have any relation with Jokowi?
+-> Tidak ada, aku hanya ingin bertemu dengan mu...
     <<jump Shop02_FemaleShop_Choice_2>>
--> Nothing, bye..
-    <<Close>>
 ===
 
 title: Shop02_FemaleShop_Choice_0
 tags:
 ---
-Mega : The item is from the people, by the people, for the people. So the prices is friendly !
-<<SpecialAction Mega 0>>
+Evellyn: Hahahaha, aku sudah bisa menebaknya dari mimik mukamu.
+Evellyn: Kita mulai dari mana ya...
+-> Aiden: Bagaimana jika dimulai dari awal petualanganmu?
+    <<jump Shop01_MaleShop_Story_0>>
+-> Aiden: Bagaimana saat kamu sedang menghadapi situasi yang sangat seru dari seluruh petualanganmu?
+    <<jump Shop01_MaleShop_Story_1>>
 ===
+
+title: Shop02_FemaleShop_Story_0
+tags:
+---
+Eve: Ahh, tentu saja, tidak seru jika kita langsung memulai dari klimaksnya.
+Eve: Kamu tahu, aku dulu hanyalah seorang gadis biasa yang mengagumi dunia luar.
+Eve: Melihat bagaimana petualang bisa menjelajahi seluruh tempat, atau melihat seorang Postman sepertimu yang juga pergi-pergi mengantarkan barang dengan mempertaruhkan nyawanya.
+Eve: Tapi suatu hari, aku membantu menyelamatkan seorang petualang yang sedang dikejar oleh monster. Dia terluka parah dan aku membantu menyembuhkan lukanya dengan potion yang pernah kupelajari dulu.
+Eve: Lambat laun dia pulih, dan saat dia akan pergi, dia mengajakku untuk bergabung bertualang dengannya.
+Eve: Awalnya aku ragu, tapi dari rumor yang beredar dia adalah petualang yang hebat, dan dia membutuhkan seseorang yang bisa membuat potion dan membantunya bertualang.
+Eve: Akhirnya aku memutuskan untuk ikut, dan membantunya bertualang mengelilingi dunia.
+Eve: Aku melihat banyak sekali tempat-tempat aneh, monster yang tidak pernah kulihat, sebuah kristal besar dan gua yang terasa asing untukku, bahkan puing-puing robot yang bertebaran.
+Eve: Semua hal yang dulunya kubayangkan, sekarang bisa kulihat dengan mata kepalaku sendiri. Aku sangat bersyukur dulu menerima ajakan dari petualang tersebut.
+Eve: Jadi bagaimana? Seru bukan? Aku berharap kamu juga akan menemukan keseruanmu sendiri saat mengantarkan barang nanti, agar kamu juga bisa merasakan kesenangan yang pastinya tidak akan pernah kamu bayangkan.
+Eve: Dan yah, itu akhirnya. Setelah mendengar cerita tersebut, adakah yang kamu butuhkan lagi di sini?
+<<jump Shop02_FemaleShop_All_Choice>>
+===
+
+title: Shop02_FemaleShop_Story_1
+tags:
+---
+Eve: Hahaha, boleh-boleh. Sepertinya kamu tipe orang yang tertarik dengan cerita di bagian seru-serunya saja.
+Eve: Oke, suatu hari aku dan rekanku sedang berada di suatu bagian terdalam hutan di suatu daerah.
+Eve: Di hutan itu, sama seperti hutan yang ada di dekat kota kita, semakin kita masuk ke dalam, kita akan menemukan kristal-kristal yang entah dari mana asalnya.
+Eve: Semakin masuk ke dalam hutan, semakin banyak kristal-kristal tersebut, dan bahkan ada beberapa pohon yang menyatu dengannya.
+Eve: Gua-gua yang kami lewati juga mengeluarkan suasana yang aneh, seperti kita ditarik ke sana, atau bahkan seperti ada sesuatu yang keluar dari gua tersebut.
+Eve: Tidak hanya itu, ada banyak sekali puing-puing robot di sana, dimana robot tersebut seperti hal yang biasa saja di zaman dulu.
+Eve: Bahkan aku pernah berpikir, apa yang membuat robot tersebut bisa musnah semua, tapi itu hanya pikiran liarku saja.
+Eve: Saat aku mencapai tengah hutan, aku melihat sebuah kristal yang sangat besar, dan itu dilindungi oleh banyak monster, salah satunya adalah goblin.
+Eve: Biasanya, monster tidak akan pernah bekerja sama, tapi di sana itu seperti hal yang biasa.
+Eve: Semakin kulihat, perilaku monster-monster tersebut semakin aneh, seperti mereka memiliki tujuan yang sama, dan ada sesuatu yang mengendalikan mereka.
+Eve: Karena kami hanya berdua, kami takut jika hal buruk akan terjadi. Itu kenapa kami langsung lari keluar dari hutan.
+Eve: Tapi saat kami lari, terdapat gempa bumi yang cukup kencang. Entah itu gempa bumi apa, kami tidak memedulikannya. Yang kami pedulikan adalah kami harus segera keluar dari sana.
+Eve: Walaupun kami sempat dikejar-kejar oleh para monster awalnya, tapi akhirnya kami bisa menjauh dan keluar dari hutan tersebut.
+Eve: Sampai saat ini aku masih belum tahu kenapa para monster tersebut bisa bekerja sama. Bahkan setelah aku menceritakannya ke orang lain, mereka semua tidak percaya.
+Eve: Mereka bilang tidak ada gempa sama sekali. Bukannya itu aneh? Padahal kami merasakan dengan jelas tanah bergoyang-goyang dengan kencang.
+Eve: Yah, mungkin itu salah satu pengalaman terseru dan mungkin sedikit aneh saat bertualang.
+Eve: Jadi, setelah mendengar cerita tersebut, adakah yang kamu butuhkan lagi di sini?
+<<jump Shop02_FemaleShop_All_Choice>>
+===
+
 
 title: Shop02_FemaleShop_Choice_1
 tags:
 ---
-Mega : My name is Mega Bullprincess, i'm the leader of the People's Deals Institution (PDI)
-<<jump Shop02_FemaleShop_Default_0>>
+Evellyn : Tentu saja, kamu tidak akan menyesal jika membeli ataupun menjual barang mu disini
+<<SpecialAction Evellyn 0>>
 ===
 
 title: Shop02_FemaleShop_Choice_2
 tags:
 ---
-Mega : Jokowi? the president of this town expedition company?
-Mega : Bet he can't do shit without me, hahaha..
-<<jump Shop02_FemaleShop_Default_0>>
+Evellyn : Hahahaha, kamu bisa saja, aku sudah berkeluarga loh, jadi kamu tidak akan memiliki kesempatan
+Evellyn : Jika tidak ada lagi, sampai jumpa di pertemuan berikutnya...
+<<Close>>
 ===

@@ -13,7 +13,8 @@ namespace CC.UI
     {
         [Space]
         [SerializeField] private PlayerStatsSO _playerStats;
-        [SerializeField] private InventoryData _playerInventoryData;
+        private InventoryData _playerInventoryData;
+        private PlayerInventoryManager _playerInventoryManager;
 
         [Header("UI Component")]
         [SerializeField] private Slider _healthSlider;
@@ -23,18 +24,31 @@ namespace CC.UI
 
         private ItemsActionPlayerStats _playerStatItemsAction;
 
-        public void Initialize()
+        void Update()
         {
-            _playerInventoryData.inputReader.PouchPerformed += AttempToUsePouch;
+            // TODO : Update health must be called from Player Health Controller
+            UpdateHealthUI();
+        }
+        public void Initialize(PlayerInventoryManager playerInventoryManaer, InventoryData _inventoryData)
+        {
+            _playerInventoryManager = playerInventoryManaer;
+            _playerInventoryData = _inventoryData;
+            _playerInventoryData.inputReader.PouchPerformed += OnPouchAction;
+
             _playerStatItemsAction = GetComponent<ItemsActionPlayerStats>();
             _playerStatItemsAction.Initialize(this, _playerStats, _playerInventoryData);
             SetDefaultStats();
-            UpdatePouchUI();
+            //UpdatePouchUI();
         }
 
         private void OnDisable()
         {
-            _playerInventoryData.inputReader.PouchPerformed -= AttempToUsePouch;
+            _playerInventoryData.inputReader.PouchPerformed -= OnPouchAction;
+        }
+
+        private void OnPouchAction()
+        {
+            AttempToUsePouch(_playerInventoryData.indexPouchEquiped);
         }
 
         private void SetDefaultStats()
@@ -43,13 +57,16 @@ namespace CC.UI
             _healthSlider.value = _playerStats.GetInstanceValue(mainStat.Health);
         }
 
-        private void AttempToUsePouch()
+        public void AttempToUsePouch(int targetIndex)
         {
-            ABaseItem item = _playerInventoryData.items[_playerInventoryData.pouchIndex].item;
-            if (item != null)
+
+            if (!_playerInventoryData.isPouchEquiped) return; ;
+
+            ABaseItem item = _playerInventoryData.items[targetIndex].item;
+            if (item != null && _playerInventoryData.items[targetIndex].stacks > 0)
             {
                 ConsumableItem consumableItem = (ConsumableItem)item;
-                CheckItemEffectType(consumableItem);
+                CheckItemEffectType(consumableItem, targetIndex);
             }
             else
             {
@@ -61,7 +78,7 @@ namespace CC.UI
             _healthSlider.value = _playerStats.GetInstanceValue(mainStat.Health);
         }
 
-        public void UpdatePouchUI()
+        /*public void UpdatePouchUI()
         {
             if (_playerInventoryData.items[_playerInventoryData.pouchIndex].item != null && _playerInventoryData.items[_playerInventoryData.pouchIndex].stacks > 0)
             {
@@ -73,7 +90,7 @@ namespace CC.UI
             {
                 PouchUI(false);
             }
-        }
+        }*/
 
         private void PouchUI(bool condition)
         {
@@ -83,20 +100,21 @@ namespace CC.UI
         public void ShowPouchPanel()
         {
             _pouchPanel.SetActive(true);
-            UpdatePouchUI();
+            //UpdatePouchUI();
         }
 
         public void HidePouchPanel()
         {
             _pouchPanel.SetActive(false);
-            UpdatePouchUI();
+            //UpdatePouchUI();
         }
 
-        private void CheckItemEffectType(ConsumableItem item)
+        private void CheckItemEffectType(ConsumableItem item, int index)
         {
-            if(item.GetConsumableType() == ConsumableType.HPRegeneration)
+            if (item.GetConsumableType() == ConsumableType.HPRegeneration)
             {
-                _playerStatItemsAction.AttempToOvertimeRegeneration(item.GetAmount(), item.DurationEffect());
+                _playerStatItemsAction.AttempToOvertimeRegeneration(item.GetAmount(), item.DurationEffect(), index);
+                _playerInventoryManager.RefreshInventory();
             }
         }
     }

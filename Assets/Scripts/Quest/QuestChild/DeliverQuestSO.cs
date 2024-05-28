@@ -29,11 +29,11 @@ namespace CC.Quest
             base.OnQuestStarted(sender, data);
             var temp = Instantiate(pickupPrefab.prefab, pickupPrefab.position, Quaternion.identity);
             if (temp != null) _instantiatedPrefabs.Add(temp);
-            temp.GetComponent<ExPickupPoint>().Init(itemToDeliver);
+            temp.GetComponent<PickupPoint>().Init(itemToDeliver);
 
             temp = Instantiate(dropPrefab.prefab, dropPrefab.position, Quaternion.identity);
             if (temp != null) _instantiatedPrefabs.Add(temp);
-            temp.GetComponent<ExDropPoint>().Init(itemToDeliver);
+            temp.GetComponent<DropPoint>().Init(itemToDeliver);
 
             foreach (var prefab in _questPrefabs)
             {
@@ -43,7 +43,7 @@ namespace CC.Quest
 
             foreach (var npc in _npcList)
             {
-                SendNPCQuestDialogue?.raiseEvent(null,npc);
+                SendNPCQuestDialogue?.raiseEvent(null, npc);
             }
 
             Debug.Log("quest has started");
@@ -56,7 +56,7 @@ namespace CC.Quest
         }
         public override void OnQuestFinished(Component sender, object data)
         {
-            base.OnQuestFinished(sender,data);
+            base.OnQuestFinished(sender, data);
             clearAllPrefab();
             Debug.Log("quest has finished");
         }

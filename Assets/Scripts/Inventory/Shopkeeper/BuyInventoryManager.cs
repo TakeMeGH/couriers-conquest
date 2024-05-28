@@ -3,7 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
 
 namespace CC.Inventory
 {
@@ -102,6 +101,16 @@ namespace CC.Inventory
             UpdatePrice();
             ShowPanel();
             RefreshInventory();
+        }
+
+        public void ClearSlotInventoryBuy()
+        {
+            foreach (AItemPanel item in _inventoryItemPanel)
+            {
+                item.itemSlot.item = null;
+                item.itemSlot.stacks = 0;
+            }
+            RefreshInventory(); 
         }
 
         public void ClearSlot(ItemSlotInfo slot)

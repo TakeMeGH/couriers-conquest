@@ -5,6 +5,8 @@ using AYellowpaper.SerializedCollections;
 using Newtonsoft.Json.Linq;
 using CC.Core.Data.Stable;
 using UnityEngine.InputSystem;
+using System;
+using UnityEngine.Events;
 
 namespace CC.Core.Data.Dynamic
 {
@@ -15,6 +17,7 @@ namespace CC.Core.Data.Dynamic
         [SerializeField] List<StatsModifier> modifiers;
         [Header("default")]
         [SerializeField] PlayerStats _defaultStatData;
+        [SerializeField] public UnityAction OnStatChange;
         public float GetValue(mainStat key)
         {
             if (statData.defaultValue.TryGetValue(key, out float value))
@@ -45,6 +48,19 @@ namespace CC.Core.Data.Dynamic
             }
         }
 
+        public void SetInstanceValue(mainStat key, float value)
+        {
+            if (statData.instanceValue.ContainsKey(key))
+            {
+                statData.instanceValue[key] = Math.Min(GetValue(key), value);
+                OnStatChange.Invoke();
+            }
+        }
+        public float GetDamageReduction()
+        {
+            return statData.damageReduction;
+        }
+
         public override ISaveable Save()
         {
             return statData;
@@ -59,22 +75,6 @@ namespace CC.Core.Data.Dynamic
             statData.CopyFrom(_defaultStatData);
         }
 
-
-        //TODO : TAMBAH DARAH
-        public void ChangeHPValue(mainStat key, float amount)
-        {
-            if (statData.instanceValue.TryGetValue(key, out float currentValue))
-            {
-                float updatedValue = currentValue + amount;
-                if(updatedValue >= GetValue(mainStat.Health))
-                {
-                    updatedValue = GetValue(mainStat.Health);
-                }
-
-                statData.instanceValue[key] = updatedValue;
-            }
-        }
-
     }
 
     [System.Serializable]
@@ -83,12 +83,15 @@ namespace CC.Core.Data.Dynamic
         public SerializedDictionary<mainStat, float> defaultValue;
         public SerializedDictionary<mainStat, float> instanceValue;
         public int playerExp;
+        public float damageReduction;
+
         public void CopyFrom(ISaveable obj)
         {
             var target = (PlayerStats)obj;
             this.defaultValue = new(target.defaultValue);
             this.instanceValue = new(target.instanceValue);
             this.playerExp = target.playerExp;
+            this.damageReduction = target.damageReduction;
         }
     }
 
@@ -99,5 +102,6 @@ namespace CC.Core.Data.Dynamic
         AttackValue,
         MovementSpeed,
         Defense,
+        ShieldValue,
     }
 }

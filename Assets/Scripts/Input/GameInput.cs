@@ -179,6 +179,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""054650e5-48be-43ae-818c-23c18dffe1e7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -283,19 +292,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""9b3e39f2-9646-497a-9f6b-01f8406321e8"",
+                    ""id"": ""98aba709-1e51-49a6-b721-f78ffd556bad"",
                     ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Dash"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""a57fb021-7be4-4e0d-808c-0c54b2685bd3"",
-                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -423,6 +421,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Pouch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dc652d38-66fa-472d-9544-2fd633e166c3"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -445,6 +454,24 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""id"": ""d21d3652-3a35-44f9-8083-e03609446d69"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
+                    ""interactions"": ""Hold"",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquipItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""889bd8a3-e3cd-42a4-902b-1f147d61df56"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ConsumeItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""3128a277-39ee-4839-9bcc-62e960df3269"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 }
@@ -464,11 +491,33 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5bbf8d76-981e-4a37-83d0-3621281090ee"",
-                    ""path"": ""<Mouse>/leftButton"",
+                    ""path"": ""<Keyboard>/r"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""DropItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""86ccd131-e109-4a46-aca5-36dea5736ef5"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""84fdc9ab-e774-45b3-bddb-b9aaf525abc2"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ConsumeItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -496,10 +545,13 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Gameplay_ScrolIInteraction = m_Gameplay.FindAction("ScrolIInteraction", throwIfNotFound: true);
         m_Gameplay_DropClimbing = m_Gameplay.FindAction("DropClimbing", throwIfNotFound: true);
         m_Gameplay_Pouch = m_Gameplay.FindAction("Pouch", throwIfNotFound: true);
+        m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
         // InventoryUI
         m_InventoryUI = asset.FindActionMap("InventoryUI", throwIfNotFound: true);
         m_InventoryUI_CloseInventory = m_InventoryUI.FindAction("CloseInventory", throwIfNotFound: true);
         m_InventoryUI_DropItem = m_InventoryUI.FindAction("DropItem", throwIfNotFound: true);
+        m_InventoryUI_EquipItem = m_InventoryUI.FindAction("EquipItem", throwIfNotFound: true);
+        m_InventoryUI_ConsumeItem = m_InventoryUI.FindAction("ConsumeItem", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -578,6 +630,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_ScrolIInteraction;
     private readonly InputAction m_Gameplay_DropClimbing;
     private readonly InputAction m_Gameplay_Pouch;
+    private readonly InputAction m_Gameplay_Pause;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -599,6 +652,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @ScrolIInteraction => m_Wrapper.m_Gameplay_ScrolIInteraction;
         public InputAction @DropClimbing => m_Wrapper.m_Gameplay_DropClimbing;
         public InputAction @Pouch => m_Wrapper.m_Gameplay_Pouch;
+        public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -659,6 +713,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Pouch.started += instance.OnPouch;
             @Pouch.performed += instance.OnPouch;
             @Pouch.canceled += instance.OnPouch;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -714,6 +771,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Pouch.started -= instance.OnPouch;
             @Pouch.performed -= instance.OnPouch;
             @Pouch.canceled -= instance.OnPouch;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -737,12 +797,16 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private List<IInventoryUIActions> m_InventoryUIActionsCallbackInterfaces = new List<IInventoryUIActions>();
     private readonly InputAction m_InventoryUI_CloseInventory;
     private readonly InputAction m_InventoryUI_DropItem;
+    private readonly InputAction m_InventoryUI_EquipItem;
+    private readonly InputAction m_InventoryUI_ConsumeItem;
     public struct InventoryUIActions
     {
         private @GameInput m_Wrapper;
         public InventoryUIActions(@GameInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @CloseInventory => m_Wrapper.m_InventoryUI_CloseInventory;
         public InputAction @DropItem => m_Wrapper.m_InventoryUI_DropItem;
+        public InputAction @EquipItem => m_Wrapper.m_InventoryUI_EquipItem;
+        public InputAction @ConsumeItem => m_Wrapper.m_InventoryUI_ConsumeItem;
         public InputActionMap Get() { return m_Wrapper.m_InventoryUI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -758,6 +822,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @DropItem.started += instance.OnDropItem;
             @DropItem.performed += instance.OnDropItem;
             @DropItem.canceled += instance.OnDropItem;
+            @EquipItem.started += instance.OnEquipItem;
+            @EquipItem.performed += instance.OnEquipItem;
+            @EquipItem.canceled += instance.OnEquipItem;
+            @ConsumeItem.started += instance.OnConsumeItem;
+            @ConsumeItem.performed += instance.OnConsumeItem;
+            @ConsumeItem.canceled += instance.OnConsumeItem;
         }
 
         private void UnregisterCallbacks(IInventoryUIActions instance)
@@ -768,6 +838,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @DropItem.started -= instance.OnDropItem;
             @DropItem.performed -= instance.OnDropItem;
             @DropItem.canceled -= instance.OnDropItem;
+            @EquipItem.started -= instance.OnEquipItem;
+            @EquipItem.performed -= instance.OnEquipItem;
+            @EquipItem.canceled -= instance.OnEquipItem;
+            @ConsumeItem.started -= instance.OnConsumeItem;
+            @ConsumeItem.performed -= instance.OnConsumeItem;
+            @ConsumeItem.canceled -= instance.OnConsumeItem;
         }
 
         public void RemoveCallbacks(IInventoryUIActions instance)
@@ -804,10 +880,13 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnScrolIInteraction(InputAction.CallbackContext context);
         void OnDropClimbing(InputAction.CallbackContext context);
         void OnPouch(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IInventoryUIActions
     {
         void OnCloseInventory(InputAction.CallbackContext context);
         void OnDropItem(InputAction.CallbackContext context);
+        void OnEquipItem(InputAction.CallbackContext context);
+        void OnConsumeItem(InputAction.CallbackContext context);
     }
 }

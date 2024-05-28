@@ -1,6 +1,4 @@
 using CC.Event;
-using CC.Quest;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -39,16 +37,15 @@ namespace CC.NPC
 
         public void OpenDialogue()
         {
-            Cursor.lockState = CursorLockMode.Confined;
+            Debug.Log(_dialogueRunner + " DEBUG");
             _inputReader.EnableInventoryUIInput();
             _dialogueVariable.SetValue("$" + _NPCName + "HaveQuest", Quest_dialogue_node != "");
-            _dialogueVariable.SetValue("$" + _NPCName + "QuestNode",Quest_dialogue_node);
+            _dialogueVariable.SetValue("$" + _NPCName + "QuestNode", Quest_dialogue_node);
             _dialogueRunner.StartDialogue(Default_dialogue_node);
         }
 
         public void OnQuestListen(Component sender, object data)
         {
-            //if (!(sender.GetType() == typeof(AQuest))) return;
             if (data is NPCQuestDialogueNodeTransfer)
             {
                 NPCQuestDialogueNodeTransfer temp = (NPCQuestDialogueNodeTransfer)data;
@@ -68,7 +65,6 @@ namespace CC.NPC
 
         public void OnDialogueClosed()
         {
-            Cursor.lockState = CursorLockMode.Locked;
             _inputReader.EnableGameplayInput();
         }
 
@@ -85,6 +81,7 @@ namespace CC.NPC
         [YarnCommand("SpecialAction")]
         public void SpecialAction(int index)
         {
+            Debug.Log("SPECIAL");
             _specialAction[index].Invoke();
         }
     }

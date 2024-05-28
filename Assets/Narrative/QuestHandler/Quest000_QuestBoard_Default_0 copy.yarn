@@ -1,0 +1,15 @@
+﻿title: Quest000_QuestBoard_Default_0
+tags:
+---
+<<declare $QuestBoardHaveQuest = false>>
+<<declare $QuestBoardQuestNode = "" >>
+
+<<if $QuestBoardHaveQuest>>
+    <<jump {$QuestBoardQuestNode}>>
+<<endif>>
+
+
+Aiden: Hari baru, misi baru.
+Aiden: Mari kita lihat apa yang ada di papan misi hari ini.
+<<SpecialAction QuestBoard 0>>
+===

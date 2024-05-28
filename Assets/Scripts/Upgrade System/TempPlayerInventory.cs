@@ -2,7 +2,6 @@ using CC.Events;
 using CC.Inventory;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 using static Cinemachine.DocumentationSortingAttribute;
 
@@ -151,7 +150,7 @@ namespace CC.UpgradeEquipment
 
             if (_upgradeEquipmentManager.CheckMaxLevelCondition(_eqItem)) return;
 
-            int level = _eqItem.weaponLevel;
+            int level = _eqItem.equipmentLevel;
             int amountKindRequiriment = _eqItem.upgradeRequiriment[level].materialRequiriment.Count;
             for (int i = 0; i < amountKindRequiriment; i++)
             {

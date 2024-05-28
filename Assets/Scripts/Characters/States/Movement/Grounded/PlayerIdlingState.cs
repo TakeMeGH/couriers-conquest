@@ -1,6 +1,3 @@
-using CC.Characters;
-using CC.Characters.States;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace CC.Characters.States
@@ -16,22 +13,17 @@ namespace CC.Characters.States
         public override void Enter()
         {
             _alreadyCalled = false;
+
             _playerController.PlayerCurrentData.MovementSpeedModifier = 0f;
-
-            base.Enter();
-
-            StartAnimation("isIdling");
 
             _playerController.PlayerCurrentData.CurrentJumpForce = _playerController.PlayerMovementData.StationaryForce;
 
             ResetVelocity();
 
+            base.Enter();
 
-            if (_playerController.PlayerCurrentData.IsUpdateNewTransform)
-            {
-                _playerController.transform.position = _playerController.PlayerCurrentData.NewTransformPosition;
-                _playerController.PlayerCurrentData.IsUpdateNewTransform = false;
-           }
+            StartAnimation("isIdling");
+
         }
 
         public override void Exit()
@@ -46,6 +38,11 @@ namespace CC.Characters.States
 
         public override void Update()
         {
+            if (_playerController.PlayerCurrentData.IsUpdateNewTransform)
+            {
+                return;
+            }
+
             base.Update();
 
             if (_playerController.PlayerCurrentData.MovementInput == Vector2.zero)
@@ -58,6 +55,11 @@ namespace CC.Characters.States
 
         public override void PhysicsUpdate()
         {
+            if (_playerController.PlayerCurrentData.IsUpdateNewTransform)
+            {
+                return;
+            }
+
             base.PhysicsUpdate();
 
             if (!IsMovingHorizontally())
@@ -66,6 +68,17 @@ namespace CC.Characters.States
             }
 
             ResetVelocity();
+        }
+
+        public override void OnAnimationEnterEvent()
+        {
+            base.OnAnimationEnterEvent();
+            if (_playerController.PlayerCurrentData.IsUpdateNewTransform)
+            {
+                _playerController.transform.position = _playerController.PlayerCurrentData.NewTransformPosition;
+                _playerController.PlayerCurrentData.IsUpdateNewTransform = false;
+            }
+
         }
         public override void OnAnimationTransitionEvent()
         {

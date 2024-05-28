@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3158425470804308995}
-  - {fileID: 8382649823230646743}
+  - {fileID: 6181882363117707503}
   - {fileID: 4034614862395370368}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -52,7 +52,7 @@ MonoBehaviour:
   _shopkeeperInventoryData: {fileID: 11400000, guid: 119a4897cbed3ed47a01c63e03c0ec34,
     type: 2}
   _shopEvent: {fileID: 11400000, guid: 69985afacbdf420439d6728edf3d5706, type: 2}
---- !u!1001 &8349566938952384060
+--- !u!1001 &5926961671554680580
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -60,71 +60,91 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4284809546884773949}
     m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55,
+    - target: {fileID: -8679921383154817045, guid: 62e10383926e8794db504249851e8aec,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62e10383926e8794db504249851e8aec,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62e10383926e8794db504249851e8aec,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 62e10383926e8794db504249851e8aec,
         type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55,
+    - target: {fileID: -8679921383154817045, guid: 62e10383926e8794db504249851e8aec,
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55,
+    - target: {fileID: -8679921383154817045, guid: 62e10383926e8794db504249851e8aec,
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55,
+    - target: {fileID: -8679921383154817045, guid: 62e10383926e8794db504249851e8aec,
         type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55,
+    - target: {fileID: -8679921383154817045, guid: 62e10383926e8794db504249851e8aec,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55,
+    - target: {fileID: -8679921383154817045, guid: 62e10383926e8794db504249851e8aec,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55,
+    - target: {fileID: -8679921383154817045, guid: 62e10383926e8794db504249851e8aec,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55,
+    - target: {fileID: -8679921383154817045, guid: 62e10383926e8794db504249851e8aec,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55,
+    - target: {fileID: -8679921383154817045, guid: 62e10383926e8794db504249851e8aec,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55,
+    - target: {fileID: -8679921383154817045, guid: 62e10383926e8794db504249851e8aec,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 81bb9eea30387e442899949a80011e55,
+    - target: {fileID: -8679921383154817045, guid: 62e10383926e8794db504249851e8aec,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 62e10383926e8794db504249851e8aec,
         type: 3}
       propertyPath: m_Name
-      value: Banana Man
+      value: Female Shopkeeper
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 81bb9eea30387e442899949a80011e55, type: 3}
---- !u!4 &8382649823230646743 stripped
+  m_SourcePrefab: {fileID: 100100000, guid: 62e10383926e8794db504249851e8aec, type: 3}
+--- !u!4 &6181882363117707503 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 81bb9eea30387e442899949a80011e55,
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 62e10383926e8794db504249851e8aec,
     type: 3}
-  m_PrefabInstance: {fileID: 8349566938952384060}
+  m_PrefabInstance: {fileID: 5926961671554680580}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9172915838011580823
 PrefabInstance:
@@ -218,7 +238,7 @@ PrefabInstance:
     - target: {fileID: 8291912193875205263, guid: a756b7df96a7963499f43bbb9e12e803,
         type: 3}
       propertyPath: _name
-      value: Mega
+      value: Evellyn
       objectReference: {fileID: 0}
     - target: {fileID: 8291912193875205263, guid: a756b7df96a7963499f43bbb9e12e803,
         type: 3}
@@ -277,7 +297,7 @@ PrefabInstance:
     - target: {fileID: 3990998231559167454, guid: 7f671a054e041a24ab5a802ae22ca581,
         type: 3}
       propertyPath: m_Name
-      value: Mega
+      value: Evellyn
       objectReference: {fileID: 0}
     - target: {fileID: 5194993098429348849, guid: 7f671a054e041a24ab5a802ae22ca581,
         type: 3}
@@ -337,7 +357,7 @@ PrefabInstance:
     - target: {fileID: 6105894126065767224, guid: 7f671a054e041a24ab5a802ae22ca581,
         type: 3}
       propertyPath: _NPCName
-      value: FemaleShop
+      value: Evellyn
       objectReference: {fileID: 0}
     - target: {fileID: 6105894126065767224, guid: 7f671a054e041a24ab5a802ae22ca581,
         type: 3}
