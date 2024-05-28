@@ -9,14 +9,12 @@ namespace CC.Inventory
     public class ItemsActionPlayerStats : MonoBehaviour
     {
         private PlayerStatsSO _playerStats;
-        private UIPlayerStatus _uiPlayerStats;
         private InventoryData _playerInventoryData;
 
         private float amountRegeneration;
 
-        public void Initialize(UIPlayerStatus uiPlayerStatus, PlayerStatsSO playerStats, InventoryData playerInventoryData)
+        public void Initialize(PlayerStatsSO playerStats, InventoryData playerInventoryData)
         {
-            _uiPlayerStats = uiPlayerStatus;
             _playerStats = playerStats;
             _playerInventoryData = playerInventoryData;
         }
@@ -36,7 +34,6 @@ namespace CC.Inventory
             _playerStats.SetInstanceValue(mainStat.Health, _newPlayerHP + _maxHp);
 
             Debug.Log("Regen : " + amountRegeneration.ToString());
-            _uiPlayerStats.UpdateHealthUI();
         }
 
         public void StopOvetimeRegenerationHP()

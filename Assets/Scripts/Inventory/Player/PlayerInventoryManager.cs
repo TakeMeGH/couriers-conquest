@@ -167,8 +167,8 @@ namespace CC.Inventory
 
         private void WeightCount()
         {
-            _weightValue = _playerInventoryWeight.GetWeight();
-            _textWeight.text = "Weight : " + _weightValue.ToString();
+            // _weightValue = _playerInventoryWeight.GetWeight();
+            // _textWeight.text = "Weight : " + _weightValue.ToString();
         }
 
         public void ClearSlot(ItemSlotInfo slot)
