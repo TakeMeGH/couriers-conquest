@@ -9,6 +9,8 @@ namespace CC.Combats
     {
         [SerializeField] private Collider myCollider;
         [SerializeField] private PlayerControllerStatesMachine _playerController; 
+        //[SerializeField] private HitPause hitPause;
+
 
         private int damage;
 
@@ -37,6 +39,7 @@ namespace CC.Combats
             if (other.TryGetComponent<Health>(out Health health))
             {
                 health.DealDamage(damage);
+                //hitPause.OnHit();
             }
         }
 

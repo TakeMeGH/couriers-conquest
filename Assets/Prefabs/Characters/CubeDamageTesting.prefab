@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 505818757829547222}
   - component: {fileID: 9015813652756013961}
   - component: {fileID: 8805188804241503588}
+  - component: {fileID: 1648250469063587691}
   - component: {fileID: 4669394539192666595}
   m_Layer: 0
   m_Name: CubeDamageTesting
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.674257, y: 1, z: 3.018}
-  m_LocalScale: {x: 1, y: 2.025745, z: 1}
+  m_LocalScale: {x: 0.51715475, y: 2.025745, z: 0.28223583}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1685090439951056051}
@@ -107,6 +108,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1648250469063587691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2142269775583714512}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e34c22ae38de5084d8d0663ecda71a93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  vfxHitPrefab: {fileID: 4195078726753886842, guid: 559446c034fc8554d87c46af18437934,
+    type: 3}
 --- !u!114 &4669394539192666595
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,10 +135,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  damageReduction: 0
-  blockDamageReduction: 0
   playerStatsSO: {fileID: 11400000, guid: f3ee829ae9f91ee48b6a0fd3da31e4a9, type: 2}
-  _playerController: {fileID: 0}
 --- !u!1 &7747772462885127089
 GameObject:
   m_ObjectHideFlags: 0
