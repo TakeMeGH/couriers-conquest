@@ -8,6 +8,7 @@ using CC.Combats;
 using CC.Core.Data.Dynamic;
 using CC.Events;
 using SA;
+using CC.Ragdoll;
 
 namespace CC.Characters
 {
@@ -51,6 +52,8 @@ namespace CC.Characters
         [field: Header("Stamina")]
         [field: SerializeField] public StaminaController StaminaController { get; private set; }
 
+        [field: Header("Ragdoll")]
+        [field: SerializeField] private RagdollController _ragdollController;
 
         #region Component
         public Animator Animator { get; private set; }
@@ -130,7 +133,11 @@ namespace CC.Characters
 
         public void OnDead()
         {
-            Destroy(gameObject);
+            Rigidbody.isKinematic = true;
+            Rigidbody.useGravity = false;
+            currentState = null;
+
+            _ragdollController.SetRagdoll(true, false);
             _onPlayerDead.RaiseEvent();
             
         }

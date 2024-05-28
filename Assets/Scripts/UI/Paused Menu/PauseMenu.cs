@@ -12,26 +12,33 @@ public class PauseMenu : MonoBehaviour
     public Button mainMenuButton;
     public Button resumeButton;
 
+    private void OnEnable()
+    {
+        _inputReader.PausePerformed += OnPausePressed;
+    }
+
+    private void OnDisable()
+    {
+        _inputReader.PausePerformed -= OnPausePressed;
+    }
 
     private void Start()
     {
         mainMenuButton.onClick.AddListener(MainMenu);
         resumeButton.onClick.AddListener(Resume);
     }
-    void Update()
+    void OnPausePressed()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (GameIsPaused)
         {
-            if (GameIsPaused)
-            {
-                Resume();
+            Resume();
 
-            }
-            else
-            {
-                StartCoroutine(Pause());
-            }
         }
+        else
+        {
+            StartCoroutine(Pause());
+        }
+
     }
 
     void Resume()

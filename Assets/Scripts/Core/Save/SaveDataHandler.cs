@@ -32,7 +32,6 @@ namespace CC.Core.Save
         private void Start()
         {
             Debug.Log("Save Location = " + Application.persistentDataPath + "/GameData/Save");
-            Cursor.lockState = CursorLockMode.Confined;
         }
         private void Update()
         {

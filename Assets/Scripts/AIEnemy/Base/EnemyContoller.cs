@@ -5,21 +5,30 @@ using CC.Combats;
 using CC.Core.Data.Dynamic;
 using CC.Ragdoll;
 using System.Collections;
-
+using CC.UI;
+using CC.Events;
 
 namespace CC.Enemy
 {
     public class EnemyController : StateMachine.StateMachine
     {
 
+        [Header("Data")]
         public EnemyControllerDataSO EnemyPersistenceData;
         public Transform[] PatrolWaypoints;
-        [field: SerializeField] public WeaponDamage WeaponDamage { get; private set; }
+        [field: SerializeField, Header("Component")] public WeaponDamage WeaponDamage { get; private set; }
         [SerializeField] RagdollController _ragdollController;
-
-        [SerializeField] PlayerStatsSO _enemyStatsSO;
         [SerializeField] Health _healthController;
         [SerializeField] float _multiplier;
+        [SerializeField] EnemyHealthUIController _healthBar;
+        [Header("Copy SO")]
+        [SerializeField] PlayerStatsSO _enemyStatsSO;
+        [SerializeField] VoidEventChannelSO _onEnemyAttacked;
+        [Header("Sink Data")]
+        [SerializeField] float sinkSpeed = 15f;
+        [SerializeField] float sinkDuration = 3f;
+
+
 
         #region Component
         public NavMeshAgent NavMeshAgent { get; private set; }
@@ -31,13 +40,17 @@ namespace CC.Enemy
         #region State Machine Variables
         public EnemyPatrolingState PatrolingState { get; private set; }
         public EnemyCheckingState CheckingState { get; private set; }
+        public EnemyFastTauntingState FastTauntingState { get; private set; }
         public EnemyChasingState ChasingState { get; private set; }
+        public EnemyFastChasingState FastChasingState { get; private set; }
+
         public EnemyTauntState TauntState { get; private set; }
-        public EnemyIdleState IdleState { get; private set; }
+        public EnemyIdleAttackState IdleAttackState { get; private set; }
         public EnemyStepBackState StepBackState { get; private set; }
         public EnemyAttackState AttackState { get; private set; }
-        #endregion
+        public EnemyStunedState StunedState { get; private set; }
 
+        #endregion
         public void Initialize()
         {
             Rigidbody = GetComponent<Rigidbody>();
@@ -48,18 +61,29 @@ namespace CC.Enemy
 
             PatrolingState = new EnemyPatrolingState(this);
             CheckingState = new EnemyCheckingState(this);
+            FastTauntingState = new EnemyFastTauntingState(this);
             ChasingState = new EnemyChasingState(this);
+            FastChasingState = new EnemyFastChasingState(this);
             TauntState = new EnemyTauntState(this);
             AttackState = new EnemyAttackState(this);
             StepBackState = new EnemyStepBackState(this);
-
-            IdleState = new EnemyIdleState(this);
+            IdleAttackState = new EnemyIdleAttackState(this);
+            StunedState = new EnemyStunedState(this);
 
             var CloneStats = Instantiate(_enemyStatsSO);
             _enemyStatsSO = CloneStats;
 
+            var CloneAttackedEvent = Instantiate(_onEnemyAttacked);
+            _onEnemyAttacked = CloneAttackedEvent;
+            _onEnemyAttacked.OnEventRaised += OnAttacked;
+
             _healthController.SetStats(_enemyStatsSO);
+            _healthController.SetAttackEvent(_onEnemyAttacked);
+
             WeaponDamage.SetStats(_enemyStatsSO);
+            _healthBar.SetStats(_enemyStatsSO);
+
+
         }
 
         void Start()
@@ -70,19 +94,19 @@ namespace CC.Enemy
 
         public void OnDead()
         {
+            _onEnemyAttacked.OnEventRaised -= OnAttacked;
+
             Rigidbody.isKinematic = true;
             Rigidbody.useGravity = false;
             NavMeshAgent.enabled = false;
             currentState = null;
+            Destroy(_healthBar.gameObject);
 
             _ragdollController.SetRagdoll(true, false);
             StartCoroutine(SinkAndFade());
 
         }
 
-        public float sinkSpeed = 15f;
-        public float sinkDuration = 3f;
-        public float fadeDuration = 1f;
         IEnumerator SinkAndFade()
         {
             float timer = 0;
@@ -100,6 +124,11 @@ namespace CC.Enemy
 
             Destroy(gameObject);
         }
+
+        void OnAttacked()
+        {
+            ((EnemyControllerState)currentState).OnAttacked();
+        }
         public void OnAnimationEnterEvent()
         {
             currentState.OnAnimationEnterEvent();
@@ -114,6 +143,5 @@ namespace CC.Enemy
         {
             currentState.OnAnimationTransitionEvent();
         }
-
     }
 }

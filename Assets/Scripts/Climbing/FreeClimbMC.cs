@@ -40,6 +40,7 @@ namespace SA
         public float UpOffsetMultiplier = 1f;
         public UnityAction OnMCMove;
         Vector3 _lastMoveDir;
+        Vector2 rawMoveDir;
         float epsilon = 1e-5f;
 
         private void OnEnable()
@@ -56,6 +57,7 @@ namespace SA
         {
             horizontal = move.x;
             vertical = move.y;
+            rawMoveDir = move;
         }
 
 
@@ -120,9 +122,6 @@ namespace SA
 
             if (!isLerping)
             {
-                horizontal = Input.GetAxis("Horizontal");
-                vertical = Input.GetAxis("Vertical");
-
                 Vector3 h = helper.right * horizontal;
                 Vector3 v = helper.up * vertical;
                 Vector3 moveDir = (h + v).normalized;
@@ -151,7 +150,7 @@ namespace SA
                 tp += transform.position;
                 targetPos = isMid ? tp : helper.position;
                 OnMCMove.Invoke();
-                a_hook.CreatePositions(targetPos, moveDir, isMid);
+                a_hook.CreatePositions(targetPos, moveDir, rawMoveDir, isMid);
 
             }
             else
@@ -244,7 +243,7 @@ namespace SA
                 inPosition = true;
                 horizontal = 0;
                 vertical = 0;
-                a_hook.CreatePositions(targetPos, Vector3.zero, false);
+                a_hook.CreatePositions(targetPos, Vector3.zero, Vector3.zero, false);
             }
 
             Vector3 tp = Vector3.Lerp(startPos, targetPos, t);

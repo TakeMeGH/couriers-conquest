@@ -39,13 +39,18 @@ public class ObjectPooling : MonoBehaviour
                 return _pooledObjects[objectTypeInt][i];
             }
         }
-        return null;
+        GameObject tmp = Instantiate(ObjectsToPool[objectTypeInt].Object, transform);
+        tmp.SetActive(false);
+        _pooledObjects[objectTypeInt].Add(tmp);
+
+        return tmp;
     }
 }
 
 public enum PoolObjectType
 {
     Item,
+    FloatingDamageText,
     Arrow,
 }
 
