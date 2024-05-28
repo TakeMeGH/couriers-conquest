@@ -7,6 +7,8 @@ using CC.Ragdoll;
 using System.Collections;
 using CC.UI;
 using CC.Events;
+using CC.Inventory;
+using System.Collections.Generic;
 
 namespace CC.Enemy
 {
@@ -16,6 +18,11 @@ namespace CC.Enemy
         [Header("Data")]
         public EnemyControllerDataSO EnemyPersistenceData;
         public Transform[] PatrolWaypoints;
+        [Header("Drop Item")]
+        [SerializeField] EnemyDropItemSO _dropItemData;
+        [SerializeField] Vector3 _dropItemOffset;
+        [SerializeField] Vector3 _dropItemRandomForce;
+        [SerializeField] float _dropSpeed;
         [field: SerializeField, Header("Component")] public WeaponDamage WeaponDamage { get; private set; }
         [SerializeField] RagdollController _ragdollController;
         [SerializeField] Health _healthController;
@@ -27,8 +34,6 @@ namespace CC.Enemy
         [Header("Sink Data")]
         [SerializeField] float sinkSpeed = 15f;
         [SerializeField] float sinkDuration = 3f;
-
-
 
         #region Component
         public NavMeshAgent NavMeshAgent { get; private set; }
@@ -102,7 +107,11 @@ namespace CC.Enemy
             currentState = null;
             Destroy(_healthBar.gameObject);
 
+            List<DropedItem> dropedItems = _dropItemData.GetDroppedItems();
+
             _ragdollController.SetRagdoll(true, false);
+
+            StartCoroutine(DropItemsWithDelay(dropedItems));
             StartCoroutine(SinkAndFade());
 
         }
@@ -123,6 +132,38 @@ namespace CC.Enemy
             }
 
             Destroy(gameObject);
+        }
+
+        private IEnumerator DropItemsWithDelay(List<DropedItem> droppedItems)
+        {
+            foreach (var item in droppedItems)
+            {
+                DropItem(item.Item, item.Amount);
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+
+
+        void DropItem(ABaseItem item, int amount)
+        {
+            GameObject dropPrefab = ObjectPooling.SharedInstance.GetPooledObject(PoolObjectType.Item);
+            if (dropPrefab != null)
+            {
+                dropPrefab.transform.position = transform.position + _dropItemOffset;
+                dropPrefab.transform.rotation = transform.rotation;
+                dropPrefab.SetActive(true);
+            }
+
+            Rigidbody rb = dropPrefab.GetComponent<Rigidbody>();
+            if (rb != null) rb.velocity = transform.up * _dropSpeed;
+
+            ItemPickup ip = dropPrefab.GetComponentInChildren<ItemPickup>();
+            ip.isDropItem = true;
+            if (ip != null)
+            {
+                ip.item = item;
+                ip.amount = amount;
+            }
         }
 
         void OnAttacked()

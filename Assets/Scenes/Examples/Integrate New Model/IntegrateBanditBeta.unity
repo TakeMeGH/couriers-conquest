@@ -5055,6 +5055,10 @@ MonoBehaviour:
   - {fileID: 5404962310030881514}
   - {fileID: 6084600622044336662}
   - {fileID: 3531131182254659994}
+  _dropItemData: {fileID: 0}
+  _dropItemOffset: {x: 0, y: 0, z: 0}
+  _dropItemRandomForce: {x: 0, y: 0, z: 0}
+  _dropSpeed: 0
   <WeaponDamage>k__BackingField: {fileID: 1805628798}
   _ragdollController: {fileID: 460337354}
   _healthController: {fileID: 1875336603}
@@ -43916,17 +43920,17 @@ PrefabInstance:
     - target: {fileID: 8695095060250942119, guid: 7cd06de45a7a0c54ab04d231762d51bd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 475.736
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8695095060250942119, guid: 7cd06de45a7a0c54ab04d231762d51bd,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.173039
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8695095060250942119, guid: 7cd06de45a7a0c54ab04d231762d51bd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 55.089546
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8695095060250942119, guid: 7cd06de45a7a0c54ab04d231762d51bd,
         type: 3}
