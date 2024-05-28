@@ -1,9 +1,5 @@
-using CC.Events;
 using CC.Interaction;
 using CC.Inventory;
-using CC.Inventory.Item;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CC.Items
