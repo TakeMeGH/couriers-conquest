@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2443898485366471126}
   m_Layer: 0
   m_Name: WeaponLogic
-  m_TagString: Untagged
+  m_TagString: Bandit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8312922497990841705}
@@ -50,7 +50,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -72,6 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myCollider: {fileID: 8646336162114214455}
   _playerController: {fileID: 0}
+  hitPause: {fileID: 0}
 --- !u!54 &7885596504828300879
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -113,6 +114,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageAmount: 20
   damageRate: 1
+  vfxHitBanditPrefab: {fileID: 0}
+  vfxHitGoblinPrefab: {fileID: 0}
 --- !u!1 &7845024810492706681
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,7 +145,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.95, y: 1, z: 3.018}
-  m_LocalScale: {x: 1, y: 2.025745, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1887989079460878776}
