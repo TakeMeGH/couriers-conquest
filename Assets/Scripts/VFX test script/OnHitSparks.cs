@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -13,6 +11,7 @@ public class OnHitSparks : MonoBehaviour
 
         if (other.gameObject.CompareTag("Weapon"))
         {
+            Debug.Log("COLLIDE");
             //Debug.Log("Triggered with Weapon"); // Log when the triggered object is a Weapon
 
             // Cast a ray from the sword to the object being hit

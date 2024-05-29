@@ -10,6 +10,7 @@ namespace CC.Combats
     {
         [SerializeField] LayerMask _targetLayer;
         PlayerStatsSO _statsSO;
+        HitPause _hitPause;
 
         int _damage;
         Collider _collider;
@@ -19,6 +20,7 @@ namespace CC.Combats
         void Start()
         {
             _collider = GetComponent<Collider>();
+            _hitPause = GetComponent<HitPause>();
         }
         public void SetStats(PlayerStatsSO statsSO)
         {
@@ -53,6 +55,7 @@ namespace CC.Combats
             if (other.TryGetComponent(out Health health))
             {
                 health.DealDamage(_damage);
+                _hitPause?.OnHit();
             }
         }
 
