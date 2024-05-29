@@ -1,6 +1,7 @@
 using CC.Event;
 using CC.Inventory;
 using UnityEngine;
+using AYellowpaper.SerializedCollections;
 
 namespace CC.Quest
 {
@@ -10,6 +11,7 @@ namespace CC.Quest
         [SerializeField] QuestType _questType;
         [SerializeField] string _questName;
         [TextArea] [SerializeField] string _questDescription;
+        [SerializeField] string _questArea;
         [SerializeField] int[] _questPrerequisitesID;
         [SerializeField] SenderDataEventChannelSO _onSendReward;
         [SerializeField] Reward _reward;
@@ -44,6 +46,16 @@ namespace CC.Quest
         {
             return _questPrerequisitesID;
         }
+
+        public string GetQuestArea()
+        {
+            return _questArea;
+        }
+
+        public Reward GetReward()
+        {
+            return _reward;
+        }
         #endregion "Getter"
     }
 
@@ -59,6 +71,6 @@ namespace CC.Quest
     {
         public int gold;
         public int exp;
-        public ABaseItem[] item;
+        public SerializedDictionary<ABaseItem, int> item;
     }
 }
