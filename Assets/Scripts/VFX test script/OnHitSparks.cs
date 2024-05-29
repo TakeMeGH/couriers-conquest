@@ -30,7 +30,7 @@ void OnTriggerEnter(Collider other)
             VisualEffect vfxHit = vfxHitInstance.GetComponent<VisualEffect>();
 
             // Trigger VFX on hit
-            vfxHit.SendEvent("OnPlay");
+            vfxHit.Play();
 
             //Debug.Log("VFX should be playing now"); // Log when the VFX should be playing
         }
