@@ -25,7 +25,7 @@ public class OnHitSparks : MonoBehaviour
                 Vector3 offset = hit.normal * 0.1f; // Adjust the multiplier as needed
 
                 GameObject vfxHitInstance = Instantiate(vfxHitPrefab, vfxPosition, Quaternion.identity);
-                VisualEffect vfxHit = vfxHitInstance.GetComponent<VisualEffect>();
+                VisualEffect vfxHit = vfxHitInstance.GetComponentInChildren<VisualEffect>();
 
                 vfxHit.Play();
             }
