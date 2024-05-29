@@ -22,16 +22,16 @@ public class SwordSwing : MonoBehaviour
     // These methods would be called at the appropriate time in your sword swing animations
     public void TriggerVFXSlash1()
     {
-        vfxSlash1.SendEvent("OnPlay");
+        vfxSlash1.Play();
     }
 
     public void TriggerVFXSlash2()
     {
-        vfxSlash2.SendEvent("OnPlay");
+        vfxSlash2.Play();
     }
 
     public void TriggerVFXSlash3()
     {
-        vfxSlash3.SendEvent("OnPlay");
+        vfxSlash3.Play();
     }
 }

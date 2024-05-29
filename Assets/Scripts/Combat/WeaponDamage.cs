@@ -18,7 +18,6 @@ namespace CC.Combats
         {
         return damage;
         }
-
         
 
         private List<Collider> alreadyCollidedWith = new List<Collider>();
