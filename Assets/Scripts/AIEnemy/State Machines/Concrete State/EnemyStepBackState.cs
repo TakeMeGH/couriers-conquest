@@ -76,7 +76,7 @@ namespace CC.Enemy.States
 
         private void StepBack()
         {
-            _enemyController.transform.LookAt(_enemyController.EnemyCurrentData.PlayerTransform.position);
+            LookAt(_enemyController.EnemyCurrentData.PlayerTransform);
 
             Vector3 directionToPlayer = _enemyController.transform.position -
                 _enemyController.EnemyCurrentData.PlayerTransform.position;

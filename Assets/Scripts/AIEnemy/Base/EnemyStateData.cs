@@ -15,6 +15,10 @@ namespace CC.Enemy
         public bool IsPlayerInRange = false;
         public bool IsPlayerNear;
         public int AttackedCount = 0;
+        public float CurrentRotationTime = 100f;
+        public Quaternion TargetRotation;
+        public Quaternion InitialRotation;
+
 
     }
 }

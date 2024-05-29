@@ -320,8 +320,8 @@ MonoBehaviour:
     type: 2}
   <TriggerOnMovementStateAnimationTransitionEvent>k__BackingField: {fileID: 11400000,
     guid: dd8e68e18f529754daac5587590602d5, type: 2}
-  <_onPlayerDead>k__BackingField: {fileID: 11400000, guid: 939f7ace2fa4ab643b35f126639fdfa5,
-    type: 2}
+  _onPlayerDead: {fileID: 11400000, guid: 939f7ace2fa4ab643b35f126639fdfa5, type: 2}
+  _playerWatcher: {fileID: 11400000, guid: b4a5d3959431bd648be30b8a79350cf5, type: 2}
   <LayerData>k__BackingField:
     <GroundLayer>k__BackingField:
       serializedVersion: 2
