@@ -15,6 +15,7 @@ namespace CC.Interaction
         List<InteracionInstance> _potentialInteractions = new List<InteracionInstance>();
         CustomInterractables _currentInteraction;
         int _currentInteractionIndex = 0;
+        public bool CanInteract = true;
         private void OnEnable()
         {
             _inputReader.InteractPerformed += OnInteractionButtonPress;
@@ -41,6 +42,11 @@ namespace CC.Interaction
         {
             if (_potentialInteractions.Count == 0)
                 return;
+
+            if (CanInteract == false && _currentInteraction.IsAlwaysCanInteract == false)
+            {
+                return;
+            }
 
             if (_currentInteraction.transform.parent.tag == "Pickable")
             {

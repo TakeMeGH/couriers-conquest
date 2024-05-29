@@ -22,6 +22,7 @@ namespace CC.Enemy.States
 
             StartAnimation("isIdleAttack");
 
+
             GetNextState();
 
             _enemyController.NavMeshAgent.speed = 0;

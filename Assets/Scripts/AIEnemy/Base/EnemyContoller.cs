@@ -9,6 +9,7 @@ using CC.UI;
 using CC.Events;
 using CC.Inventory;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 namespace CC.Enemy
 {
@@ -18,6 +19,8 @@ namespace CC.Enemy
         [Header("Data")]
         public EnemyControllerDataSO EnemyPersistenceData;
         public Transform[] PatrolWaypoints;
+        public UnityAction OnPlayerDetected;
+        public bool IsDead { get; private set; }
         [Header("Drop Item")]
         [SerializeField] EnemyDropItemSO _dropItemData;
         [SerializeField] Vector3 _dropItemOffset;
@@ -26,11 +29,12 @@ namespace CC.Enemy
         [field: SerializeField, Header("Component")] public WeaponDamage WeaponDamage { get; private set; }
         [SerializeField] RagdollController _ragdollController;
         [SerializeField] Health _healthController;
-        [SerializeField] float _multiplier;
-        [SerializeField] EnemyHealthUIController _healthBar;
+        [field: SerializeField] public EnemyHealthUIController HealthBar { get; private set; }
         [Header("Copy SO")]
         [SerializeField] PlayerStatsSO _enemyStatsSO;
         [SerializeField] VoidEventChannelSO _onEnemyAttacked;
+        [Header("Event")]
+        [SerializeField] IntEventChannelSO _playerWatcher;
         [Header("Sink Data")]
         [SerializeField] float sinkSpeed = 15f;
         [SerializeField] float sinkDuration = 3f;
@@ -82,19 +86,23 @@ namespace CC.Enemy
             _onEnemyAttacked = CloneAttackedEvent;
             _onEnemyAttacked.OnEventRaised += OnAttacked;
 
+            _healthController.gameObject.SetActive(true);
             _healthController.SetStats(_enemyStatsSO);
             _healthController.SetAttackEvent(_onEnemyAttacked);
 
+            HealthBar.gameObject.SetActive(true);
+
             WeaponDamage.SetStats(_enemyStatsSO);
-            _healthBar.SetStats(_enemyStatsSO);
+            HealthBar.SetStats(_enemyStatsSO);
 
-
+            _ragdollController.Initialize();
+            IsDead = false;
+            SwitchState(PatrolingState);
         }
 
         void Start()
         {
             Initialize();
-            SwitchState(PatrolingState);
         }
 
         public void OnDead()
@@ -105,7 +113,13 @@ namespace CC.Enemy
             Rigidbody.useGravity = false;
             NavMeshAgent.enabled = false;
             currentState = null;
-            Destroy(_healthBar.gameObject);
+
+            HealthBar.gameObject.SetActive(false);
+            _healthController.gameObject.SetActive(false);
+
+            IsDead = true;
+
+            PlayerOutOfRange();
 
             List<DropedItem> dropedItems = _dropItemData.GetDroppedItems();
 
@@ -131,7 +145,7 @@ namespace CC.Enemy
                 yield return null;
             }
 
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
 
         private IEnumerator DropItemsWithDelay(List<DropedItem> droppedItems)
@@ -166,9 +180,30 @@ namespace CC.Enemy
             }
         }
 
+        public void PlayerInRange()
+        {
+            if (EnemyCurrentData.IsPlayerInRange == false)
+            {
+                EnemyCurrentData.IsPlayerInRange = true;
+                OnPlayerDetected.Invoke();
+                _playerWatcher.RaiseEvent(1);
+            }
+        }
+
+        public void PlayerOutOfRange()
+        {
+            if (EnemyCurrentData.IsPlayerInRange == true)
+            {
+                EnemyCurrentData.IsPlayerInRange = false;
+                _playerWatcher.RaiseEvent(-1);
+            }
+        }
+
+
         void OnAttacked()
         {
             ((EnemyControllerState)currentState).OnAttacked();
+            PlayerInRange();
         }
         public void OnAnimationEnterEvent()
         {
@@ -184,5 +219,6 @@ namespace CC.Enemy
         {
             currentState.OnAnimationTransitionEvent();
         }
+
     }
 }

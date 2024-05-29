@@ -12,6 +12,8 @@ namespace CC
         [field: SerializeField] public int DefaultAnggularSpeed = 360;
         [field: SerializeField] public float DefaultStopingDistance = 0.33f;
         [field: SerializeField] public int AttackedLimitBeforeStuned = 3;
+        [field: SerializeField] public float RotationTime = 0.2f;
+
         #region Patrol Data
         [field: SerializeField, Header("patrol Data")] public float PatrolSpeed = 3f;
         [field: SerializeField] public float PatrolStopDistance = 0.33f;

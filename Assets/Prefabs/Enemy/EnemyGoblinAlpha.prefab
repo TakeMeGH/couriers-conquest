@@ -1763,16 +1763,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _dropItemData: {fileID: 11400000, guid: afcc8919b253b2b40afa0cc1f36c0f1c, type: 2}
-  _dropItemOffset: {x: 0, y: 0, z: 0}
+  _dropItemOffset: {x: 0, y: 0.5, z: 0}
   _dropItemRandomForce: {x: 0, y: 0, z: 0}
-  _dropSpeed: 0
+  _dropSpeed: 2
   <WeaponDamage>k__BackingField: {fileID: 8725953494464136171}
   _ragdollController: {fileID: 7478387344449003953}
   _healthController: {fileID: 1086184282529002461}
-  _multiplier: 0
-  _healthBar: {fileID: 8066388624502212078}
+  <HealthBar>k__BackingField: {fileID: 8066388624502212078}
   _enemyStatsSO: {fileID: 11400000, guid: c40a0154ae00e1144b5e2e26529690cf, type: 2}
   _onEnemyAttacked: {fileID: 11400000, guid: 02ea49625c4987640b8462f56a65d970, type: 2}
+  _playerWatcher: {fileID: 11400000, guid: b4a5d3959431bd648be30b8a79350cf5, type: 2}
   sinkSpeed: 0.5
   sinkDuration: 3
 --- !u!1 &425877479865021082

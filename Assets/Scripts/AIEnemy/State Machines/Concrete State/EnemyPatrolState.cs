@@ -19,12 +19,14 @@ namespace CC.Enemy.States
 
             StartAnimation("isPatroling");
 
+            _enemyController.HealthBar.gameObject.SetActive(false);
+
             _enemyController.NavMeshAgent.isStopped = false;
             _enemyController.NavMeshAgent.speed = _enemyController.EnemyPersistenceData.PatrolSpeed;
             _enemyController.NavMeshAgent.stoppingDistance = _enemyController.EnemyPersistenceData.PatrolStopDistance;
             _enemyController.NavMeshAgent.SetDestination(GetRandomWayPointDestination());
 
-            _enemyController.EnemyCurrentData.IsPlayerInRange = false;
+            _enemyController.PlayerOutOfRange();
         }
 
         public override void Update()

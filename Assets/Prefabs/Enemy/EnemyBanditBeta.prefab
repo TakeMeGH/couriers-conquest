@@ -1376,10 +1376,10 @@ MonoBehaviour:
   <WeaponDamage>k__BackingField: {fileID: 1387482312805168573}
   _ragdollController: {fileID: 8081441547813980010}
   _healthController: {fileID: 7559780195844688439}
-  _multiplier: 0
-  _healthBar: {fileID: 5938882680814370529}
+  <HealthBar>k__BackingField: {fileID: 5938882680814370529}
   _enemyStatsSO: {fileID: 11400000, guid: 04689d612c1106249a656d5899600541, type: 2}
   _onEnemyAttacked: {fileID: 11400000, guid: 02ea49625c4987640b8462f56a65d970, type: 2}
+  _playerWatcher: {fileID: 11400000, guid: b4a5d3959431bd648be30b8a79350cf5, type: 2}
   sinkSpeed: 0.5
   sinkDuration: 3
 --- !u!1 &342751689039767428

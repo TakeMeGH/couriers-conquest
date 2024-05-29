@@ -18,9 +18,14 @@ namespace CC.Ragdoll
         {
             rigidbodies = GetComponentsInChildren<Rigidbody>();
             colliders = GetComponentsInChildren<Collider>();
+            Initialize();
+        }
 
+        public void Initialize()
+        {
             if (!_isTesting) SetRagdoll(false, true, true);
             else SetRagdoll(true, false, true);
+
         }
 
         public void SetRagdoll(bool state, bool animatorState, bool isFirstTime = false)

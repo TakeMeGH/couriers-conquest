@@ -1614,8 +1614,6 @@ GameObject:
   - component: {fileID: 1693382248100830491}
   - component: {fileID: 6602919409980710817}
   - component: {fileID: 3398146139638401875}
-  - component: {fileID: 5609192867707235087}
-  - component: {fileID: 6621022742202587736}
   m_Layer: 5
   m_Name: Status Panel
   m_TagString: Untagged
@@ -1685,32 +1683,6 @@ MonoBehaviour:
   _itemEffect: {fileID: 0}
   _itemDescription: {fileID: 0}
   _background: {fileID: 0}
---- !u!114 &5609192867707235087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 226292345144316686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b767d31b808c3c4a980cfc46274069d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerStats: {fileID: 11400000, guid: f3ee829ae9f91ee48b6a0fd3da31e4a9, type: 2}
-  _pouchPanel: {fileID: 5285276965433587691}
---- !u!114 &6621022742202587736
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 226292345144316686}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3680f0f0ddf8ad44b24720a948f7668, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &238861611001323988
 GameObject:
   m_ObjectHideFlags: 0
@@ -45247,7 +45219,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _aitemInventoryData: {fileID: 11400000, guid: 8a4eab9fce0693d45bf28a92fc853498,
     type: 2}
-  _uiPlayerStatus: {fileID: 5609192867707235087}
+  _uiPlayerStatus: {fileID: 3237108038202575443}
   itemDetailPanel: {fileID: 4571583273405084933}
   existingPanels: []
   _panelButtons: []
