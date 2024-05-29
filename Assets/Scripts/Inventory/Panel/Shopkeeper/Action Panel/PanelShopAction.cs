@@ -44,13 +44,13 @@ namespace CC.Inventory
 
         private void PickupItem()
         {
-            ItemSlotInfo tempSlot = new ItemSlotInfo(_itemSlot.item, 10);
+            ItemSlotInfo tempSlot = new ItemSlotInfo(_itemSlot.item, _itemSlot.item.maxStacks);
 
             _mousePanel.itemSlot = tempSlot;
             _mousePanel.itemSlot.stacks = _itemSlot.item.maxStacks;
             _mousePanel.sourceItemPanel = _inventoryPanel;
             if (Input.GetKey(KeyCode.LeftShift) && _itemSlot.stacks > 1) _mousePanel.splitSize = _itemSlot.stacks / 2;
-            else _mousePanel.splitSize = _itemSlot.stacks;
+            else _mousePanel.splitSize = _itemSlot.stacks - (_itemSlot.stacks - 1);
             _mousePanel.SetUI();
         }
 

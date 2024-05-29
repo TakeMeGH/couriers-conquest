@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.Progress;
+using UnityEngine.EventSystems;
 
 namespace CC.Inventory
 {
@@ -21,33 +21,43 @@ namespace CC.Inventory
             _itemDictionary = new ItemDictionary();
             _itemDictionary.Initialize();
 
-            DefaultItem();
+            DefaultItem(inventoryManager);
             SetDefaultEquipment();
+            AddAllQuestItemEvent();
         }
 
-        private void DefaultItem()
+        private void DefaultItem(IInventoryManager inventoryManager)
         {
             for (int i = 0; i < _playerInventoryManager.itemPanelGrid.Length; i++)
             {
                 AItemPanel[] itemPanelsInGrid = _playerInventoryManager.itemPanelGrid[i].GetComponentsInChildren<AItemPanel>();
+                for (int j = 0; j < itemPanelsInGrid.Length; j++)
+                {
+                    itemPanelsInGrid[j].Initialize(inventoryManager);
+                    PanelInventory script = (PanelInventory)itemPanelsInGrid[j];
+
+                    script.itemIndex = j;
+                }
                 _playerInventoryManager.existingPanels.AddRange(itemPanelsInGrid);
+
             }
 
-            _inventoryData.items.Clear();
+            //_inventoryData.items.Clear();
             for (int i = 0; i < _playerInventoryManager.existingPanels.Count; i++)
             {
-                _inventoryData.items.Add(new ItemSlotInfo(null, 0));
                 _playerInventoryManager.existingPanels[i].mousePanel = _itemSlotMouse;
             }
+
+            /*for(int i = _inventoryData.items.Count; i < _playerInventoryManager.existingPanels.Count; i++)
+            {
+                _inventoryData.items.Add(new ItemSlotInfo(null, 0));
+            }*/
         }
 
         private void SetDefaultEquipment()
         {
-            OnAddItem(_itemDictionary.GetValueByKey("Long Sword"), 1);
-            OnAddItem(_itemDictionary.GetValueByKey("Basic Armor"), 1);
-            OnAddItem(_itemDictionary.GetValueByKey("Basic Shield"), 1);
 
-            for (int i = _inventoryData.inventorySize; i < _playerInventoryManager.existingPanels.Count; i++)
+            for (int i = _inventoryData.inventorySize - 3; i < _playerInventoryManager.existingPanels.Count; i++)
             {
                 AttachDefaultItem(i);
             };
@@ -55,7 +65,6 @@ namespace CC.Inventory
 
         public int OnAddItem(ABaseItem item, int amount)
         {
-            Debug.Log("Add Item");
 
             if (item == null)
             {
@@ -64,7 +73,50 @@ namespace CC.Inventory
             }
 
             //Check for open spaces in existing slots
-            foreach (ItemSlotInfo i in _inventoryData.items)
+
+            for (int i = 0; i < _inventoryData.inventorySize; i++)
+            {
+                if (_inventoryData.items[i].item != null)
+                {
+                    if (_inventoryData.items[i].item.itemName == item.itemName)
+                    {
+                        if (amount > _inventoryData.items[i].item.maxStacks - _inventoryData.items[i].stacks)
+                        {
+                            amount -= _inventoryData.items[i].item.maxStacks - _inventoryData.items[i].stacks;
+                            _inventoryData.items[i].stacks = _inventoryData.items[i].item.maxStacks;
+                        }
+                        else
+                        {
+                            _inventoryData.items[i].stacks += amount;
+                            if (_playerInventoryManager.inventoryMenuUI.activeSelf) _playerInventoryManager.RefreshInventory();
+                            return 0;
+                        }
+                    }
+                }
+            }
+
+
+            for (int i = 0; i < _inventoryData.inventorySize; i++)
+            {
+                if (_inventoryData.items[i].item == null)
+                {
+                    if (amount > item.maxStacks)
+                    {
+                        _inventoryData.items[i].item = item;
+                        _inventoryData.items[i].stacks = item.maxStacks;
+                        amount -= item.maxStacks;
+                    }
+                    else
+                    {
+                        _inventoryData.items[i].item = item;
+                        _inventoryData.items[i].stacks = amount;
+                        if (_playerInventoryManager.inventoryMenuUI.activeSelf) _playerInventoryManager.RefreshInventory();
+                        return 0;
+                    }
+                }
+            }
+
+            /*foreach (ItemSlotInfo i in _inventoryData.items)
             {
                 if (i.item != null)
                 {
@@ -83,9 +135,10 @@ namespace CC.Inventory
                         }
                     }
                 }
-            }
+            }*/
+
             //Fill empty slots with leftover items
-            foreach (ItemSlotInfo i in _inventoryData.items)
+            /*foreach (ItemSlotInfo i in _inventoryData.items)
             {
                 if (i.item == null)
                 {
@@ -103,7 +156,7 @@ namespace CC.Inventory
                         return 0;
                     }
                 }
-            }
+            }*/
 
             if (_playerInventoryManager.inventoryMenuUI.activeSelf) _playerInventoryManager.RefreshInventory();
             return amount;
@@ -181,6 +234,56 @@ namespace CC.Inventory
         public void OnUpdateCurrency(float amount)
         {
             _inventoryData.playerGold += amount;
+        }
+
+        public void AddAllQuestItemEvent()
+        {
+            for (int i = 0; i < _inventoryData.items.Count; i++)
+            {
+                if (_inventoryData.items[i].item == null) continue;
+
+                AddQuestItemEvent(i);
+            }
+        }
+
+        public void AddQuestItemEvent(int indexItem)
+        {
+            if (_inventoryData.items[indexItem].item.GetItemType() == ItemType.QuestItem)
+            {
+                ((QuestItem)_inventoryData.items[indexItem].item).EnableDamageEvent();
+            }
+        }
+
+        public void OnEquipRune()
+        {
+            if (_playerInventoryManager.activeSlot == ItemType.Rune && _playerInventoryManager.activeIndexItemSlot != _inventoryData.indexRuneEquiped)
+            {
+                SetRuneItem();
+            }
+            else if (_playerInventoryManager.activeSlot == ItemType.Consumable && _playerInventoryManager.activeIndexItemSlot != _inventoryData.indexPouchEquiped)
+            {
+                SetConsumableItem();
+            }
+        }
+
+        public void ResetEquipedPanelUI()
+        {
+            for (int i = 0; i < _playerInventoryManager.existingPanels.Count; i++)
+            {
+                _playerInventoryManager.existingPanels[i].ShowEquipedPanel(false);
+            }
+        }
+
+        public void SetRuneItem()
+        {
+            ResetEquipedPanelUI();
+            _playerInventoryManager.existingPanels[_playerInventoryManager.activeIndexItemSlot].ShowEquipedPanel(true);
+        }
+
+        public void SetConsumableItem()
+        {
+            ResetEquipedPanelUI();
+            _playerInventoryManager.existingPanels[_playerInventoryManager.activeIndexItemSlot].ShowEquipedPanel(true);
         }
     }
 }

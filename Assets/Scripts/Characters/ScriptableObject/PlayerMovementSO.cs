@@ -59,9 +59,16 @@ namespace CC.Characters
         [field: SerializeField, Header("Fall Data")][field: Range(0f, 10f)] public float FallSpeedLimit { get; private set; } = 10f;
         #endregion
 
+        #region ClimbData
+        [field: SerializeField, Header("Climb Data")] public float RotationMinLimitBeforeStandup { get; private set; } = -7.5f;
+        [field: SerializeField, Header("Climb Data")] public float RotationMaxLimitBeforeStandup { get; private set; } = -7.5f;
+
         #endregion
-        
-       #region StaminaCostData
+
+
+        #endregion
+
+        #region StaminaCostData
         [SerializeField, Header("Stamina Cost Data"), Range(0f, 100f)]
         public float SprintStaminaCost = 5f;
 
@@ -70,6 +77,9 @@ namespace CC.Characters
 
         [SerializeField, Range(0f, 100f)]
         public float BlockStaminaCost = 5f;
+        [SerializeField, Range(0f, 100f)]
+        public float ClimbStaminaCost = 2f;
+
         #endregion
 
 

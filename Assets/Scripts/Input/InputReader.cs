@@ -31,6 +31,8 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     public event UnityAction DropClimbingPerformed = delegate { };
     public event UnityAction<float> ScrollInteracionPerformed = delegate { };
     public event UnityAction PouchPerformed = delegate { };
+    public event UnityAction PausePerformed = delegate { };
+
 
     public bool IsBlocking { get; private set; }
     public bool IsAttacking { get; private set; }
@@ -39,6 +41,9 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     public event UnityAction OpenInventoryEvent = delegate { };
     public event UnityAction CloseInventoryEvent = delegate { };
     public event UnityAction DropItemPerformed = delegate { };
+    public event UnityAction DropItemCanceled = delegate { };
+    public event UnityAction EquipItemPerformed = delegate { };
+    public event UnityAction ConsumeItemPerformed = delegate { };
     [SerializeField] VoidEventChannelSO _enableCameraInputEvent;
 
     [SerializeField] VoidEventChannelSO _disableCameraInputEvent;
@@ -198,7 +203,13 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     public void OnDropItem(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
+        {
             DropItemPerformed.Invoke();
+        }
+        else if (context.phase == InputActionPhase.Canceled)
+        {
+            DropItemCanceled.Invoke();
+        }
     }
 
     public void EnableGameplayInput()
@@ -221,7 +232,6 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     {
         DisableSpecificAction("Gameplay", "Zoom");
         EnableSpecificAction("Gameplay", "ScrolIInteraction");
-        Debug.Log("ENABLE GA");
     }
 
     public void DisableScrollInteracionInput()
@@ -294,5 +304,23 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     {
         if (context.phase == InputActionPhase.Performed)
             PouchPerformed.Invoke();
+    }
+
+    public void OnEquipItem(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            EquipItemPerformed.Invoke();
+    }
+
+    public void OnConsumeItem(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            ConsumeItemPerformed.Invoke();
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            PausePerformed.Invoke();
     }
 }

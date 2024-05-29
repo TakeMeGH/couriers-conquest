@@ -14,13 +14,13 @@ namespace CC.Combats
 
         private float nextDamageTime = 0f;
 
-        private void OnCollisionStay(Collision collision)
+        private void OnTriggerStay(Collider other)
         {
-            if (collision.gameObject.CompareTag("Player") && Time.time >= nextDamageTime)
+            if (other.gameObject.CompareTag("Player") && Time.time >= nextDamageTime)
             {
-                Health playerHealth = collision.gameObject.GetComponent<Health>();
-                PlayerControllerStatesMachine playerController = collision.gameObject.GetComponent<PlayerControllerStatesMachine>();
-                StaminaController staminaController = collision.gameObject.GetComponent<StaminaController>();
+                Health playerHealth = other.gameObject.GetComponent<Health>();
+                PlayerControllerStatesMachine playerController = other.gameObject.GetComponent<PlayerControllerStatesMachine>();
+                StaminaController staminaController = other.gameObject.GetComponent<StaminaController>();
                 if (playerHealth != null && playerController != null && staminaController != null)
                 {
                     playerHealth.DealDamage(Mathf.RoundToInt(damageAmount));
@@ -37,6 +37,7 @@ namespace CC.Combats
                     TriggerVFX(collision.gameObject.tag);
                 }
             }
+
         }
 
         private void TriggerVFX(string enemyTag)
@@ -114,4 +115,3 @@ namespace CC.Combats
         }
     }
 }
-*/

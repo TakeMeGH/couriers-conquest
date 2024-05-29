@@ -22,8 +22,6 @@ namespace CC.Characters.States
             _playerController.PlayerCurrentData.MovementSpeedModifier = 0f;
 
             ResetRotationXZ();
-            // _playerController.transform.rotation = Quaternion.Euler(0, _playerController.transform.rotation.eulerAngles.y, 0);
-            // Debug.Log(_playerController.transform.eulerAngles + " ROTATION");
             playerPositionOnEnter = _playerController.transform.position;
 
             ResetVerticalVelocity();
@@ -43,15 +41,10 @@ namespace CC.Characters.States
             base.Update();
             ResetRotationXZ();
 
-            // Debug.Log(_playerController.transform.eulerAngles + " ROTATION");
-
-            if (_playerController.PlayerCurrentData.CurrentDropTime <= 0f)
+            if (_playerController.StaminaController.GetCurrentStamina() > 0 &&
+                _playerController.PlayerCurrentData.CurrentDropTime <= 0f)
             {
-                if (_playerController.FreeClimb.CheckForClimb())
-                {
-                    _playerController.SwitchState(_playerController.PlayerClimbState);
-
-                }
+                CheckForClimb();
             }
             else
             {

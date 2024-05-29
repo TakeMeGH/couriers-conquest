@@ -2,50 +2,63 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CC.Characters;
+using CC.Core.Data.Dynamic;
 
 namespace CC.Combats
 {
     public class WeaponDamage : MonoBehaviour
     {
-        [SerializeField] private Collider myCollider;
-        [SerializeField] private PlayerControllerStatesMachine _playerController; 
-        [SerializeField] private HitPause hitPause;
+        [SerializeField] LayerMask _targetLayer;
+        PlayerStatsSO _statsSO;
+
+        int _damage;
+        Collider _collider;
+        private List<Collider> _alreadyCollidedWith = new List<Collider>();
 
 
-        private int damage;
-
-        public int GetDamage() //si getdamage ini cmn untuk debug log ke playerattackingstate buat ngasih tau jumlah damage yg dikeluarkan player
+        void Start()
         {
-        return damage;
+            _collider = GetComponent<Collider>();
         }
-        
+        public void SetStats(PlayerStatsSO statsSO)
+        {
+            _statsSO = statsSO;
+        }
 
-        private List<Collider> alreadyCollidedWith = new List<Collider>();
+        public void EnableWeapon()
+        {
+            _alreadyCollidedWith.Clear();
+            _collider.enabled = true;
+        }
+
+        public void DisableWeapon()
+        {
+            _collider.enabled = false;
+        }
+
 
         private void OnEnable()
         {
-            alreadyCollidedWith.Clear();
+            _alreadyCollidedWith.Clear();
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other == myCollider) { return; }
+            if ((_targetLayer & (1 << other.gameObject.layer)) == 0) { return; }
 
-            if (alreadyCollidedWith.Contains(other)) { return; }
+            if (_alreadyCollidedWith.Contains(other)) { return; }
 
-            alreadyCollidedWith.Add(other);
+            _alreadyCollidedWith.Add(other);
 
-            if (other.TryGetComponent<Health>(out Health health))
+            if (other.TryGetComponent(out Health health))
             {
-                health.DealDamage(damage);
-                hitPause.OnHit();
+                health.DealDamage(_damage);
             }
         }
 
-        public void SetAttack()  
+        public void SetAttack()
         {
-            // Get the player's total attack value, including base value and modifiers
-            this.damage = Mathf.RoundToInt(_playerController.playerStatsSO.GetValue(CC.Core.Data.Dynamic.mainStat.AttackValue));
+            _damage = Mathf.RoundToInt(_statsSO.GetValue(mainStat.AttackValue));
         }
 
     }

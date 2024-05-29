@@ -13,6 +13,8 @@ TagManager:
   - Weapon
   - Goblin
   - Bandit
+  - ErraRenderer
+  - Waypoint
   layers:
   - Default
   - TransparentFX
@@ -25,18 +27,18 @@ TagManager:
   - Player
   - Obstacle
   - Cloak
-  - 
-  - 
-  - 
+  - PlayerDamageable
+  - EnemyDamageable
+  - Enemy
   - Interractables
   - Grass
+  - Weapon
+  - MiniMap
   - 
+  - HeightDef
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Waypoint
+  - WorldCollider
   - 
   - 
   - 

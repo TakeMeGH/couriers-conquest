@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Cinemachine.DocumentationSortingAttribute;
-using static UnityEditor.Progress;
 
 namespace CC.UpgradeEquipment
 {
@@ -55,7 +54,7 @@ namespace CC.UpgradeEquipment
                 _upgradeEquipmentUI = GetComponent<UpgradeEquipmentUI>();
 
                 _upgradeSlot.inventory = _tempPlayerInventory;
-                _upgradeSlot.OnEnable();
+                //_upgradeSlot.Initialize();
                 _upgradeEquipmentUI.Initialize(this);
                 _upgradeEquipmentUI.SetButtonListener();
                 SetRequirimentItemSlot();
@@ -75,7 +74,7 @@ namespace CC.UpgradeEquipment
             foreach (AItemPanel itemPanel in _requirimentItemSlot)
             {
                 itemPanel.inventory = _tempPlayerInventory;
-                itemPanel.OnEnable();
+                //itemPanel.Initialize();
             }
         }
 

@@ -3844,7 +3844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edc4ba68daa9bb0448ba0c4290a9d3ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inventoryData: {fileID: 11400000, guid: 8e3fd643f87a7dc43bc27cce8d2044f8, type: 2}
+  _inputReader: {fileID: 0}
   _itemSlotMouse: {fileID: 0}
   _panelScript: []
   _itemPanel: []
@@ -3860,7 +3860,6 @@ MonoBehaviour:
   _cancelSellButton: {fileID: 2854146781801733704}
   _money: 10000
   _onEventInventory: {fileID: 11400000, guid: db12c7e45fe520e41a5e131522e76e63, type: 2}
-  _unEventInventory: {fileID: 11400000, guid: a0a3f09bf7b289e45bfd44451532eefa, type: 2}
 --- !u!1 &5189355248094965115
 GameObject:
   m_ObjectHideFlags: 0

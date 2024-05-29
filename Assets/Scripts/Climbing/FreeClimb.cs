@@ -74,7 +74,6 @@ namespace SA
             origin.y += 1.4f;
             Vector3 dir = transform.forward;
             RaycastHit hit;
-            Debug.Log("ORIGIN");
             if (Physics.Raycast(origin, dir, out hit, 5))
             {
                 helper.position = PosWithOffset(origin, hit.point);
@@ -102,7 +101,6 @@ namespace SA
 
         public void Tick(float delta)
         {
-            Debug.Log("NGE TICK");
             if (!inPosition)
             {
                 GetInPosition();
@@ -172,7 +170,6 @@ namespace SA
             RaycastHit hit;
             if (Physics.Raycast(origin, dir, out hit, dis))
             {
-                Debug.Log("CORNER");
                 //Check if it's a corner
                 return false;
             }

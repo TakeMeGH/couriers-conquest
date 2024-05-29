@@ -6,8 +6,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEditor.Progress;
-using static UnityEditor.Timeline.Actions.MenuPriority;
+using UnityEngine.UI;
 
 namespace CC.Inventory
 {
@@ -15,12 +14,15 @@ namespace CC.Inventory
     {
         [SerializeField] private AInventoryData _aitemInventoryData;
         [SerializeField] private UIPlayerStatus _uiPlayerStatus;
+        private PouchAndRuneManager _pouchRuneManager;
+        public GameObject itemDetailPanel;
 
         private InventoryData _inventoryData;
         public List<AItemPanel> existingPanels = new List<AItemPanel>();
+        [SerializeField] private List<Button> _panelButtons = new List<Button>();
 
         private IInventoryManagement _playerInventoryManagement;
-        private IInventoryAction _playerInventoryAction;
+        private PlayerInventoryAction _playerInventoryAction;
         private IInventoryWeight _playerInventoryWeight;
 
         [Space]
@@ -33,8 +35,31 @@ namespace CC.Inventory
         [Header("Weight System")]
         [SerializeField] private TextMeshProUGUI _textWeight;
         private float _weightValue;
+
+        [Header("Equiped")]
+        [SerializeField] public ItemType activeSlot;
+        [SerializeField] private GameObject _labelDropSlotItem;
+        [SerializeField] private GameObject _labelEquipSlotItem;
+        [SerializeField] private GameObject _labelConsumeSlotItem;
+        [SerializeField] private TextMeshProUGUI _textLabelEquiped;
+        public int activeIndexItemSlot;
+        public InventoryActionType actionType = InventoryActionType.None;
+
+        [Header("Drop Item")]
+        [SerializeField] private float maxHoldDuration = 3f;
+        public bool isHoldDrop;
+        [HideInInspector] public bool _canDrop;
+        public Slider sliderDrop;
+
         private void OnEnable()
         {
+            _inventoryData = (InventoryData)_aitemInventoryData;
+            _playerInventoryWeight = new PlayerInventoryWeight();
+            _playerInventoryManagement = new PlayerInventoryManagement();
+            _playerInventoryAction = new PlayerInventoryAction();
+            _pouchRuneManager = GetComponent<PouchAndRuneManager>();
+            Initalize();
+
             _inventoryData.addItemToInventory.OnEventRaised += _playerInventoryManagement.OnAddItem;
             _inventoryData.removeItemEvent.OnEventRaised.AddListener(_playerInventoryManagement.OnRemoveItem);
             _inventoryData.itemCheckEvent.OnEventRaised += _playerInventoryAction.CheckItem;
@@ -42,8 +67,15 @@ namespace CC.Inventory
             _inventoryData.onSellItem.OnEventRaised += _playerInventoryManagement.OnSellItem;
             _inventoryData.onUpdateCurrency.OnEventRaised += _playerInventoryManagement.OnUpdateCurrency;
             _inventoryData.onUpgradeEquipment.OnEventRaised += _playerInventoryAction.UpgradeItem;
-            _inventoryData.inputReader.DropItemPerformed += _playerInventoryAction.OnDropItem;
-            _uiPlayerStatus.Initialize();
+            _inventoryData.onCharacterDamaged.OnEventRaised += CloseInventory;
+
+            _inventoryData.inputReader.EquipItemPerformed += OnEquipSlot;
+            _inventoryData.inputReader.DropItemPerformed += _playerInventoryAction.DropPerformed;
+            _inventoryData.inputReader.DropItemCanceled += _playerInventoryAction.DropCanceled;
+            _inventoryData.inputReader.ConsumeItemPerformed += OnConsumeItem;
+
+
+            _uiPlayerStatus.Initialize(this, _inventoryData);
         }
 
         private void OnDisable()
@@ -55,22 +87,32 @@ namespace CC.Inventory
             _inventoryData.onSellItem.OnEventRaised -= _playerInventoryManagement.OnSellItem;
             _inventoryData.onUpdateCurrency.OnEventRaised -= _playerInventoryManagement.OnUpdateCurrency;
             _inventoryData.onUpgradeEquipment.OnEventRaised -= _playerInventoryAction.UpgradeItem;
-            _inventoryData.inputReader.DropItemPerformed -= _playerInventoryAction.OnDropItem;
+            _inventoryData.onCharacterDamaged.OnEventRaised -= CloseInventory;
 
+            _inventoryData.inputReader.EquipItemPerformed -= OnEquipSlot;
+            _inventoryData.inputReader.DropItemPerformed -= _playerInventoryAction.DropPerformed;
+            _inventoryData.inputReader.DropItemCanceled -= _playerInventoryAction.DropCanceled;
+            _inventoryData.inputReader.ConsumeItemPerformed -= OnConsumeItem;
         }
 
-        private void Awake()
+        public void Initalize()
         {
-            _inventoryData = (InventoryData)_aitemInventoryData;
-
-            _playerInventoryWeight = new PlayerInventoryWeight();
             _playerInventoryWeight.Initialize(_inventoryData);
-
-            _playerInventoryManagement = new PlayerInventoryManagement();
             _playerInventoryManagement.Initialize(_inventoryData, this, _itemSlotMouse);
+            _playerInventoryAction.Initialize(_inventoryData, this, _itemSlotMouse, sliderDrop);
+            _pouchRuneManager.Initialize(this, _inventoryData);
 
-            _playerInventoryAction = new PlayerInventoryAction();
-            _playerInventoryAction.Initialize(_inventoryData, this, _itemSlotMouse);
+            inventoryMenuUI.SetActive(true);
+            SetButtonPanels();
+            inventoryMenuUI.SetActive(false);
+        }
+
+        private void Update()
+        {
+            if (isHoldDrop)
+            {
+                _playerInventoryAction.HoldAttemp();
+            }
         }
 
         public void OpenInventory()
@@ -80,6 +122,11 @@ namespace CC.Inventory
             RefreshInventory();
             _inventoryData.inputReader.EnableInventoryUIInput();
             _uiPlayerStatus.HidePouchPanel();
+            itemDetailPanel.SetActive(false);
+            sliderDrop.gameObject.SetActive(false);
+            activeSlot = ItemType.None;
+
+            RefreshPanelItem();
         }
 
         public void CloseInventory()
@@ -90,11 +137,41 @@ namespace CC.Inventory
             _uiPlayerStatus.ShowPouchPanel();
         }
 
+        private void SetButtonPanels()
+        {
+            _panelButtons.Clear();
+            foreach (AItemPanel i in existingPanels)
+            {
+                Button newButton = i.GetComponent<Button>();
+                _panelButtons.Add(newButton);
+            }
+            RefreshPanelItem();
+        }
+
+        public void RefreshPanelItem()
+        {
+            for (int i = 0; i < existingPanels.Count; i++)
+            {
+                if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == _panelButtons[i])
+                {
+                    EventSystem.current.SetSelectedGameObject(null);
+                }
+
+                if (existingPanels[i].itemSlot.item == null)
+                {
+                    _panelButtons[i].interactable = false;
+                }
+                else
+                {
+                    _panelButtons[i].interactable = true;
+                }
+            }
+        }
 
         private void WeightCount()
         {
-            _weightValue = _playerInventoryWeight.GetWeight();
-            _textWeight.text = "Weight : " + _weightValue.ToString();
+            // _weightValue = _playerInventoryWeight.GetWeight();
+            // _textWeight.text = "Weight : " + _weightValue.ToString();
         }
 
         public void ClearSlot(ItemSlotInfo slot)
@@ -103,9 +180,74 @@ namespace CC.Inventory
             slot.stacks = 0;
         }
 
+        public void SetLabelConsumableType()
+        {
+            _labelConsumeSlotItem.SetActive(true);
+        }
+
+        public void SetLabelMaterialsType()
+        {
+            _labelDropSlotItem.SetActive(true);
+            _labelConsumeSlotItem.SetActive(false);
+            _labelEquipSlotItem.SetActive(false);
+        }
+
+        public void CanEquipSpesifikSlot()
+        {
+            _labelEquipSlotItem.SetActive(true);
+            _labelConsumeSlotItem.SetActive(false);
+
+            if ((_inventoryData.isPouchEquiped && activeIndexItemSlot == _inventoryData.indexPouchEquiped))
+            {
+                _textLabelEquiped.text = "Unequip Item";
+                actionType = InventoryActionType.Unequip;
+            }
+            else if ((!_inventoryData.isRuneEquiped) || (!_inventoryData.isPouchEquiped))
+            {
+                _textLabelEquiped.text = "Equip Item";
+                actionType = InventoryActionType.Equip;
+            }
+            else
+            {
+                actionType = InventoryActionType.None;
+            }
+        }
+
+        private void OnEquipSlot()
+        {
+            if (actionType == InventoryActionType.None) return;
+
+            if (actionType == InventoryActionType.Equip)
+            {
+                if (activeSlot == ItemType.Consumable)
+                {
+                    _pouchRuneManager.EquipPouch(existingPanels[activeIndexItemSlot].itemSlot.item, activeIndexItemSlot);
+                    itemDetailPanel.SetActive(false);
+                    RefreshPanelItem();
+                }
+            }
+            else if (actionType == InventoryActionType.Unequip)
+            {
+                if (activeSlot == ItemType.Consumable)
+                {
+                    _pouchRuneManager.UnEquipPouch();
+                    itemDetailPanel.SetActive(false);
+                    RefreshPanelItem();
+                }
+            }
+        }
+
+        private void OnConsumeItem()
+        {
+            if (activeSlot == ItemType.Consumable)
+            {
+                Debug.Log("Attempt To Consume");
+                _uiPlayerStatus.AttempToUsePouch(activeIndexItemSlot);
+            }
+        }
+
         public void RefreshInventory()
         {
-
             int index = 0;
             foreach (ItemSlotInfo i in _inventoryData.items)
             {
@@ -128,9 +270,18 @@ namespace CC.Inventory
                         panel.itemImage.CrossFadeAlpha(1, 0.05f, true);
                         panel.stacksText.gameObject.SetActive(true);
 
+                        if (i.stacks <= 0)
+                        {
+                            i.item = null;
+                            i.stacks = 0;
+                            panel.isNull = true;
+                            continue;
+                        }
+
                         if (i.stacks > 1)
                         {
                             panel.stacksText.text = "" + i.stacks;
+                            panel.isNull = false;
                         }
                         else
                         {

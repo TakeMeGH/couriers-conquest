@@ -4,8 +4,10 @@ using UnityEngine.Events;
 using System.Collections.Generic;
 using CC.Combats;
 using CC.Core.Data.Dynamic;
-using CC.Inventory;
+using CC.Events;
 using SA;
+using CC.Ragdoll;
+using CC.Interaction;
 
 namespace CC.Characters
 {
@@ -18,17 +20,19 @@ namespace CC.Characters
         [field: SerializeField] public PlayerMovementSO PlayerMovementData { get; private set; }
 
         [field: Header("Animation Events")]
-        [field: SerializeField] public Events.VoidEventChannelSO TriggerOnMovementStateAnimationEnterEvent { get; private set; }
-        [field: SerializeField] public Events.VoidEventChannelSO TriggerOnMovementStateAnimationExitEvent { get; private set; }
-        [field: SerializeField] public Events.VoidEventChannelSO TriggerOnMovementStateAnimationTransitionEvent { get; private set; }
+        [field: SerializeField] public VoidEventChannelSO TriggerOnMovementStateAnimationEnterEvent { get; private set; }
+        [field: SerializeField] public VoidEventChannelSO TriggerOnMovementStateAnimationExitEvent { get; private set; }
+        [field: SerializeField] public VoidEventChannelSO TriggerOnMovementStateAnimationTransitionEvent { get; private set; }
+
+        [field: Header("Events")]
+        [SerializeField] VoidEventChannelSO _onPlayerDead;
+        [SerializeField] IntEventChannelSO _playerWatcher;
 
         [field: Header("Collisions")]
         [field: SerializeField] public PlayerLayerData LayerData { get; private set; }
 
         [field: Header("Player Stats")]
-        [field: SerializeField] public PlayerStatsSO playerStatsSO;
-        //[field: SerializeField] public EquipmentItem equippedWeapon;
-        //[field: SerializeField] public EquipmentItem equippedShield;
+        [field: SerializeField] public PlayerStatsSO PlayerStatsSO { get; private set; }
 
         [field: Header("Attack Combo")]
         [field: SerializeField] public AttackSO[] Attacks { get; private set; }
@@ -39,17 +43,20 @@ namespace CC.Characters
 
         [field: Header("Health")]
         [field: SerializeField] public Health Health { get; private set; }
-        [field: Header("Climbing")]
 
         [field: Header("Climbing")]
         [field: SerializeField] public FreeClimbMC FreeClimb { get; private set; }
         [field: SerializeField] public Transform StandUpPoint { get; private set; }
         public Vector3 OffsetStandUpPoint { get; private set; }
 
-
         [field: Header("Stamina")]
         [field: SerializeField] public StaminaController StaminaController { get; private set; }
 
+        [field: Header("Ragdoll")]
+        [field: SerializeField] private RagdollController _ragdollController;
+        #region Variable
+        int _playerWatcherCount = 0;
+        #endregion
 
         #region Component
         public Animator Animator { get; private set; }
@@ -57,6 +64,7 @@ namespace CC.Characters
         public Transform MainCameraTransform { get; private set; }
         public PlayerStateData PlayerCurrentData { get; private set; }
         public PlayerResizableCapsuleCollider ResizableCapsuleCollider { get; private set; }
+        public InteractionManager _interactionManager { get; private set; }
 
         #endregion
 
@@ -78,10 +86,8 @@ namespace CC.Characters
         public States.PlayerWalkingState PlayerWalkingState { get; private set; }
         public States.PlayerClimbState PlayerClimbState { get; private set; }
         public States.PlayerClimbUpState PlayerClimbUpState { get; private set; }
-
-
         public List<States.PlayerAttackingState> PlayerAttackingStates { get; private set; }
-       
+
         #endregion
         private void Initialize()
         {
@@ -89,6 +95,7 @@ namespace CC.Characters
             ResizableCapsuleCollider = GetComponent<PlayerResizableCapsuleCollider>();
             Animator = GetComponentInChildren<Animator>();
             StaminaController = GetComponent<StaminaController>();
+            _interactionManager = GetComponent<InteractionManager>();
 
             PlayerCurrentData = new PlayerStateData();
 
@@ -116,12 +123,40 @@ namespace CC.Characters
             }
 
             OffsetStandUpPoint = StandUpPoint.transform.position - transform.position;
+
+            Weapon.SetStats(PlayerStatsSO);
+            Health.SetStats(PlayerStatsSO);
+            StaminaController.SetStats(PlayerStatsSO);
+
+            _playerWatcher.OnEventRaised += OnEnemyWatch;
         }
 
         private void Start()
         {
             Initialize();
             SwitchState(PlayerIdlingState);
+        }
+
+        void OnEnemyWatch(int value)
+        {
+            _playerWatcherCount += value;
+            if (_playerWatcherCount > 0)
+            {
+                _interactionManager.CanInteract = false;
+            }
+            else
+            {
+                _interactionManager.CanInteract = true;
+            }
+        }
+        public void OnDead()
+        {
+            Rigidbody.isKinematic = true;
+            Rigidbody.useGravity = false;
+            currentState = null;
+
+            _ragdollController.SetRagdoll(true, false);
+            _onPlayerDead.RaiseEvent();
         }
 
         private void OnTriggerEnter(Collider collider)

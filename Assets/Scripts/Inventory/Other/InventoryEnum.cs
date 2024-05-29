@@ -22,6 +22,8 @@ namespace CC.Inventory
         Rune,
         Equipment,
         QuestItem,
+        DropMonster,
+        None
     }
 
     public enum ConsumableType
@@ -30,5 +32,12 @@ namespace CC.Inventory
         OnetimeATK,
         OvertimeATK,
         Stamina,
+    }
+
+    public enum InventoryActionType
+    {
+        None,
+        Equip,
+        Unequip
     }
 }
