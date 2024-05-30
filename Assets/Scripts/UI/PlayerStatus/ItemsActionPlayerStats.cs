@@ -1,4 +1,5 @@
 using CC.Core.Data.Dynamic;
+using CC.Core.Data.Stable;
 using CC.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -41,24 +42,26 @@ namespace CC.Inventory
             float _currentAmount = _playerStats.GetInstanceValue(statType);
             float _maxAmount = _playerStats.GetValue(statType);
 
-            if (_currentAmount + amount >= _maxAmount) {
+            if (_currentAmount + amount >= _maxAmount)
+            {
                 value = _maxAmount - _currentAmount;
             }
 
             _playerStats.SetInstanceValue(statType, _currentAmount + value);
 
-            Debug.Log("Regen " + statType.ToString() +  " : "+ amount.ToString());
+            Debug.Log("Regen " + statType.ToString() + " : " + amount.ToString());
         }
 
         public void AttempToIncreaseStat(float amountPoint, float duration, mainStat statType)
         {
+            Debug.Log("Increase");
             StartCoroutine(StatIncreaseCoroutine(amountPoint, duration, statType));
         }
 
         private IEnumerator StatIncreaseCoroutine(float amountPoint, float duration, mainStat statType)
         {
             float elapsed = 0f;
-            IncreasePlayerStats(amountPoint, statType);
+            StatsModifier _newModifier = IncreasePlayerStats(amountPoint, statType);
 
             while (elapsed < duration)
             {
@@ -66,25 +69,17 @@ namespace CC.Inventory
                 elapsed += 1f;
             }
 
-            DecreasePlayerStats(amountPoint, statType);
+            DecreasePlayerStats(_newModifier);
         }
 
-        private void IncreasePlayerStats(float amount, mainStat statType)
+        private StatsModifier IncreasePlayerStats(float amount, mainStat statType)
         {
-            float _currentAmount = _playerStats.GetInstanceValue(statType);
-            float _newValue = _currentAmount + amount;
-
-            Debug.Log("Increase " + statType.ToString() + " : " + amount.ToString());
-
-            _playerStats.SetInstanceValue(statType, _newValue);
+            return _playerStats.AddModifier(statType, amount);
         }
 
-        private void DecreasePlayerStats(float amount, mainStat statType)
+        private void DecreasePlayerStats(StatsModifier modifier)
         {
-            float _currentAmount = _playerStats.GetInstanceValue(statType);
-            float _newValue = _currentAmount - amount;
-
-            _playerStats.SetInstanceValue(statType, _newValue);
+            _playerStats.RemoveModifier(modifier);
         }
     }
 }

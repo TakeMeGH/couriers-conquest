@@ -93,7 +93,7 @@ namespace CC.Inventory
 
         private void RefreshUIPouch()
         {
-            if(_pouchSlot == null)
+            if (_pouchSlot == null)
             {
                 _iconPouch.enabled = false;
                 _bgPouch.enabled = true;
@@ -188,11 +188,13 @@ namespace CC.Inventory
             {
                 _actionPlayerStats.AttempToOvertimeRegeneration(item.GetAmount(mainStat.Health), item.DurationEffect(), mainStat.Health);
                 _playerInventoryManager.RefreshInventory();
-            }else if(item.GetConsumableType() == ConsumableType.IncreaseStamina)
+            }
+            else if (item.GetConsumableType() == ConsumableType.IncreaseStamina)
             {
                 _actionPlayerStats.AttempToOvertimeRegeneration(item.GetAmount(mainStat.Stamina), item.DurationEffect(), mainStat.Stamina);
                 _playerInventoryManager.RefreshInventory();
-            }else if(item.GetConsumableType() == ConsumableType.IncreaseAttack)
+            }
+            else if (item.GetConsumableType() == ConsumableType.IncreaseAttack)
             {
                 _actionPlayerStats.AttempToIncreaseStat(item.GetAmount(mainStat.AttackValue), item.DurationEffect(), mainStat.AttackValue);
                 _playerInventoryManager.RefreshInventory();

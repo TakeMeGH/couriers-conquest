@@ -56,6 +56,26 @@ namespace CC.Core.Data.Dynamic
                 OnStatChange.Invoke();
             }
         }
+
+        public StatsModifier AddModifier(mainStat key, float value)
+        {
+            StatsModifier _newModifier = new()
+            {
+                isPercent = false,
+                statsToModify = new SerializedDictionary<mainStat, float>
+            {
+                { key, value }
+            }
+            };
+            modifiers.Add(_newModifier);
+            Debug.Log("MODIFIER " + modifiers + " " + modifiers.Count + " " + key + " " + value);
+            return _newModifier;
+        }
+
+        public void RemoveModifier(StatsModifier modifier)
+        {
+            modifiers.Remove(modifier);
+        }
         public float GetDamageReduction()
         {
             return statData.damageReduction;
@@ -103,5 +123,6 @@ namespace CC.Core.Data.Dynamic
         MovementSpeed,
         Defense,
         ShieldValue,
+        ExpMultiplier
     }
 }
