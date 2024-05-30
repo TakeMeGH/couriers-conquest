@@ -12,7 +12,7 @@ namespace CC.Inventory
     {
         public float dropSpeed = 5;
         [SerializeField] private InputReader _inputReader;
-        public int pouchIndex = 16;
+        public int inventoryIndex = 16;
 
 
         [SerializeField] public bool isRuneEquiped = false;
@@ -45,9 +45,9 @@ namespace CC.Inventory
         public OnSenderBaseItemEventChannel onUpgradeEquipment { get => _onUpgradeEquipment; }
         public VoidEventChannelSO onCharacterDamaged { get => _onCharacterDamaged; }
         [Header("Player Currency")]
-        [SerializeField] private float _playerGold;
-
-        public float playerGold
+        [SerializeField] private int _playerGold;
+        
+        public int playerGold
         {
             get => _playerGold;
             set => _playerGold = value;

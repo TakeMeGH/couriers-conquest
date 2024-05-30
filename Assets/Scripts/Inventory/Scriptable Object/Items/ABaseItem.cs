@@ -9,11 +9,11 @@ namespace CC.Inventory
         public string itemName;
         public string idItem;
         public float itemWeight;
-        public string itemDescription;
+        [TextArea] public string itemDescription;
         public Sprite itemSprite;
         public int maxStacks;
-        public float buySell;
-        public float costSell;
+        public int costBuy;
+        public int costSell;
 
         public abstract ItemType GetItemType();
         public abstract void UseItem();

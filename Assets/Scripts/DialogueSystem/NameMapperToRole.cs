@@ -23,7 +23,7 @@ namespace CC.Dialogue
             if (obj == _characterName)
             {
                 string name = _characterName.text;
-                Debug.Log(name + " DEBUG " + NameToRole[name]);
+                name = name.Trim();
                 if (NameToRole.ContainsKey(name))
                 {
                     _roleText.text = NameToRole[name];

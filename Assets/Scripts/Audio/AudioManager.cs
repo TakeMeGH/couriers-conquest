@@ -55,9 +55,6 @@ public class AudioManager : MonoBehaviour
         // masterBus.setVolume(settingValue.MasterVolumeValue);
         // musicBus.setVolume(settingValue.MusicVolumeValue);
         // sfxBus.setVolume(settingValue.SFXVolumeValue);        
-
-        
-
     }
 
     
