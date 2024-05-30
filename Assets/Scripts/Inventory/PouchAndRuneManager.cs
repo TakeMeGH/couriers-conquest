@@ -65,6 +65,8 @@ namespace CC.Inventory
             _inventoryData.indexPouchEquiped = targetIndex;
             _inventoryData.isPouchEquiped = true;
             RefreshUIPouch();
+
+            //Here To Modify Player Stats
         }
 
         public void UnEquipPouch()
@@ -73,6 +75,8 @@ namespace CC.Inventory
             _playerInventoryManager.existingPanels[_inventoryData.indexPouchEquiped].equipedPanel.SetActive(false);
             _inventoryData.isPouchEquiped = false;
             RefreshUIPouch();
+
+            //Here To Modify Player Stats
         }
 
         private void UpdatePouchIconEquip(int targetIndex)
