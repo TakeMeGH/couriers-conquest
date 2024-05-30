@@ -25,7 +25,7 @@ namespace CC.Inventory
             SetDefaultEquipment();
             AddAllQuestItemEvent();
 
-            CheckDefaultEquipment();
+            //CheckDefaultEquipment();
         }
 
         private void DefaultItem(IInventoryManager inventoryManager)
@@ -129,7 +129,9 @@ namespace CC.Inventory
 
                 if (_inventoryData.items[i].item.GetItemType() == ItemType.Equipment)
                 {
-                    if (((EquipmentItem)_inventoryData.items[i].item).specificType == _playerInventoryManager.existingPanels[targetSlot].GetSlotType())
+                    EquipmentItem item = (EquipmentItem)_inventoryData.items[i].item;
+
+                    if (item.specificType == _playerInventoryManager.existingPanels[targetSlot].GetSlotType())
                     {
                         _inventoryData.items[targetSlot].item = _inventoryData.items[i].item;
                         _inventoryData.items[targetSlot].stacks = _inventoryData.items[i].stacks;
@@ -140,13 +142,23 @@ namespace CC.Inventory
                     {
                         //Debug.Log(targetSlot.ToString() + " Not Added");
                     }
+
+                    AddModifier(item);
                 }
             }
 
             _playerInventoryManager.RefreshInventory();
         }
 
-        private void CheckDefaultEquipment()
+        private void AddModifier(EquipmentItem item)
+        {
+            if (item.specificType == ItemSlotType.Weapon)
+            {
+
+            }
+        }
+
+        /*private void CheckDefaultEquipment()
         {
             for (int i = _inventoryData.inventoryIndex; i < _playerInventoryManager.existingPanels.Count; i++)
             {
@@ -162,7 +174,7 @@ namespace CC.Inventory
                     Debug.Log("Not Null");
                 }
             };
-        }
+        }*/
 
         public void OnRemoveItem(Component _component, object _item)
         {

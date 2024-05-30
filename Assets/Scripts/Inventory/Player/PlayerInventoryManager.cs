@@ -1,12 +1,16 @@
+using CC.Core.Data.Dynamic;
+using CC.Core.Data.Stable;
 using CC.Event;
 using CC.Events;
 using CC.UI;
+using FMOD;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace CC.Inventory
@@ -14,6 +18,7 @@ namespace CC.Inventory
     public class PlayerInventoryManager : MonoBehaviour, IInventoryManager
     {
         [SerializeField] private AInventoryData _aitemInventoryData;
+        [SerializeField] private PlayerStatsSO _playerStats;
         //[SerializeField] private UIPlayerStatus _uiPlayerStatus;
         private PouchAndRuneManager _pouchRuneManager;
         public GameObject itemDetailPanel;
@@ -21,7 +26,10 @@ namespace CC.Inventory
 
         private InventoryData _inventoryData;
         public List<PanelInventory> existingPanels = new List<PanelInventory>();
-        public ABaseItem[] _defaultEquipment;
+        public StatsModifier _activeModifierSword;
+        public StatsModifier _activeModifierShield;
+        public StatsModifier _activeModifierArmor;
+        //public ABaseItem[] _defaultEquipment;
 
         private IInventoryManagement _playerInventoryManagement;
         private PlayerInventoryAction _playerInventoryAction;
@@ -80,8 +88,6 @@ namespace CC.Inventory
             _inventoryData.inputReader.DropItemPerformed += _playerInventoryAction.DropPerformed;
             _inventoryData.inputReader.DropItemCanceled += _playerInventoryAction.DropCanceled;
             _inventoryData.inputReader.ConsumeItemPerformed += OnConsumeItem;
-
-            //_uiPlayerStatus.Initialize(this, _inventoryData);
         }
 
         private void OnDisable()
@@ -264,6 +270,34 @@ namespace CC.Inventory
             if (activeSlot == ItemType.Consumable)
             {
                 _pouchRuneManager.AttempToConsumeItem(activeIndexItemSlot);
+            }
+        }
+
+        public void AddEquipmentModifier(mainStat key, float value)
+        {
+            if (key == mainStat.AttackValue && _activeModifierSword != null)
+            {
+                _playerStats.RemoveModifier(_activeModifierSword);
+            }
+            else if (key == mainStat.ShieldValue && _activeModifierShield != null)
+            {
+                _playerStats.RemoveModifier(_activeModifierShield);
+            }
+            else if (key == mainStat.Health && _activeModifierArmor != null)
+            {
+                _playerStats.RemoveModifier(_activeModifierArmor);
+            }
+
+            StatsModifier newModifier = _playerStats.AddModifier(key, value);
+            if (key == mainStat.AttackValue)
+            {
+                _activeModifierSword = newModifier;
+            }else if(key == mainStat.ShieldValue)
+            {
+                _activeModifierShield = newModifier;
+            }else if(key == mainStat.Health)
+            {
+                _activeModifierArmor = newModifier;
             }
         }
 
