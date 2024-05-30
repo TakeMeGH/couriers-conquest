@@ -60,7 +60,7 @@ namespace CC.Inventory
         {
             _amount = _addItemToInventory.RaiseEvent(_item, _amount);
             _onItemPickup.RaiseEvent();
-            _itemPickedUP.raiseEvent(this, new itemNotifData(_item.itemName,_customInteractables.GetAmount()));
+            _itemPickedUP.raiseEvent(this, new itemNotifData(_item.itemName,_customInteractables.GetAmount(),_item.itemSprite));
             if (isDropItem)
             {
                 if (_amount < 1)
