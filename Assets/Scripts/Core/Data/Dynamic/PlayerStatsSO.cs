@@ -68,7 +68,6 @@ namespace CC.Core.Data.Dynamic
             }
             };
             modifiers.Add(_newModifier);
-            Debug.Log("MODIFIER " + modifiers + " " + modifiers.Count + " " + key + " " + value);
             return _newModifier;
         }
 
