@@ -6,7 +6,6 @@ using CC.Events;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using Yarn.Unity;
 
 
 public class UIPlayerDied : MonoBehaviour
@@ -35,7 +34,8 @@ public class UIPlayerDied : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (_playerController._onPlayerDead != null)
+        if (_playerController._onPlayerDead == null)
+            Debug.Log("Died");
             _playerController._onPlayerDead.OnEventRaised -= gameOver;
     }
 

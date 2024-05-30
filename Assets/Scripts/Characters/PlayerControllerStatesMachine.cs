@@ -123,6 +123,7 @@ namespace CC.Characters
             Weapon.SetStats(PlayerStatsSO);
             Health.SetStats(PlayerStatsSO);
             StaminaController.SetStats(PlayerStatsSO);
+
         }
 
         private void Start()
@@ -139,7 +140,6 @@ namespace CC.Characters
 
             _ragdollController.SetRagdoll(true, false);
             _onPlayerDead.RaiseEvent();
-            
         }
 
         private void OnTriggerEnter(Collider collider)
