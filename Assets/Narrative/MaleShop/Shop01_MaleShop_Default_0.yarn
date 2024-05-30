@@ -13,13 +13,13 @@ Reymond : Jadi, adakah yang kamu butuhkan disini sekarang kak?
 title: Shop01_MaleShop_All_Choice
 tags:
 ---
--> Aku memiliki kisah petualangan
+-> Aiden: Aku memiliki kisah petualangan
     <<jump Shop01_MaleShop_Choice_0>>
--> Aku ingin membeli atau menjual sesuatu
+-> Aiden: Aku ingin membeli atau menjual sesuatu
     <<jump Shop01_MaleShop_Choice_1>>
--> Bisakah kita membuat sebuah kontrak?
+-> Aiden: Bisakah kita membuat sebuah kontrak?
     <<jump Shop01_MaleShop_Choice_2>>
--> Tidak ada, aku sudah punya apa yang kubutuhkan
+-> Aiden: Tidak ada, aku sudah punya apa yang kubutuhkan
     <<jump Shop01_MaleShop_Choice_3>>
 ===
 
