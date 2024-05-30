@@ -8,50 +8,83 @@ namespace CC.Inventory
 {
     public class ItemsActionPlayerStats : MonoBehaviour
     {
-        private PlayerStatsSO _playerStats;
-        private UIPlayerStatus _uiPlayerStats;
-        private InventoryData _playerInventoryData;
+        [SerializeField] private PlayerStatsSO _playerStats;
+        private InventoryData _inventoryData;
 
-        private float amountRegeneration;
+        private float _amountRegenerationHP;
 
-        public void Initialize(UIPlayerStatus uiPlayerStatus, PlayerStatsSO playerStats, InventoryData playerInventoryData)
+        public void Initialize(InventoryData playerInventoryData)
         {
-            _uiPlayerStats = uiPlayerStatus;
-            _playerStats = playerStats;
-            _playerInventoryData = playerInventoryData;
+            _inventoryData = playerInventoryData;
         }
 
-        public void AttempToOvertimeRegeneration(float regenerationPoint, float regenDuration, int index)
+        public void AttempToOvertimeRegeneration(float regenerationPoint, float regenDuration, mainStat statType)
         {
-            amountRegeneration = regenerationPoint;
-            InvokeRepeating("StartOvertimeRegenerationHP", 0f, 1f);
-            Invoke("StopOvetimeRegenerationHP", regenDuration);
-            ReduceItem(index);
+            StartCoroutine(OvertimeRegenerationCoroutine(regenerationPoint, regenDuration, statType));
         }
 
-        public void StartOvertimeRegenerationHP()
+        private IEnumerator OvertimeRegenerationCoroutine(float regenerationPoint, float regenDuration, mainStat statType)
         {
-            float _newPlayerHP = _playerStats.GetInstanceValue(mainStat.Health);
-            float _maxHp = _playerStats.GetValue(mainStat.Health);
-            _playerStats.SetInstanceValue(mainStat.Health, _newPlayerHP + _maxHp);
+            float elapsed = 0f;
 
-            Debug.Log("Regen : " + amountRegeneration.ToString());
-            _uiPlayerStats.UpdateHealthUI();
-        }
-
-        public void StopOvetimeRegenerationHP()
-        {
-            CancelInvoke("StartOvertimeRegenerationHP");
-        }
-
-        private void ReduceItem(int index)
-        {
-            _playerInventoryData.items[index].stacks--;
-            if (_playerInventoryData.items[index].stacks <= 0)
+            while (elapsed < regenDuration)
             {
-                _playerInventoryData.items[index].item = null;
+                StartOvertimeRegenerationHP(regenerationPoint, statType);
+                yield return new WaitForSeconds(1f);
+                elapsed += 1f;
             }
-            //_uiPlayerStats.UpdatePouchUI();
+        }
+
+        public void StartOvertimeRegenerationHP(float amount, mainStat statType)
+        {
+            float value = amount;
+            float _currentAmount = _playerStats.GetInstanceValue(statType);
+            float _maxAmount = _playerStats.GetValue(statType);
+
+            if (_currentAmount + amount >= _maxAmount) {
+                value = _maxAmount - _currentAmount;
+            }
+
+            _playerStats.SetInstanceValue(statType, _currentAmount + value);
+
+            Debug.Log("Regen " + statType.ToString() +  " : "+ amount.ToString());
+        }
+
+        public void AttempToIncreaseStat(float amountPoint, float duration, mainStat statType)
+        {
+            StartCoroutine(StatIncreaseCoroutine(amountPoint, duration, statType));
+        }
+
+        private IEnumerator StatIncreaseCoroutine(float amountPoint, float duration, mainStat statType)
+        {
+            float elapsed = 0f;
+            IncreasePlayerStats(amountPoint, statType);
+
+            while (elapsed < duration)
+            {
+                yield return new WaitForSeconds(1f);
+                elapsed += 1f;
+            }
+
+            DecreasePlayerStats(amountPoint, statType);
+        }
+
+        private void IncreasePlayerStats(float amount, mainStat statType)
+        {
+            float _currentAmount = _playerStats.GetInstanceValue(statType);
+            float _newValue = _currentAmount + amount;
+
+            Debug.Log("Increase " + statType.ToString() + " : " + amount.ToString());
+
+            _playerStats.SetInstanceValue(statType, _newValue);
+        }
+
+        private void DecreasePlayerStats(float amount, mainStat statType)
+        {
+            float _currentAmount = _playerStats.GetInstanceValue(statType);
+            float _newValue = _currentAmount - amount;
+
+            _playerStats.SetInstanceValue(statType, _newValue);
         }
     }
 }

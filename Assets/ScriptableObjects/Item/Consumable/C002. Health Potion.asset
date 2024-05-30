@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba8a9da6ea335d04b9e3362266650be7, type: 3}
+  m_Name: C002. Health Potion
+  m_EditorClassIdentifier: 
+  itemName: Health Potion
+  idItem: C002
+  itemWeight: 0.4
+  itemDescription: Gabungan dari beberapa herbal dan obat, dapat menyembuhkan luka,
+    dan memulihkan health secara perlahan dengan waktu tertentu
+  itemSprite: {fileID: 21300000, guid: 24723700615b3e74182b88f9ab6955fe, type: 3}
+  maxStacks: 10
+  costBuy: 25
+  costSell: 15
+  durationEffect: 10
+  effectStats:
+    isPercent: 0
+    statsToModify:
+      _serializedList:
+      - Key: 0
+        Value: 50
+  _consumableType: 0

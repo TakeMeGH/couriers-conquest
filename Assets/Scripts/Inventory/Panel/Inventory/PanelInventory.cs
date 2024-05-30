@@ -15,6 +15,7 @@ namespace CC.Inventory
         private IPanelAction _actionPanel;
         private PlayerInventoryManager _playerInventoryManager;
         public int itemIndex;
+        [SerializeField] private Image _frameItem;
 
         public override void Initialize(IInventoryManager inventoryManager)
         {
@@ -40,17 +41,13 @@ namespace CC.Inventory
 
             if (eventData.button == PointerEventData.InputButton.Left)
             {
-                Debug.Log("OnAction");
-                _playerInventoryManager.activeIndexItemSlot = itemIndex;
+                if (itemSlot.item == null) return;
+
+                //Debug.Log("OnAction");
+
+                _playerInventoryManager.SwapActiveSlot(itemIndex);
                 _actionPanel.OnAction();
                 _playerInventoryManager.itemDetailPanel.SetActive(true);
-            }
-            else if (eventData.button == PointerEventData.InputButton.Right)
-            {
-                if (mousePanel.itemSlot.item != null)
-                {
-                    inventory.RefreshInventory();
-                }
             }
         }
 
@@ -62,6 +59,24 @@ namespace CC.Inventory
         public override void RefreshInventory()
         {
             _actionPanel.RefreshInventory();
+        }
+
+        public override void OnAction()
+        {
+            _actionPanel.OnAction();
+        }
+
+        public void ChangeFrameSlotUI(Sprite frame)
+        {
+            if (itemSlot.item == null) return;
+            if (itemSlot.item.GetItemType() == ItemType.Equipment) return;    
+
+            _frameItem.sprite = frame;
+        }
+
+        public void ForceChangeFrame(Sprite frame)
+        {
+            _frameItem.sprite = frame;
         }
     }
 }

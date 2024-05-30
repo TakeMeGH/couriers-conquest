@@ -44,6 +44,8 @@ namespace CC.Inventory.Item
         {
             _amount = _addItemToInventory.RaiseEvent(_item, _amount);
 
+            Debug.Log("Pickup");
+
             _onItemPickup.RaiseEvent();
             if (isDropItem)
             {

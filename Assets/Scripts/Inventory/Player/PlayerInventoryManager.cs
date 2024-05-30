@@ -1,6 +1,7 @@
 using CC.Event;
 using CC.Events;
 using CC.UI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -13,17 +14,20 @@ namespace CC.Inventory
     public class PlayerInventoryManager : MonoBehaviour, IInventoryManager
     {
         [SerializeField] private AInventoryData _aitemInventoryData;
-        [SerializeField] private UIPlayerStatus _uiPlayerStatus;
+        //[SerializeField] private UIPlayerStatus _uiPlayerStatus;
         private PouchAndRuneManager _pouchRuneManager;
         public GameObject itemDetailPanel;
+        [SerializeField] private GameObject _hudPanel;
 
         private InventoryData _inventoryData;
-        public List<AItemPanel> existingPanels = new List<AItemPanel>();
-        [SerializeField] private List<Button> _panelButtons = new List<Button>();
+        public List<PanelInventory> existingPanels = new List<PanelInventory>();
+        public ABaseItem[] _defaultEquipment;
 
         private IInventoryManagement _playerInventoryManagement;
         private PlayerInventoryAction _playerInventoryAction;
         private IInventoryWeight _playerInventoryWeight;
+
+        public FMOD.Studio.EventInstance openSound;
 
         [Space]
         [Header("Inventory Menu Components")]
@@ -42,13 +46,16 @@ namespace CC.Inventory
         [SerializeField] private GameObject _labelEquipSlotItem;
         [SerializeField] private GameObject _labelConsumeSlotItem;
         [SerializeField] private TextMeshProUGUI _textLabelEquiped;
+        [SerializeField] private Sprite _frameItemDefault;
+        [SerializeField] private Sprite _frameItemHover;
         public int activeIndexItemSlot;
+        private int _previousActive;
         public InventoryActionType actionType = InventoryActionType.None;
 
         [Header("Drop Item")]
         [SerializeField] private float maxHoldDuration = 3f;
         public bool isHoldDrop;
-        [HideInInspector] public bool _canDrop;
+        [HideInInspector] public bool canDrop;
         public Slider sliderDrop;
 
         private void OnEnable()
@@ -73,7 +80,7 @@ namespace CC.Inventory
             _inventoryData.inputReader.DropItemCanceled += _playerInventoryAction.DropCanceled;
             _inventoryData.inputReader.ConsumeItemPerformed += OnConsumeItem;
 
-            _uiPlayerStatus.Initialize(this, _inventoryData);
+            //_uiPlayerStatus.Initialize(this, _inventoryData);
         }
 
         private void OnDisable()
@@ -100,7 +107,6 @@ namespace CC.Inventory
             _pouchRuneManager.Initialize(this, _inventoryData);
 
             inventoryMenuUI.SetActive(true);
-            SetButtonPanels();
             inventoryMenuUI.SetActive(false);
         }
 
@@ -118,12 +124,14 @@ namespace CC.Inventory
 
             RefreshInventory();
             _inventoryData.inputReader.EnableInventoryUIInput();
-            _uiPlayerStatus.HidePouchPanel();
+            //_uiPlayerStatus.HidePouchPanel();
             itemDetailPanel.SetActive(false);
             sliderDrop.gameObject.SetActive(false);
             activeSlot = ItemType.None;
+            existingPanels[activeIndexItemSlot].ChangeFrameSlotUI(_frameItemDefault);
 
-            RefreshPanelItem();
+            FMODUnity.RuntimeManager.PlayOneShotAttached("event:/SFX/Character/Walk", gameObject);
+            _hudPanel.SetActive(false);
         }
 
         public void CloseInventory()
@@ -131,44 +139,33 @@ namespace CC.Inventory
             inventoryMenuUI.SetActive(false);
             _itemSlotMouse.EmptySlot();
             _inventoryData.inputReader.EnableGameplayInput();
-            _uiPlayerStatus.ShowPouchPanel();
+            _hudPanel.SetActive(true);
         }
 
-        private void SetButtonPanels()
+        public void SwapActiveSlot(int targetActive)
         {
-            _panelButtons.Clear();
-            foreach (AItemPanel i in existingPanels)
-            {
-                Button newButton = i.GetComponent<Button>();
-                _panelButtons.Add(newButton);
-            }
-            RefreshPanelItem();
+            _previousActive = activeIndexItemSlot;
+            existingPanels[_previousActive].ChangeFrameSlotUI(_frameItemDefault);
+
+            activeIndexItemSlot = targetActive;
+            existingPanels[activeIndexItemSlot].ChangeFrameSlotUI(_frameItemHover);
+        }
+
+        public void ChangeFrameToDefault(int index)
+        {
+            existingPanels[index].ForceChangeFrame(_frameItemDefault);
         }
 
         public void RefreshPanelItem()
         {
-            for (int i = 0; i < existingPanels.Count; i++)
-            {
-                if (EventSystem.current != null && EventSystem.current.currentSelectedGameObject == _panelButtons[i])
-                {
-                    EventSystem.current.SetSelectedGameObject(null);
-                }
-
-                if (existingPanels[i].itemSlot.item == null)
-                {
-                    _panelButtons[i].interactable = false;
-                }
-                else
-                {
-                    _panelButtons[i].interactable = true;
-                }
-            }
+            existingPanels[activeIndexItemSlot].isNull = true;
+            existingPanels[activeIndexItemSlot].ChangeFrameSlotUI(_frameItemDefault);
         }
 
         private void WeightCount()
         {
             _weightValue = _playerInventoryWeight.GetWeight();
-            _textWeight.text = "Weight : " + _weightValue.ToString();
+            _textWeight.text = _weightValue.ToString();
         }
 
         public void ClearSlot(ItemSlotInfo slot)
@@ -180,6 +177,7 @@ namespace CC.Inventory
         public void SetLabelConsumableType()
         {
             _labelConsumeSlotItem.SetActive(true);
+            _labelDropSlotItem.SetActive(true);
         }
 
         public void SetLabelMaterialsType()
@@ -189,12 +187,19 @@ namespace CC.Inventory
             _labelEquipSlotItem.SetActive(false);
         }
 
+        public void SetNoActionLabel()
+        {
+            _labelDropSlotItem.SetActive(false);
+            _labelConsumeSlotItem.SetActive(false);
+            _labelEquipSlotItem.SetActive(false);
+        }
+
         public void CanEquipSpesifikSlot()
         {
             _labelEquipSlotItem.SetActive(true);
             _labelConsumeSlotItem.SetActive(false);
 
-            if ((_inventoryData.isPouchEquiped && activeIndexItemSlot == _inventoryData.indexPouchEquiped))
+            if ((_inventoryData.isPouchEquiped && activeIndexItemSlot == _inventoryData.indexPouchEquiped) || (_inventoryData.isRuneEquiped && activeIndexItemSlot == _inventoryData.indexRuneEquiped))
             {
                 _textLabelEquiped.text = "Unequip Item";
                 actionType = InventoryActionType.Unequip;
@@ -219,26 +224,43 @@ namespace CC.Inventory
                 if(activeSlot == ItemType.Consumable)
                 {
                     _pouchRuneManager.EquipPouch(existingPanels[activeIndexItemSlot].itemSlot.item, activeIndexItemSlot);
-                    itemDetailPanel.SetActive(false);
-                    RefreshPanelItem();
+                    existingPanels[activeIndexItemSlot].OnAction();
+                }else if(activeSlot == ItemType.Rune)
+                {
+                    _pouchRuneManager.EquipRune(existingPanels[activeIndexItemSlot].itemSlot.item, activeIndexItemSlot);
+                    existingPanels[activeIndexItemSlot].OnAction();
                 }
             }else if(actionType == InventoryActionType.Unequip)
             {
                 if (activeSlot == ItemType.Consumable)
                 {
-                    _pouchRuneManager.UnEquipPouch();
-                    itemDetailPanel.SetActive(false);
-                    RefreshPanelItem();
+                    UnEquipSlot(ItemType.Consumable);
+                }else if(activeSlot == ItemType.Rune)
+                {
+                    UnEquipSlot(ItemType.Rune);
                 }
             }
+        }
+
+        public void UnEquipSlot(ItemType type)
+        {
+            if(type == ItemType.Consumable)
+            {
+                _pouchRuneManager.UnEquipPouch();
+            }else if(type == ItemType.Rune)
+            {
+                _pouchRuneManager.UnEquipRune();
+            }
+
+            existingPanels[activeIndexItemSlot].ChangeFrameSlotUI(_frameItemDefault);
+            itemDetailPanel.SetActive(false);
         }
 
         private void OnConsumeItem()
         {
             if(activeSlot == ItemType.Consumable)
             {
-                Debug.Log("Attempt To Consume");
-                _uiPlayerStatus.AttempToUsePouch(activeIndexItemSlot);
+                _pouchRuneManager.AttempToConsumeItem(activeIndexItemSlot);
             }
         }
 
@@ -271,12 +293,19 @@ namespace CC.Inventory
                             i.item = null;
                             i.stacks = 0;
                             panel.isNull = true;
-                            continue;
-                        }
-
-                        if (i.stacks > 1)
+                            panel.stacksText.gameObject.SetActive(false);
+                            panel.itemImage.gameObject.SetActive(false);
+                        }else if(i.stacks > 0)
                         {
-                            panel.stacksText.text = "" + i.stacks;
+                            if (i.stacks == 1)
+                            {
+                                panel.stacksText.text = "";
+                            }
+                            else
+                            {
+                                panel.stacksText.text = "" + i.stacks;
+                            }
+
                             panel.isNull = false;
                         }
                         else

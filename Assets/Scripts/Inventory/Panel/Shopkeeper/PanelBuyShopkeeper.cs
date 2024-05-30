@@ -49,5 +49,10 @@ namespace CC
         {
             _actionPanel.RefreshInventory();
         }
+
+        public override void OnAction()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
