@@ -1,0 +1,70 @@
+﻿title: Shop03_Blacksmith_Default_0
+tags:
+---
+
+Dravor : Halo kawan, hari yang indah ya untuk berada diluar ya
+Dravor : Ngomong-ngomong, selamat datang di Blacksmith ku
+Dravor : Adakah yang kamu sedang butuhkan saat ini disini?
+<<jump Shop03_Blacksmith_All_Choice>>
+===
+
+title: Shop03_Blacksmith_All_Choice
+tags:
+---
+-> Sepertinya aku sudah memiliki semua yang kubutuhkan
+    <<jump Shop03_Blacksmith_Choice_3>>
+-> Bisakah kamu melakukan upgrade pada senjata ku ini?
+    <<jump Shop03_Blacksmith_Choice_2>>
+-> Apakah senjata mu memiliki kualitas yang bagus?
+    <<jump Shop03_Blacksmith_Choice_1>>
+-> Sudah berapa banyak kamu membuat senjata?
+    <<jump Shop03_Blacksmith_Choice_0>>
+
+
+===
+
+title: Shop03_Blacksmith_Choice_0
+tags:
+---
+Dravor: Hah? Kamu berkata apa, Nak?
+Aiden: Sudah berapa kali kamu membuat senjata?
+Dravor: Ohhh, aku sudah membuat senjata sejak dulu sekali.
+Aiden: Bukan itu yang...
+Dravor: Kamu tahu, waktu umurku 10 tahun, aku sudah belajar menempa. Tentu saja, karena aku hebat, aku sangat mudah belajar.
+Dravor: Bahkan ayahku yang dikenal banyak orang mengagumiku. Tanpa perlu waktu lama sejak awal belajar menempa, aku mampu membuat senjataku sendiri untuk pertama kalinya.
+Dravor: Yahh, namanya orang hebat, saat kecil pun aku sudah bisa menandingi seseorang yang sudah bertahun-tahun belajar menempa, hahahaha.
+Dravor: Dan juga, Nak, apa kamu tahu, dulu aku banyak sekali membuat senjata. Bahkan aku bisa membuat 3-8 senjata hanya dalam waktu satu bulan.
+Dravor: Tapi semakin aku dewasa, kuantitas senjata itu tidak terlalu penting. Kualitaslah yang berbicara.
+Dravor: Itulah kenapa di saat itu aku memerlukan waktu satu bulan untuk membuat 1-2 senjata. Bahkan senjata dengan kualitas di atasnya, aku memerlukan waktu berbulan-bulan untuk membuatnya.
+Dravor: Yahh, jika dipikir-pikir, aku sudah membuat sangat banyak senjata, mungkin sekitar ratusan sampai ribuan. Tapi siapa yang peduli?
+Dravor: Sekarang aku hanya ingin membuat senjata dengan kualitas yang sangat bagus dan tidak akan membuat senjata dengan kualitas yang rendah.
+Dravor: Jadi, adakah yang kamu butuhkan lagi di sini?
+<<jump Shop03_Blacksmith_All_Choice>>
+===
+
+title: Shop03_Blacksmith_Choice_1
+tags:
+---
+Dravor: Hahahahaha, tentu saja, senjataku sekarang memiliki kualitas yang lebih bagus dari senjata buatan orang lain. Aku bisa menjamin itu.
+Dravor: Tapi ingat, jangan sampai tertipu. Banyak di luar sana yang mengaku memiliki senjata buatanku, padahal itu jelas bukan buatanku.
+Dravor: Atau jika itu memang buatanku, itu adalah senjata yang kubuat dulu, hanya berdasarkan kuantitas saja.
+Dravor: Jika kamu ingin membuat senjata bagus, atau melakukan upgrade pada senjatamu, kamu bisa langsung menemuiku.
+Dravor: Aku akan membuat senjatamu menjadi lebih kuat lagi, tapi tentunya kamu harus membawa material yang bagus.
+Dravor: Jadi, adakah yang kamu butuhkan di sini?
+<<jump Shop03_Blacksmith_All_Choice>>
+===
+
+title: Shop03_Blacksmith_Choice_2
+tags:
+---
+Dravor: Tentu saja nak, kamu bisa mengandalkannya padaku
+<<SpecialAction Dravor 0>>
+===
+
+
+title: Shop03_Blacksmith_Choice_3
+tags:
+---
+Dravor:Baiklah, sampai bertemu kembali, kuharap kamu puas dengan senjatamu sekarang
+<<Close>>
+===
