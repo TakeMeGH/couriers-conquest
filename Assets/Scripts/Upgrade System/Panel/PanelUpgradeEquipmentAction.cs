@@ -46,7 +46,7 @@ namespace CC.UpgradeEquipment
                     {
                         if (_mousePanel.itemSlot.item == _materialRequiriment.itemRequiriment)
                         {
-                            OnActionInventory();
+                            //OnActionInventory();
                         }
                         else
                         {
@@ -58,7 +58,7 @@ namespace CC.UpgradeEquipment
 
                         if (_mousePanel.itemSlot.item.GetItemType() == ItemType.Equipment)
                         {
-                            OnActionInventory();
+                            //OnActionInventory();
                         }
                         else
                         {

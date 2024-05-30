@@ -1,5 +1,6 @@
 using CC.Events;
 using CC.Inventory;
+using CC.Shop;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,18 +9,16 @@ namespace CC.Interaction.Blacksmith
 {
     public class BlacksmithInteract : MonoBehaviour
     {
-        [SerializeField] private AInventoryData _playerInventoryData;
-        [SerializeField] private AInventoryData _blacksmithInventoryData;
-        [SerializeField] private PlayerInventoryDataChannel _upgradeEvent;
+        [SerializeField] private VoidEventChannelSO _onUpgradeEvent;
 
         public void Interact()
         {
-            ShowShopkeeper();
+            ShowBlackSmith();
         }
 
-        public void ShowShopkeeper()
+        public void ShowBlackSmith()
         {
-            _upgradeEvent.RaiseEvent(_playerInventoryData, _blacksmithInventoryData);
+            _onUpgradeEvent.RaiseEvent();
         }
     }
 }

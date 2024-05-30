@@ -474,6 +474,24 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""7d36fd63-2923-49e8-a96e-744d64b3aff2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Back"",
+                    ""type"": ""Button"",
+                    ""id"": ""e215b2be-275d-4541-a185-85456be532c9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -520,6 +538,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""ConsumeItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a0273480-ec60-45de-a11e-f05929b5b2b8"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""11d639e6-25d5-4817-9480-478b19c9afe2"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -552,6 +592,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_InventoryUI_DropItem = m_InventoryUI.FindAction("DropItem", throwIfNotFound: true);
         m_InventoryUI_EquipItem = m_InventoryUI.FindAction("EquipItem", throwIfNotFound: true);
         m_InventoryUI_ConsumeItem = m_InventoryUI.FindAction("ConsumeItem", throwIfNotFound: true);
+        m_InventoryUI_Confirm = m_InventoryUI.FindAction("Confirm", throwIfNotFound: true);
+        m_InventoryUI_Back = m_InventoryUI.FindAction("Back", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -799,6 +841,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_InventoryUI_DropItem;
     private readonly InputAction m_InventoryUI_EquipItem;
     private readonly InputAction m_InventoryUI_ConsumeItem;
+    private readonly InputAction m_InventoryUI_Confirm;
+    private readonly InputAction m_InventoryUI_Back;
     public struct InventoryUIActions
     {
         private @GameInput m_Wrapper;
@@ -807,6 +851,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @DropItem => m_Wrapper.m_InventoryUI_DropItem;
         public InputAction @EquipItem => m_Wrapper.m_InventoryUI_EquipItem;
         public InputAction @ConsumeItem => m_Wrapper.m_InventoryUI_ConsumeItem;
+        public InputAction @Confirm => m_Wrapper.m_InventoryUI_Confirm;
+        public InputAction @Back => m_Wrapper.m_InventoryUI_Back;
         public InputActionMap Get() { return m_Wrapper.m_InventoryUI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -828,6 +874,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @ConsumeItem.started += instance.OnConsumeItem;
             @ConsumeItem.performed += instance.OnConsumeItem;
             @ConsumeItem.canceled += instance.OnConsumeItem;
+            @Confirm.started += instance.OnConfirm;
+            @Confirm.performed += instance.OnConfirm;
+            @Confirm.canceled += instance.OnConfirm;
+            @Back.started += instance.OnBack;
+            @Back.performed += instance.OnBack;
+            @Back.canceled += instance.OnBack;
         }
 
         private void UnregisterCallbacks(IInventoryUIActions instance)
@@ -844,6 +896,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @ConsumeItem.started -= instance.OnConsumeItem;
             @ConsumeItem.performed -= instance.OnConsumeItem;
             @ConsumeItem.canceled -= instance.OnConsumeItem;
+            @Confirm.started -= instance.OnConfirm;
+            @Confirm.performed -= instance.OnConfirm;
+            @Confirm.canceled -= instance.OnConfirm;
+            @Back.started -= instance.OnBack;
+            @Back.performed -= instance.OnBack;
+            @Back.canceled -= instance.OnBack;
         }
 
         public void RemoveCallbacks(IInventoryUIActions instance)
@@ -888,5 +946,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnDropItem(InputAction.CallbackContext context);
         void OnEquipItem(InputAction.CallbackContext context);
         void OnConsumeItem(InputAction.CallbackContext context);
+        void OnConfirm(InputAction.CallbackContext context);
+        void OnBack(InputAction.CallbackContext context);
     }
 }

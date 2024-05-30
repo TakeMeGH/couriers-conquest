@@ -3122,7 +3122,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1330386162274945146}
-  - {fileID: 2844134994764847978}
   - {fileID: 6408533251163733001}
   - {fileID: 1255831703693511164}
   m_Father: {fileID: 1271718992418475980}
@@ -10049,7 +10048,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 85.83032, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5589844743943919344
@@ -14107,6 +14106,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2844134994764847978}
   - {fileID: 8315656937625247818}
   m_Father: {fileID: 3586956277854786044}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14137,6 +14137,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputReader: {fileID: 11400000, guid: 2c06813ec1504fb49916705513d476fd, type: 2}
   _itemSlotMouse: {fileID: 7275831097706820900}
+  _buyInventoryManager: {fileID: 0}
+  _sellInventoryManager: {fileID: 0}
   _panelScript: []
   _itemPanel: []
   _buyMenu: {fileID: 1945910178900593267}
@@ -14145,7 +14147,7 @@ MonoBehaviour:
   _textPrice: {fileID: 7777195305144756456}
   _buyButton: {fileID: 8344695200202785244}
   _cancelBuyButton: {fileID: 5293752203606650734}
-  _shopCanvas: {fileID: 566475417291752867}
+  _buyCanvas: {fileID: 0}
   _textSell: {fileID: 7862834708335352677}
   _sellButton: {fileID: 6307754119350966810}
   _cancelSellButton: {fileID: 9172958234949923371}
@@ -28000,7 +28002,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 85.83032, y: -293.9082}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2626979399227357449
@@ -40055,7 +40057,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _aitemInventoryData: {fileID: 11400000, guid: 8a4eab9fce0693d45bf28a92fc853498,
     type: 2}
-  _uiPlayerStatus: {fileID: 3237108038202575443}
   itemDetailPanel: {fileID: 4571583273405084933}
   existingPanels: []
   _panelButtons: []
@@ -42680,7 +42681,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 85.83032, y: -163.9082}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &940714981453744043
@@ -48798,13 +48799,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7621966825159946878}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4696993326999979163}
-  m_Father: {fileID: 8315656937625247818}
+  m_Father: {fileID: 1271718992418475980}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -48861,10 +48862,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fe63c2e9b3c95946ac8a405af0d96c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerInventoryData: {fileID: 0}
-  _inventoryItemPanel: []
-  _inventoryPanelUI: {fileID: 1873752279516190605}
-  _firstInit: 0
+  _buyPanel: {fileID: 0}
+  activePanelIndex: 0
+  _buyPanelList: []
+  _isSelected: 0
   _addItemToInventory: {fileID: 11400000, guid: 4611073ba66144c44ba509f62ea86853,
     type: 2}
 --- !u!1 &7629770387062106408

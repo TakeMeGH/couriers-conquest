@@ -70,7 +70,7 @@ public class StaminaController : MonoBehaviour
             _regenerateCourutine = null;
 
         }
-
+        SetCurrentStamina();
         currentStamina -= amount;
         currentStamina = Mathf.Max(currentStamina, 0);
         _statsSO.SetInstanceValue(mainStat.Stamina, currentStamina);
@@ -93,6 +93,7 @@ public class StaminaController : MonoBehaviour
                     yield break;
                 }
             }
+            SetCurrentStamina();
             currentStamina += staminaIncreaseRate * Time.deltaTime;
             currentStamina = Mathf.Min(currentStamina, _statsSO.GetValue(mainStat.Stamina));
             _statsSO.SetInstanceValue(mainStat.Stamina, currentStamina);
@@ -100,5 +101,10 @@ public class StaminaController : MonoBehaviour
         }
 
         isRegenerating = false;
+    }
+
+    void SetCurrentStamina()
+    {
+        currentStamina = _statsSO.GetInstanceValue(mainStat.Stamina);
     }
 }
