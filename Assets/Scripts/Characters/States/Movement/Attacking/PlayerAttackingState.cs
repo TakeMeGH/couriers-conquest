@@ -1,6 +1,5 @@
 using System;
-using Cinemachine.Utility;
-using Unity.VisualScripting;
+using CC.Enemy;
 using UnityEngine;
 
 
@@ -12,7 +11,7 @@ namespace CC.Characters.States
         float _timeToRotate = 0.2f;
         bool _isFullyRotated = false;
         bool _noNearestEnemy = false;
-        float searchRadius = 3.0f;
+        float searchRadius = 10f;
 
         private float previousFrameTime;
         private bool alreadyAppliedForce;
@@ -132,12 +131,15 @@ namespace CC.Characters.States
             _noNearestEnemy = true;
             foreach (var enemyColider in enemyColliders)
             {
-                float distance = (enemyColider.transform.position - position).sqrMagnitude;
-                if (distance < closestDistance)
+                if (enemyColider.TryGetComponent<EnemyController>(out EnemyController enemyController))
                 {
-                    closestDistance = distance;
-                    _nearestEnemy = enemyColider.transform.position;
-                    _noNearestEnemy = false;
+                    float distance = (enemyColider.transform.position - position).sqrMagnitude;
+                    if (distance < closestDistance && enemyController.IsDead == false)
+                    {
+                        closestDistance = distance;
+                        _nearestEnemy = enemyColider.transform.position;
+                        _noNearestEnemy = false;
+                    }
                 }
             }
 

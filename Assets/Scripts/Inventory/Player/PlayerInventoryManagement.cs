@@ -226,7 +226,6 @@ namespace CC.Inventory
         {
             if (_inventoryData.items[indexItem].item.GetItemType() == ItemType.QuestItem)
             {
-                Debug.Log("ENABLE DAMAGE EVENT");
                 ((QuestItem)_inventoryData.items[indexItem].item).EnableDamageEvent();
             }
         }

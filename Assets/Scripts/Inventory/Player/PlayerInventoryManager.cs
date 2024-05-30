@@ -74,6 +74,7 @@ namespace CC.Inventory
             _inventoryData.onSellItem.OnEventRaised += _playerInventoryManagement.OnSellItem;
             _inventoryData.onUpdateCurrency.OnEventRaised += _playerInventoryManagement.OnUpdateCurrency;
             _inventoryData.onUpgradeEquipment.OnEventRaised += _playerInventoryAction.UpgradeItem;
+            _inventoryData.onCharacterDamaged.OnEventRaised += CloseInventory;
 
             _inventoryData.inputReader.EquipItemPerformed += OnEquipSlot;
             _inventoryData.inputReader.DropItemPerformed += _playerInventoryAction.DropPerformed;
@@ -92,6 +93,7 @@ namespace CC.Inventory
             _inventoryData.onSellItem.OnEventRaised -= _playerInventoryManagement.OnSellItem;
             _inventoryData.onUpdateCurrency.OnEventRaised -= _playerInventoryManagement.OnUpdateCurrency;
             _inventoryData.onUpgradeEquipment.OnEventRaised -= _playerInventoryAction.UpgradeItem;
+            _inventoryData.onCharacterDamaged.OnEventRaised -= CloseInventory;
 
             _inventoryData.inputReader.EquipItemPerformed -= OnEquipSlot;
             _inventoryData.inputReader.DropItemPerformed -= _playerInventoryAction.DropPerformed;
@@ -204,7 +206,7 @@ namespace CC.Inventory
                 _textLabelEquiped.text = "Unequip Item";
                 actionType = InventoryActionType.Unequip;
             }
-            else if((!_inventoryData.isRuneEquiped) || (!_inventoryData.isPouchEquiped))
+            else if ((!_inventoryData.isRuneEquiped) || (!_inventoryData.isPouchEquiped))
             {
                 _textLabelEquiped.text = "Equip Item";
                 actionType = InventoryActionType.Equip;
@@ -217,11 +219,11 @@ namespace CC.Inventory
 
         private void OnEquipSlot()
         {
-            if(actionType == InventoryActionType.None) return;
+            if (actionType == InventoryActionType.None) return;
 
-            if(actionType == InventoryActionType.Equip)
+            if (actionType == InventoryActionType.Equip)
             {
-                if(activeSlot == ItemType.Consumable)
+                if (activeSlot == ItemType.Consumable)
                 {
                     _pouchRuneManager.EquipPouch(existingPanels[activeIndexItemSlot].itemSlot.item, activeIndexItemSlot);
                     existingPanels[activeIndexItemSlot].OnAction();
@@ -230,7 +232,8 @@ namespace CC.Inventory
                     _pouchRuneManager.EquipRune(existingPanels[activeIndexItemSlot].itemSlot.item, activeIndexItemSlot);
                     existingPanels[activeIndexItemSlot].OnAction();
                 }
-            }else if(actionType == InventoryActionType.Unequip)
+            }
+            else if (actionType == InventoryActionType.Unequip)
             {
                 if (activeSlot == ItemType.Consumable)
                 {
@@ -258,7 +261,7 @@ namespace CC.Inventory
 
         private void OnConsumeItem()
         {
-            if(activeSlot == ItemType.Consumable)
+            if (activeSlot == ItemType.Consumable)
             {
                 _pouchRuneManager.AttempToConsumeItem(activeIndexItemSlot);
             }
@@ -288,7 +291,7 @@ namespace CC.Inventory
                         panel.itemImage.CrossFadeAlpha(1, 0.05f, true);
                         panel.stacksText.gameObject.SetActive(true);
 
-                        if(i.stacks <= 0)
+                        if (i.stacks <= 0)
                         {
                             i.item = null;
                             i.stacks = 0;

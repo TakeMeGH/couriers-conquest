@@ -11,9 +11,9 @@ namespace CC
         [field: SerializeField] public float NavmeshRayMaxDistance = 1f;
         [field: SerializeField] public int DefaultAnggularSpeed = 360;
         [field: SerializeField] public float DefaultStopingDistance = 0.33f;
+        [field: SerializeField] public int AttackedLimitBeforeStuned = 3;
+        [field: SerializeField] public float RotationTime = 0.2f;
 
-        [field: SerializeField] public float StartWaitTime = 4;
-        [field: SerializeField] public float TimetoRotate = 2;
         #region Patrol Data
         [field: SerializeField, Header("patrol Data")] public float PatrolSpeed = 3f;
         [field: SerializeField] public float PatrolStopDistance = 0.33f;
@@ -49,7 +49,6 @@ namespace CC
         [field: SerializeField] public float StepBackDistance = 5f;
         [field: SerializeField] public float StepBackMaxTime = 3f;
         [field: SerializeField] public float TimeToReStepBack = 0.2f;
-
 
         #endregion
 

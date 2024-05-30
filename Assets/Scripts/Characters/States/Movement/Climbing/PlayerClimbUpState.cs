@@ -27,31 +27,19 @@ namespace CC.Characters.States
         {
 
             StopAnimation("isClimbingUp");
-
-            // _playerController.transform.position = _newTransformPosition;
-            // Debug.Log(_newTransformPosition + " " + _playerController.transform.position + " EXIT");
-
             base.Exit();
-            // StopAnimation("Climbing");
 
         }
 
         public override void OnAnimationTransitionEvent()
         {
-            Debug.Log("MASUK" + " " + _playerController.OffsetStandUpPoint);
             _newTransformPosition = _playerController.transform.position;
             _newTransformPosition += _playerController.transform.forward * _playerController.OffsetStandUpPoint.z;
             _newTransformPosition += _playerController.transform.up * _playerController.OffsetStandUpPoint.y;
             _playerController.PlayerCurrentData.NewTransformPosition = _newTransformPosition;
             _playerController.PlayerCurrentData.IsUpdateNewTransform = true;
-            // _playerController.transform.position = _newTransformPosition;
             _playerController.SwitchState(_playerController.PlayerIdlingState);
 
         }
-        // public override void OnAnimationExitEvent()
-        // {
-        //     _playerController.SwitchState(_playerController.PlayerIdlingState);
-
-        // }
     }
 }
