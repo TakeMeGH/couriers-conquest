@@ -29,7 +29,9 @@ namespace CC.Inventory
         {
             if (_inventory != null)
             {
-                Debug.Log("Select Item");
+                if(_itemSlot.item == null) return;
+
+                //Debug.Log("Select Item");
                 PickupItem();
                 SetItemType(_itemSlot.item.GetItemType());
 
@@ -41,34 +43,34 @@ namespace CC.Inventory
 
         private void SetItemType(ItemType type)
         {
-            Debug.Log(type.ToString());
+            //Debug.Log(type.ToString());
             if (type == ItemType.Consumable)
             {
                 _playerInventoryManager.activeSlot = ItemType.Consumable;
-                CanEquipLabelUI();
+                _playerInventoryManager.CanEquipSpesifikSlot();
                 _playerInventoryManager.SetLabelConsumableType();
+                _playerInventoryManager.canDrop = true;
             }
             else if (type == ItemType.Rune)
             {
                 _playerInventoryManager.activeSlot = ItemType.Rune;
-                CanEquipLabelUI();
+                _playerInventoryManager.CanEquipSpesifikSlot();
+                _playerInventoryManager.canDrop = true;
             }
             else if (type == ItemType.Equipment)
             {
                 _playerInventoryManager.actionType = InventoryActionType.None;
                 _playerInventoryManager.activeSlot = ItemType.Equipment;
+                _playerInventoryManager.canDrop = false;
+                _playerInventoryManager.SetNoActionLabel();
             }
             else
             {
                 _playerInventoryManager.actionType = InventoryActionType.None;
                 _playerInventoryManager.activeSlot = ItemType.Materials;
                 _playerInventoryManager.SetLabelMaterialsType();
+                _playerInventoryManager.canDrop = true;
             }
-        }
-
-        private void CanEquipLabelUI()
-        {
-            _playerInventoryManager.CanEquipSpesifikSlot();
         }
 
         public void RefreshInventory()

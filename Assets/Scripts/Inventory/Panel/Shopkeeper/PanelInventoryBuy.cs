@@ -63,5 +63,10 @@ namespace CC
             itemImage.gameObject.SetActive(false);
             stacksText.gameObject.SetActive(false);
         }
+
+        public override void OnAction()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

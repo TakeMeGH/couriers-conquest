@@ -57,9 +57,6 @@ public class UIManager : MonoBehaviour
         _HUD.SetActive(true);
     }
 
-
-
-
     private void OpenInventory()
     {
         if (isInventoryOpen) return;

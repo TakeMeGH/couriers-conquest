@@ -30,8 +30,8 @@ namespace CC.Core.Save
         private void SetOtherValue()
         {
             _playerInventory.playerGold = _saveInventoryData.playerGold;
-            _playerInventory.isPouchEquiped = _saveInventoryData.isEquipedPouch;
             _playerInventory.isRuneEquiped = _saveInventoryData.isQuipedRune;
+            _playerInventory.isPouchEquiped = _saveInventoryData.isEquipedPouch;
             _playerInventory.indexPouchEquiped = _saveInventoryData.indexPouch;
             _playerInventory.indexRuneEquiped = _saveInventoryData.indexRune;
         }
@@ -164,7 +164,7 @@ namespace CC.Core.Save
     {
         public List<RawInventorySaveData> dataValue;
         public SerializedDictionary<string, int> equipmentLevel;
-        public float playerGold;
+        public int playerGold;
         public bool isEquipedPouch;
         public bool isQuipedRune;
         public int indexPouch;

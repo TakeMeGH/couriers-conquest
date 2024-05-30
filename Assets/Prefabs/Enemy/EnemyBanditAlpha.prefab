@@ -14139,13 +14139,17 @@ MonoBehaviour:
   PatrolWaypoints:
   - {fileID: 0}
   - {fileID: 0}
+  _dropItemData: {fileID: 11400000, guid: 9f0f1ae140e4bf94e8a05178b110b51b, type: 2}
+  _dropItemOffset: {x: 0, y: 0.5, z: 0}
+  _dropItemRandomForce: {x: 0, y: 0, z: 0}
+  _dropSpeed: 2
   <WeaponDamage>k__BackingField: {fileID: 4857137905248485336}
   _ragdollController: {fileID: 4939032850561271187}
   _healthController: {fileID: 1378175434573802880}
-  _multiplier: 0
-  _healthBar: {fileID: 5633490583590479052}
+  <HealthBar>k__BackingField: {fileID: 5633490583590479052}
   _enemyStatsSO: {fileID: 11400000, guid: 700214312cc021946974893c268ce4cf, type: 2}
   _onEnemyAttacked: {fileID: 11400000, guid: 02ea49625c4987640b8462f56a65d970, type: 2}
+  _playerWatcher: {fileID: 11400000, guid: b4a5d3959431bd648be30b8a79350cf5, type: 2}
   sinkSpeed: 0.5
   sinkDuration: 3
 --- !u!1 &3425349060437242145

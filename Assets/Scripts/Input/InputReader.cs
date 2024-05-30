@@ -44,6 +44,8 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     public event UnityAction DropItemCanceled = delegate { };
     public event UnityAction EquipItemPerformed = delegate { };
     public event UnityAction ConsumeItemPerformed = delegate { };
+    public event UnityAction ConfirmActionPerformed = delegate { };
+    public event UnityAction BackActionPerformed = delegate { };
     [SerializeField] VoidEventChannelSO _enableCameraInputEvent;
 
     [SerializeField] VoidEventChannelSO _disableCameraInputEvent;
@@ -322,5 +324,17 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     {
         if (context.phase == InputActionPhase.Performed)
             PausePerformed.Invoke();
+    }
+
+    public void OnConfirm(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            ConfirmActionPerformed.Invoke();
+    }
+
+    public void OnBack(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            BackActionPerformed.Invoke();
     }
 }

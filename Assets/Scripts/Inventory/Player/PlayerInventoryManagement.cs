@@ -24,13 +24,15 @@ namespace CC.Inventory
             DefaultItem(inventoryManager);
             SetDefaultEquipment();
             AddAllQuestItemEvent();
+
+            CheckDefaultEquipment();
         }
 
         private void DefaultItem(IInventoryManager inventoryManager)
         {
             for (int i = 0; i < _playerInventoryManager.itemPanelGrid.Length; i++)
             {
-                AItemPanel[] itemPanelsInGrid = _playerInventoryManager.itemPanelGrid[i].GetComponentsInChildren<AItemPanel>();
+                PanelInventory[] itemPanelsInGrid = _playerInventoryManager.itemPanelGrid[i].GetComponentsInChildren<PanelInventory>();
                 for (int j = 0; j < itemPanelsInGrid.Length; j++)
                 {
                     itemPanelsInGrid[j].Initialize(inventoryManager);
@@ -39,7 +41,6 @@ namespace CC.Inventory
                     script.itemIndex = j;
                 }
                 _playerInventoryManager.existingPanels.AddRange(itemPanelsInGrid);
-
             }
 
             //_inventoryData.items.Clear();
@@ -56,10 +57,10 @@ namespace CC.Inventory
 
         private void SetDefaultEquipment()
         {
-
-            for (int i = _inventoryData.inventorySize - 3; i < _playerInventoryManager.existingPanels.Count; i++)
+            for (int i = _inventoryData.inventoryIndex; i < _playerInventoryManager.existingPanels.Count; i++)
             {
                 AttachDefaultItem(i);
+                _playerInventoryManager.existingPanels[i].itemIndex = i;
             };
         }
 
@@ -116,48 +117,6 @@ namespace CC.Inventory
                 }
             }
 
-            /*foreach (ItemSlotInfo i in _inventoryData.items)
-            {
-                if (i.item != null)
-                {
-                    if (i.item.itemName == item.itemName)
-                    {
-                        if (amount > i.item.maxStacks - i.stacks)
-                        {
-                            amount -= i.item.maxStacks - i.stacks;
-                            i.stacks = i.item.maxStacks;
-                        }
-                        else
-                        {
-                            i.stacks += amount;
-                            if (_playerInventoryManager.inventoryMenuUI.activeSelf) _playerInventoryManager.RefreshInventory();
-                            return 0;
-                        }
-                    }
-                }
-            }*/
-
-            //Fill empty slots with leftover items
-            /*foreach (ItemSlotInfo i in _inventoryData.items)
-            {
-                if (i.item == null)
-                {
-                    if (amount > item.maxStacks)
-                    {
-                        i.item = item;
-                        i.stacks = item.maxStacks;
-                        amount -= item.maxStacks;
-                    }
-                    else
-                    {
-                        i.item = item;
-                        i.stacks = amount;
-                        if (_playerInventoryManager.inventoryMenuUI.activeSelf) _playerInventoryManager.RefreshInventory();
-                        return 0;
-                    }
-                }
-            }*/
-
             if (_playerInventoryManager.inventoryMenuUI.activeSelf) _playerInventoryManager.RefreshInventory();
             return amount;
         }
@@ -185,6 +144,24 @@ namespace CC.Inventory
             }
 
             _playerInventoryManager.RefreshInventory();
+        }
+
+        private void CheckDefaultEquipment()
+        {
+            for (int i = _inventoryData.inventoryIndex; i < _playerInventoryManager.existingPanels.Count; i++)
+            {
+                if (_inventoryData.items[i].item == null)
+                {
+                    Debug.Log("Null");
+                    _inventoryData.items[i].item = _playerInventoryManager._defaultEquipment[i - _inventoryData.inventoryIndex];
+                    AttachDefaultItem(i);
+                    _playerInventoryManager.existingPanels[i].itemIndex = i;
+                }
+                else
+                {
+                    Debug.Log("Not Null");
+                }
+            };
         }
 
         public void OnRemoveItem(Component _component, object _item)
@@ -216,7 +193,6 @@ namespace CC.Inventory
                     {
                         i.stacks -= _currentAmmount;
                         _currentAmmount = 0;
-
                     }
                     if (i.stacks <= 0)
                     {
@@ -231,7 +207,7 @@ namespace CC.Inventory
             }
         }
 
-        public void OnUpdateCurrency(float amount)
+        public void OnUpdateCurrency(int amount)
         {
             _inventoryData.playerGold += amount;
         }
@@ -250,7 +226,6 @@ namespace CC.Inventory
         {
             if (_inventoryData.items[indexItem].item.GetItemType() == ItemType.QuestItem)
             {
-                Debug.Log("ENABLE DAMAGE EVENT");
                 ((QuestItem)_inventoryData.items[indexItem].item).EnableDamageEvent();
             }
         }

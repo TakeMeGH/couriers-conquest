@@ -23,14 +23,38 @@ namespace CC.Inventory
         {
             Debug.Log("Use : " + itemName);
         }
+
+        public float GetStatsWeapon(mainStat key)
+        {
+            if (EquipmentStats.TryGetValue(key, out float value))
+            {
+                return value;
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 
     [System.Serializable]
     public class UpgradeRequiriment
     {
         public List<UpgradeMaterialRequiriment> materialRequiriment = new List<UpgradeMaterialRequiriment>();
-        public float price;
+        public int price;
         public SerializedDictionary<mainStat, float> EquipmentStats;
+
+        public float GetStatsUpgradeWeapon(mainStat key)
+        {
+            if (EquipmentStats.TryGetValue(key, out float value))
+            {
+                return value;
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 
     [System.Serializable]

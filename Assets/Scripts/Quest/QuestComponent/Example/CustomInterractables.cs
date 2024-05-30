@@ -10,6 +10,7 @@ namespace CC.Interaction
         [SerializeField] Sprite _icon;
         [SerializeField] string _name;
         [SerializeField] int _amount = 1;
+        [field:SerializeField] public bool IsAlwaysCanInteract { get; private set; } = true;
         public UnityEvent<Component> functionTrigger;
         public void Interact()
         {
