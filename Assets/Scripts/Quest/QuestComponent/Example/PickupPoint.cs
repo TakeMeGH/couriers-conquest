@@ -4,6 +4,7 @@ using CC.Inventory;
 using UnityEngine;
 using CC.NPC;
 using System.Collections.Generic;
+using CC.Quest.UI;
 
 
 namespace CC.Quest.Example
@@ -14,6 +15,8 @@ namespace CC.Quest.Example
         [SerializeField] ItemInventoryEventChannel _addItemToInventory;
         [SerializeField] List<NPCQuestDialogueNodeTransfer> _nextNpcList;
         [SerializeField] SenderDataEventChannelSO SendNPCQuestDialogue;
+        [SerializeField] SenderDataEventChannelSO _findQuestHintOwner;
+        [SerializeField] QuestHintData _questHintData;
         [ReadOnly] QuestManager _manager;
 
         [ReadOnly] ABaseItem _itemToDeliver;
@@ -43,6 +46,8 @@ namespace CC.Quest.Example
             _onPickup?.raiseEvent(this, null);
 
             foreach (var npc in _nextNpcList) SendNPCQuestDialogue?.raiseEvent(this, npc);
+
+            _findQuestHintOwner?.raiseEvent(this, _questHintData);
 
             if (_itemToDeliver != null) _addItemToInventory.RaiseEvent(_itemToDeliver, 1);
         }

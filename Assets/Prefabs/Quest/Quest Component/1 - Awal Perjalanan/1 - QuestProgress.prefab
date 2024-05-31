@@ -45,10 +45,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb01c9116af81a42b2b1b650a0ad992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onProgress: {fileID: 11400000, guid: 38cd4e099427acd4a89565c352e7f044, type: 2}
+  _onProgress:
+  - {fileID: 11400000, guid: 38cd4e099427acd4a89565c352e7f044, type: 2}
+  - {fileID: 11400000, guid: 9159890fb49c355418da3c75607d2ac8, type: 2}
   _nextNpcList: []
   SendNPCQuestDialogue: {fileID: 11400000, guid: acf930db98f4c3646a9449d6d1863992,
     type: 2}
+  _findQuestHintOwner: {fileID: 0}
+  _questHintData: {fileID: 0}
 --- !u!114 &2581227413503184616
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -16,12 +16,14 @@ MonoBehaviour:
   _questType: 1
   _questName: Awal Perjalanan
   _questDescription: Awal Perjalanan Aiden
+  _questArea: 
   _questPrerequisitesID: 00000000
   _onSendReward: {fileID: 0}
   _reward:
     gold: 0
     exp: 0
-    item: []
+    item:
+      _serializedList: []
   pickupPrefab:
     prefab: {fileID: 6618757732054344946, guid: b6436812b7152f74bb9437125a9aa3ee,
       type: 3}
@@ -45,3 +47,6 @@ MonoBehaviour:
     dialogueNode: NPC001_Richard_Quest_1
     events:
     - {fileID: 11400000, guid: e152843c24039274c84e4bd60d7d76fd, type: 2}
+  _findQuestHintOwner: {fileID: 11400000, guid: f85d367ed4b0ea848a5ac8d6fdd4dad9,
+    type: 2}
+  _questHintData: {fileID: 11400000, guid: 662a96ce855ec5d43a066cd79783fbb9, type: 2}

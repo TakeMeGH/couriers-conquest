@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4005442012985645581}
   - component: {fileID: 8823362245025098737}
   - component: {fileID: 3873669286631801398}
+  - component: {fileID: 876906130311513172}
   - component: {fileID: 2454921053779937761}
   m_Layer: 0
   m_Name: Richard
@@ -134,6 +135,20 @@ MonoBehaviour:
   _dialogueRunner: {fileID: 0}
   _dialogueVariable: {fileID: 0}
   _isCommandHandler: 0
+--- !u!114 &876906130311513172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7210035503753155729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91c43303a03156340977e35bbcf6fd3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 0
+  _questHint: {fileID: 11400000, guid: 33bda85cc80d8d645affe3a5e3464497, type: 2}
 --- !u!114 &2454921053779937761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,6 +186,22 @@ MonoBehaviour:
           m_TargetAssemblyTypeName: CC.NPC.NPCBehaviour, Assembly-CSharp
           m_MethodName: clearQuestDialogue
           m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - channel: {fileID: 11400000, guid: f85d367ed4b0ea848a5ac8d6fdd4dad9, type: 2}
+    eventToCall:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 876906130311513172}
+          m_TargetAssemblyTypeName: CC.GameObjectIdentifier, Assembly-CSharp
+          m_MethodName: OnGameObjectListen
+          m_Mode: 0
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
             m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
