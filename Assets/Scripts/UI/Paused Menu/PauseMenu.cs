@@ -52,9 +52,9 @@ public class PauseMenu : MonoBehaviour
     IEnumerator Pause()
     {
         _inputReader.EnableInventoryUIInput();
-        yield return null;
         pauseMenuUI.SetActive(true);
         GameIsPaused = true;
+        yield return new WaitForEndOfFrame();
         Time.timeScale = 0f;
 
     }
