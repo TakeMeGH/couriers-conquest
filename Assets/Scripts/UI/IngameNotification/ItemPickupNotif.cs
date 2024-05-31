@@ -16,7 +16,14 @@ namespace CC.UI.Notification
         public void Set(itemNotifData data, float duration)
         {
             _itemName.text = data.itemName;
-            _itemQuantity.text = "x" + data.quantity.ToString();
+            if (data.quantity == 1)
+            {
+                _itemQuantity.text = "";
+            }
+            else
+            {
+                _itemQuantity.text = "x" + data.quantity.ToString();
+            }
             _icon.sprite = data.icon;
             _duration = duration;
             _onScreen = true;

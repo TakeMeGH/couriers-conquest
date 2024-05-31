@@ -14,7 +14,7 @@ namespace CC.UI.Notification
             if(data is itemNotifData)
             {
                 GameObject _notif = Instantiate(_itemPickupNotif, _itemPickupLayout.transform);
-                _notif.GetComponent<ItemPickupNotif>().Set((itemNotifData)data,1f);
+                _notif.GetComponent<ItemPickupNotif>().Set((itemNotifData)data,2.5f);
             }
         }
         

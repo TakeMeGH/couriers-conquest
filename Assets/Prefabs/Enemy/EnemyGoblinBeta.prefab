@@ -28177,19 +28177,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dbe01fe64c6faa4db2053001ef82075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyPersistenceData: {fileID: 11400000, guid: bb881867a4f498f41a7e2e4e25f6a7c8,
+  EnemyPersistenceData: {fileID: 11400000, guid: 2de558231cbf39d419694cfc581304cc,
     type: 2}
   PatrolWaypoints:
   - {fileID: 0}
   - {fileID: 0}
-  _dropItemData: {fileID: 0}
+  _dropItemData: {fileID: 11400000, guid: f9aaffe1eb0139c47ababb2eab9e538e, type: 2}
   _dropItemOffset: {x: 0, y: 0.5, z: 0}
   _dropItemRandomForce: {x: 0, y: 0, z: 0}
   _dropSpeed: 2
   <WeaponDamage>k__BackingField: {fileID: 7836596064183353974}
   _ragdollController: {fileID: 4047431944282586144}
   _healthController: {fileID: 1999867523127796152}
-  <HealthBar>k__BackingField: {fileID: 0}
+  <HealthBar>k__BackingField: {fileID: 7336744931703321973}
   _enemyStatsSO: {fileID: 11400000, guid: 073d4fe57c3df1242abb9751fbadde1d, type: 2}
   _onEnemyAttacked: {fileID: 11400000, guid: 02ea49625c4987640b8462f56a65d970, type: 2}
   _playerWatcher: {fileID: 11400000, guid: b4a5d3959431bd648be30b8a79350cf5, type: 2}
@@ -30464,6 +30464,7 @@ GameObject:
   - component: {fileID: 2911249723282068963}
   - component: {fileID: 1999867523127796152}
   - component: {fileID: 4546072623981494139}
+  - component: {fileID: 5888316466584887977}
   m_Layer: 12
   m_Name: HealthManager
   m_TagString: Untagged
@@ -30480,7 +30481,7 @@ Transform:
   m_GameObject: {fileID: 7192822538529798937}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30540,7 +30541,19 @@ CapsuleCollider:
   m_Radius: 0.4
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 1.0188, z: 0}
+  m_Center: {x: 0, y: 0.0188, z: 0}
+--- !u!114 &5888316466584887977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7192822538529798937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e34c22ae38de5084d8d0663ecda71a93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7196741291461263096
 GameObject:
   m_ObjectHideFlags: 0
@@ -38505,6 +38518,8 @@ MonoBehaviour:
   _targetLayer:
     serializedVersion: 2
     m_Bits: 2048
+  _onHitVFX: {fileID: 1665647362407752377, guid: d23193adcafda3045a25d09c37f9241e,
+    type: 3}
 --- !u!1 &8783338286161264420
 GameObject:
   m_ObjectHideFlags: 0
@@ -41430,3 +41445,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8089615420901659426}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7336744931703321973 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1555233881233253975, guid: ff607222ed912594fb73f482c1bc172e,
+    type: 3}
+  m_PrefabInstance: {fileID: 8089615420901659426}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c0e021e6fb198643a3bb5e5f49b71aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

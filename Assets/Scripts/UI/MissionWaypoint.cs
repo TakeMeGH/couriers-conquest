@@ -16,7 +16,7 @@ namespace CC
         [SerializeField] TransformAnchor _playerTransformAnchor = default;
         [SerializeField] float _showTime;
         [SerializeField] InputReader _inputReader;
-        bool _isShowing;
+        bool _isShowing = false;
         float _currentShowTime;
         Transform _playerTransform;
         Image img;
@@ -38,6 +38,8 @@ namespace CC
         private void Start()
         {
             if (img == null) FindImage();
+
+            if(img != null && !_isShowing) stopHint();
         }
 
         void FindImage()

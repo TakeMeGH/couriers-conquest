@@ -67141,6 +67141,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 3586956277854786044}
     m_Modifications:
+    - target: {fileID: 248642978839901137, guid: fa505bdfe83da2e45a78e773cd42b6e4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 659583493391229722, guid: fa505bdfe83da2e45a78e773cd42b6e4,
         type: 3}
       propertyPath: m_Pivot.x
@@ -67342,6 +67347,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UI_Notification
+      objectReference: {fileID: 0}
+    - target: {fileID: 5614950424530675042, guid: fa505bdfe83da2e45a78e773cd42b6e4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5614950424530675042, guid: fa505bdfe83da2e45a78e773cd42b6e4,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5614950424530675042, guid: fa505bdfe83da2e45a78e773cd42b6e4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5632569316878228601, guid: fa505bdfe83da2e45a78e773cd42b6e4,
         type: 3}
@@ -67546,13 +67566,19 @@ PrefabInstance:
     - target: {fileID: 8059770006956222758, guid: fa505bdfe83da2e45a78e773cd42b6e4,
         type: 3}
       propertyPath: m_HorizontalAlignment
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8109557226798674657, guid: fa505bdfe83da2e45a78e773cd42b6e4,
         type: 3}
       propertyPath: m_SizeDelta.x
       value: 312
       objectReference: {fileID: 0}
+    - target: {fileID: 8269628246467416955, guid: fa505bdfe83da2e45a78e773cd42b6e4,
+        type: 3}
+      propertyPath: _prefabs
+      value: 
+      objectReference: {fileID: 6034235069190026535, guid: 0f980a8d5f56f554d97e1c8e41cdb075,
+        type: 3}
     - target: {fileID: 8925965590304722404, guid: fa505bdfe83da2e45a78e773cd42b6e4,
         type: 3}
       propertyPath: m_Pivot.x

@@ -931,6 +931,7 @@ GameObject:
   - component: {fileID: 7775043817768126678}
   - component: {fileID: 7559780195844688439}
   - component: {fileID: 4533780076630932422}
+  - component: {fileID: 2361532813584533129}
   m_Layer: 12
   m_Name: HealthManager
   m_TagString: Untagged
@@ -947,7 +948,7 @@ Transform:
   m_GameObject: {fileID: 265026503912100002}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1007,7 +1008,19 @@ CapsuleCollider:
   m_Radius: 0.4
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 1.0188, z: 0}
+  m_Center: {x: 0, y: 0.0188, z: 0}
+--- !u!114 &2361532813584533129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265026503912100002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e34c22ae38de5084d8d0663ecda71a93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &273369211298358640
 GameObject:
   m_ObjectHideFlags: 0
@@ -24342,6 +24355,8 @@ MonoBehaviour:
   _targetLayer:
     serializedVersion: 2
     m_Bits: 2048
+  _onHitVFX: {fileID: 1025841467983556428, guid: 3d3dd832ccb017146a49cddffc91ab0e,
+    type: 3}
 --- !u!1 &5026155476760871883
 GameObject:
   m_ObjectHideFlags: 0

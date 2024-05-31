@@ -9,7 +9,6 @@ namespace CC.Combats
    public class HitPause : MonoBehaviour
 {
     public float pauseDuration = 0.1f; // Duration of the hit pause
-
     // Call this function when a hit is detected
     public void OnHit()
     {

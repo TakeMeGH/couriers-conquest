@@ -468,6 +468,7 @@ MonoBehaviour:
     guid: dd8e68e18f529754daac5587590602d5, type: 2}
   _onPlayerDead: {fileID: 11400000, guid: 939f7ace2fa4ab643b35f126639fdfa5, type: 2}
   _playerWatcher: {fileID: 11400000, guid: b4a5d3959431bd648be30b8a79350cf5, type: 2}
+  _onUpdateExp: {fileID: 11400000, guid: c3d722e27167b1740bbeb30729d9a68e, type: 2}
   <LayerData>k__BackingField:
     <GroundLayer>k__BackingField:
       serializedVersion: 2
@@ -1163,6 +1164,7 @@ GameObject:
   - component: {fileID: 3944035369420138692}
   - component: {fileID: 2107294712133200879}
   - component: {fileID: 7427144683471969171}
+  - component: {fileID: 2750770969685492590}
   m_Layer: 11
   m_Name: HealthManager
   m_TagString: Untagged
@@ -1240,6 +1242,18 @@ CapsuleCollider:
   m_Height: 2.2418153
   m_Direction: 1
   m_Center: {x: -0.01680912, y: -0.08821595, z: 0}
+--- !u!114 &2750770969685492590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6655406177078873421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e34c22ae38de5084d8d0663ecda71a93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6839657509875483949
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,6 +1327,8 @@ MonoBehaviour:
   _targetLayer:
     serializedVersion: 2
     m_Bits: 4096
+  _onHitVFX: {fileID: 4195078726753886842, guid: 559446c034fc8554d87c46af18437934,
+    type: 3}
 --- !u!54 &1149497327884641052
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -52,21 +52,24 @@ MonoBehaviour:
     type: 2}
   _onCharacterDamaged: {fileID: 11400000, guid: 2d6ad549611d5a74ab9b67dfcf4273eb,
     type: 2}
+  _itemPickupUI: {fileID: 11400000, guid: b0fda64278ae15e4daee6ae8f77d445b, type: 2}
   _playerGold: 1000
+  <GoldSprite>k__BackingField: {fileID: 21300000, guid: be98550d0e44617409157cf845b1e528,
+    type: 3}
   references:
     version: 2
     RefIds:
     - rid: 6232471290656325689
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
-        item: {fileID: 11400000, guid: 642fcf34f06480346bc2dacac957129c, type: 2}
-        name: '1: HP Potion'
-        stacks: 10
+        item: {fileID: 11400000, guid: 422f8d7e01666b842a6c8cd38c85618d, type: 2}
+        name: '1: Apple'
+        stacks: 1
     - rid: 6232471290656325690
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
         item: {fileID: 11400000, guid: 642fcf34f06480346bc2dacac957129c, type: 2}
-        name: '2: HP Potion'
+        name: '2: -'
         stacks: 10
     - rid: 6232471290656325691
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
@@ -155,18 +158,18 @@ MonoBehaviour:
     - rid: 6232471290656325705
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
-        item: {fileID: 11400000, guid: eeefb73c36e7e3843a06c4df2437434c, type: 2}
-        name: '17: Aiden Sword'
+        item: {fileID: 0}
+        name: '17: -'
         stacks: 1
     - rid: 6232471290656325706
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
-        item: {fileID: 11400000, guid: 0dd8a24712edce245a6b26e0eb3937df, type: 2}
-        name: '18: Aiden Shield'
+        item: {fileID: 0}
+        name: '18: -'
         stacks: 1
     - rid: 6232471290656325707
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
-        item: {fileID: 11400000, guid: 0d4930972d997194f8758cd8dc1f2c2f, type: 2}
-        name: '19: Aiden Armor'
+        item: {fileID: 0}
+        name: '19: -'
         stacks: 1
