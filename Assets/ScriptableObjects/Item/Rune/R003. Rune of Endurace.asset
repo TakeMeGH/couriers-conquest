@@ -19,10 +19,14 @@ MonoBehaviour:
     diukir menggunakan kalimat kuno. Rune ini dapat digunakan untuk menaikan status
     deff pada player, dan mengurangi attack untuk player
   itemSprite: {fileID: 21300000, guid: 3576dafce61846c4fa4269fe86e10397, type: 3}
-  maxStacks: 0
+  maxStacks: 1
   costBuy: 60
   costSell: 30
   runeStats:
     isPercent: 0
     statsToModify:
-      _serializedList: []
+      _serializedList:
+      - Key: 2
+        Value: -5
+      - Key: 4
+        Value: 10

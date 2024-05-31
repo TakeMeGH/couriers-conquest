@@ -71,10 +71,21 @@ namespace CC.Core.Data.Dynamic
             return _newModifier;
         }
 
+        public void ForceAddModifier(StatsModifier modifier)
+        {
+            modifiers.Add(modifier);
+        }
+
         public void RemoveModifier(StatsModifier modifier)
         {
             modifiers.Remove(modifier);
         }
+
+        public void ClearAllModifier()
+        {
+            modifiers.Clear();
+        }
+
         public float GetDamageReduction()
         {
             return statData.damageReduction;

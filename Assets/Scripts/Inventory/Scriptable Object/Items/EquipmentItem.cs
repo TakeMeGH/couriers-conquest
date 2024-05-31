@@ -10,7 +10,7 @@ namespace CC.Inventory
     public class EquipmentItem : ABaseItem
     {
         public int equipmentLevel;
-        public SerializedDictionary<mainStat, float> EquipmentStats;
+        public SerializedDictionary<mainStat, float> _baseStats;
         public ItemSlotType specificType;
         public List<UpgradeRequiriment> upgradeRequiriment = new List<UpgradeRequiriment>();
 
@@ -26,13 +26,27 @@ namespace CC.Inventory
 
         public float GetStatsWeapon(mainStat key)
         {
-            if (EquipmentStats.TryGetValue(key, out float value))
+            if (equipmentLevel <= 0)
             {
-                return value;
+                if (_baseStats.TryGetValue(key, out float value))
+                {
+                    return value;
+                }
+                else
+                {
+                    return 0;
+                }
             }
             else
             {
-                return 0;
+                if (upgradeRequiriment[equipmentLevel - 1].EquipmentStats.TryGetValue(key, out float value))
+                {
+                    return value;
+                }
+                else
+                {
+                    return 0;
+                }
             }
         }
     }
