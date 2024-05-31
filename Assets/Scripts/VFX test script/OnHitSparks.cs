@@ -5,7 +5,6 @@ public class OnHitSparks : MonoBehaviour
 {
     public void OnHit(Vector3 otherPosition, GameObject otherVFX)
     {
-        Debug.Log(otherPosition + " OTHER");
         RaycastHit hit;
         if (Physics.Raycast(transform.position, (otherPosition - transform.position).normalized, out hit))
         {
