@@ -3198,6 +3198,8 @@ MonoBehaviour:
   _targetLayer:
     serializedVersion: 2
     m_Bits: 2048
+  _onHitVFX: {fileID: 1025841467983556428, guid: 3d3dd832ccb017146a49cddffc91ab0e,
+    type: 3}
 --- !u!1 &885581289315280137
 GameObject:
   m_ObjectHideFlags: 0
@@ -14139,13 +14141,17 @@ MonoBehaviour:
   PatrolWaypoints:
   - {fileID: 0}
   - {fileID: 0}
+  _dropItemData: {fileID: 11400000, guid: 9f0f1ae140e4bf94e8a05178b110b51b, type: 2}
+  _dropItemOffset: {x: 0, y: 0.5, z: 0}
+  _dropItemRandomForce: {x: 0, y: 0, z: 0}
+  _dropSpeed: 2
   <WeaponDamage>k__BackingField: {fileID: 4857137905248485336}
   _ragdollController: {fileID: 4939032850561271187}
   _healthController: {fileID: 1378175434573802880}
-  _multiplier: 0
-  _healthBar: {fileID: 5633490583590479052}
+  <HealthBar>k__BackingField: {fileID: 5633490583590479052}
   _enemyStatsSO: {fileID: 11400000, guid: 700214312cc021946974893c268ce4cf, type: 2}
   _onEnemyAttacked: {fileID: 11400000, guid: 02ea49625c4987640b8462f56a65d970, type: 2}
+  _playerWatcher: {fileID: 11400000, guid: b4a5d3959431bd648be30b8a79350cf5, type: 2}
   sinkSpeed: 0.5
   sinkDuration: 3
 --- !u!1 &3425349060437242145
@@ -35561,6 +35567,7 @@ GameObject:
   - component: {fileID: 5226458384842659579}
   - component: {fileID: 1378175434573802880}
   - component: {fileID: 8579709131560005800}
+  - component: {fileID: 5680724107870366126}
   m_Layer: 12
   m_Name: HealthManager
   m_TagString: Untagged
@@ -35577,7 +35584,7 @@ Transform:
   m_GameObject: {fileID: 8143901568320514085}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -35636,7 +35643,19 @@ CapsuleCollider:
   m_Radius: 0.4
   m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 1.0188, z: 0}
+  m_Center: {x: 0, y: 0.0188, z: 0}
+--- !u!114 &5680724107870366126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8143901568320514085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e34c22ae38de5084d8d0663ecda71a93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8146175005715551829
 GameObject:
   m_ObjectHideFlags: 0

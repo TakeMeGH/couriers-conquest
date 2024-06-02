@@ -16,40 +16,42 @@ MonoBehaviour:
     defaultValue:
       _serializedList:
       - Key: 0
-        Value: 100
-      - Key: 1
-        Value: 100
+        Value: 105
       - Key: 2
-        Value: 10
+        Value: 27
       - Key: 4
-        Value: 2
+        Value: 5.5
+      - Key: 1
+        Value: 102
+      - Key: 3
+        Value: 1
+      - Key: 6
+        Value: 1
     instanceValue:
       _serializedList:
       - Key: 0
-        Value: 30
+        Value: 0
       - Key: 1
-        Value: 100
-    playerExp: 0
+        Value: 102
+    playerExp: 35
+    playerLevel: 2
     damageReduction: 0
-  modifiers:
-  - isPercent: 0
-    statsToModify:
-      _serializedList:
-      - Key: 4
-        Value: 10
-      - Key: 2
-        Value: 30
+  modifiers: []
   _defaultStatData:
     defaultValue:
       _serializedList:
       - Key: 0
         Value: 100
+      - Key: 2
+        Value: 25
+      - Key: 4
+        Value: 5
       - Key: 1
         Value: 100
-      - Key: 2
-        Value: 10
-      - Key: 4
-        Value: 2
+      - Key: 3
+        Value: 1
+      - Key: 6
+        Value: 1
     instanceValue:
       _serializedList:
       - Key: 0
@@ -57,4 +59,84 @@ MonoBehaviour:
       - Key: 1
         Value: 100
     playerExp: 0
+    playerLevel: 0
     damageReduction: 0
+  _listLevelStats:
+  - RequiredExp: 75
+    Stats:
+      _serializedList:
+      - Key: 0
+        Value: 100
+      - Key: 2
+        Value: 26
+      - Key: 4
+        Value: 5.25
+      - Key: 1
+        Value: 101
+      - Key: 3
+        Value: 1
+      - Key: 6
+        Value: 1
+  - RequiredExp: 150
+    Stats:
+      _serializedList:
+      - Key: 0
+        Value: 105
+      - Key: 2
+        Value: 27
+      - Key: 4
+        Value: 5.5
+      - Key: 1
+        Value: 102
+      - Key: 3
+        Value: 1
+      - Key: 6
+        Value: 1
+  - RequiredExp: 225
+    Stats:
+      _serializedList:
+      - Key: 0
+        Value: 110
+      - Key: 2
+        Value: 28
+      - Key: 4
+        Value: 5.75
+      - Key: 1
+        Value: 103
+      - Key: 3
+        Value: 1
+      - Key: 6
+        Value: 1
+  - RequiredExp: 300
+    Stats:
+      _serializedList:
+      - Key: 0
+        Value: 115
+      - Key: 2
+        Value: 29
+      - Key: 4
+        Value: 6
+      - Key: 1
+        Value: 104
+      - Key: 3
+        Value: 1
+      - Key: 6
+        Value: 1
+  - RequiredExp: 375
+    Stats:
+      _serializedList:
+      - Key: 0
+        Value: 120
+      - Key: 2
+        Value: 30
+      - Key: 4
+        Value: 6.25
+      - Key: 1
+        Value: 105
+      - Key: 3
+        Value: 1
+      - Key: 6
+        Value: 1
+  _itemPickupUI: {fileID: 11400000, guid: b0fda64278ae15e4daee6ae8f77d445b, type: 2}
+  _expIcon: {fileID: 21300000, guid: c66334be5347a66489608f8a81b06101, type: 3}
+  _levelUpIcon: {fileID: 21300000, guid: eb6b236540ada9148b0645cdc5c37377, type: 3}

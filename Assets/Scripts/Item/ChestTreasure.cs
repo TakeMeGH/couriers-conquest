@@ -1,9 +1,5 @@
-using CC.Events;
 using CC.Interaction;
 using CC.Inventory;
-using CC.Inventory.Item;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace CC.Items
@@ -30,7 +26,7 @@ namespace CC.Items
 
         public void Interact()
         {
-            foreach(ChestValue item in _items.itemChest)
+            foreach (ChestValue item in _items.itemChest)
             {
                 AttempToDrop(item);
             }
@@ -44,7 +40,6 @@ namespace CC.Items
             if (_customInteractables == null) _customInteractables = GetComponent<CustomInterractables>();
 
             _customInteractables.SetName(_chestName);
-            //_customInteractables.SetIcon(_item.itemSprite);
         }
 
         public void AttempToDrop(ChestValue item)
@@ -59,8 +54,6 @@ namespace CC.Items
             Transform _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
             GameObject dropPrefab = ObjectPooling.SharedInstance.GetPooledObject(PoolObjectType.Item);
 
-
-            //Dropped The Prefab
             if (dropPrefab != null)
             {
                 dropPrefab.transform.position = _playerTransform.position + new Vector3(0, 1.8f, 0) + camTransform.forward;
@@ -71,7 +64,6 @@ namespace CC.Items
             Rigidbody rb = dropPrefab.GetComponent<Rigidbody>();
             if (rb != null) rb.velocity = camTransform.forward * 1;
 
-            //Proses Add Item To Inventory
             ItemPickup ip = dropPrefab.GetComponentInChildren<ItemPickup>();
             ip.isDropItem = true;
             if (ip != null)

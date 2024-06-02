@@ -29,6 +29,7 @@ namespace CC.Enemy.States
         public virtual void Update()
         {
             EnviromentView();
+            UpdateRotation();
         }
 
         public virtual void PhysicsUpdate()
@@ -111,7 +112,8 @@ namespace CC.Enemy.States
                         && IsInNavmeshSurface(player))
                     {
                         _enemyController.EnemyCurrentData.PlayerTransform = player;
-                        _enemyController.EnemyCurrentData.IsPlayerInRange = true;
+                        _enemyController.PlayerInRange();
+                        break;
                     }
                 }
             }
@@ -126,6 +128,27 @@ namespace CC.Enemy.States
             }
             return false;
 
+        }
+
+        public void LookAt(Transform target)
+        {
+            _enemyController.EnemyCurrentData.InitialRotation = _enemyController.transform.rotation;
+
+            Vector3 targetPosition = new Vector3(target.position.x, _enemyController.transform.position.y, target.position.z);
+
+            _enemyController.EnemyCurrentData.TargetRotation = Quaternion.LookRotation(targetPosition - _enemyController.transform.position);
+            _enemyController.EnemyCurrentData.CurrentRotationTime = 0f;
+        }
+
+        public void UpdateRotation()
+        {
+            if (_enemyController.EnemyCurrentData.CurrentRotationTime < _enemyController.EnemyPersistenceData.RotationTime)
+            {
+                _enemyController.EnemyCurrentData.CurrentRotationTime += Time.deltaTime;
+                _enemyController.transform.rotation = Quaternion.Slerp(_enemyController.EnemyCurrentData.InitialRotation,
+                    _enemyController.EnemyCurrentData.TargetRotation,
+                    Mathf.Min(1f, _enemyController.EnemyCurrentData.CurrentRotationTime / _enemyController.EnemyPersistenceData.RotationTime));
+            }
         }
     }
 }

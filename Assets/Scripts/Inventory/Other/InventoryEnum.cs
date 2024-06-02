@@ -28,10 +28,11 @@ namespace CC.Inventory
 
     public enum ConsumableType
     {
-        HPRegeneration,
-        OnetimeATK,
-        OvertimeATK,
-        Stamina,
+        RegenerationHP,
+        IncreaseAttack,
+        IncreaseDefense,
+        IncreaseStamina,
+        IncreaseSpeed
     }
 
     public enum InventoryActionType

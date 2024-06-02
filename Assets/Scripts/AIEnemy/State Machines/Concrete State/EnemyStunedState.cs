@@ -16,8 +16,7 @@ namespace CC.Enemy.States
             _enemyController.EnemyCurrentData.AttackedCount = 0;
             _enemyController.Animator.SetTrigger("Stuned");
             
-            Debug.Log(_enemyController.EnemyCurrentData.PlayerTransform.position);
-            _enemyController.transform.LookAt(_enemyController.EnemyCurrentData.PlayerTransform.position);
+            LookAt(_enemyController.EnemyCurrentData.PlayerTransform);
 
             _enemyController.NavMeshAgent.speed = 0;
             _enemyController.NavMeshAgent.velocity = Vector3.zero;

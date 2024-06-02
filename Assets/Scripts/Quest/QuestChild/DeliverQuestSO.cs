@@ -4,6 +4,7 @@ using CC.Inventory;
 using CC.Quest.Example;
 using CC.NPC;
 using UnityEngine;
+using CC.Quest.UI;
 
 namespace CC.Quest
 {
@@ -21,9 +22,11 @@ namespace CC.Quest
         [Header("Dialogue")]
         [SerializeField] SenderDataEventChannelSO SendNPCQuestDialogue;
         [SerializeField] SenderDataEventChannelSO ClearNPCQuestDialogue;
-        //[SerializeField] string _dialogueNode;
         //[SerializeField] SenderDataEventChannelSO[] _extraEventsChannel;
         [SerializeField] List<NPCQuestDialogueNodeTransfer> _npcList; //init npc with dialogues
+        [Header("Quest Hint")]
+        [SerializeField] SenderDataEventChannelSO _findQuestHintOwner;
+        [SerializeField] QuestHintData _questHintData;
         public override void OnQuestStarted(Component sender, object data)
         {
             base.OnQuestStarted(sender, data);
@@ -46,6 +49,7 @@ namespace CC.Quest
                 SendNPCQuestDialogue?.raiseEvent(null, npc);
             }
 
+            _findQuestHintOwner?.raiseEvent(null, _questHintData);
             Debug.Log("quest has started");
         }
         public override void OnQuestProgress(Component sender, object data)

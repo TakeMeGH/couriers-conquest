@@ -25,7 +25,8 @@ namespace CC.Enemy.States
                 StartAnimation("isLightAttack");
             }
             
-            _enemyController.transform.LookAt(_enemyController.EnemyCurrentData.PlayerTransform.position);
+            LookAt(_enemyController.EnemyCurrentData.PlayerTransform);
+            // _enemyController.transform.LookAt(_enemyController.EnemyCurrentData.PlayerTransform.position);
             _enemyController.WeaponDamage.SetAttack();
 
             _enemyController.NavMeshAgent.speed = 0;

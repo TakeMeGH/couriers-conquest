@@ -9,8 +9,10 @@ namespace CC.Combats
     public class WeaponDamage : MonoBehaviour
     {
         [SerializeField] LayerMask _targetLayer;
+        [SerializeField] GameObject _onHitVFX;
         PlayerStatsSO _statsSO;
-
+        HitPause _hitPause;
+        bool _canHitPause;
         int _damage;
         Collider _collider;
         private List<Collider> _alreadyCollidedWith = new List<Collider>();
@@ -19,6 +21,7 @@ namespace CC.Combats
         void Start()
         {
             _collider = GetComponent<Collider>();
+            _hitPause = GetComponent<HitPause>();
         }
         public void SetStats(PlayerStatsSO statsSO)
         {
@@ -29,6 +32,7 @@ namespace CC.Combats
         {
             _alreadyCollidedWith.Clear();
             _collider.enabled = true;
+            _canHitPause = true;
         }
 
         public void DisableWeapon()
@@ -53,6 +57,15 @@ namespace CC.Combats
             if (other.TryGetComponent(out Health health))
             {
                 health.DealDamage(_damage);
+                if (other.TryGetComponent(out OnHitSparks onHitSparks))
+                {
+                    onHitSparks.OnHit(transform.position, _onHitVFX);
+                }
+                if (_canHitPause)
+                {
+                    _canHitPause = false;
+                    _hitPause?.OnHit();
+                }
             }
         }
 

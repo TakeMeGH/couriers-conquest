@@ -42,12 +42,12 @@ namespace CC.Quest
         #region "Quest Flow"
         public void StartQuest(Component sender, object data)
         {
-            acceptedQuest.OnQuestStarted(sender,data);
+            acceptedQuest.OnQuestStarted(sender, data);
         }
 
         public void ProgressQuest(Component sender, object data)
         {
-            acceptedQuest.OnQuestProgress(sender,data);
+            acceptedQuest.OnQuestProgress(sender, data);
         }
 
         public void CompleteQuest(Component sender, object data)
@@ -56,6 +56,13 @@ namespace CC.Quest
             _playerState.addFinishedQuest(acceptedQuest.GetQuestID());
             acceptedQuest = null;
         }
+
+        public void SendQuestReward(Component sender, object data)
+        {
+            acceptedQuest.SendReward(sender, data);
+        }
+
+
 
         public void CancelQuest(Component sender, object data)
         {

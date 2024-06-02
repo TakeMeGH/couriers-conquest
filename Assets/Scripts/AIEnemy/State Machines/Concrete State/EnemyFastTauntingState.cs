@@ -13,8 +13,9 @@ namespace CC.Enemy.States
             base.Enter();
 
             StartAnimation("isFastTaunting");
-
-            _enemyController.transform.LookAt(_enemyController.EnemyCurrentData.PlayerTransform.position);
+            
+            _enemyController.HealthBar.gameObject.SetActive(true);
+            LookAt(_enemyController.EnemyCurrentData.PlayerTransform);
 
             _enemyController.NavMeshAgent.speed = 0;
             _enemyController.NavMeshAgent.velocity = Vector3.zero;

@@ -15716,7 +15716,7 @@ MonoBehaviour:
       Data2: 1086969497
       Data3: -1361297494
       Data4: 1248302993
-    Path: event:/Music/Main Menu
+    Path: event:/Music (all goes to Music Slider)/Main Menu
   Event: 
   PlayEvent: 1
   StopEvent: 2
@@ -15744,6 +15744,13 @@ MonoBehaviour:
   musicVolume: 1
   SFXVolume: 1
   settingValue: {fileID: 11400000, guid: 42389bf0155686c49ac220452321e9de, type: 2}
+  bgmInstance:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
 --- !u!4 &1888573584
 Transform:
   m_ObjectHideFlags: 0

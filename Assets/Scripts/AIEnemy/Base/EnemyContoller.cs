@@ -7,6 +7,9 @@ using CC.Ragdoll;
 using System.Collections;
 using CC.UI;
 using CC.Events;
+using CC.Inventory;
+using System.Collections.Generic;
+using UnityEngine.Events;
 
 namespace CC.Enemy
 {
@@ -16,19 +19,25 @@ namespace CC.Enemy
         [Header("Data")]
         public EnemyControllerDataSO EnemyPersistenceData;
         public Transform[] PatrolWaypoints;
+        public UnityAction OnPlayerDetected;
+        public bool IsDead { get; private set; }
+        [Header("Drop Item")]
+        [SerializeField] EnemyDropItemSO _dropItemData;
+        [SerializeField] Vector3 _dropItemOffset;
+        [SerializeField] Vector3 _dropItemRandomForce;
+        [SerializeField] float _dropSpeed;
         [field: SerializeField, Header("Component")] public WeaponDamage WeaponDamage { get; private set; }
         [SerializeField] RagdollController _ragdollController;
         [SerializeField] Health _healthController;
-        [SerializeField] float _multiplier;
-        [SerializeField] EnemyHealthUIController _healthBar;
+        [field: SerializeField] public EnemyHealthUIController HealthBar { get; private set; }
         [Header("Copy SO")]
         [SerializeField] PlayerStatsSO _enemyStatsSO;
         [SerializeField] VoidEventChannelSO _onEnemyAttacked;
+        [Header("Event")]
+        [SerializeField] IntEventChannelSO _playerWatcher;
         [Header("Sink Data")]
         [SerializeField] float sinkSpeed = 15f;
         [SerializeField] float sinkDuration = 3f;
-
-
 
         #region Component
         public NavMeshAgent NavMeshAgent { get; private set; }
@@ -77,19 +86,23 @@ namespace CC.Enemy
             _onEnemyAttacked = CloneAttackedEvent;
             _onEnemyAttacked.OnEventRaised += OnAttacked;
 
+            _healthController.gameObject.SetActive(true);
             _healthController.SetStats(_enemyStatsSO);
             _healthController.SetAttackEvent(_onEnemyAttacked);
 
+            HealthBar.gameObject.SetActive(true);
+
             WeaponDamage.SetStats(_enemyStatsSO);
-            _healthBar.SetStats(_enemyStatsSO);
+            HealthBar.SetStats(_enemyStatsSO);
 
-
+            _ragdollController.Initialize();
+            IsDead = false;
+            SwitchState(PatrolingState);
         }
 
         void Start()
         {
             Initialize();
-            SwitchState(PatrolingState);
         }
 
         public void OnDead()
@@ -100,9 +113,19 @@ namespace CC.Enemy
             Rigidbody.useGravity = false;
             NavMeshAgent.enabled = false;
             currentState = null;
-            Destroy(_healthBar.gameObject);
+
+            HealthBar.gameObject.SetActive(false);
+            _healthController.gameObject.SetActive(false);
+
+            IsDead = true;
+
+            PlayerOutOfRange();
+
+            List<DropedItem> dropedItems = _dropItemData.GetDroppedItems();
 
             _ragdollController.SetRagdoll(true, false);
+
+            StartCoroutine(DropItemsWithDelay(dropedItems));
             StartCoroutine(SinkAndFade());
 
         }
@@ -122,12 +145,65 @@ namespace CC.Enemy
                 yield return null;
             }
 
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
+
+        private IEnumerator DropItemsWithDelay(List<DropedItem> droppedItems)
+        {
+            foreach (var item in droppedItems)
+            {
+                DropItem(item.Item, item.Amount);
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+
+
+        void DropItem(ABaseItem item, int amount)
+        {
+            GameObject dropPrefab = ObjectPooling.SharedInstance.GetPooledObject(PoolObjectType.Item);
+            if (dropPrefab != null)
+            {
+                dropPrefab.transform.position = transform.position + _dropItemOffset;
+                dropPrefab.transform.rotation = transform.rotation;
+                dropPrefab.SetActive(true);
+            }
+
+            Rigidbody rb = dropPrefab.GetComponent<Rigidbody>();
+            if (rb != null) rb.velocity = transform.up * _dropSpeed;
+
+            ItemPickup ip = dropPrefab.GetComponentInChildren<ItemPickup>();
+            ip.isDropItem = true;
+            if (ip != null)
+            {
+                ip.item = item;
+                ip.amount = amount;
+            }
+        }
+
+        public void PlayerInRange()
+        {
+            if (EnemyCurrentData.IsPlayerInRange == false)
+            {
+                EnemyCurrentData.IsPlayerInRange = true;
+                OnPlayerDetected.Invoke();
+                _playerWatcher.RaiseEvent(1);
+            }
+        }
+
+        public void PlayerOutOfRange()
+        {
+            if (EnemyCurrentData.IsPlayerInRange == true)
+            {
+                EnemyCurrentData.IsPlayerInRange = false;
+                _playerWatcher.RaiseEvent(-1);
+            }
+        }
+
 
         void OnAttacked()
         {
             ((EnemyControllerState)currentState).OnAttacked();
+            PlayerInRange();
         }
         public void OnAnimationEnterEvent()
         {
@@ -143,5 +219,6 @@ namespace CC.Enemy
         {
             currentState.OnAnimationTransitionEvent();
         }
+
     }
 }
