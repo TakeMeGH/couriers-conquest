@@ -196,6 +196,51 @@ VFXRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &730056253489914747
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6928434167020472544}
+  - component: {fileID: 2945888845450149729}
+  m_Layer: 8
+  m_Name: GrassInteractor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6928434167020472544
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730056253489914747}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.031, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8473285502499647466}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2945888845450149729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730056253489914747}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d537cf29eb88ac49abfe85b2033bd6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 1.25
 --- !u!1 &1492272950720154060
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +372,6 @@ GameObject:
   - component: {fileID: 7307293346083946928}
   - component: {fileID: 2421224697272190204}
   - component: {fileID: 6733626225632487495}
-  - component: {fileID: 5218433006751980378}
   - component: {fileID: 2922320480930429317}
   m_Layer: 8
   m_Name: Player MC
@@ -542,19 +586,6 @@ MonoBehaviour:
   _weightTreshold: 20
   _weightMultiplier: 0.02
   _onWeightUpdated: {fileID: 11400000, guid: 33b19aa9c0b983f4192af77f887fb053, type: 2}
---- !u!114 &5218433006751980378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1713287152588927198}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d537cf29eb88ac49abfe85b2033bd6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radius: 0.6
 --- !u!114 &2922320480930429317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1575,6 +1606,7 @@ Transform:
   - {fileID: 8381440508210819030}
   - {fileID: 1434765533425226840}
   - {fileID: 7887747153653520539}
+  - {fileID: 6928434167020472544}
   m_Father: {fileID: 4116597097574829069}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7451345458827248923

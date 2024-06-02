@@ -33,6 +33,7 @@ Transform:
   - {fileID: 2569008146101126345}
   - {fileID: 5226280362212160398}
   - {fileID: 1791802196104178144}
+  - {fileID: 8746233049218567851}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3220452818553738118
@@ -83,6 +84,56 @@ MonoBehaviour:
     type: 2}
   _playerStateData: {fileID: 11400000, guid: b8def99fed8f3ab47b6dacd033f88368, type: 2}
   _prologueQuestId: 0
+  _inputReader: {fileID: 11400000, guid: 2c06813ec1504fb49916705513d476fd, type: 2}
+--- !u!1 &7586603581939361763
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8746233049218567851}
+  - component: {fileID: 4909533659453886721}
+  m_Layer: 31
+  m_Name: PostProcessing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8746233049218567851
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7586603581939361763}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2217315979337995632}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4909533659453886721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7586603581939361763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: a6560a915ef98420e9faacc1c7438823, type: 2}
 --- !u!1001 &6237427337483462864
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -145,6 +196,66 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DaynightManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627791706205863779, guid: f59bf2a858f324141b31a73d8d0b9a99,
+        type: 3}
+      propertyPath: _waterMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 4bf06c7d7e34a8845b86a5275231539c, type: 2}
+    - target: {fileID: 8627791706205863779, guid: f59bf2a858f324141b31a73d8d0b9a99,
+        type: 3}
+      propertyPath: _waterGrad.key0.a
+      value: 0.39215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627791706205863779, guid: f59bf2a858f324141b31a73d8d0b9a99,
+        type: 3}
+      propertyPath: _waterGrad.key0.b
+      value: 0.15294118
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627791706205863779, guid: f59bf2a858f324141b31a73d8d0b9a99,
+        type: 3}
+      propertyPath: _waterGrad.key0.g
+      value: 0.1254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627791706205863779, guid: f59bf2a858f324141b31a73d8d0b9a99,
+        type: 3}
+      propertyPath: _waterGrad.key1.a
+      value: 0.39215687
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627791706205863779, guid: f59bf2a858f324141b31a73d8d0b9a99,
+        type: 3}
+      propertyPath: _waterGrad.key1.b
+      value: 0.15471691
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627791706205863779, guid: f59bf2a858f324141b31a73d8d0b9a99,
+        type: 3}
+      propertyPath: _waterGrad.key1.g
+      value: 0.12441489
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627791706205863779, guid: f59bf2a858f324141b31a73d8d0b9a99,
+        type: 3}
+      propertyPath: _waterGrad.key1.r
+      value: 0.0008757434
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627791706205863779, guid: f59bf2a858f324141b31a73d8d0b9a99,
+        type: 3}
+      propertyPath: _waterGrad.key6.b
+      value: 0.15294118
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627791706205863779, guid: f59bf2a858f324141b31a73d8d0b9a99,
+        type: 3}
+      propertyPath: _waterGrad.key6.g
+      value: 0.1254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627791706205863779, guid: f59bf2a858f324141b31a73d8d0b9a99,
+        type: 3}
+      propertyPath: _waterGrad.key7.b
+      value: 0.15294118
+      objectReference: {fileID: 0}
+    - target: {fileID: 8627791706205863779, guid: f59bf2a858f324141b31a73d8d0b9a99,
+        type: 3}
+      propertyPath: _waterGrad.key7.g
+      value: 0.1254902
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
