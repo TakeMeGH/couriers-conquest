@@ -8,6 +8,9 @@ namespace CC.Inventory
 {
     public class ItemsActionPlayerStats : MonoBehaviour
     {
+        [SerializeField]
+        private PotionVFX potionVFX; // Reference to the PotionVFX script
+
         private PlayerStatsSO _playerStats;
         private InventoryData _playerInventoryData;
 
@@ -25,13 +28,14 @@ namespace CC.Inventory
             InvokeRepeating("StartOvertimeRegenerationHP", 0f, 1f);
             Invoke("StopOvetimeRegenerationHP", regenDuration);
             ReduceItem(index);
+            potionVFX.ActivateHealingEffect(); // Activate the healing VFX
         }
 
         public void StartOvertimeRegenerationHP()
         {
             float _newPlayerHP = _playerStats.GetInstanceValue(mainStat.Health);
             float _maxHp = _playerStats.GetValue(mainStat.Health);
-            _playerStats.SetInstanceValue(mainStat.Health, _newPlayerHP + _maxHp);
+            _playerStats.SetInstanceValue(mainStat.Health, Mathf.Min(_newPlayerHP + amountRegeneration, _maxHp));
 
             Debug.Log("Regen : " + amountRegeneration.ToString());
         }
