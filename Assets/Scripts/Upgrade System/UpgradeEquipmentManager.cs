@@ -153,7 +153,7 @@ namespace CC.UpgradeEquipment
         {
             UseMaterialRequiriment();
             ReducePlayerMoney();
-            SuccesfullUpgrade();
+            //SuccesfullUpgrade();
 
             ResetPanel();
             _tempPlayerInventory.Initialize(_inventoryData, this, _itemSlotMouse, _playerInventoryData);
@@ -181,7 +181,7 @@ namespace CC.UpgradeEquipment
             _onUpdateCurrency.RaiseEvent(-_lastPrice);
         }
 
-        private void SuccesfullUpgrade()
+       /* private void SuccesfullUpgrade()
         {
             // TODO : FIX
             _upgradeEquipmentUI.SetStatsPanelBeforeUpgrade(_currentEquipmentItem.itemSprite, 
@@ -193,6 +193,6 @@ namespace CC.UpgradeEquipment
             _upgradeEquipmentUI.SetStatsPanelAfterUpgrade(_currentEquipmentItem.itemSprite, 
                 _currentEquipmentItem.equipmentLevel, _currentEquipmentItem.EquipmentStats, 
                 _currentEquipmentItem.itemWeight);
-        }
+        }*/
     }
 }

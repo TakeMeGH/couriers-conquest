@@ -82,6 +82,11 @@ namespace CC.Core.Data.Dynamic
             return _newModifier;
         }
 
+        public void ForceAddModifier(StatsModifier modifier)
+        {
+            modifiers.Add(modifier);
+        }
+
         public void OnUpdateExp(int amount)
         {
             _itemPickupUI.raiseEvent(null, new itemNotifData("Exp", amount, _expIcon));
@@ -127,6 +132,12 @@ namespace CC.Core.Data.Dynamic
         {
             modifiers.Remove(modifier);
         }
+
+        public void ClearAllModifier()
+        {
+            modifiers.Clear();
+        }
+
         public float GetDamageReduction()
         {
             return statData.damageReduction;

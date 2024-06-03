@@ -1,3 +1,4 @@
+using CC.Core.Data.Dynamic;
 using System.Collections;
 using System.Collections.Generic;
 using CC.UI.Notification;
@@ -26,7 +27,7 @@ namespace CC.Inventory
             SetDefaultEquipment();
             AddAllQuestItemEvent();
 
-            CheckDefaultEquipment();
+            //CheckDefaultEquipment();
         }
 
         private void DefaultItem(IInventoryManager inventoryManager)
@@ -58,6 +59,7 @@ namespace CC.Inventory
 
         private void SetDefaultEquipment()
         {
+            _playerInventoryManager.ClearAllModifier();
             for (int i = _inventoryData.inventoryIndex; i < _playerInventoryManager.existingPanels.Count; i++)
             {
                 AttachDefaultItem(i);
@@ -138,7 +140,11 @@ namespace CC.Inventory
 
                 if (_inventoryData.items[i].item.GetItemType() == ItemType.Equipment)
                 {
-                    if (((EquipmentItem)_inventoryData.items[i].item).specificType == _playerInventoryManager.existingPanels[targetSlot].GetSlotType())
+                    EquipmentItem item = (EquipmentItem)_inventoryData.items[i].item;
+                    Debug.Log("Try To Attach");
+                    _playerInventoryManager.AddModifier(item, false);
+
+                    if (item.specificType == _playerInventoryManager.existingPanels[targetSlot].GetSlotType())
                     {
                         _inventoryData.items[targetSlot].item = _inventoryData.items[i].item;
                         _inventoryData.items[targetSlot].stacks = _inventoryData.items[i].stacks;
@@ -155,7 +161,9 @@ namespace CC.Inventory
             _playerInventoryManager.RefreshInventory();
         }
 
-        private void CheckDefaultEquipment()
+        
+
+        /*private void CheckDefaultEquipment()
         {
             for (int i = _inventoryData.inventoryIndex; i < _playerInventoryManager.existingPanels.Count; i++)
             {
@@ -171,7 +179,7 @@ namespace CC.Inventory
                     Debug.Log("Not Null");
                 }
             };
-        }
+        }*/
 
         public void OnRemoveItem(Component _component, object _item)
         {

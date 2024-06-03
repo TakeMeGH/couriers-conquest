@@ -21,30 +21,60 @@ MonoBehaviour:
   costBuy: 0
   costSell: 0
   equipmentLevel: 0
-  EquipmentStats:
+  _baseStats:
     _serializedList:
-    - Key: 6
-      Value: 20
-    - Key: 0
-      Value: 0
-    - Key: 1
-      Value: 0
-    - Key: 2
-      Value: 0
-    - Key: 3
-      Value: 0
-    - Key: 4
-      Value: 10
     - Key: 5
-      Value: 0
+      Value: 5
   specificType: 2
   upgradeRequiriment:
   - materialRequiriment:
-    - itemRequiriment: {fileID: 11400000, guid: 67dcfa53c07ea3e4ca05ee6d7793545f,
+    - itemRequiriment: {fileID: 11400000, guid: 682e083349ed3b94e9494c5281401aef,
         type: 2}
       amount: 2
-    price: 0
+    - itemRequiriment: {fileID: 11400000, guid: 67dcfa53c07ea3e4ca05ee6d7793545f,
+        type: 2}
+      amount: 1
+    price: 40
     EquipmentStats:
       _serializedList:
       - Key: 5
-        Value: 20
+        Value: 7
+  - materialRequiriment:
+    - itemRequiriment: {fileID: 11400000, guid: 682e083349ed3b94e9494c5281401aef,
+        type: 2}
+      amount: 4
+    - itemRequiriment: {fileID: 11400000, guid: 67dcfa53c07ea3e4ca05ee6d7793545f,
+        type: 2}
+      amount: 3
+    price: 45
+    EquipmentStats:
+      _serializedList:
+      - Key: 5
+        Value: 9
+  - materialRequiriment:
+    - itemRequiriment: {fileID: 11400000, guid: a82e255da905aaa4f824eafb1d676a52,
+        type: 2}
+      amount: 2
+    - itemRequiriment: {fileID: 11400000, guid: 67dcfa53c07ea3e4ca05ee6d7793545f,
+        type: 2}
+      amount: 5
+    price: 50
+    EquipmentStats:
+      _serializedList:
+      - Key: 5
+        Value: 11
+  - materialRequiriment:
+    - itemRequiriment: {fileID: 11400000, guid: a82e255da905aaa4f824eafb1d676a52,
+        type: 2}
+      amount: 4
+    - itemRequiriment: {fileID: 11400000, guid: 67dcfa53c07ea3e4ca05ee6d7793545f,
+        type: 2}
+      amount: 8
+    - itemRequiriment: {fileID: 11400000, guid: f8376366fdc676241aaf518d00bd996f,
+        type: 2}
+      amount: 2
+    price: 80
+    EquipmentStats:
+      _serializedList:
+      - Key: 5
+        Value: 15
