@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
@@ -10,10 +8,11 @@ using CC;
 public class AudioManager : MonoBehaviour
 {
 
-    public static AudioManager instance {
+    public static AudioManager instance
+    {
         get;
         private set;
-        }
+    }
 
     [Header("Volume")]
 
@@ -29,14 +28,20 @@ public class AudioManager : MonoBehaviour
     [SerializeField]
     private SettingsValueHolder settingValue;
 
+    [Header("Event")]
+    [SerializeField] EventReference bgmInstance;
+
+
     private Bus masterBus;
     private Bus musicBus;
     private Bus sfxBus;
 
-    private void Awake() {
-        if (instance != null){
+    private void Awake()
+    {
+        if (instance != null)
+        {
             Debug.LogError("Somehow there's more than one AudioManager in the scene");
-        }    
+        }
         instance = this;
 
         masterBus = RuntimeManager.GetBus("bus:/");
@@ -50,33 +55,36 @@ public class AudioManager : MonoBehaviour
         masterVolume = settingValue.MasterVolumeValue;
         musicVolume = settingValue.MusicVolumeValue;
         SFXVolume = settingValue.SFXVolumeValue;
-        
-        
+
+
         // masterBus.setVolume(settingValue.MasterVolumeValue);
         // musicBus.setVolume(settingValue.MusicVolumeValue);
         // sfxBus.setVolume(settingValue.SFXVolumeValue);        
     }
 
-    
-    public void AudioPlayOneShot(EventReference sound, Vector3 worldPos){
+
+    public void AudioPlayOneShot(EventReference sound, Vector3 worldPos)
+    {
         RuntimeManager.PlayOneShot(sound, worldPos);
     }
 
-    
-    public void saveConfirmedVolume(){
+
+    public void saveConfirmedVolume()
+    {
         masterBus.getVolume(out settingValue.MasterVolumeValue);
         musicBus.getVolume(out settingValue.MusicVolumeValue);
         sfxBus.getVolume(out settingValue.SFXVolumeValue);
     }
-    
-    public void discardConfirmedVolume(){
+
+    public void discardConfirmedVolume()
+    {
 
 
         masterVolume = settingValue.MasterVolumeValue;
         musicVolume = settingValue.MusicVolumeValue;
         SFXVolume = settingValue.SFXVolumeValue;
 
-        
+
         masterBus.setVolume(settingValue.MasterVolumeValue);
         musicBus.setVolume(settingValue.MusicVolumeValue);
         sfxBus.setVolume(settingValue.SFXVolumeValue);

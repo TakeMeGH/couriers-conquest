@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CC.UI.Notification
 {
@@ -9,12 +10,21 @@ namespace CC.UI.Notification
     {
         [SerializeField] TextMeshProUGUI _itemName;
         [SerializeField] TextMeshProUGUI _itemQuantity;
+        [SerializeField] Image _icon;
         [SerializeField] float _duration;
         [SerializeField] bool _onScreen;
         public void Set(itemNotifData data, float duration)
         {
             _itemName.text = data.itemName;
-            _itemQuantity.text = "x" + data.quantity.ToString();
+            if (data.quantity == 1)
+            {
+                _itemQuantity.text = "";
+            }
+            else
+            {
+                _itemQuantity.text = "x" + data.quantity.ToString();
+            }
+            _icon.sprite = data.icon;
             _duration = duration;
             _onScreen = true;
         }

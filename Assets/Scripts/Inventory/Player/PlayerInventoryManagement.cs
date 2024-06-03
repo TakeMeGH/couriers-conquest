@@ -1,6 +1,7 @@
 using CC.Core.Data.Dynamic;
 using System.Collections;
 using System.Collections.Generic;
+using CC.UI.Notification;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -77,6 +78,10 @@ namespace CC.Inventory
 
             //Check for open spaces in existing slots
 
+            // TODO : ITEMPICKEDUP
+            int totalAmount = amount;
+
+
             for (int i = 0; i < _inventoryData.inventorySize; i++)
             {
                 if (_inventoryData.items[i].item != null)
@@ -92,6 +97,7 @@ namespace CC.Inventory
                         {
                             _inventoryData.items[i].stacks += amount;
                             if (_playerInventoryManager.inventoryMenuUI.activeSelf) _playerInventoryManager.RefreshInventory();
+                            _inventoryData.itemPickupUI.raiseEvent(null, new itemNotifData(item.itemName, amount, item.itemSprite));
                             return 0;
                         }
                     }
@@ -114,10 +120,13 @@ namespace CC.Inventory
                         _inventoryData.items[i].item = item;
                         _inventoryData.items[i].stacks = amount;
                         if (_playerInventoryManager.inventoryMenuUI.activeSelf) _playerInventoryManager.RefreshInventory();
+                        _inventoryData.itemPickupUI.raiseEvent(null, new itemNotifData(item.itemName, amount, item.itemSprite));
                         return 0;
                     }
                 }
             }
+
+            _inventoryData.itemPickupUI.raiseEvent(null, new itemNotifData(item.itemName, totalAmount - amount, item.itemSprite));
 
             if (_playerInventoryManager.inventoryMenuUI.activeSelf) _playerInventoryManager.RefreshInventory();
             return amount;
@@ -217,6 +226,7 @@ namespace CC.Inventory
 
         public void OnUpdateCurrency(int amount)
         {
+            _inventoryData.itemPickupUI.raiseEvent(null, new itemNotifData("Gold", amount, _inventoryData.GoldSprite));
             _inventoryData.playerGold += amount;
         }
 

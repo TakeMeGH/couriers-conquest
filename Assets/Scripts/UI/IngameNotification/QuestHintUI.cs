@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using CC.Quest.UI;
+using CC.RuntimeAnchors;
 using TMPro;
 using UnityEngine;
 
@@ -8,24 +8,33 @@ namespace CC.UI.Notification
     public class QuestHintUI : MonoBehaviour
     {
         [Header("Visuals")]
-        [SerializeField] TextMeshProUGUI _QuestTitle;
-        [SerializeField] TextMeshProUGUI _QuestObjective;
-        [SerializeField] TextMeshProUGUI _DistanceToObjective;
+        [SerializeField] TextMeshProUGUI _questObjective;
+        [SerializeField] TextMeshProUGUI _distanceToObjective;
         [SerializeField] GameObject _Visuals;
+        [SerializeField] TransformAnchor _playerTransformAnchor = default;
 
         [Header("Param")]
         [SerializeField] bool showHint;
         [SerializeField] GameObject _targetObjective;
-        [SerializeField] GameObject _player;
+        Transform _player;
+        private void OnEnable()
+        {
+            _playerTransformAnchor.OnAnchorProvided += SetPlayerTransfrom;
+        }
+
+        private void OnDisable()
+        {
+            _playerTransformAnchor.OnAnchorProvided -= SetPlayerTransfrom;
+        }
+
 
         public void Hints(Component sender, object data)
         {
-            if(data is QuestHintData)
+            if (data is HintData)
             {
-                QuestHintData _data = (QuestHintData)data;
-                _QuestTitle.text = _data.questName;
-                _QuestObjective.text = _data.questObjective;
-                _targetObjective = _data.targetObjective;
+                HintData _data = (HintData)data;
+                _questObjective.text = _data.Objective;
+                _targetObjective = _data.Destination;
                 showHint = true;
                 _Visuals.SetActive(true);
             }
@@ -38,27 +47,21 @@ namespace CC.UI.Notification
 
         void updateDistance()
         {
-            _DistanceToObjective.text = Vector3.Distance(_player.transform.position, _targetObjective.transform.position).ToString("F2");
+            _distanceToObjective.text = ((int)Vector3.Distance(_player.transform.position, _targetObjective.transform.position)).ToString() + "M";
+         
         }
 
         public void stopHint()
         {
+            Debug.Log("STOP HIN");
             showHint = false;
             _Visuals.SetActive(false);
         }
 
-
-    }
-    public class QuestHintData
-    {
-        public readonly string questName;
-        public readonly string questObjective;
-        public readonly GameObject targetObjective;
-        public QuestHintData(string _name, string _objective, GameObject _target)
+        void SetPlayerTransfrom()
         {
-            questName = _name;
-            questObjective = _objective;
-            targetObjective = _target;
+            _player = _playerTransformAnchor.Value;
         }
+
     }
 }

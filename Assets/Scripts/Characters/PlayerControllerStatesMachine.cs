@@ -27,6 +27,7 @@ namespace CC.Characters
         [field: Header("Events")]
         [SerializeField] VoidEventChannelSO _onPlayerDead;
         [SerializeField] IntEventChannelSO _playerWatcher;
+        [SerializeField] IntEventChannelSO _onUpdateExp;
 
         [field: Header("Collisions")]
         [field: SerializeField] public PlayerLayerData LayerData { get; private set; }
@@ -129,6 +130,7 @@ namespace CC.Characters
             StaminaController.SetStats(PlayerStatsSO);
 
             _playerWatcher.OnEventRaised += OnEnemyWatch;
+            _onUpdateExp.OnEventRaised += PlayerStatsSO.OnUpdateExp;
         }
 
         private void Start()

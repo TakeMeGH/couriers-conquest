@@ -16,12 +16,18 @@ MonoBehaviour:
   _questType: 1
   _questName: Prologue
   _questDescription: Prologue
+  _questArea: 
   _questPrerequisitesID: 
   _onSendReward: {fileID: 0}
   _reward:
-    gold: 0
-    exp: 0
-    item: []
+    gold: 10
+    exp: 15
+    item:
+      _serializedList:
+      - Key: {fileID: 11400000, guid: 422f8d7e01666b842a6c8cd38c85618d, type: 2}
+        Value: 10
+      - Key: {fileID: 11400000, guid: a82e255da905aaa4f824eafb1d676a52, type: 2}
+        Value: 5
   pickupPrefab:
     prefab: {fileID: 6618757732054344946, guid: 0e96020387a36884a940b117cbf4caea,
       type: 3}
@@ -45,3 +51,6 @@ MonoBehaviour:
   - targetNPC: Quest000
     dialogueNode: Quest000_QuestBoard_NoQuest
     events: []
+  _findQuestHintOwner: {fileID: 11400000, guid: f85d367ed4b0ea848a5ac8d6fdd4dad9,
+    type: 2}
+  _questHintData: {fileID: 11400000, guid: 8fc43cfdfeb8420478dff8a3df376a75, type: 2}

@@ -7,30 +7,17 @@ namespace CC.UI.Notification
     public class BannerNotificationManager : MonoBehaviour
     {
         [Header("Banner Prefab")]
-        [SerializeField] GameObject[] _prefabs;
-        // 0 : Text; 1 : BG
+        [SerializeField] GameObject _prefabs;
         [Header("Param")]
         [SerializeField] Transform _layout;
 
         public void spawnBanner(Component sender, object data)
         {
-            if(data is string)
+            if (data is string)
             {
-                textBannerHandler temp = Instantiate(_prefabs[0],_layout).GetComponent<textBannerHandler>();
+                BGBannerHandler temp = Instantiate(_prefabs, _layout).GetComponent<BGBannerHandler>();
                 temp.Set((string)data);
             }
-            if(data is BGBannerData)
-            {
-                BGBannerHandler temp = Instantiate(_prefabs[1], _layout).GetComponent<BGBannerHandler>();
-                temp.Set((BGBannerData)data);
-            }
         }
-    }
-
-    public class BGBannerData
-    {
-        public Sprite BG;
-        public string Title;
-        public string description;
     }
 }

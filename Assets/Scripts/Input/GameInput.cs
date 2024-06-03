@@ -188,6 +188,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShowWaypoint"",
+                    ""type"": ""Button"",
+                    ""id"": ""22277749-7f07-494e-ad0b-545204f5b43d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -432,6 +441,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""523b6b62-342c-4006-a688-a95db78cbda2"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShowWaypoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -586,6 +606,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Gameplay_DropClimbing = m_Gameplay.FindAction("DropClimbing", throwIfNotFound: true);
         m_Gameplay_Pouch = m_Gameplay.FindAction("Pouch", throwIfNotFound: true);
         m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
+        m_Gameplay_ShowWaypoint = m_Gameplay.FindAction("ShowWaypoint", throwIfNotFound: true);
         // InventoryUI
         m_InventoryUI = asset.FindActionMap("InventoryUI", throwIfNotFound: true);
         m_InventoryUI_CloseInventory = m_InventoryUI.FindAction("CloseInventory", throwIfNotFound: true);
@@ -673,6 +694,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_DropClimbing;
     private readonly InputAction m_Gameplay_Pouch;
     private readonly InputAction m_Gameplay_Pause;
+    private readonly InputAction m_Gameplay_ShowWaypoint;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -695,6 +717,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @DropClimbing => m_Wrapper.m_Gameplay_DropClimbing;
         public InputAction @Pouch => m_Wrapper.m_Gameplay_Pouch;
         public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
+        public InputAction @ShowWaypoint => m_Wrapper.m_Gameplay_ShowWaypoint;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -758,6 +781,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @ShowWaypoint.started += instance.OnShowWaypoint;
+            @ShowWaypoint.performed += instance.OnShowWaypoint;
+            @ShowWaypoint.canceled += instance.OnShowWaypoint;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -816,6 +842,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @ShowWaypoint.started -= instance.OnShowWaypoint;
+            @ShowWaypoint.performed -= instance.OnShowWaypoint;
+            @ShowWaypoint.canceled -= instance.OnShowWaypoint;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -939,6 +968,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnDropClimbing(InputAction.CallbackContext context);
         void OnPouch(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnShowWaypoint(InputAction.CallbackContext context);
     }
     public interface IInventoryUIActions
     {

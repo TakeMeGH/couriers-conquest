@@ -32,6 +32,7 @@ namespace CC.Inventory
         [SerializeField] private OnUpdateCurrencyEventChannel _onUpdateCurrency;
         [SerializeField] private OnSenderBaseItemEventChannel _onUpgradeEquipment;
         [SerializeField] private VoidEventChannelSO _onCharacterDamaged;
+        [SerializeField] private SenderDataEventChannelSO _itemPickupUI;
 
 
         public InputReader inputReader { get => _inputReader; }
@@ -44,9 +45,12 @@ namespace CC.Inventory
         public OnUpdateCurrencyEventChannel onUpdateCurrency { get => _onUpdateCurrency; }
         public OnSenderBaseItemEventChannel onUpgradeEquipment { get => _onUpgradeEquipment; }
         public VoidEventChannelSO onCharacterDamaged { get => _onCharacterDamaged; }
+        public SenderDataEventChannelSO itemPickupUI { get => _itemPickupUI; }
+
         [Header("Player Currency")]
         [SerializeField] private int _playerGold;
-        
+        [field: SerializeField] public Sprite GoldSprite { get; private set; }
+
         public int playerGold
         {
             get => _playerGold;

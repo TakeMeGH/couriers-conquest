@@ -4,9 +4,10 @@ using UnityEngine;
 using AYellowpaper.SerializedCollections;
 using Newtonsoft.Json.Linq;
 using CC.Core.Data.Stable;
-using UnityEngine.InputSystem;
 using System;
 using UnityEngine.Events;
+using CC.Event;
+using CC.UI.Notification;
 
 namespace CC.Core.Data.Dynamic
 {
@@ -18,6 +19,16 @@ namespace CC.Core.Data.Dynamic
         [Header("default")]
         [SerializeField] PlayerStats _defaultStatData;
         [SerializeField] public UnityAction OnStatChange;
+        public UnityAction OnExpChange;
+
+        [Header("Level")]
+        [SerializeField] List<LevelStats> _listLevelStats;
+
+        [Header("Exp Componenet")]
+        [SerializeField] SenderDataEventChannelSO _itemPickupUI;
+        [SerializeField] Sprite _expIcon;
+        [SerializeField] Sprite _levelUpIcon;
+
         public float GetValue(mainStat key)
         {
             if (statData.defaultValue.TryGetValue(key, out float value))
@@ -76,6 +87,47 @@ namespace CC.Core.Data.Dynamic
             modifiers.Add(modifier);
         }
 
+        public void OnUpdateExp(int amount)
+        {
+            _itemPickupUI.raiseEvent(null, new itemNotifData("Exp", amount, _expIcon));
+            statData.playerExp += amount;
+            while (GetLevelMaxExp() > 0 && statData.playerExp >= GetLevelMaxExp())
+            {
+                statData.playerExp -= GetLevelMaxExp();
+                OnLevelUp();
+
+            }
+            OnExpChange.Invoke();
+        }
+
+        void OnLevelUp()
+        {
+            statData.defaultValue = _listLevelStats[statData.playerLevel].Stats;
+
+            statData.playerLevel++;
+            _itemPickupUI.raiseEvent(null, new itemNotifData("Level Up", 1, _levelUpIcon));
+
+        }
+
+        public int GetLevelMaxExp()
+        {
+            if (statData.playerLevel >= _listLevelStats.Count)
+            {
+                return 0;
+            }
+            return _listLevelStats[statData.playerLevel].RequiredExp;
+        }
+        public int GetExp()
+        {
+            return statData.playerExp;
+        }
+
+        public int GetLevel()
+        {
+            return statData.playerLevel;
+        }
+
+
         public void RemoveModifier(StatsModifier modifier)
         {
             modifiers.Remove(modifier);
@@ -113,6 +165,7 @@ namespace CC.Core.Data.Dynamic
         public SerializedDictionary<mainStat, float> defaultValue;
         public SerializedDictionary<mainStat, float> instanceValue;
         public int playerExp;
+        public int playerLevel;
         public float damageReduction;
 
         public void CopyFrom(ISaveable obj)
@@ -123,6 +176,12 @@ namespace CC.Core.Data.Dynamic
             this.playerExp = target.playerExp;
             this.damageReduction = target.damageReduction;
         }
+    }
+    [System.Serializable]
+    public class LevelStats
+    {
+        public int RequiredExp;
+        public SerializedDictionary<mainStat, float> Stats;
     }
 
     public enum mainStat

@@ -13,25 +13,25 @@ MonoBehaviour:
   m_Name: PlayerInventory
   m_EditorClassIdentifier: 
   _items:
-  - rid: 6232471300354080939
-  - rid: 6232471300354080940
-  - rid: 6232471300354080941
-  - rid: 6232471300354080942
-  - rid: 6232471300354080943
-  - rid: 6232471300354080944
-  - rid: 6232471300354080945
-  - rid: 6232471300354080946
-  - rid: 6232471300354080947
-  - rid: 6232471300354080948
-  - rid: 6232471300354080949
-  - rid: 6232471300354080950
-  - rid: 6232471300354080951
-  - rid: 6232471300354080952
-  - rid: 6232471300354080953
-  - rid: 6232471300354080954
-  - rid: 6232471300354080955
-  - rid: 6232471300354080956
-  - rid: 6232471300354080957
+  - rid: 6232471290656325689
+  - rid: 6232471290656325690
+  - rid: 6232471290656325691
+  - rid: 6232471290656325692
+  - rid: 6232471290656325693
+  - rid: 6232471290656325694
+  - rid: 6232471290656325695
+  - rid: 6232471290656325696
+  - rid: 6232471290656325697
+  - rid: 6232471290656325698
+  - rid: 6232471290656325699
+  - rid: 6232471290656325700
+  - rid: 6232471290656325701
+  - rid: 6232471290656325702
+  - rid: 6232471290656325703
+  - rid: 6232471290656325704
+  - rid: 6232471290656325705
+  - rid: 6232471290656325706
+  - rid: 6232471290656325707
   inventorySize: 19
   dropSpeed: 5
   _inputReader: {fileID: 11400000, guid: 2c06813ec1504fb49916705513d476fd, type: 2}
@@ -39,7 +39,7 @@ MonoBehaviour:
   isRuneEquiped: 0
   isPouchEquiped: 1
   indexRuneEquiped: 0
-  indexPouchEquiped: 2
+  indexPouchEquiped: 3
   _addItemToInventory: {fileID: 11400000, guid: 4611073ba66144c44ba509f62ea86853,
     type: 2}
   _removeItemEvent: {fileID: 11400000, guid: 766a1bd66c57f004c9da23725408ea2d, type: 2}
@@ -52,121 +52,124 @@ MonoBehaviour:
     type: 2}
   _onCharacterDamaged: {fileID: 11400000, guid: 2d6ad549611d5a74ab9b67dfcf4273eb,
     type: 2}
-  _playerGold: 900
+  _itemPickupUI: {fileID: 11400000, guid: b0fda64278ae15e4daee6ae8f77d445b, type: 2}
+  _playerGold: 1000
+  <GoldSprite>k__BackingField: {fileID: 21300000, guid: be98550d0e44617409157cf845b1e528,
+    type: 3}
   references:
     version: 2
     RefIds:
-    - rid: 6232471300354080939
+    - rid: 6232471290656325689
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
-        item: {fileID: 11400000, guid: 07ce9958dd09f3348a38ed376a0e869b, type: 2}
-        name: 
+        item: {fileID: 11400000, guid: 422f8d7e01666b842a6c8cd38c85618d, type: 2}
+        name: '1: Apple'
+        stacks: 1
+    - rid: 6232471290656325690
+      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
+      data:
+        item: {fileID: 11400000, guid: 642fcf34f06480346bc2dacac957129c, type: 2}
+        name: '2: -'
         stacks: 10
-    - rid: 6232471300354080940
+    - rid: 6232471290656325691
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
-        item: {fileID: 11400000, guid: 546ad07f0ddc12348bdd7323f5a44d9a, type: 2}
-        name: 
-        stacks: 9
-    - rid: 6232471300354080941
-      type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
-      data:
-        item: {fileID: 11400000, guid: 09c60c90f62663640aa0591f877cd0c3, type: 2}
-        name: 
+        item: {fileID: 11400000, guid: 422f8d7e01666b842a6c8cd38c85618d, type: 2}
+        name: '3: Apple'
         stacks: 10
-    - rid: 6232471300354080942
+    - rid: 6232471290656325692
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
-        item: {fileID: 11400000, guid: 09c60c90f62663640aa0591f877cd0c3, type: 2}
-        name: 
+        item: {fileID: 11400000, guid: 422f8d7e01666b842a6c8cd38c85618d, type: 2}
+        name: '4: Apple'
         stacks: 10
-    - rid: 6232471300354080943
+    - rid: 6232471290656325693
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
         item: {fileID: 0}
-        name: 
-        stacks: 0
-    - rid: 6232471300354080944
+        name: '5: -'
+        stacks: 1
+    - rid: 6232471290656325694
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
         item: {fileID: 0}
-        name: 
-        stacks: 0
-    - rid: 6232471300354080945
+        name: '6: -'
+        stacks: 1
+    - rid: 6232471290656325695
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
         item: {fileID: 0}
-        name: 
-        stacks: 0
-    - rid: 6232471300354080946
+        name: '7: -'
+        stacks: 1
+    - rid: 6232471290656325696
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
         item: {fileID: 0}
-        name: 
+        name: '8: -'
         stacks: 0
-    - rid: 6232471300354080947
+    - rid: 6232471290656325697
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
         item: {fileID: 0}
-        name: 
+        name: '9: -'
         stacks: 0
-    - rid: 6232471300354080948
+    - rid: 6232471290656325698
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
         item: {fileID: 0}
-        name: 
+        name: '10: -'
         stacks: 0
-    - rid: 6232471300354080949
+    - rid: 6232471290656325699
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
         item: {fileID: 0}
-        name: 
+        name: '11: -'
         stacks: 0
-    - rid: 6232471300354080950
+    - rid: 6232471290656325700
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
         item: {fileID: 0}
-        name: 
+        name: '12: -'
         stacks: 0
-    - rid: 6232471300354080951
+    - rid: 6232471290656325701
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
         item: {fileID: 0}
-        name: 
+        name: '13: -'
         stacks: 0
-    - rid: 6232471300354080952
+    - rid: 6232471290656325702
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
         item: {fileID: 0}
-        name: 
+        name: '14: -'
         stacks: 0
-    - rid: 6232471300354080953
+    - rid: 6232471290656325703
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
         item: {fileID: 0}
-        name: 
+        name: '15: -'
         stacks: 0
-    - rid: 6232471300354080954
+    - rid: 6232471290656325704
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
         item: {fileID: 0}
-        name: 
+        name: '16: -'
         stacks: 0
-    - rid: 6232471300354080955
+    - rid: 6232471290656325705
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
         item: {fileID: 0}
-        name: 
-        stacks: 0
-    - rid: 6232471300354080956
+        name: '17: -'
+        stacks: 1
+    - rid: 6232471290656325706
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
         item: {fileID: 0}
-        name: 
-        stacks: 0
-    - rid: 6232471300354080957
+        name: '18: -'
+        stacks: 1
+    - rid: 6232471290656325707
       type: {class: ItemSlotInfo, ns: CC.Inventory, asm: Assembly-CSharp}
       data:
         item: {fileID: 0}
-        name: 
-        stacks: 0
+        name: '19: -'
+        stacks: 1
