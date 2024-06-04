@@ -10,6 +10,7 @@ namespace CC.Core.Save.UI
     {
         [SerializeField] List<LoadButton> buttonList;
         [SerializeField] SaveDataHandler _handler;
+        [SerializeField] int _slot;
         public void tryFindSave()
         {
             foreach (var button in buttonList)
@@ -37,5 +38,14 @@ namespace CC.Core.Save.UI
             }
         }
 
+        public void selectSlot(int slot)
+        {
+            _slot = slot;
+        }
+
+        public void HandleLoad()
+        {
+            _handler.LoadGame(this, _slot);
+        }
     }
 }
