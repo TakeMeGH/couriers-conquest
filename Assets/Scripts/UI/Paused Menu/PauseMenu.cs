@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] InputReader _inputReader;
+    [SerializeField] CanvasGroup _HUD;
     public static bool GameIsPaused = false;
     public GameObject pauseMenuUI;
     public Button mainMenuButton;
@@ -32,7 +33,6 @@ public class PauseMenu : MonoBehaviour
         if (GameIsPaused)
         {
             Resume();
-
         }
         else
         {
@@ -47,10 +47,12 @@ public class PauseMenu : MonoBehaviour
         _inputReader.EnableGameplayInput();
         GameIsPaused = false;
         pauseMenuUI.SetActive(false);
+        _HUD.alpha = 1f;
     }
 
     IEnumerator Pause()
     {
+        _HUD.alpha = 0f;
         _inputReader.EnableInventoryUIInput();
         pauseMenuUI.SetActive(true);
         GameIsPaused = true;

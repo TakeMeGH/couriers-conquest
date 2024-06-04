@@ -1,3 +1,4 @@
+using CC.Events;
 using CC.Interaction;
 using CC.Inventory;
 using UnityEngine;
@@ -6,40 +7,43 @@ namespace CC.Items
 {
     public class ChestTreasure : MonoBehaviour
     {
-        [SerializeField] private ChestData _items;
-        private CustomInterractables _customInteractables;
-        [SerializeField] private string _chestName = "Chest";
-        public ChestData items { get => _items; set => items = value; }
+        [SerializeField] ChestDataModel _chestData;
+        [SerializeField] CustomInterractables _customInteractables;
+        [SerializeField] OnUpdateCurrencyEventChannel _onUpdateCurrency;
+        [SerializeField] Animator _animator;
+        [SerializeField] Vector3 _offset;
+        [SerializeField] Vector3 _randomVector3;
+        public bool IsCanOpen = true;
 
         public void Initialize()
         {
-            if (_items.isColectable)
+            if (_chestData.CurrentChestData.IsAlreadyOpen)
             {
-                _customInteractables = new CustomInterractables();
-                OnItemSet();
+                Destroy(_customInteractables);
+                _animator.Play("IdleOpen");
             }
             else
             {
-                transform.parent.gameObject.SetActive(false);
+                _animator.Play("IdleClosed");
             }
         }
 
         public void Interact()
         {
-            foreach (ChestValue item in _items.itemChest)
+            foreach (ChestValue item in _chestData.itemChest)
             {
                 AttempToDrop(item);
             }
+            _chestData.CurrentChestData.IsAlreadyOpen = true;
+            _onUpdateCurrency.RaiseEvent(_chestData.Gold);
 
-            gameObject.SetActive(false);
-            transform.parent.gameObject.SetActive(false);
+            _customInteractables.transform.position = Vector3.zero;
+            Destroy(_customInteractables, 0.2f);
+            _animator.Play("Open");
         }
-
-        public void OnItemSet()
+        private void Start()
         {
-            if (_customInteractables == null) _customInteractables = GetComponent<CustomInterractables>();
-
-            _customInteractables.SetName(_chestName);
+            Initialize();
         }
 
         public void AttempToDrop(ChestValue item)
@@ -50,19 +54,17 @@ namespace CC.Items
                 return;
             }
 
-            Transform camTransform = UnityEngine.Camera.main.transform;
-            Transform _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
             GameObject dropPrefab = ObjectPooling.SharedInstance.GetPooledObject(PoolObjectType.Item);
 
             if (dropPrefab != null)
             {
-                dropPrefab.transform.position = _playerTransform.position + new Vector3(0, 1.8f, 0) + camTransform.forward;
-                dropPrefab.transform.rotation = _playerTransform.rotation;
+                dropPrefab.transform.position = transform.position + _offset + GenerateRandomVector();
+                dropPrefab.transform.rotation = transform.rotation;
                 dropPrefab.SetActive(true);
             }
 
             Rigidbody rb = dropPrefab.GetComponent<Rigidbody>();
-            if (rb != null) rb.velocity = camTransform.forward * 1;
+            if (rb != null) rb.velocity = transform.up * 2;
 
             ItemPickup ip = dropPrefab.GetComponentInChildren<ItemPickup>();
             ip.isDropItem = true;
@@ -70,8 +72,16 @@ namespace CC.Items
             {
                 ip.item = item.item;
                 ip.amount = item.amount;
-                ip.Interact();
             }
+        }
+
+        Vector3 GenerateRandomVector()
+        {
+            Vector3 randomVector = new Vector3(Random.Range(-_randomVector3.x, _randomVector3.x),
+                                       Random.Range(-_randomVector3.y, _randomVector3.y),
+                                       Random.Range(-_randomVector3.z, _randomVector3.z));
+
+            return randomVector;
         }
     }
 }

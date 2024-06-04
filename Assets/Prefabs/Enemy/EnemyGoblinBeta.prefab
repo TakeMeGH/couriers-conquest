@@ -28191,8 +28191,9 @@ MonoBehaviour:
   _healthController: {fileID: 1999867523127796152}
   <HealthBar>k__BackingField: {fileID: 7336744931703321973}
   _enemyStatsSO: {fileID: 11400000, guid: 073d4fe57c3df1242abb9751fbadde1d, type: 2}
-  _onEnemyAttacked: {fileID: 11400000, guid: 02ea49625c4987640b8462f56a65d970, type: 2}
+  OnEnemyAttacked: {fileID: 11400000, guid: 02ea49625c4987640b8462f56a65d970, type: 2}
   _playerWatcher: {fileID: 11400000, guid: b4a5d3959431bd648be30b8a79350cf5, type: 2}
+  _onUpdateExp: {fileID: 11400000, guid: c3d722e27167b1740bbeb30729d9a68e, type: 2}
   sinkSpeed: 0.5
   sinkDuration: 3
 --- !u!1 &6510255264978202669
