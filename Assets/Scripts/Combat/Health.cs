@@ -122,5 +122,10 @@ namespace CC.Combats
 
         }
 
+        private void OnDestroy()
+        {
+            _onCharacterDamaged.OnEventRaised = null;
+        }
+
     }
 }

@@ -76,6 +76,11 @@ namespace CC.Inventory
                 return amount;
             }
 
+            if (item.GetItemType() == ItemType.QuestItem)
+            {
+                ((QuestItem)item).EnableDamageEvent();
+            }
+
             //Check for open spaces in existing slots
 
             // TODO : ITEMPICKEDUP
@@ -161,7 +166,7 @@ namespace CC.Inventory
             _playerInventoryManager.RefreshInventory();
         }
 
-        
+
 
         /*private void CheckDefaultEquipment()
         {
@@ -184,6 +189,11 @@ namespace CC.Inventory
         public void OnRemoveItem(Component _component, object _item)
         {
             ABaseItem _itemToRemove = (ABaseItem)_item;
+
+            if (_itemToRemove.GetItemType() == ItemType.QuestItem)
+            {
+                ((QuestItem)_itemToRemove).DisableDamageEvent();
+            }
             foreach (ItemSlotInfo i in _inventoryData.items)
             {
                 if (_itemToRemove == i.item)
