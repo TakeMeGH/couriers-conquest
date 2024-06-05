@@ -54,7 +54,7 @@ namespace CC.UpgradeEquipment
                 _upgradeEquipmentUI = GetComponent<UpgradeEquipmentUI>();
 
                 _upgradeSlot.inventory = _tempPlayerInventory;
-                _upgradeSlot.OnEnable();
+                //_upgradeSlot.Initialize();
                 _upgradeEquipmentUI.Initialize(this);
                 _upgradeEquipmentUI.SetButtonListener();
                 SetRequirimentItemSlot();
@@ -74,7 +74,7 @@ namespace CC.UpgradeEquipment
             foreach (AItemPanel itemPanel in _requirimentItemSlot)
             {
                 itemPanel.inventory = _tempPlayerInventory;
-                itemPanel.OnEnable();
+                //itemPanel.Initialize();
             }
         }
 

@@ -14,6 +14,13 @@ namespace CC.Inventory
         [SerializeField] private InputReader _inputReader;
         public int pouchIndex = 16;
 
+
+        [SerializeField] public bool isRuneEquiped = false;
+        [SerializeField] public bool isPouchEquiped = false;
+        [SerializeField] public int indexRuneEquiped;
+        [SerializeField] public int indexPouchEquiped;
+
+
         [Space]
         [Header("Event System")]
         [SerializeField] private ItemInventoryEventChannel _addItemToInventory;
@@ -24,6 +31,8 @@ namespace CC.Inventory
         [SerializeField] private SellItemEventChannel _onSellItem;
         [SerializeField] private OnUpdateCurrencyEventChannel _onUpdateCurrency;
         [SerializeField] private OnSenderBaseItemEventChannel _onUpgradeEquipment;
+        [SerializeField] private VoidEventChannelSO _onCharacterDamaged;
+
 
         public InputReader inputReader { get => _inputReader; }
         public ItemInventoryEventChannel addItemToInventory { get => _addItemToInventory; }
@@ -34,11 +43,10 @@ namespace CC.Inventory
         public SellItemEventChannel onSellItem { get => _onSellItem; }
         public OnUpdateCurrencyEventChannel onUpdateCurrency { get => _onUpdateCurrency; }
         public OnSenderBaseItemEventChannel onUpgradeEquipment { get => _onUpgradeEquipment; }
-
-
+        public VoidEventChannelSO onCharacterDamaged { get => _onCharacterDamaged; }
         [Header("Player Currency")]
         [SerializeField] private float _playerGold;
-        
+
         public float playerGold
         {
             get => _playerGold;

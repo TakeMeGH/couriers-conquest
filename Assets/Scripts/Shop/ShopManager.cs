@@ -16,7 +16,7 @@ namespace CC.Inventory
         private InventoryData _playerData;
 
         [SerializeField] private ItemSlotMouse _itemSlotMouse;
-        private BuyInventoryManager _shopInventoryManager;
+        private BuyInventoryManager _buyInventoryManager;
         private SellInventoryManager _sellInventoryManager;
 
         [SerializeField] private List<UIPanelShop> _panelScript = new List<UIPanelShop>();
@@ -67,23 +67,16 @@ namespace CC.Inventory
             _inputReader.EnableInventoryUIInput();
 
 
-            if (_shopInventoryManager == null)
+            if (_buyInventoryManager == null)
             {
-                _shopInventoryManager = GetComponentInChildren<BuyInventoryManager>();
+                _buyInventoryManager = GetComponentInChildren<BuyInventoryManager>();
                 _sellInventoryManager = GetComponentInChildren<SellInventoryManager>();
 
-                _buyButton.onClick.RemoveAllListeners();
-                _buyButton.onClick.AddListener(BuyItem);
-
-                _buyMenu.onClick.AddListener(ToogleMenu);
-                _sellMenu.onClick.AddListener(ToogleMenu);
-
-                _sellButton.onClick.RemoveAllListeners();
-                _sellButton.onClick.AddListener(SellItem);
+                SetButton();
             }
 
             _inventoryShop = (InventoryShopkeeper)_inventoryData;
-            _shopInventoryManager.Initialize(_inventoryData, this, _itemSlotMouse, playerData);
+            _buyInventoryManager.Initialize(_inventoryData, this, _itemSlotMouse, playerData);
             _sellInventoryManager.Initialize(_inventoryData, this, _itemSlotMouse, playerData);
 
 
@@ -92,10 +85,28 @@ namespace CC.Inventory
 
         }
 
+        private void SetButton()
+        {
+            _buyButton.onClick.RemoveAllListeners();
+            _buyButton.onClick.AddListener(BuyItem);
+
+            _buyMenu.onClick.AddListener(ToogleMenu);
+            _sellMenu.onClick.AddListener(ToogleMenu);
+
+            _sellButton.onClick.RemoveAllListeners();
+            _sellButton.onClick.AddListener(SellItem);
+
+            _cancelBuyButton.onClick.RemoveAllListeners();
+            _cancelBuyButton.onClick.AddListener(CancelInventoryBuy);
+
+            _cancelSellButton.onClick.RemoveAllListeners();
+            _cancelSellButton.onClick.AddListener(CancelInventorySell);
+        }
+
         public void ClosePanel()
         {
             _isToogle = false;
-            _shopInventoryManager.gameObject.SetActive(_isToogle);
+            _buyInventoryManager.gameObject.SetActive(_isToogle);
             _sellInventoryManager.gameObject.SetActive(_isToogle);
             _shopCanvas.SetActive(_isToogle);
             _inputReader.EnableGameplayInput();
@@ -124,8 +135,8 @@ namespace CC.Inventory
             itemPanel.name = item.itemName + " Panel";
             itemPanel.itemImage.gameObject.SetActive(true);
 
-            itemPanel.inventory = _shopInventoryManager;
-            itemPanel.OnEnable();
+            itemPanel.inventory = _buyInventoryManager;
+            //itemPanel.Initialize();
         }
 
         private void ShowPanel()
@@ -147,17 +158,16 @@ namespace CC.Inventory
             _buyMenu.interactable = !_isToogle;
             _sellMenu.interactable = _isToogle;
 
-            _shopInventoryManager.gameObject.SetActive(_isToogle);
+            _buyInventoryManager.gameObject.SetActive(_isToogle);
             _sellInventoryManager.gameObject.SetActive(!_isToogle);
 
             if (_isToogle)
             {
-                _shopInventoryManager.ShowPanel();
+                _buyInventoryManager.ShowPanel();
             }
             else
             {
                 _sellInventoryManager.ShowPanel();
-
             }
         }
 
@@ -167,7 +177,7 @@ namespace CC.Inventory
             _lastPrice = amount;
             SetButton(_lastPrice != 0 && _playerData.playerGold >= amount);
 
-            _textPrice.text = " - " +  _lastPrice.ToString();
+            _textPrice.text = " - " + _lastPrice.ToString();
             _textMoney.text = _playerData.playerGold.ToString();
         }
 
@@ -189,13 +199,23 @@ namespace CC.Inventory
         private void BuyItem()
         {
             _onUpdateCurrency.RaiseEvent(-_lastPrice);
-            _shopInventoryManager.BuyItem();
+            _buyInventoryManager.BuyItem();
         }
 
         private void SellItem()
         {
             _onUpdateCurrency.RaiseEvent(_lastPrice);
             _sellInventoryManager.SellItem();
+        }
+
+        private void CancelInventoryBuy()
+        {
+            _buyInventoryManager.ShowPanel();
+        }
+
+        private void CancelInventorySell()
+        {
+            _sellInventoryManager.ShowPanel();
         }
     }
 }

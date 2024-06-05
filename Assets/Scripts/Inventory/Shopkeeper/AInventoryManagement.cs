@@ -74,7 +74,7 @@ namespace CC.Inventory
 
             itemPanel.mousePanel = _itemSlotMouse;
             itemPanel.inventory = _inventoryManager;
-            itemPanel.OnEnable();
+            itemPanel.Initialize(_inventoryManager);
         }
 
         public virtual void RefreshRequirimentPanel(AItemPanel itemPanel, UpgradeMaterialRequiriment item)

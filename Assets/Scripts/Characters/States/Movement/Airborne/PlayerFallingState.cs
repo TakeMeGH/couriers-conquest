@@ -44,11 +44,7 @@ namespace CC.Characters.States
             if (_playerController.StaminaController.GetCurrentStamina() > 0 &&
                 _playerController.PlayerCurrentData.CurrentDropTime <= 0f)
             {
-                if (_playerController.FreeClimb.CheckForClimb())
-                {
-                    _playerController.SwitchState(_playerController.PlayerClimbState);
-
-                }
+                CheckForClimb();
             }
             else
             {

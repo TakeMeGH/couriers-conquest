@@ -6,6 +6,7 @@ using Newtonsoft.Json.Linq;
 using CC.Core.Data.Stable;
 using UnityEngine.InputSystem;
 using System;
+using UnityEngine.Events;
 
 namespace CC.Core.Data.Dynamic
 {
@@ -16,6 +17,7 @@ namespace CC.Core.Data.Dynamic
         [SerializeField] List<StatsModifier> modifiers;
         [Header("default")]
         [SerializeField] PlayerStats _defaultStatData;
+        [SerializeField] public UnityAction OnStatChange;
         public float GetValue(mainStat key)
         {
             if (statData.defaultValue.TryGetValue(key, out float value))
@@ -51,6 +53,7 @@ namespace CC.Core.Data.Dynamic
             if (statData.instanceValue.ContainsKey(key))
             {
                 statData.instanceValue[key] = Math.Min(GetValue(key), value);
+                OnStatChange.Invoke();
             }
         }
         public float GetDamageReduction()

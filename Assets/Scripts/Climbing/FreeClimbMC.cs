@@ -40,6 +40,9 @@ namespace SA
         public float UpOffsetMultiplier = 1f;
         public UnityAction OnMCMove;
         Vector3 _lastMoveDir;
+        Vector2 rawMoveDir;
+        Vector2 lastRawMoveDir;
+
         float epsilon = 1e-5f;
 
         private void OnEnable()
@@ -56,6 +59,7 @@ namespace SA
         {
             horizontal = move.x;
             vertical = move.y;
+            rawMoveDir = move;
         }
 
 
@@ -79,12 +83,12 @@ namespace SA
             Vector3 dir = transform.forward;
             RaycastHit hit;
 
-            if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin, origin + dir * 0.5f, 0);
+            if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin, origin + dir * 1f, 0);
             if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin + Vector3.up, origin + Vector3.up + dir * 0.5f, 1);
 
             if (Physics.Raycast(origin + Vector3.up, dir, 1.5f, UsedLayer))
             {
-                if (Physics.Raycast(origin, dir, out hit, 0.5f, UsedLayer))
+                if (Physics.Raycast(origin, dir, out hit, 1f, UsedLayer))
                 {
                     helper.position = PosWithOffset(origin, hit.point);
                     a_hook.Init(this, helper);
@@ -120,13 +124,11 @@ namespace SA
 
             if (!isLerping)
             {
-                horizontal = Input.GetAxis("Horizontal");
-                vertical = Input.GetAxis("Vertical");
-
                 Vector3 h = helper.right * horizontal;
                 Vector3 v = helper.up * vertical;
                 Vector3 moveDir = (h + v).normalized;
                 _lastMoveDir = moveDir;
+                lastRawMoveDir = rawMoveDir;
 
                 if (isMid)
                 {
@@ -151,7 +153,7 @@ namespace SA
                 tp += transform.position;
                 targetPos = isMid ? tp : helper.position;
                 OnMCMove.Invoke();
-                a_hook.CreatePositions(targetPos, moveDir, isMid);
+                a_hook.CreatePositions(targetPos, moveDir, rawMoveDir, isMid);
 
             }
             else
@@ -162,7 +164,7 @@ namespace SA
                     t = 1;
                     isLerping = false;
                 }
-                CheckUp(_lastMoveDir);
+                CheckUp(lastRawMoveDir);
                 Vector3 cp = Vector3.Lerp(startPos, targetPos, t);
                 transform.position = cp;
                 transform.rotation = Quaternion.Slerp(transform.rotation, helper.rotation, delta * rotateSpeed);
@@ -193,7 +195,7 @@ namespace SA
             // Raycast forward towards the wall
             if (DebugLine.singleton != null) DebugLine.singleton.SetLine(origin, origin + (dir * dis2), 1);
 
-            if (!CheckUp(moveDir))
+            if (!CheckUp(rawMoveDir))
             {
                 return false;
             }
@@ -223,6 +225,7 @@ namespace SA
             if (Physics.Raycast(origin, dir, out hit, dis2, UsedLayer))
             {
                 float angle = Vector3.Angle(-helper.forward, hit.normal);
+                Debug.Log("ANGLE " + angle);
                 if (angle < 40)
                 {
                     helper.position = PosWithOffset(origin, hit.point);
@@ -244,7 +247,7 @@ namespace SA
                 inPosition = true;
                 horizontal = 0;
                 vertical = 0;
-                a_hook.CreatePositions(targetPos, Vector3.zero, false);
+                a_hook.CreatePositions(targetPos, Vector3.zero, Vector3.zero, false);
             }
 
             Vector3 tp = Vector3.Lerp(startPos, targetPos, t);
@@ -265,6 +268,7 @@ namespace SA
         {
             // Kalau turun tidak dipedulikan
             if (moveDir.y <= -epsilon) return true;
+            if(moveDir.x > epsilon || moveDir.x < -epsilon) return true;
             Vector3 origin = transform.position;
             float dis = rayTowardsMoveDir;
 

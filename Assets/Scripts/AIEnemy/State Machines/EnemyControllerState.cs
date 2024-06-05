@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using CC.Characters;
 using CC.Enemy;
 using CC.StateMachine;
 using UnityEngine;
@@ -18,18 +19,17 @@ namespace CC.Enemy.States
 
         public virtual void Enter()
         {
-
+            if (_enemyController.EnemyCurrentData.PlayerTransform == null)
+            {
+                _enemyController.EnemyCurrentData.PlayerTransform = GameObject.FindObjectOfType<PlayerControllerStatesMachine>()?.transform;
+            }
         }
 
 
         public virtual void Update()
         {
             EnviromentView();
-
-            // if (enemy.Animator != null)
-            // {
-            //     enemy.Animator.SetFloat("Speed", enemy.EnemyCurrentData.navMeshAgent.velocity.magnitude);
-            // }
+            UpdateRotation();
         }
 
         public virtual void PhysicsUpdate()
@@ -80,59 +80,15 @@ namespace CC.Enemy.States
             return false;
         }
 
-
-
-        // public void Move(float speed)
-        // {
-        //     enemy.EnemyCurrentData.navMeshAgent.isStopped = false;
-        //     enemy.EnemyCurrentData.navMeshAgent.speed = speed;
-        // }
-
-        // public void Stop()
-        // {
-        //     enemy.EnemyCurrentData.navMeshAgent.isStopped = true;
-        //     enemy.EnemyCurrentData.navMeshAgent.speed = 0;
-        // }
-        // public void NextPoint(bool useRandom = true)
-        // {
-        //     if (useRandom)
-        //     {
-        //         enemy.EnemyCurrentData.m_CurrentWaypointIndex = Random.Range(0, enemy.waypoints.Length);
-        //     }
-
-        //     enemy.EnemyCurrentData.navMeshAgent.SetDestination(enemy.waypoints[enemy.EnemyCurrentData.m_CurrentWaypointIndex].position);
-
-        // }
-
-        void CaughtPlayer()
+        public virtual void OnAttacked()
         {
-            // enemy.EnemyCurrentData.m_CaughtPlayer = true;
+            _enemyController.EnemyCurrentData.AttackedCount++;
+            if (_enemyController.EnemyCurrentData.AttackedCount == _enemyController.EnemyPersistenceData.AttackedLimitBeforeStuned)
+            {
+                _enemyController.SwitchState(_enemyController.StunedState);
+            }
         }
 
-        // public void LookingPlayer(Vector3 player)
-        // {
-        //     enemy.EnemyCurrentData.navMeshAgent.SetDestination(player);
-        //     if (Vector3.Distance(enemy.transform.position, player) <= 0.3)
-        //     {
-        //         if (enemy.EnemyCurrentData.m_WaitTime <= 0)
-        //         {
-        //             enemy.EnemyCurrentData.m_PlayerNear = false;
-        //             Move(enemy.EnemyCurrentData.speedWalk);
-        //             enemy.EnemyCurrentData.navMeshAgent.SetDestination(enemy.waypoints[enemy.EnemyCurrentData.m_CurrentWaypointIndex].position);
-        //             enemy.EnemyCurrentData.m_WaitTime = enemy.EnemyCurrentData.startWaitTime;
-        //             enemy.EnemyCurrentData.m_TimeToRotate = enemy.EnemyCurrentData.timetoRotate;
-        //         }
-        //         else
-        //         {
-        //             Stop();
-        //             enemy.EnemyCurrentData.m_WaitTime -= Time.deltaTime;
-        //         }
-        //     }
-
-        //     Vector3 direction = (player - enemy.transform.position).normalized;
-        //     Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        //     enemy.transform.rotation = Quaternion.Slerp(enemy.transform.rotation, lookRotation, Time.deltaTime * enemy.EnemyCurrentData.rotationSpeed);
-        // }
         public void EnviromentView()
         {
             if (_enemyController.EnemyCurrentData.IsPlayerInRange)
@@ -156,7 +112,8 @@ namespace CC.Enemy.States
                         && IsInNavmeshSurface(player))
                     {
                         _enemyController.EnemyCurrentData.PlayerTransform = player;
-                        _enemyController.EnemyCurrentData.IsPlayerInRange = true;
+                        _enemyController.PlayerInRange();
+                        break;
                     }
                 }
             }
@@ -171,6 +128,27 @@ namespace CC.Enemy.States
             }
             return false;
 
+        }
+
+        public void LookAt(Transform target)
+        {
+            _enemyController.EnemyCurrentData.InitialRotation = _enemyController.transform.rotation;
+
+            Vector3 targetPosition = new Vector3(target.position.x, _enemyController.transform.position.y, target.position.z);
+
+            _enemyController.EnemyCurrentData.TargetRotation = Quaternion.LookRotation(targetPosition - _enemyController.transform.position);
+            _enemyController.EnemyCurrentData.CurrentRotationTime = 0f;
+        }
+
+        public void UpdateRotation()
+        {
+            if (_enemyController.EnemyCurrentData.CurrentRotationTime < _enemyController.EnemyPersistenceData.RotationTime)
+            {
+                _enemyController.EnemyCurrentData.CurrentRotationTime += Time.deltaTime;
+                _enemyController.transform.rotation = Quaternion.Slerp(_enemyController.EnemyCurrentData.InitialRotation,
+                    _enemyController.EnemyCurrentData.TargetRotation,
+                    Mathf.Min(1f, _enemyController.EnemyCurrentData.CurrentRotationTime / _enemyController.EnemyPersistenceData.RotationTime));
+            }
         }
     }
 }
