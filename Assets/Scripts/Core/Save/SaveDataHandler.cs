@@ -30,7 +30,7 @@ namespace CC.Core.Save
         float timeIndicator;
         private void Awake()
         {
-            if(_loadOnAwake) _OnAwakeLoad?.raiseEvent(this, null);
+            if (_loadOnAwake) _OnAwakeLoad?.raiseEvent(this, null);
         }
         private void Start()
         {
@@ -49,7 +49,7 @@ namespace CC.Core.Save
         #region "To be Called On Event"
         public void LoadGame(Component sender, object slot)
         {
-            if (slot is int) {LoadData((int)slot); }
+            if (slot is int) { LoadData((int)slot); }
         }
 
         public void AutoSave(Component sender, object slot)
@@ -70,7 +70,7 @@ namespace CC.Core.Save
                 autoSave = setAuto;
                 StartCoroutine(ForceSaveData(1));
             }
-            _saveButton.interactable = autoSave;
+            if (_saveButton != null) _saveButton.interactable = autoSave;
         }
 
         public void ManualSave(Component sender, object slot)

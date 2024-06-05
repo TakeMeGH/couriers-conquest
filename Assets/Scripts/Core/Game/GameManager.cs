@@ -16,6 +16,7 @@ namespace CC
 
         private void Start()
         {
+            Time.timeScale = 1;
             if (!_playerStateData.IsFinishedQuest(_prologueQuestId))
             {
                 _activateQuestEvent.raiseEvent(this, _prologueQuestId);
