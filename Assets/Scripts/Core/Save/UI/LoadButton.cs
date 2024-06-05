@@ -47,7 +47,7 @@ namespace CC.Core.Save.UI
         {
             _notNullObject.SetActive(false);
             _nullField.SetActive(true);
-            GetComponent<Button>().interactable = isIgnoreUnavailableSlot;
+            GetComponent<Button>().interactable = !isIgnoreUnavailableSlot;
         }
 
         void OnDisplay()
