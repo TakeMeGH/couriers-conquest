@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fc8af5ec0429eb41a03046326a0106e, type: 3}
+  m_Name: 6 - Mengantarkan barang berkualitas tinggi
+  m_EditorClassIdentifier: 
+  _questID: 6
+  _questType: 1
+  _questName: Mengantarkan surat ke pegunungan
+  _questDescription: Tolong antarkan surat menuju pegunungan, tempatnya cukup jauh.
+  _questArea: 
+  _questPrerequisitesID: 
+  _addItemToInventory: {fileID: 11400000, guid: 4611073ba66144c44ba509f62ea86853,
+    type: 2}
+  _onUpdateCurrency: {fileID: 11400000, guid: 60a8e86410b7bfc47953ac08146e97aa, type: 2}
+  _onUpdateExp: {fileID: 11400000, guid: c3d722e27167b1740bbeb30729d9a68e, type: 2}
+  _onSpawnBanner: {fileID: 11400000, guid: a782506403c389841b949d8769fc2f28, type: 2}
+  _reward:
+    gold: 20
+    exp: 225
+    item:
+      _serializedList:
+      - Key: {fileID: 11400000, guid: 422f8d7e01666b842a6c8cd38c85618d, type: 2}
+        Value: 10
+  pickupPrefab:
+    prefab: {fileID: 6618757732054344946, guid: 46283f89741eb0d469225cfcd633a107,
+      type: 3}
+    position: {x: 0, y: 0, z: 0}
+  dropPrefab:
+    prefab: {fileID: 7398444736682334487, guid: 64d5e481a312f3e41ab2033b2193b23d,
+      type: 3}
+    position: {x: 0, y: 0, z: 0}
+  _questPrefabs: []
+  itemToDeliver: {fileID: 11400000, guid: 2fa55f0cc1e366542bc0a0352a4f37ef, type: 2}
+  _pickedUp: 0
+  SendNPCQuestDialogue: {fileID: 11400000, guid: acf930db98f4c3646a9449d6d1863992,
+    type: 2}
+  ClearNPCQuestDialogue: {fileID: 11400000, guid: 83cde709c0a1f4c4e8441bfe20c19bfe,
+    type: 2}
+  _npcList:
+  - targetNPC: NPC003
+    dialogueNode: NPC003_Vivian_Quest_2
+    events:
+    - {fileID: 11400000, guid: e152843c24039274c84e4bd60d7d76fd, type: 2}
+  _findQuestHintOwner: {fileID: 11400000, guid: f85d367ed4b0ea848a5ac8d6fdd4dad9,
+    type: 2}
+  _questHintData: {fileID: 11400000, guid: 8ac8e1f4a1f75854e96b41738075ad9b, type: 2}

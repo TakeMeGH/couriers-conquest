@@ -35,6 +35,7 @@ namespace CC.Core.Daytime
 
         [Header("Events")]
         [SerializeField] SenderDataEventChannelSO _AutoSave;
+        [SerializeField] SenderDataEventChannelSO _onDayChange;
         private void Start()
         {
             _day = _model.getDay();
@@ -54,7 +55,15 @@ namespace CC.Core.Daytime
             if (_recTime > _secToMin)
             {
                 //Debug.Log("UpdatingTime");
-                if(_time >= 1440){_model.OnTimeUpdate(0); _model.OnDayUpdate(_model.getDay() + 1); _AutoSave?.raiseEvent(this,0) ; _day = _model.getDay(); _time = _model.getTime(); }
+                if (_time >= 1440)
+                {
+                    _model.OnTimeUpdate(0);
+                    _model.OnDayUpdate(_model.getDay() + 1);
+                    _AutoSave?.raiseEvent(this, 0);
+                    _day = _model.getDay();
+                    _time = _model.getTime();
+                    _onDayChange.raiseEvent(this, null);
+                }
                 else _model.OnTimeUpdate(_time + 1);
                 _currentTimeGrad = _model.getTime() / 1440f;
                 //Debug.Log(_model.getTime() / 1440f);
@@ -70,8 +79,8 @@ namespace CC.Core.Daytime
             _directionalLight.transform.rotation = Quaternion.Euler(sunPos * 360, 0f, 0f);
             RenderSettings.fogColor = _fogGrad.Evaluate(_currentTimeGrad);
             _directionalLight.color = _lightGrad.Evaluate(_currentTimeGrad);
-            _skyBoxMaterial.SetColor("_Tint",_skyBoxGrad.Evaluate(_currentTimeGrad));
-            _waterMaterial.SetColor("_SurfaceColor",_waterGrad.Evaluate(_currentTimeGrad));
+            _skyBoxMaterial.SetColor("_Tint", _skyBoxGrad.Evaluate(_currentTimeGrad));
+            _waterMaterial.SetColor("_SurfaceColor", _waterGrad.Evaluate(_currentTimeGrad));
             _waterMaterial.SetColor("_FoamColor", _foamGrad.Evaluate(_currentTimeGrad));
         }
 

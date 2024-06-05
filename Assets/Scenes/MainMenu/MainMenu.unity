@@ -970,6 +970,8 @@ MonoBehaviour:
   - {fileID: 0}
   _handler: {fileID: 1250484269}
   _slot: 0
+  _isSave: 0
+  _saveIndicator: {fileID: 0}
 --- !u!114 &105319667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2572,7 +2574,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1888573583}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: saveConfirmedVolume
         m_Mode: 1
@@ -4212,7 +4214,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1888573583}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: AudioManager, Assembly-CSharp
         m_MethodName: discardConfirmedVolume
         m_Mode: 1
@@ -6454,6 +6456,74 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1049337123}
   m_CullTransparentMesh: 1
+--- !u!1001 &1079504505
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7677075970302710508, guid: f9417aca945c839479d8a8952abf019f,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 367.5431
+      objectReference: {fileID: 0}
+    - target: {fileID: 7677075970302710508, guid: f9417aca945c839479d8a8952abf019f,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 233.19548
+      objectReference: {fileID: 0}
+    - target: {fileID: 7677075970302710508, guid: f9417aca945c839479d8a8952abf019f,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.9158058
+      objectReference: {fileID: 0}
+    - target: {fileID: 7677075970302710508, guid: f9417aca945c839479d8a8952abf019f,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7677075970302710508, guid: f9417aca945c839479d8a8952abf019f,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7677075970302710508, guid: f9417aca945c839479d8a8952abf019f,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7677075970302710508, guid: f9417aca945c839479d8a8952abf019f,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7677075970302710508, guid: f9417aca945c839479d8a8952abf019f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7677075970302710508, guid: f9417aca945c839479d8a8952abf019f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7677075970302710508, guid: f9417aca945c839479d8a8952abf019f,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8811206672666204821, guid: f9417aca945c839479d8a8952abf019f,
+        type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f9417aca945c839479d8a8952abf019f, type: 3}
 --- !u!1 &1094158191
 GameObject:
   m_ObjectHideFlags: 0
@@ -8718,6 +8788,8 @@ MonoBehaviour:
   - {fileID: 0}
   _handler: {fileID: 1250484269}
   _slot: 0
+  _isSave: 0
+  _saveIndicator: {fileID: 0}
 --- !u!114 &1354084490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12803,93 +12875,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1876326427}
   m_CullTransparentMesh: 1
---- !u!1 &1888573581
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1888573584}
-  - component: {fileID: 1888573583}
-  - component: {fileID: 1888573582}
-  m_Layer: 0
-  m_Name: AudioMan
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1888573582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1888573581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a6610d2e704f1648819acc8d7460285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CollisionTag: 
-  EventReference:
-    Guid:
-      Data1: -1588717940
-      Data2: 1086969497
-      Data3: -1361297494
-      Data4: 1248302993
-    Path: event:/Music (all goes to Music Slider)/Main Menu
-  Event: 
-  PlayEvent: 1
-  StopEvent: 2
-  AllowFadeout: 1
-  TriggerOnce: 0
-  Preload: 0
-  AllowNonRigidbodyDoppler: 0
-  Params: []
-  OverrideAttenuation: 0
-  OverrideMinDistance: 1
-  OverrideMaxDistance: 20
---- !u!114 &1888573583
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1888573581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfa9f7c38d103ae49ac7a33065573466, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  masterVolume: 1
-  musicVolume: 1
-  SFXVolume: 1
-  settingValue: {fileID: 11400000, guid: 42389bf0155686c49ac220452321e9de, type: 2}
-  bgmInstance:
-    Guid:
-      Data1: 0
-      Data2: 0
-      Data3: 0
-      Data4: 0
-    Path: 
---- !u!4 &1888573584
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1888573581}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 367.5431, y: 233.19548, z: -2.9158058}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1891583981
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13165,6 +13150,8 @@ MonoBehaviour:
   - {fileID: 1306829052}
   _handler: {fileID: 1250484269}
   _slot: 0
+  _isSave: 0
+  _saveIndicator: {fileID: 0}
 --- !u!114 &1895544482
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15274,4 +15261,4 @@ SceneRoots:
   - {fileID: 182318688}
   - {fileID: 1538194229}
   - {fileID: 2067016057}
-  - {fileID: 1888573584}
+  - {fileID: 1079504505}

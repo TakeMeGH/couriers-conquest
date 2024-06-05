@@ -1,0 +1,44 @@
+title: NPC004_Arthur_Quest_0
+tags:
+---
+Aiden: Halo, apakah benar ini rumah dari Arthur?
+Arthur: Iya, dengan saya sendiri, adakah yang bisa kubantu?
+Aiden: Aku Aiden, seorang Postman, aku ditugaskan oleh pak Richard yang berlokasi di kota Luminare untuk mengantarkan barang ini.
+Arthur: Ah, akhirnya barangku sampai juga, padahal kukira akan sampai besok, tetapi malah sampainya sekarang. Terima kasih karena mengirimkan barang ini, Aiden.
+-> Aiden: Sama-sama Arthur, ini juga merupakan tugasku. Ngomong-ngomong, apa yang kau lakukan di sini? Berada jauh dari kota dan desa?
+    <<jump NPC004_Arthur_Quest_0_Background>>
+-> Aiden: Sama-sama Arthur, ini juga merupakan tugas ku.
+    <<jump NPC004_Arthur_Quest_0_ToThePoint>>
+===
+
+title: NPC004_Arthur_Quest_0_Background
+tags:
+---
+Arthur: Aku di sini hanya untuk meneliti beberapa hal terkait monster, dan kristal, karena di lokasi ini aku bisa mendapatkan sampel-sampel penting itu dengan mudah.
+Aiden: Sendirian? Apakah itu tidak berbahaya?
+Arthur: Hahahaha, tenang saja, aku cukup hebat dalam bertarung, jadi itu sudah bisa melindungiku, lagi pula aku sudah berada cukup lama di sini, jadi itu bukan masalah yang begitu besar.
+Arthur: Ngomong-ngomong barang yang kau kirimkan tadi juga merupakan item dan perlengkapanku untuk bertahan hidup, jadi aku akan baik-baik saja.
+Aiden: Wah Arthur, kau merupakan orang yang hebat bisa bertahan hidup di sini seorang diri, aku saja pasti tidak akan bisa bertahan di sini dalam waktu yang lama.
+Arthur: Ini hal yang mudah jika kau terbiasa. Tadi di awal kudengar namamu Aiden kan? Apakah benar kamu itu anak dari Raidan? Karena kudengar dia memiliki anak bernama Aiden.
+Aiden: Itu benar, aku merupakan anak dari Raidan, itu juga mengapa aku mengikuti jejaknya menjadi seorang Postman sekarang.
+Arthur: Wah, ternyata kau sudah besar ya, padahal dulu aku diceritakan kau itu masih kecil, tapi sekarang kau sudah mempertaruhkan nyawa menjadi Postman, kau tumbuh menjadi orang yang hebat, Aiden.
+Aiden: Aku hanya mengikuti jejaknya saja menjadi seorang Postman, jadi ini juga bukan hal besar yang bisa kusombongkan.
+Arthur: Kau tau Aiden, jarang sekali orang-orang ingin mempertaruhkan nyawanya, makanya aku salut denganmu, karena setidaknya kau tahu bagaimana seorang Postman itu dari ayahmu, kau tetap mengikuti jejaknya.
+Arthur: Kau harus bangga akan hal itu Aiden, banggalah seperti ayahmu dulu yang bangga dengan apa yang dia lakukan. Jangan putus semangat, dan juga jangan merasa rendah, karena kau tidak serendah itu karena mengikuti jejak ayahmu, malah kau itu hebat mau mempertaruhkan nyawamu.
+Aiden: Yah, sepertinya kau benar Arthur, aku cukup keras dengan diriku yang mengikuti jejak ayah. Terima kasih atas masukannya, dan sepertinya aku bisa lebih menikmati pekerjaanku sekarang.
+Aiden: Kalau begitu aku izin pamit juga, karena pak Richard menyuruhku untuk ke tempatnya lagi jika sudah mengirimkan barang tadi.
+Arthur: Tentu-tentu, sekali lagi terima kasih karena telah mengantarkan barang ini, Aiden, hati-hati di perjalanan pulangmu.
+Aiden: Sama-sama Arthur, sampai jumpa lagi nanti.
+<<CustomAction Arthur 0>>
+<<Close>>
+===
+
+title: NPC004_Arthur_Quest_0_ToThePoint
+tags:
+---
+Aiden: Karena sudah mengantarkan barang ini, aku izin pergi, karena Richard menyuruhku ke tempatnya lagi setelah mengantarkan barang.
+Arthur: Tentu Aiden, ini juga untuk Rewardnya. Hati-hati di perjalanmu pulang, dan sampai jumpa lagi lain waktu.
+Aiden: Sampai jumpa juga Arthur.
+<<CustomAction Arthur 0>>
+<<Close>>
+===

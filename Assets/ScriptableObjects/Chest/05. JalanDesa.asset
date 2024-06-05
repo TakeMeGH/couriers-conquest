@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfc5b6411e3fbce4f91e072084902c50, type: 3}
+  m_Name: 05. JalanDesa
+  m_EditorClassIdentifier: 
+  itemChest:
+  - item: {fileID: 11400000, guid: 682e083349ed3b94e9494c5281401aef, type: 2}
+    amount: 2
+  Gold: 10
+  CurrentChestData:
+    IsAlreadyOpen: 0
+  DefaultChestData:
+    IsAlreadyOpen: 0

@@ -2,6 +2,14 @@
 tags:
 ---
 
+<<declare $DravorHaveQuest = false>>
+<<declare $DravorQuestNode = "" >>
+
+<<if $DravorHaveQuest>>
+    <<jump {$DravorQuestNode}>>
+<<endif>>
+
+
 Dravor : Halo kawan, hari yang indah ya untuk berada diluar ya
 Dravor : Ngomong-ngomong, selamat datang di Blacksmith ku
 Dravor : Adakah yang kamu sedang butuhkan saat ini disini?
