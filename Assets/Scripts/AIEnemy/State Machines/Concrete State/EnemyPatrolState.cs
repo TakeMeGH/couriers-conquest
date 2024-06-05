@@ -19,7 +19,7 @@ namespace CC.Enemy.States
 
             StartAnimation("isPatroling");
 
-            _enemyController.HealthBar.gameObject.SetActive(false);
+            if (_enemyController.HealthBar != null) _enemyController.HealthBar.gameObject.SetActive(false);
 
             _enemyController.NavMeshAgent.isStopped = false;
             _enemyController.NavMeshAgent.speed = _enemyController.EnemyPersistenceData.PatrolSpeed;
