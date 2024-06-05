@@ -136,6 +136,7 @@ namespace CC
 
         void CheckCanOpenChest()
         {
+            if(!_isUsingChest) return;
             if (AnyActive())
             {
                 _chest.IsCanOpen = false;

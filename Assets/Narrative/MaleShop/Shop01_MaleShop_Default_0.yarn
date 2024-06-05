@@ -1,11 +1,11 @@
 ﻿title: Shop01_MaleShop_Default_0
 tags:
 ---
-<<declare $RaymondHaveQuest = false>>
-<<declare $RaymondQuestNode = "" >>
+<<declare $ReymondHaveQuest = false>>
+<<declare $ReymondQuestNode = "" >>
 
-<<if $RaymondHaveQuest>>
-    <<jump {$RaymondQuestNode}>>
+<<if $ReymondHaveQuest>>
+    <<jump {$ReymondQuestNode}>>
 <<endif>>
 
 Reymond : Halo kak, senang bertemu denganmu!

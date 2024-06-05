@@ -1,59 +1,43 @@
 ﻿title: Shop01_MaleShop_Quest_0
 tags:
 ---
-Dravor: Halo kawan, adakah yang bisa ku bantu?
-Aiden: Halo Dravor, aku Aiden, seorang yang baru bergabung dengan Postman.
--> Aiden: Aku ingin bertanya tentang beberapa hal terkait pedang ini kepadamu, apakah kau tahu ini pedang apa?
+Aiden: Halo, apakah benar ini toko milik Reymond?
+Reymond: Ya, itu aku sendiri. Ada yang bisa aku bantu?
+-> Aiden: Aku disuruh mengantarkan hasil penelitian ini oleh Rachel, berikut untuk barangnya.
     <<jump Shop01_MaleShop_Quest_0_Background>>
--> Aiden: Aku hanya ingin bertanya, apakah kau sedang ada misi untuk pengantaran?
+-> Aiden: Rachel tadi menyuruhku untuk mengantarkan barang penelitian ini, berikut untuk barangnya.
     <<jump Shop01_MaleShop_Quest_0_ToThePoint>>
 ===
 
 title: Shop01_MaleShop_Quest_0_Background
 tags:
 ---
-Dravor: Hmm, sini aku lihat, sepertinya aku pernah melihat pedang ini di suatu tempat.
-Aiden: Itu pedang milik Raidan, salah seorang Postman yang hebat dulu.
-Dravor: Ahhh, aku ingat, ternyata ini pedangnya dia, sudah lama aku tidak melihatnya makanya aku tidak mengenali pedang ini sendiri. Jadi kau ingin penjelasan yang panjang untuk pedang ini sendiri, atau yang sederhana saja?
--> Aiden: Penjelasan yang panjang sepertinya tidak terlalu buruk untukku, karena aku memiliki waktu yang cukup banyak.
+Reymond: Wah, akhirnya dia berhasil juga dalam penelitian itu, aku sudah menunggunya lama sekali. Terima kasih karena telah mengantarkan barang ini, karena ini benar-benar sangat penting.
+-> Aiden: Tentu saja. Ngomong-ngomong, jika aku boleh tahu, memangnya benda apa itu?
     <<jump Shop01_MaleShop_Quest_0_Background_1>>
--> Aiden: Sepertinya aku tidak memiliki waktu yang cukup banyak, tapi apakah kau bisa menyederhanakannya saja?
+-> Aiden: Tentu saja, karena ini juga merupakan tugasku sebagai seorang Postman.
     <<jump Shop01_MaleShop_Quest_0_Background_2>>
 ===
 
 title: Shop01_MaleShop_Quest_0_Background_1
 tags:
 ---
-Dravor: Baiklah kalau itu mau mu, dulu aku sangat tertarik untuk meneliti pedang ini, karna ini pedang yang sangat hebat, dan memiliki sesuatu seperti magis didalamnya, dan bahkan bisa menembus kulit yang keras seperti crystal.
-Aiden: Jadi, apakah kamu bisa menceritakan tentang pedang itu kepadaku?
-Dravor: Dengan senang hati, kalo dilihat dari pedang ini yang ada denganmu, dan namamu yang cukup mirip, pasti kamu anak dari Raidan sendiri, jadi kamu berhak tau juga tentang pedang ini.
-Dravor: Waktu itu aku mendengar dari Raidan bahwa dia menemukan pedang ini disaat menjelajah, memang awalnya dia adalah seorang Postman yang sedikit diatas rata-rata. Tetapi semenjak mendapatkan pedang ini, entah kenapa nasibnya terus naik secara perlahan, dan dia menjadi salah satu Postman hebat yang bahkan sampai dikenal diseluruh dunia.
-Dravor: Aku meneliti pedang ini setelah dia mengalahkan sebuah monster yang telah terkontaminasi dengan crystal. Aku mendapatkan kulit dari monster tersebut sebagai bahan eksperimen.
-Dravor: Dan tentu saja, seluruh pisau atau pedang tidak ada yang bisa menembusnya, hanya pedang ayahmu ini lah yang bisa menembusnya sampai membelahnya menjadi beberapa bagian. Setelah aku meneliti dan melihat, pedang ayahmu seperti memiliki keterkaitan dengan crystal.
-Dravor: Entah kenapa, energi yang dipancarkan dari kedua benda itu hampir sama, tetapi juga berbeda, bahkan pedang itu juga bisa digabungkan dengan beberapa magis lainnya, atau bahkan rune.
-Dravor: Sampai saat ini aku masih tidak tau material apa yang digunakan untuk membuat pedang ini, tapi satu hal yang pasti, ini merupakan pedang yang sangat hebat, dan mungkin hanya ada satu pedang seperti ini di dunia.
-Aiden: Wah ternyata pedang ini lebih hebat dari yang aku kira.
-Dravor: Ngomong-ngomong kau itu seorang Postman kan nak, bisakah kau menerima quest ku, karna aku perlu mengirimkan beberapa barang menuju desa Little Valey.
-Aiden: Tentu, dengan senang hati aku akan mengambil misi tersebut.
-Dravor: Kalau begitu, tolong ambil terlebih dahulu misi tersebut di Bulletin Board, kalau sudah, kembali lagi kesini, dan aku akan memberikan barang yang akan kau antar itu.
-Aiden: Baiklah, sebelumnya terimakasih atas informasi yang kau berikan tentang pedang ini, kalau begitu aku akan ke Bulletin Board terlebih dahulu, sampai jumpa.
-<<CustomAction Dravor 0>>
+Reymond: Beberapa barang penelitian ini adalah rahasia, tetapi ada juga beberapa barang yang nantinya akan ku jual, seperti Rune ini, ini memiliki beberapa efek yang cukup hebat, kau tahu. Tapi aku perlu mengujinya terlebih dahulu.
+Aiden: Wah, apakah Rune itu memiliki efek yang berbeda dari Rune lainnya?
+Reymond: Tentu saja, itulah kenapa kubilang ini merupakan barang yang sangat penting. Tapi sepertinya ini memerlukan waktu yang lama untuk bisa diperjual belikan, karena sangat banyak tes yang diperlukan sampai ini benar-benar siap untuk diperjual belikan.
+Aiden: Ku kira itu sudah bisa langsung digunakan, tetapi memerlukan pengujian terlebih dahulu. Baiklah, kalau begitu, aku akan menunggu sampai Rune itu dijual, dan aku akan mencobanya nanti.
+Reymond: Hahaha, tentu, nanti jika Rune ini sudah siap digunakan, aku akan langsung mengabari mu. Ngomong-ngomong ini untuk reward karena telah mengantarkan penelitian ini, terima kasih dan sampai jumpa lagi lain waktu.
+Aiden: Baiklah, terima kasih juga atas rewardnya, aku nantikan Rune itu sampai dijual nanti.
+<<CustomAction Reymond 0>>
 <<Close>>
 ===
 
 title: Shop01_MaleShop_Quest_0_Background_2
 tags:
 ---
-Dravor: Tentu saja, pedang yang kau bawa itu merupakan pedang yang materialnya cukup langka. Dulu ayahmu bilang menemukan pedang itu disaat sedang menjelajah. Pedang itu sangat hebat, bahkan crystal pada monster yang telah terkontaminasi saja bisa ditembus.
-Dravor: Pedang itu juga memiliki semacam energi yang sama dengan crystal, tapi aku masih belum tau aura apa itu. Tapi intinya, itu adalah pedang yang sangat hebat yang pernah aku temui, dan juga pedang yang bisa disatukan dengan magis ataupun rune yang ada.
-Dravor: Jaga baik-baik pedang itu Aiden, karena itu merupakan pedang yang hebat, serta berharga untukmu juga.
-Aiden: Tentu saja, aku pasti akan menjaga pedang ini, karna ini juga merupakan peninggalan dari ayahku.
-Dravor: Ngomong-ngomong, jika kau beruntung dan memiliki material seperti Frostbite Crystal, dan Iron Crystal, kau bisa melakukan upgrade pada pedang tersebut, langsung bawa saja ke aku, dan aku akan membuat pedang itu lebih kuat lagi.
-Aiden: Baiklah, jika aku memiliki material itu, aku akan mencoba untuk melakukan upgrade nanti kepadamu.
-Dravor: Oiya ngomong-ngomong, aku memiliki sebuah quest pengantaran, apakah kau mau untuk mengambilnya? Jika iya, pertama kau ambil dahulu quest tersebut di Bulletin Board, setelah itu kembali lagi kesini untuk mengambil barangnya.
-Aiden: Tentu saja, apa yang tidak untuk mengantarkan barang. Baiklah kalau begitu, aku akan mengambilnya dulu di Bulletin Board, kalau begitu, sampai jumpa lagi nanti.
-Dravor: Sampai jumpa.
-<<CustomAction Dravor 0>>
+Reymond: Baik-baik, ini untuk rewardnya sendiri karena kau telah mengantarkan barang penelitian ini kesini. Sampai jumpa lagi dilain waktu.
+Aiden: Terima kasih atas rewardnya, sampai jumpa juga.
+<<CustomAction Reymond 0>>
 <<Close>>
 ===
 
@@ -62,36 +46,9 @@ Dravor: Sampai jumpa.
 title: Shop01_MaleShop_Quest_0_ToThePoint
 tags:
 ---
-Aiden: Aku hanya ingin bertanya, apakah kau sedang ada misi untuk pengantaran?
-Dravor: Wah, beruntung sekali, aku sedang menunggu seseorang untuk mengambil misi yang ku taruh di Bulletin Board, dan kau muncul.
-Dravor: Kalau kau ingin mengambil misi ini, tolong ambil dulu permintaanku di Bulletin Board, aku takut jika itu tidak diambil, akan ada orang lain nanti yang mengambilnya setelah kau.
-Aiden: Baiklah kalau begitu, aku akan mengambilnya dulu di Bulletin Board.
-Dravor: Ngomong-ngomong pedang yang tidak asing, apakah aku boleh melihatnya sebentar?
--> Aiden: Tentu, jika sebentar saja, aku akan memberikannya kepadamu.   
-    <<jump Shop01_MaleShop_Quest_0_ToThePoint_1>>
--> Aiden: Maaf, tapi ini adalah barang peninggalan ayahku, jadi aku tidak bisa menyerahkannya dengan sembarangan.
-    <<jump Shop01_MaleShop_Quest_0_ToThePoint_2>>
-===
-
-title: Shop01_MaleShop_Quest_0_ToThePoint_1
-tags:
----
-Dravor: Baiklah, sini aku lihat.
-Dravor: ....
-Dravor: Wah, apakah ini pedang milik Raidan, sudah lama aku tidak melihat pedang ini. Ini benar-benar pedang yang hebat kau tau, pedang yang terbuat dari material yang cukup langka.
-Dravor: Pedang ini juga memiliki energi yang sama dengan crystal, dan pedang ini juga bisa digabungkan dengan magis ataupun rune yang ada. Benar-benar pedang yang hebat. Jika kau memiliki material seperti Frostbite Crystal dan Iron Crystal, mungkin aku bisa mengupgradenya menjadi lebih hebat lagi.
-Aiden: Wah, aku tidak menyangka bahwa pedang peninggalan ini bisa sehebat itu. Tentu saja, jika aku memiliki material-material itu, aku pasti akan melakukan upgrade itu kepadamu. Terimakasih karena memberitahukan hal tersebut.
-Dravor: Baiklah, sepertinya itu saja yang bisa kusampaikan untuk pedang itu, jaga baik-baik pedang itu Aiden, karena itu pedang yang hebat.
-Aiden: Tentu saja, aku akan menjaganya dengan baik. Kalau begitu aku akan langsung pergi menuju Bulletin Board untuk mengambil quest mu tadi.
-<<CustomAction Dravor 0>>
-<<Close>>
-===
-
-title: Shop01_MaleShop_Quest_0_ToThePoint_2
-tags:
----
-Dravor: Hahaha, tentu saja, itu barang yang penting untuk mu kan pasti. Kalau begitu, cepatlah ambil quest itu di Bulletin Board, dan nanti kembali lagi kesini untuk mengambil barangnya.
-Aiden: Aku akan mengambilnya sekarang kalau begitu, sampai jumpa nanti.
-<<CustomAction Dravor 0>>
+Reymond: Wah, akhirnya sudah sampai juga hasil dari penelitian Rachel.
+Reymond: Ini untuk reward karena kau telah mengantarkan barang ini, terima kasih ya karena telah mengantarkannya kesini.
+Aiden: Tentu saja, terima kasih juga atas rewardnya, sampai jumpa lagi lain waktu.
+<<CustomAction Reymond 0>>
 <<Close>>
 ===
