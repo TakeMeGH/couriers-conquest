@@ -34,6 +34,52 @@ Transform:
   - {fileID: 6573787880617926040}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3531421679647388045
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8793119302248095733}
+  - component: {fileID: 9081681472282356219}
+  m_Layer: 6
+  m_Name: Identifier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8793119302248095733
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3531421679647388045}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4792030672017966080}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9081681472282356219
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3531421679647388045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91c43303a03156340977e35bbcf6fd3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 6
+  _questHint: {fileID: 11400000, guid: 33bda85cc80d8d645affe3a5e3464497, type: 2}
 --- !u!1 &5444314556235140581
 GameObject:
   m_ObjectHideFlags: 0
@@ -16006,7 +16052,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4284809546884773949, guid: 06a42a946dc9e814fb33110e29be9acc,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8793119302248095733}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3578207193914465664, guid: 06a42a946dc9e814fb33110e29be9acc,
         type: 3}
@@ -16016,7 +16066,78 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 496026639612349772}
+    - targetCorrespondingSourceObject: {fileID: 5226244688639495599, guid: 06a42a946dc9e814fb33110e29be9acc,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 9175344473547482339}
   m_SourcePrefab: {fileID: 100100000, guid: 06a42a946dc9e814fb33110e29be9acc, type: 3}
+--- !u!1 &3562730827669156242 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5226244688639495599, guid: 06a42a946dc9e814fb33110e29be9acc,
+    type: 3}
+  m_PrefabInstance: {fileID: 8788217312662305853}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &9175344473547482339
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3562730827669156242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc664d1b263d3c4caade25e036d29be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listeners:
+  - channel: {fileID: 11400000, guid: acf930db98f4c3646a9449d6d1863992, type: 2}
+    eventToCall:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5958259195887042420}
+          m_TargetAssemblyTypeName: CC.NPC.NPCBehaviour, Assembly-CSharp
+          m_MethodName: OnQuestListen
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - channel: {fileID: 11400000, guid: 83cde709c0a1f4c4e8441bfe20c19bfe, type: 2}
+    eventToCall:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 5958259195887042420}
+          m_TargetAssemblyTypeName: CC.NPC.NPCBehaviour, Assembly-CSharp
+          m_MethodName: clearQuestDialogue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - channel: {fileID: 11400000, guid: f85d367ed4b0ea848a5ac8d6fdd4dad9, type: 2}
+    eventToCall:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 9081681472282356219}
+          m_TargetAssemblyTypeName: CC.GameObjectIdentifier, Assembly-CSharp
+          m_MethodName: OnGameObjectListen
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!4 &4792030672017966080 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4284809546884773949, guid: 06a42a946dc9e814fb33110e29be9acc,
@@ -16057,6 +16178,18 @@ MonoBehaviour:
   _animator: {fileID: 8853052674068924072}
   _idleTime: 2
   _actionTime: 6.5
+--- !u!114 &5958259195887042420 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3123800765364273993, guid: 06a42a946dc9e814fb33110e29be9acc,
+    type: 3}
+  m_PrefabInstance: {fileID: 8788217312662305853}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3562730827669156242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3efbcccfb07006c458d19df5513e4922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &8853052674068924072 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 228093228117654165, guid: 06a42a946dc9e814fb33110e29be9acc,

@@ -1,0 +1,13 @@
+title: NPC004_Arthur_Default_0
+tags:
+---
+<<declare $ArthurHaveQuest = false>>
+<<declare $ArthurQuestNode = "" >>
+
+<<if $ArthurHaveQuest>>
+    <<jump {$ArthurQuestNode}>>
+<<endif>>
+
+Rachel : Hati-hati dijalan
+<<Close>>
+===

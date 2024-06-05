@@ -1,5 +1,51 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &673743352036483307
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6977402714043705724}
+  - component: {fileID: 3749194863102788494}
+  m_Layer: 6
+  m_Name: Identifier
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6977402714043705724
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673743352036483307}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1764687155352374767}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3749194863102788494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673743352036483307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91c43303a03156340977e35bbcf6fd3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ID: 7
+  _questHint: {fileID: 11400000, guid: 33bda85cc80d8d645affe3a5e3464497, type: 2}
 --- !u!1 &1114003652543250140
 GameObject:
   m_ObjectHideFlags: 0
@@ -11006,6 +11052,10 @@ PrefabInstance:
         type: 3}
       insertIndex: 0
       addedObject: {fileID: 7728831365676036674}
+    - targetCorrespondingSourceObject: {fileID: 7929601028889380876, guid: ba583e88bc44de441a673766635a3177,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6977402714043705724}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7265838883056004529, guid: ba583e88bc44de441a673766635a3177,
         type: 3}
@@ -11015,6 +11065,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 579297616796920907}
+    - targetCorrespondingSourceObject: {fileID: 884693924268811331, guid: ba583e88bc44de441a673766635a3177,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2621497492818150871}
   m_SourcePrefab: {fileID: 100100000, guid: ba583e88bc44de441a673766635a3177, type: 3}
 --- !u!1 &1343064957670467666 stripped
 GameObject:
@@ -11056,3 +11110,82 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8536282278290982371}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1868789383273033542 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8041653823258602149, guid: ba583e88bc44de441a673766635a3177,
+    type: 3}
+  m_PrefabInstance: {fileID: 8536282278290982371}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8805073758307099040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3efbcccfb07006c458d19df5513e4922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &8805073758307099040 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 884693924268811331, guid: ba583e88bc44de441a673766635a3177,
+    type: 3}
+  m_PrefabInstance: {fileID: 8536282278290982371}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2621497492818150871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8805073758307099040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc664d1b263d3c4caade25e036d29be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listeners:
+  - channel: {fileID: 11400000, guid: acf930db98f4c3646a9449d6d1863992, type: 2}
+    eventToCall:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1868789383273033542}
+          m_TargetAssemblyTypeName: CC.NPC.NPCBehaviour, Assembly-CSharp
+          m_MethodName: OnQuestListen
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - channel: {fileID: 11400000, guid: 83cde709c0a1f4c4e8441bfe20c19bfe, type: 2}
+    eventToCall:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1868789383273033542}
+          m_TargetAssemblyTypeName: CC.NPC.NPCBehaviour, Assembly-CSharp
+          m_MethodName: clearQuestDialogue
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+  - channel: {fileID: 11400000, guid: 83cde709c0a1f4c4e8441bfe20c19bfe, type: 2}
+    eventToCall:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 3749194863102788494}
+          m_TargetAssemblyTypeName: CC.GameObjectIdentifier, Assembly-CSharp
+          m_MethodName: OnGameObjectListen
+          m_Mode: 0
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

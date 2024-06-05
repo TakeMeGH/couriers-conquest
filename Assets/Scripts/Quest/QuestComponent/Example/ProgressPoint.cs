@@ -26,10 +26,12 @@ namespace CC.Quest.Example
 
         public void doProgress()
         {
-            foreach (var eventOnDrop in _onProgress)
+            foreach (var eventOnProgress in _onProgress)
             {
-                eventOnDrop?.raiseEvent(this, null);
+                eventOnProgress?.raiseEvent(this, null);
             }
+
+            foreach (var npc in _nextNpcList) SendNPCQuestDialogue?.raiseEvent(this, npc);
 
             _findQuestHintOwner?.raiseEvent(this, _questHintData);
 

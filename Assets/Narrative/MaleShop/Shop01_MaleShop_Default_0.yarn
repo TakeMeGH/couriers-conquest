@@ -1,6 +1,13 @@
 ﻿title: Shop01_MaleShop_Default_0
 tags:
 ---
+<<declare $RaymondHaveQuest = false>>
+<<declare $RaymondQuestNode = "" >>
+
+<<if $RaymondHaveQuest>>
+    <<jump {$RaymondQuestNode}>>
+<<endif>>
+
 Reymond : Halo kak, senang bertemu denganmu!
 Reymond : Selamat datang di GoodCompany Shop
 Reymond : Disini kamu bisa menemukan berbagai barang premium yang tidak akan bisa kamu temukan di tempat lain
