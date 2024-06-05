@@ -14,11 +14,11 @@ namespace CC.Core.Save.UI
         [SerializeField] int _slot;
         [SerializeField] bool _isSave;
         [SerializeField] GameObject _saveIndicator;
-        public void tryFindSave()
+        public void tryFindSave(bool isIgnoreUnavailableSlot = true)
         {
             foreach (var button in buttonList)
             {
-                button.PopulateButton();
+                button.PopulateButton(isIgnoreUnavailableSlot);
             }
         }
 

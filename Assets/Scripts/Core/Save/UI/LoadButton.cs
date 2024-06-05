@@ -23,13 +23,13 @@ namespace CC.Core.Save.UI
         [Header("Null/NotNull")]
         [SerializeField] GameObject _nullField;
         [SerializeField] GameObject _notNullObject;
-        public void PopulateButton()
+        public void PopulateButton(bool isIgnoreUnavailableSlot = true)
         {
             string path = Application.persistentDataPath + "/GameData/Save" + slot;
             if (!File.Exists(path))
             {
                 Debug.Log("File on slot not found");
-                DisplayNull();
+                DisplayNull(isIgnoreUnavailableSlot);
                 return;
             }
             try
@@ -43,11 +43,11 @@ namespace CC.Core.Save.UI
             }
         }
 
-        void DisplayNull()
+        void DisplayNull(bool isIgnoreUnavailableSlot = true)
         {
             _notNullObject.SetActive(false);
             _nullField.SetActive(true);
-            GetComponent<Button>().interactable = false;
+            GetComponent<Button>().interactable = isIgnoreUnavailableSlot;
         }
 
         void OnDisplay()

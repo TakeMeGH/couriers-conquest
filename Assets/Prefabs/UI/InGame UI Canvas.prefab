@@ -66007,6 +66007,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: PausePanel
       objectReference: {fileID: 0}
+    - target: {fileID: 5379593174818014432, guid: a7dfa97b3ee976f4d922680fb49e4d23,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5379593174818014432, guid: a7dfa97b3ee976f4d922680fb49e4d23,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_BoolArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6580027231618662997, guid: a7dfa97b3ee976f4d922680fb49e4d23,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7560302728818918818, guid: a7dfa97b3ee976f4d922680fb49e4d23,
         type: 3}
       propertyPath: m_Pivot.x
