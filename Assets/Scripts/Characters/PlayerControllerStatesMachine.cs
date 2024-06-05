@@ -8,6 +8,7 @@ using CC.Events;
 using SA;
 using CC.Ragdoll;
 using CC.Interaction;
+using CC.Characters.States;
 
 namespace CC.Characters
 {
@@ -169,6 +170,11 @@ namespace CC.Characters
         private void OnTriggerExit(Collider collider)
         {
             TriggerExitEvent.Invoke(collider);
+        }
+
+        private void OnDestroy()
+        {
+            if (currentState != null) ((PlayerMovementState)currentState).OnDestroy();
         }
     }
 }

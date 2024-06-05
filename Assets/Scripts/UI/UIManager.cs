@@ -10,7 +10,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] InputReader _inputReader;
     [SerializeField] SenderDataEventChannelSO _onInventoryOpen;
     [SerializeField] SenderDataEventChannelSO _onInventoryClose;
-    [SerializeField] GameObject _HUD;
+    [SerializeField] CanvasGroup _HUD;
     DialogueRunner _dialogueRunner;
 
     bool isInventoryOpen;
@@ -49,12 +49,12 @@ public class UIManager : MonoBehaviour
 
     public void OnDialogueOpen()
     {
-        _HUD.SetActive(false);
+        _HUD.alpha = 0;
     }
 
     public void OnDialogueComplete()
     {
-        _HUD.SetActive(true);
+        _HUD.alpha = 1;
     }
 
     private void OpenInventory()

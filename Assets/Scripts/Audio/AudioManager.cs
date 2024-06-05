@@ -2,6 +2,7 @@ using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
 using CC;
+using System.Collections;
 
 
 
@@ -27,9 +28,17 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField]
     private SettingsValueHolder settingValue;
+    [Header("SFX")]
+    [Header("BGM")]
+    [SerializeField] public EventReference MainMenuBGM;
+    [SerializeField] public EventReference CityBGM;
+    [SerializeField] public EventReference ForestBGM;
+    [SerializeField] public EventReference VillageBGM;
 
-    [Header("Event")]
-    [SerializeField] EventReference bgmInstance;
+
+
+    EventInstance _BGMEventInstance;
+    EventReference _currentBGMReference;
 
 
     private Bus masterBus;
@@ -48,21 +57,49 @@ public class AudioManager : MonoBehaviour
         musicBus = RuntimeManager.GetBus("bus:/Music");
         sfxBus = RuntimeManager.GetBus("bus:/Sound Effects");
 
-        // masterBus.getVolume(out masterVolume);
-        // musicBus.getVolume(out musicVolume);
-        // sfxBus.getVolume(out SFXVolume);
-
         masterVolume = settingValue.MasterVolumeValue;
         musicVolume = settingValue.MusicVolumeValue;
         SFXVolume = settingValue.SFXVolumeValue;
-
-
-        // masterBus.setVolume(settingValue.MasterVolumeValue);
-        // musicBus.setVolume(settingValue.MusicVolumeValue);
-        // sfxBus.setVolume(settingValue.SFXVolumeValue);        
     }
 
+    public bool IsPlayingBGM()
+    {
+        return _BGMEventInstance.isValid();
+    }
 
+    public void InitializeBGM(EventReference BGMReference)
+    {
+        if (_currentBGMReference.Path == BGMReference.Path)
+        {
+            return;
+        }
+        StartCoroutine(FadeOutAndChangeBGM(BGMReference));
+    }
+
+    private IEnumerator FadeOutAndChangeBGM(EventReference newBGMReference)
+    {
+        if (_BGMEventInstance.isValid())
+        {
+            _BGMEventInstance.getVolume(out float currentVolume);
+            float fadeDuration = 2.0f;
+            float elapsedTime = 0f;
+
+            while (elapsedTime < fadeDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                float newVolume = Mathf.Lerp(currentVolume, 0f, elapsedTime / fadeDuration);
+                _BGMEventInstance.setVolume(newVolume);
+                yield return null;
+            }
+
+            _BGMEventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+            _BGMEventInstance.release();
+        }
+
+        _BGMEventInstance = RuntimeManager.CreateInstance(newBGMReference);
+        _BGMEventInstance.start();
+        _currentBGMReference = newBGMReference;
+    }
     public void AudioPlayOneShot(EventReference sound, Vector3 worldPos)
     {
         RuntimeManager.PlayOneShot(sound, worldPos);
@@ -84,7 +121,6 @@ public class AudioManager : MonoBehaviour
         musicVolume = settingValue.MusicVolumeValue;
         SFXVolume = settingValue.SFXVolumeValue;
 
-
         masterBus.setVolume(settingValue.MasterVolumeValue);
         musicBus.setVolume(settingValue.MusicVolumeValue);
         sfxBus.setVolume(settingValue.SFXVolumeValue);
@@ -94,6 +130,16 @@ public class AudioManager : MonoBehaviour
 
     private void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            InitializeBGM(AudioManager.instance.MainMenuBGM);
+        }
+        else if (Input.GetKeyDown(KeyCode.Y))
+        {
+            InitializeBGM(AudioManager.instance.CityBGM);
+
+        }
         masterBus.setVolume(masterVolume);
         musicBus.setVolume(musicVolume);
         sfxBus.setVolume(SFXVolume);

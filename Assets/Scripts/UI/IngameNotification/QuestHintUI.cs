@@ -42,18 +42,17 @@ namespace CC.UI.Notification
 
         private void Update()
         {
-            if (showHint) updateDistance();
+            if (showHint && _player != null) updateDistance();
         }
 
         void updateDistance()
         {
             _distanceToObjective.text = ((int)Vector3.Distance(_player.transform.position, _targetObjective.transform.position)).ToString() + "M";
-         
+
         }
 
         public void stopHint()
         {
-            Debug.Log("STOP HIN");
             showHint = false;
             _Visuals.SetActive(false);
         }
@@ -61,6 +60,11 @@ namespace CC.UI.Notification
         void SetPlayerTransfrom()
         {
             _player = _playerTransformAnchor.Value;
+        }
+
+        private void OnDestroy()
+        {
+            stopHint();
         }
 
     }

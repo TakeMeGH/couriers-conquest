@@ -1,15 +1,37 @@
 ﻿title: NPC002_Rachel_Quest_0
 tags:
 ---
-Aiden: Halo, apakah benar Anda bernama Rachel?
-Rachel: Ya benar, itu aku. Adakah yang bisa kubantu?
-Aiden: Aku Aiden dan aku seorang pengantar. Aku mengambil misi dari Richard untuk mengantarkan barang ini. Isinya adalah material untuk potion.
-Rachel: Ah, akhirnya sampai juga material potion yang kubutuhkan ini. Aku akhirnya bisa menyelesaikan penelitianku tentang potion baru ini.
-Rachel: Ngomong-ngomong, namamu sepertinya pernah kudengar di suatu tempat, karena nama Aiden itu cukup menarik.
-Aiden: Ini hanya sebuah nama yang diberikan oleh orang tuaku. Mungkin itu hanya perasaanmu saja.
-Rachel: Hm, sepertinya begitu. Tapi intinya, terima kasih karena mengantarkan barang ini.
-Rachel: Dan ini untuk reward-nya. Sampai jumpa di lain waktu.
-Aiden: Tentu, sampai jumpa lagi nanti.
+Aiden: Halo, apakah Anda Rachel?
+Rachel: Ya, itu saya. Ada yang bisa saya bantu?
+Aiden: Saya Aiden, Postman. Saya mengambil misi dari Richard untuk mengantarkan material pembuatan potion.
+Rachel: Akhirnya material potion sampai juga. Terima kasih sudah mengantarkannya.
+Rachel: Sepertinya kamu baru menjadi Postman, apakah Richard memberitahumu tentang reward dan item?
+-> Aiden: Tentu, itu akan sangat membantu.
+    <<jump NPC002_Rachel_Quest_0_Tutorial>>
+-> Aiden: Saya sudah cukup tahu, tapi terima kasih.
+    <<jump NPC002_Rachel_Quest_0_Complete>>
+===
+
+title: NPC002_Rachel_Quest_0_Tutorial
+tags:
+---
+Aiden: Tentu, itu akan sangat membantu.
+Rachel: Baiklah. Setelah kamu menyerahkan barang, kamu akan mendapatkan Gold, XP, dan terkadang item. XP meningkatkan levelmu, Gold bisa digunakan untuk berbagai keperluan.
+Rachel: Kamu juga bisa menjual item yang kamu temukan atau dapatkan dari musuh. Jangan lewatkan kesempatan itu.
+Rachel: Di desa ini ada Shopkeeper. Kamu bisa langsung ke sana jika ingin membeli atau menjual item.
+Rachel: Terima kasih atas bantuanmu. Semoga kamu menjadi Postman yang hebat.
+Aiden: Terima kasih, sampai jumpa.
+<<CustomAction Rachel 0>>
+<<Close>>
+===
+
+title: NPC002_Rachel_Quest_0_Complete
+tags:
+---
+Aiden: Saya sudah cukup tahu, tapi terima kasih.
+Rachel: Tidak masalah. Ini reward untukmu.
+Rachel: Terima kasih atas bantuanmu. Semoga kamu menjadi Postman yang hebat.
+Aiden: Terima kasih, sampai jumpa.
 <<CustomAction Rachel 0>>
 <<Close>>
 ===

@@ -337,5 +337,11 @@ namespace CC.Characters.States
             _playerController.Rigidbody.useGravity = true;
             _playerController.Rigidbody.isKinematic = false;
         }
+
+
+        public void OnDestroy()
+        {
+            Exit();
+        }
     }
 }

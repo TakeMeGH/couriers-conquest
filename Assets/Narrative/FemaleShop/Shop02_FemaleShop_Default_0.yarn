@@ -1,8 +1,13 @@
 ﻿title: Shop02_FemaleShop_Default_0
 tags:
 ---
-<<declare $EveHaveQuest = false>>
-<<declare $EveQuestNode = "" >>
+<<declare $EvellynHaveQuest = false>>
+<<declare $EvellynQuestNode = "" >>
+
+<<if $EvellynHaveQuest>>
+    <<jump {$EvellynQuestNode}>>
+<<endif>>
+
 
 Evellyn : Halo, senang bertemu dengan mu nak! 
 Evellyn : Selamat datang di Advent's Shop
