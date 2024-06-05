@@ -154,10 +154,13 @@ namespace CC.Characters
         }
         public void OnDead()
         {
+            OnDestroy();
+
             Rigidbody.isKinematic = true;
             Rigidbody.useGravity = false;
             currentState = null;
 
+            AudioManager.instance.InitializeBGM(AudioManager.instance.DeadBGM);
             _ragdollController.SetRagdoll(true, false);
             _onPlayerDead.RaiseEvent();
         }

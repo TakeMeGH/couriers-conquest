@@ -87,7 +87,7 @@ public class StaminaController : MonoBehaviour
             var currentState = playerController.GetCurrentState();
             foreach (var state in activeStates)
             {
-                if (currentState.GetType() == state)
+                if (currentState == null || currentState.GetType() == state)
                 {
                     isRegenerating = false;
                     yield break;

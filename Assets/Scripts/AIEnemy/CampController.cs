@@ -19,6 +19,7 @@ namespace CC
 
         [Header("Data")]
         [SerializeField] CampDataModel _campDataModel;
+        [SerializeField] bool _isBandit;
         [Header("Event")]
         [SerializeField] SenderDataEventChannelSO _onDayChange;
         List<EnemyController> _spawnedEnemyControllers;
@@ -52,12 +53,27 @@ namespace CC
                 return;
             }
 
+            Vector3 position = transform.position;
             _lastTime = currentTime;
             for (int i = 0; i < _spawnedEnemyControllers.Count; i++)
             {
                 if (_spawnedEnemyControllers[i] == null) continue;
+                if (_spawnedEnemyControllers[i].IsPlayerInRange())
+                {
+                    position = _spawnedEnemyControllers[i].transform.position;
+                }
                 _spawnedEnemyControllers[i].PlayerInRange();
             }
+
+            if (_isBandit)
+            {
+                AudioManager.instance.AudioPlayOneShot(AudioManager.instance.BanditNotice, position);
+            }
+            else
+            {
+                AudioManager.instance.AudioPlayOneShot(AudioManager.instance.GoblinNotice, position);
+            }
+
         }
 
         bool CanRespawn()
@@ -136,7 +152,7 @@ namespace CC
 
         void CheckCanOpenChest()
         {
-            if(!_isUsingChest) return;
+            if (!_isUsingChest) return;
             if (AnyActive())
             {
                 _chest.IsCanOpen = false;

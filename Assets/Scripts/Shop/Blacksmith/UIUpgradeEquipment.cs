@@ -15,7 +15,8 @@ namespace CC.UpgradeEquipment
         private InventoryData _inventoryData;
         [SerializeField] private InputReader _inputReader;
 
-        [Space][Header("UI COMPONENT")]
+        [Space]
+        [Header("UI COMPONENT")]
         [SerializeField] private Image _itemBeforeImage;
         [SerializeField] private Image _itemAfterImage;
 
@@ -119,7 +120,8 @@ namespace CC.UpgradeEquipment
 
                 _textLabelBefore.text = "Defense : ";
                 _textLabelAfter.text = "Defense : ";
-            } else if (_items.specificType == ItemSlotType.Armor)
+            }
+            else if (_items.specificType == ItemSlotType.Armor)
             {
                 _textStatBefore.text = _items.GetStatsWeapon(mainStat.Health).ToString();
                 _textStatAfter.text = _items.upgradeRequiriment[_items.equipmentLevel].GetStatsUpgradeWeapon(mainStat.Health).ToString();
@@ -133,9 +135,9 @@ namespace CC.UpgradeEquipment
         {
             int amount = 0;
 
-            foreach(ItemSlotInfo items in _inventoryData.items)
+            foreach (ItemSlotInfo items in _inventoryData.items)
             {
-                if(items.item == item)
+                if (items.item == item)
                 {
                     amount += items.stacks;
                 }
@@ -146,15 +148,17 @@ namespace CC.UpgradeEquipment
 
         private void ShowPanelConfirm()
         {
+            AudioManager.instance.AudioPlayOneShot(AudioManager.instance.ConfirmUI, transform.position);
+
             if (!_hasSelected) return;
 
-            if(CheckRequiriment())
+            if (CheckRequiriment())
             {
                 _panelConfirm.SetActive(true);
                 int price = _items.upgradeRequiriment[_items.equipmentLevel].price;
                 _textPrice.text = price.ToString();
 
-                if(price > _inventoryData.playerGold)
+                if (price > _inventoryData.playerGold)
                 {
                     _textPrice.color = Color.red;
                 }
@@ -164,7 +168,8 @@ namespace CC.UpgradeEquipment
                 }
 
                 _hasSelectedUI = true;
-            }else if (_isMax)
+            }
+            else if (_isMax)
             {
                 ShowPanelFailed("Equipment Sudah di Level Maksimal");
             }
@@ -183,7 +188,7 @@ namespace CC.UpgradeEquipment
 
         public void AttempToUpgrade()
         {
-            if(_inventoryData.playerGold >= _items.upgradeRequiriment[_items.equipmentLevel].price)
+            if (_inventoryData.playerGold >= _items.upgradeRequiriment[_items.equipmentLevel].price)
             {
                 Debug.Log("Success To Upgrade");
                 SuccessToUpgrade();
@@ -209,11 +214,11 @@ namespace CC.UpgradeEquipment
         {
             bool isAllready = true;
 
-            foreach(PanelMaterialsUpgrade panel in _panelsMaterialsRequiriment)
+            foreach (PanelMaterialsUpgrade panel in _panelsMaterialsRequiriment)
             {
                 if (panel.gameObject.activeSelf)
                 {
-                    if(!panel.isAllready)
+                    if (!panel.isAllready)
                     {
                         return false;
                     }
@@ -225,7 +230,7 @@ namespace CC.UpgradeEquipment
 
         private void HideRequiriment()
         {
-            foreach(var panel in _panelsMaterialsRequiriment)
+            foreach (var panel in _panelsMaterialsRequiriment)
             {
                 panel.gameObject.SetActive(false);
             }
@@ -241,6 +246,7 @@ namespace CC.UpgradeEquipment
             }
             else
             {
+                AudioManager.instance.AudioPlayOneShot(AudioManager.instance.BackUI, transform.position);
                 _blacksmithManager.CloseBlacksmith();
             }
         }

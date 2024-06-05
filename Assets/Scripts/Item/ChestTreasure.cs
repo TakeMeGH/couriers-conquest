@@ -64,7 +64,7 @@ namespace CC.Items
             }
 
             Rigidbody rb = dropPrefab.GetComponent<Rigidbody>();
-            if (rb != null) rb.velocity = transform.up * 2;
+            if (rb != null) rb.velocity = transform.up * 4;
 
             ItemPickup ip = dropPrefab.GetComponentInChildren<ItemPickup>();
             ip.isDropItem = true;

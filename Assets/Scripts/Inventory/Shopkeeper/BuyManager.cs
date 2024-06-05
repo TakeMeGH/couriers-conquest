@@ -119,6 +119,7 @@ namespace CC.Inventory
             }
             else
             {
+                AudioManager.instance.AudioPlayOneShot(AudioManager.instance.BackUI, transform.position);
                 gameObject.SetActive(false);
                 _inputReader.EnableGameplayInput();
                 _shopManager.ShowOtherUI();
@@ -148,6 +149,7 @@ namespace CC.Inventory
 
         private void ConfirmAction()
         {
+            AudioManager.instance.AudioPlayOneShot(AudioManager.instance.ConfirmUI, transform.position);
             _panelDetailBuy.SetActive(true);
             _hasSelectedUI = true;
             SetSlider();
@@ -279,7 +281,7 @@ namespace CC.Inventory
                 }
             }
 
-            if(amount <= 0)
+            if (amount <= 0)
             {
                 return true;
             }

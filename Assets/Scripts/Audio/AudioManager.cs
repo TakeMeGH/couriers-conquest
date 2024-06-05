@@ -3,6 +3,7 @@ using FMODUnity;
 using FMOD.Studio;
 using CC;
 using System.Collections;
+using CC.Event;
 
 
 
@@ -28,13 +29,31 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField]
     private SettingsValueHolder settingValue;
-    [Header("SFX")]
+    [Header("SFX UI")]
+    [SerializeField] public EventReference ConfirmUI;
+    [SerializeField] public EventReference BackUI;
+    [SerializeField] public EventReference DialogueUI;
+
+    [Header("SFX Player")]
+    public EventReference DashPlayer;
+    public EventReference WalkPlayer;
+    public EventReference SwordSwing;
+    public EventReference SwordHit;
+    public EventReference ShieldHit;
+
+    [Header("SFX NPC")]
+    public EventReference BlacksmithHit;
+    public EventReference GoblinNotice;
+    public EventReference BanditNotice;
+
     [Header("BGM")]
     [SerializeField] public EventReference MainMenuBGM;
     [SerializeField] public EventReference CityBGM;
     [SerializeField] public EventReference ForestBGM;
     [SerializeField] public EventReference VillageBGM;
-
+    [SerializeField] public EventReference DeadBGM;
+    [Header("Event")]
+    [SerializeField] SenderDataEventChannelSO _OnLoadFinished;
 
 
     EventInstance _BGMEventInstance;
@@ -60,6 +79,8 @@ public class AudioManager : MonoBehaviour
         masterVolume = settingValue.MasterVolumeValue;
         musicVolume = settingValue.MusicVolumeValue;
         SFXVolume = settingValue.SFXVolumeValue;
+
+        _OnLoadFinished.OnEventRaised.AddListener(StopBGM);
     }
 
     public bool IsPlayingBGM()
@@ -76,6 +97,13 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(FadeOutAndChangeBGM(BGMReference));
     }
 
+    public void StopBGM(Component component, object sender)
+    {
+        if (!_BGMEventInstance.isValid()) return;
+        _BGMEventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+        _BGMEventInstance.release();
+
+    }
     private IEnumerator FadeOutAndChangeBGM(EventReference newBGMReference)
     {
         if (_BGMEventInstance.isValid())
@@ -111,12 +139,11 @@ public class AudioManager : MonoBehaviour
         masterBus.getVolume(out settingValue.MasterVolumeValue);
         musicBus.getVolume(out settingValue.MusicVolumeValue);
         sfxBus.getVolume(out settingValue.SFXVolumeValue);
+        Debug.Log(settingValue.MasterVolumeValue + " DEBUG");
     }
 
     public void discardConfirmedVolume()
     {
-
-
         masterVolume = settingValue.MasterVolumeValue;
         musicVolume = settingValue.MusicVolumeValue;
         SFXVolume = settingValue.SFXVolumeValue;
@@ -145,5 +172,9 @@ public class AudioManager : MonoBehaviour
         sfxBus.setVolume(SFXVolume);
     }
 
+    private void OnDestroy()
+    {
+        StopBGM(null, null);
+    }
 
 }
