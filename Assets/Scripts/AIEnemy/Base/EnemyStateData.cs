@@ -11,13 +11,14 @@ namespace CC.Enemy
 
         public int CurrentWaypointIndex = -1;
         public Transform PlayerTransform;
-        public int IsHeavyAttack;
-        public float CurrentWaitTime;
-        public float CurrentTimeToRotate;
+        public bool IsHeavyAttack;
         public bool IsPlayerInRange = false;
         public bool IsPlayerNear;
-        public bool IsPatrol;
-        public bool IsCaughtPlayer;
+        public int AttackedCount = 0;
+        public float CurrentRotationTime = 100f;
+        public Quaternion TargetRotation;
+        public Quaternion InitialRotation;
+
 
     }
 }

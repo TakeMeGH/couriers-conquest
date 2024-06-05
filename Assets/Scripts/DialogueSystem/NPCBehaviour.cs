@@ -37,6 +37,7 @@ namespace CC.NPC
 
         public void OpenDialogue()
         {
+            Debug.Log(_dialogueRunner + " DEBUG");
             _inputReader.EnableInventoryUIInput();
             _dialogueVariable.SetValue("$" + _NPCName + "HaveQuest", Quest_dialogue_node != "");
             _dialogueVariable.SetValue("$" + _NPCName + "QuestNode", Quest_dialogue_node);

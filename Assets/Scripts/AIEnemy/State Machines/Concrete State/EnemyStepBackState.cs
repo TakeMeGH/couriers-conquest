@@ -9,6 +9,8 @@ namespace CC.Enemy.States
     {
         public NavMeshPath navMeshPath;
         float timeToSetDestination = 0;
+        float stepBackTime = 0;
+
 
         public EnemyStepBackState(EnemyController _enemyController) : base(_enemyController)
         {
@@ -20,6 +22,9 @@ namespace CC.Enemy.States
 
             StartAnimation("isStepBack");
 
+            stepBackTime = 0;
+            timeToSetDestination = 0;
+
             _enemyController.NavMeshAgent.isStopped = false;
             _enemyController.NavMeshAgent.angularSpeed = 0;
 
@@ -30,6 +35,13 @@ namespace CC.Enemy.States
         public override void Update()
         {
             base.Update();
+
+            stepBackTime += Time.deltaTime;
+
+            if (stepBackTime >= _enemyController.EnemyPersistenceData.StepBackMaxTime)
+            {
+                _enemyController.SwitchState(_enemyController.IdleAttackState);
+            }
         }
 
         public override void PhysicsUpdate()
@@ -41,7 +53,7 @@ namespace CC.Enemy.States
 
             if (distance > _enemyController.EnemyPersistenceData.StepBackDistance)
             {
-                _enemyController.SwitchState(_enemyController.ChasingState);
+                _enemyController.SwitchState(_enemyController.IdleAttackState);
             }
 
             timeToSetDestination -= Time.deltaTime;
@@ -49,7 +61,7 @@ namespace CC.Enemy.States
             {
 
                 StepBack();
-                timeToSetDestination = 0.2f;
+                timeToSetDestination = _enemyController.EnemyPersistenceData.TimeToReStepBack;
             }
 
 
@@ -64,7 +76,7 @@ namespace CC.Enemy.States
 
         private void StepBack()
         {
-            _enemyController.transform.LookAt(_enemyController.EnemyCurrentData.PlayerTransform.position);
+            LookAt(_enemyController.EnemyCurrentData.PlayerTransform);
 
             Vector3 directionToPlayer = _enemyController.transform.position -
                 _enemyController.EnemyCurrentData.PlayerTransform.position;

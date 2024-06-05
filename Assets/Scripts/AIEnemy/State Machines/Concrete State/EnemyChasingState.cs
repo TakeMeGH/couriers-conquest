@@ -18,16 +18,15 @@ namespace CC.Enemy.States
         {
             base.Enter();
 
-            StartAnimation("isChasing");
-            _enemyController.Animator.SetFloat("isFastChase", 1);
+            StartAnimation("isSlowChasing");
 
             isOutOfRange = false;
             CheckChase();
 
             _enemyController.NavMeshAgent.isStopped = false;
             _enemyController.NavMeshAgent.angularSpeed = _enemyController.EnemyPersistenceData.DefaultAnggularSpeed;
-            _enemyController.NavMeshAgent.speed = _enemyController.EnemyPersistenceData.FastChaseSpeed;
-            _enemyController.NavMeshAgent.stoppingDistance = _enemyController.EnemyPersistenceData.ChaseStopingDistancce;
+            _enemyController.NavMeshAgent.speed = _enemyController.EnemyPersistenceData.SlowChaseSpeed;
+            _enemyController.NavMeshAgent.stoppingDistance = _enemyController.EnemyPersistenceData.DefaultStopingDistance;
         }
 
 
@@ -52,15 +51,9 @@ namespace CC.Enemy.States
             float distance = Vector3.Distance(_enemyController.transform.position,
                 _enemyController.EnemyCurrentData.PlayerTransform.transform.position);
 
-            if (distance < _enemyController.EnemyPersistenceData.TooCloseDistance)
+            if (distance < _enemyController.EnemyPersistenceData.ChaseStopingDistance)
             {
                 _enemyController.SwitchState(_enemyController.StepBackState);
-            }
-
-
-            if (!isOutOfRange && IsStoping())
-            {
-                _enemyController.SwitchState(_enemyController.AttackState);
             }
         }
 
@@ -68,7 +61,7 @@ namespace CC.Enemy.States
         {
             base.Exit();
 
-            StopAnimation("isChasing");
+            StopAnimation("isSlowChasing");
 
         }
 

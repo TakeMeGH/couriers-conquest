@@ -11,8 +11,9 @@ namespace CC.UpgradeEquipment
         private bool click;
         private PanelUpgradeEquipmentAction _actionPanel;
         [SerializeField] private bool _isRequiriment;
-        public override void OnEnable()
+        public override void Initialize(IInventoryManager inventoryManager)
         {
+            inventory = inventoryManager;
             _actionPanel = new PanelUpgradeEquipmentAction();
             _actionPanel.SetRequiriment(_isRequiriment);
             _actionPanel.Initialize(this, inventory, mousePanel, itemSlot, itemImage, GetSlotType());
@@ -44,34 +45,6 @@ namespace CC.UpgradeEquipment
                     inventory.RefreshInventory();
                 }
             }
-        }
-
-        public override void OnBeginDrag(PointerEventData eventData)
-        {
-            click = true;
-        }
-
-        public override void OnEndDrag(PointerEventData eventData)
-        {
-            if (click)
-            {
-                _actionPanel.OnAction();
-                click = false;
-            }
-        }
-
-        public override void OnDrag(PointerEventData eventData)
-        {
-            if (click)
-            {
-                _actionPanel.OnAction();
-                click = false;
-            }
-        }
-        public override void OnDrop(PointerEventData eventData)
-        {
-            _actionPanel.OnAction();
-            click = false;
         }
 
         public override void RefreshInventory()

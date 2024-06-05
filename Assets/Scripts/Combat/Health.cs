@@ -10,18 +10,43 @@ namespace CC.Combats
         [SerializeField] VoidEventChannelSO _onCharacterDamaged;
         public UnityEvent OnHealthReachedZero;
         [SerializeField] float _health;
+        [SerializeField] Vector3 _floatingDamageOffset;
+        [SerializeField] Vector3 _floatingDamageRandomOffset;
         PlayerStatsSO _statsSO;
         bool _isBlocking;
+
+        private void OnEnable()
+        {
+            if (_statsSO != null)
+            {
+                _statsSO.OnStatChange += SetHealth;
+            }
+        }
+
+        private void OnDisable()
+        {
+            if (_statsSO != null)
+            {
+                _statsSO.OnStatChange -= SetHealth;
+            }
+        }
 
         public void SetStats(PlayerStatsSO statsSO)
         {
             _statsSO = statsSO;
+            _statsSO.OnStatChange += SetHealth;
             Init();
         }
 
+        public void SetAttackEvent(VoidEventChannelSO attackEvent)
+        {
+            _onCharacterDamaged = attackEvent;
+        }
+
+
         private void Init()
         {
-            _health = _statsSO.GetInstanceValue(mainStat.Health);
+            SetHealth();
         }
 
 
@@ -33,6 +58,11 @@ namespace CC.Combats
         public void SetBlocking(bool isBlocking)
         {
             _isBlocking = isBlocking;
+        }
+
+        public void SetHealth()
+        {
+            _health = _statsSO.GetInstanceValue(mainStat.Health);
         }
 
 
@@ -52,6 +82,8 @@ namespace CC.Combats
             }
             float calculatedDamage = Mathf.Min(Mathf.RoundToInt(damage * (1 - totalReduction)), _health);
 
+            CreateFloatingDamage(calculatedDamage);
+
             if (calculatedDamage > 0)
             {
                 _onCharacterDamaged?.RaiseEvent();
@@ -69,5 +101,20 @@ namespace CC.Combats
 
             return calculatedDamage;
         }
+        void CreateFloatingDamage(float _damage)
+        {
+            GameObject tmp = ObjectPooling.SharedInstance.GetPooledObject(PoolObjectType.FloatingDamageText);
+            tmp.transform.position = transform.position;
+            tmp.transform.position += _floatingDamageOffset;
+            tmp.transform.position += new Vector3(Random.Range(-_floatingDamageRandomOffset.x, _floatingDamageRandomOffset.x),
+                Random.Range(-_floatingDamageRandomOffset.y, _floatingDamageRandomOffset.y),
+                Random.Range(-_floatingDamageRandomOffset.z, _floatingDamageRandomOffset.z));
+            tmp.SetActive(true);
+
+            FloatingDamageController _floatingDamageController = tmp.GetComponent<FloatingDamageController>();
+            _floatingDamageController.Init(_damage.ToString());
+
+        }
+
     }
 }
