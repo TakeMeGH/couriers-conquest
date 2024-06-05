@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028331, g: 0.2257133, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15712,11 +15712,19 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
+<<<<<<< Updated upstream
       Data1: -1588717940
       Data2: 1086969497
       Data3: -1361297494
       Data4: 1248302993
     Path: event:/Music/Main Menu
+=======
+      Data1: 2109478817
+      Data2: 1280835435
+      Data3: 67627198
+      Data4: 1459512156
+    Path: event:/Music (all goes to Music Slider)/some kind of ending music (if needed)
+>>>>>>> Stashed changes
   Event: 
   PlayEvent: 1
   StopEvent: 2
@@ -15744,6 +15752,16 @@ MonoBehaviour:
   musicVolume: 1
   SFXVolume: 1
   settingValue: {fileID: 11400000, guid: 42389bf0155686c49ac220452321e9de, type: 2}
+<<<<<<< Updated upstream
+=======
+  bgmInstance:
+    Guid:
+      Data1: 2109478817
+      Data2: 1280835435
+      Data3: 67627198
+      Data4: 1459512156
+    Path: event:/Music (all goes to Music Slider)/some kind of ending music (if needed)
+>>>>>>> Stashed changes
 --- !u!4 &1888573584
 Transform:
   m_ObjectHideFlags: 0
