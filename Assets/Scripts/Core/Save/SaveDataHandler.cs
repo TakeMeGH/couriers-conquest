@@ -8,6 +8,7 @@ using Newtonsoft.Json.Linq;
 using CC.Event;
 using CC.Core.Save.UI;
 using System.Threading.Tasks;
+using UnityEngine.UI;
 
 namespace CC.Core.Save
 {
@@ -20,6 +21,8 @@ namespace CC.Core.Save
         [Header("Load")]
         [SerializeField] bool _loadOnAwake;
         [SerializeField] SenderDataEventChannelSO _OnAwakeLoad;
+        [Header("Save")]
+        [SerializeField] Button _saveButton;
         [Header("Events")]
         [SerializeField] SenderDataEventChannelSO _OnBeforeSave;
         [SerializeField] SenderDataEventChannelSO _OnLoadFinished;
@@ -67,6 +70,7 @@ namespace CC.Core.Save
                 autoSave = setAuto;
                 StartCoroutine(ForceSaveData(1));
             }
+            _saveButton.interactable = autoSave;
         }
 
         public void ManualSave(Component sender, object slot)
@@ -125,6 +129,7 @@ namespace CC.Core.Save
                 }
             }
             yield return null;
+            Debug.Log("save finished");
             _OnSaveFinished?.raiseEvent(this, null);
         }
 

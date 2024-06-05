@@ -1,3 +1,4 @@
+using CC.Event;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -11,6 +12,8 @@ namespace CC.Core.Save.UI
         [SerializeField] List<LoadButton> buttonList;
         [SerializeField] SaveDataHandler _handler;
         [SerializeField] int _slot;
+        [SerializeField] bool _isSave;
+        [SerializeField] GameObject _saveIndicator;
         public void tryFindSave()
         {
             foreach (var button in buttonList)
@@ -45,7 +48,11 @@ namespace CC.Core.Save.UI
 
         public void HandleLoad()
         {
-            _handler.LoadGame(this, _slot);
+            if (!_isSave) _handler.LoadGame(this, _slot);
+            else
+            {
+                _handler.AutoSave(this, _slot);
+            }
         }
     }
 }
