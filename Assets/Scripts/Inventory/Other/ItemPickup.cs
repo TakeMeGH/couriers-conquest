@@ -78,8 +78,10 @@ namespace CC.Inventory
 
         public void OnItemSet()
         {
+
             if (_customInteractables == null) _customInteractables = GetComponent<CustomInterractables>();
 
+            if (_customInteractables == null) return;
             _customInteractables.SetName(_item.itemName);
             _customInteractables.SetIcon(_item.itemSprite);
 

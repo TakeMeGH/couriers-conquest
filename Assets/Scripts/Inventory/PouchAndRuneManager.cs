@@ -1,4 +1,5 @@
 using CC.Core.Data.Dynamic;
+using CC.Core.Data.Stable;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,9 @@ namespace CC.Inventory
     {
         private PlayerInventoryManager _playerInventoryManager;
         private InventoryData _inventoryData;
+        private PlayerStatsSO _playerStats;
         private ItemsActionPlayerStats _actionPlayerStats;
+        private StatsModifier _activeRuneModifier;
         [SerializeField] private InputReader _inputReader;
 
         [SerializeField] private ABaseItem _pouchSlot;
@@ -35,11 +38,11 @@ namespace CC.Inventory
             _inputReader.PouchPerformed -= AttempToUsePouch;
         }
 
-        public void Initialize(PlayerInventoryManager playerInventoryManager, InventoryData inventoryData)
+        public void Initialize(PlayerInventoryManager playerInventoryManager, InventoryData inventoryData, PlayerStatsSO playerstats)
         {
             _playerInventoryManager = playerInventoryManager;
             _inventoryData = inventoryData;
-
+            _playerStats = playerstats;
             LoadLastPouch();
         }
 
@@ -53,6 +56,9 @@ namespace CC.Inventory
             if (_inventoryData.isRuneEquiped)
             {
                 EquipRune(_inventoryData.items[_inventoryData.indexRuneEquiped].item, _inventoryData.indexRuneEquiped);
+                RuneItem item = (RuneItem)_inventoryData.items[_inventoryData.indexRuneEquiped].item;
+                _playerStats.ForceAddModifier(item.GetRuneStats());
+                _activeRuneModifier = item.GetRuneStats();
             }
         }
 
@@ -116,7 +122,18 @@ namespace CC.Inventory
             _runeSlot = item;
             _inventoryData.indexRuneEquiped = targetIndex;
             _inventoryData.isRuneEquiped = true;
+
+            if (_runeSlot != null)
+            {
+                _playerStats.RemoveModifier(_activeRuneModifier);
+            }
+
+            RuneItem itemRune = (RuneItem)_inventoryData.items[_inventoryData.indexRuneEquiped].item;
+            _playerStats.ForceAddModifier(itemRune.GetRuneStats());
+            _activeRuneModifier = itemRune.GetRuneStats();
+
             RefreshUIRune();
+            _playerInventoryManager.UpdatePlayerStatus();
         }
 
         public void UnEquipRune()
@@ -124,7 +141,10 @@ namespace CC.Inventory
             _runeSlot = null;
             _playerInventoryManager.existingPanels[_inventoryData.indexRuneEquiped].equipedPanel.SetActive(false);
             _inventoryData.isRuneEquiped = false;
+
+            _playerStats.RemoveModifier(_activeRuneModifier);
             RefreshUIRune();
+            _playerInventoryManager.UpdatePlayerStatus();
         }
 
         private void UpdateRuneIconEquip(int targetIndex)
@@ -167,6 +187,7 @@ namespace CC.Inventory
                 ConsumableItem consumableItem = (ConsumableItem)item;
                 CheckItemEffectType(consumableItem, indexPouch);
                 ReduceItem(indexPouch, true);
+                _playerInventoryManager.UpdatePlayerStatus();
             }
             else
             {
@@ -180,6 +201,7 @@ namespace CC.Inventory
             ConsumableItem consumableItem = (ConsumableItem)item;
             CheckItemEffectType(consumableItem, indexItem);
             ReduceItem(indexItem, false);
+            _playerInventoryManager.UpdatePlayerStatus();
         }
 
         private void CheckItemEffectType(ConsumableItem item, int index)

@@ -1,0 +1,91 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7398444736682334487
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8355245448115395463}
+  - component: {fileID: 2623069485692427590}
+  - component: {fileID: 7551833558603642292}
+  m_Layer: 0
+  m_Name: 2 - QuestDrop
+  m_TagString: NPC
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8355245448115395463
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7398444736682334487}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3, y: 0.5, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2623069485692427590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7398444736682334487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca64120829071d4429e5c27d4df5f3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _onDrop:
+  - {fileID: 11400000, guid: 380457c037c5d5942bf63a7ade47fd26, type: 2}
+  _itemCheckEvent: {fileID: 11400000, guid: 41611e7359646fa4aa396be77ab032bc, type: 2}
+  _questItemRemoveEvent: {fileID: 11400000, guid: 766a1bd66c57f004c9da23725408ea2d,
+    type: 2}
+  _nextNpcList:
+  - targetNPC: NPC001
+    dialogueNode: NPC001_Richard_Quest_3
+    events:
+    - {fileID: 11400000, guid: 563ea384cb9c7f246a6074b5d33ac608, type: 2}
+  SendNPCQuestDialogue: {fileID: 11400000, guid: acf930db98f4c3646a9449d6d1863992,
+    type: 2}
+  _findQuestHintOwner: {fileID: 11400000, guid: f85d367ed4b0ea848a5ac8d6fdd4dad9,
+    type: 2}
+  _questHintData: {fileID: 11400000, guid: 317e74e9ea3f3d945ba4568cfa815c79, type: 2}
+--- !u!114 &7551833558603642292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7398444736682334487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc664d1b263d3c4caade25e036d29be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  listeners:
+  - channel: {fileID: 11400000, guid: 4da067a5f23a3a1488c193680ae99352, type: 2}
+    eventToCall:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2623069485692427590}
+          m_TargetAssemblyTypeName: CC.Quest.Example.ExDropPoint, Assembly-CSharp
+          m_MethodName: doDrop
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

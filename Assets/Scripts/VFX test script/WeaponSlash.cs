@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class SwordSwing : MonoBehaviour
+public class WeaponSlash : MonoBehaviour
 {
     public VisualEffect vfxSlash1; // Assign your VFX VisualEffect for slash1 in the inspector
     public VisualEffect vfxSlash2; // Assign your VFX VisualEffect for slash2 in the inspector

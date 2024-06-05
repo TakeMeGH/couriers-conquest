@@ -1,3 +1,5 @@
+using CC.Core.Data.Dynamic;
+using CC.Core.Data.Stable;
 using CC.Event;
 using CC.Events;
 using CC.UI;
@@ -14,6 +16,7 @@ namespace CC.Inventory
     public class PlayerInventoryManager : MonoBehaviour, IInventoryManager
     {
         [SerializeField] private AInventoryData _aitemInventoryData;
+        [SerializeField] private PlayerStatsSO _playerStats;
         //[SerializeField] private UIPlayerStatus _uiPlayerStatus;
         private PouchAndRuneManager _pouchRuneManager;
         public GameObject itemDetailPanel;
@@ -21,7 +24,10 @@ namespace CC.Inventory
 
         private InventoryData _inventoryData;
         public List<PanelInventory> existingPanels = new List<PanelInventory>();
-        public ABaseItem[] _defaultEquipment;
+        public StatsModifier _activeModifierSword;
+        public StatsModifier _activeModifierShield;
+        public StatsModifier _activeModifierArmor;
+        //public ABaseItem[] _defaultEquipment;
 
         private IInventoryManagement _playerInventoryManagement;
         private PlayerInventoryAction _playerInventoryAction;
@@ -36,7 +42,9 @@ namespace CC.Inventory
         [SerializeField] private ItemSlotMouse _itemSlotMouse;
         [HideInInspector] public bool isActived = false;
 
-        [Header("Weight System")]
+        [Header("Player Status")]
+        [SerializeField] private TextMeshProUGUI _textAttack;
+        [SerializeField] private TextMeshProUGUI _textDefense;
         [SerializeField] private TextMeshProUGUI _textWeight;
         private float _weightValue;
 
@@ -80,8 +88,6 @@ namespace CC.Inventory
             _inventoryData.inputReader.DropItemPerformed += _playerInventoryAction.DropPerformed;
             _inventoryData.inputReader.DropItemCanceled += _playerInventoryAction.DropCanceled;
             _inventoryData.inputReader.ConsumeItemPerformed += OnConsumeItem;
-
-            //_uiPlayerStatus.Initialize(this, _inventoryData);
         }
 
         private void OnDisable()
@@ -106,7 +112,7 @@ namespace CC.Inventory
             _playerInventoryWeight.Initialize(_inventoryData);
             _playerInventoryManagement.Initialize(_inventoryData, this, _itemSlotMouse);
             _playerInventoryAction.Initialize(_inventoryData, this, _itemSlotMouse, sliderDrop);
-            _pouchRuneManager.Initialize(this, _inventoryData);
+            _pouchRuneManager.Initialize(this, _inventoryData, _playerStats);
 
             inventoryMenuUI.SetActive(true);
             inventoryMenuUI.SetActive(false);
@@ -134,6 +140,7 @@ namespace CC.Inventory
 
             FMODUnity.RuntimeManager.PlayOneShotAttached("event:/SFX/Character/Walk", gameObject);
             _hudPanel.SetActive(false);
+            UpdatePlayerStatus();
         }
 
         public void CloseInventory()
@@ -227,7 +234,8 @@ namespace CC.Inventory
                 {
                     _pouchRuneManager.EquipPouch(existingPanels[activeIndexItemSlot].itemSlot.item, activeIndexItemSlot);
                     existingPanels[activeIndexItemSlot].OnAction();
-                }else if(activeSlot == ItemType.Rune)
+                }
+                else if (activeSlot == ItemType.Rune)
                 {
                     _pouchRuneManager.EquipRune(existingPanels[activeIndexItemSlot].itemSlot.item, activeIndexItemSlot);
                     existingPanels[activeIndexItemSlot].OnAction();
@@ -238,7 +246,8 @@ namespace CC.Inventory
                 if (activeSlot == ItemType.Consumable)
                 {
                     UnEquipSlot(ItemType.Consumable);
-                }else if(activeSlot == ItemType.Rune)
+                }
+                else if (activeSlot == ItemType.Rune)
                 {
                     UnEquipSlot(ItemType.Rune);
                 }
@@ -247,10 +256,11 @@ namespace CC.Inventory
 
         public void UnEquipSlot(ItemType type)
         {
-            if(type == ItemType.Consumable)
+            if (type == ItemType.Consumable)
             {
                 _pouchRuneManager.UnEquipPouch();
-            }else if(type == ItemType.Rune)
+            }
+            else if (type == ItemType.Rune)
             {
                 _pouchRuneManager.UnEquipRune();
             }
@@ -265,6 +275,66 @@ namespace CC.Inventory
             {
                 _pouchRuneManager.AttempToConsumeItem(activeIndexItemSlot);
             }
+        }
+
+        public void AddModifier(EquipmentItem item, bool hasAttach)
+        {
+            if (item.specificType == ItemSlotType.Weapon)
+            {
+                float attack = item.GetStatsWeapon(mainStat.AttackValue);
+                AddEquipmentModifier(mainStat.AttackValue, attack, hasAttach);
+            }
+            else if (item.specificType == ItemSlotType.Shield)
+            {
+                float shield = item.GetStatsWeapon(mainStat.ShieldValue);
+                AddEquipmentModifier(mainStat.ShieldValue, shield, hasAttach);
+            }
+            else if (item.specificType == ItemSlotType.Armor)
+            {
+                float health = item.GetStatsWeapon(mainStat.Health);
+                AddEquipmentModifier(mainStat.Health, health, hasAttach);
+            }
+        }
+
+        public void ClearAllModifier()
+        {
+            _playerStats.ClearAllModifier();
+        }
+
+        public void AddEquipmentModifier(mainStat key, float value, bool hasAttach)
+        {
+            if (key == mainStat.AttackValue && hasAttach)
+            {
+                _playerStats.RemoveModifier(_activeModifierSword);
+            }
+            else if (key == mainStat.ShieldValue && hasAttach)
+            {
+                _playerStats.RemoveModifier(_activeModifierShield);
+            }
+            else if (key == mainStat.Health && hasAttach)
+            {
+                _playerStats.RemoveModifier(_activeModifierArmor);
+            }
+
+            StatsModifier newModifier = _playerStats.AddModifier(key, value);
+            if (key == mainStat.AttackValue)
+            {
+                _activeModifierSword = newModifier;
+            }
+            else if (key == mainStat.ShieldValue)
+            {
+                _activeModifierShield = newModifier;
+            }
+            else if (key == mainStat.Health)
+            {
+                _activeModifierArmor = newModifier;
+            }
+        }
+
+        public void UpdatePlayerStatus()
+        {
+            _textAttack.text = _playerStats.GetValue(mainStat.AttackValue).ToString();
+            _textDefense.text = _playerStats.GetValue(mainStat.Defense).ToString();
         }
 
         public void RefreshInventory()
@@ -298,7 +368,8 @@ namespace CC.Inventory
                             panel.isNull = true;
                             panel.stacksText.gameObject.SetActive(false);
                             panel.itemImage.gameObject.SetActive(false);
-                        }else if(i.stacks > 0)
+                        }
+                        else if (i.stacks > 0)
                         {
                             if (i.stacks == 1)
                             {

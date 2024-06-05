@@ -175,17 +175,9 @@ namespace CC.Inventory
                 if (_item == i.item)
                 {
                     EquipmentItem equipment = (EquipmentItem)i.item;
-
-                    foreach (mainStat stat in Enum.GetValues(typeof(mainStat)))
-                    {
-                        float additionValue = 0;
-                        if (equipment.EquipmentStats.TryGetValue(stat, out float value) &&
-                            equipment.upgradeRequiriment[equipment.equipmentLevel].EquipmentStats.TryGetValue(stat, out additionValue)) { }
-                        {
-                            equipment.EquipmentStats[stat] = value + additionValue;
-                        }
-                    }
                     equipment.equipmentLevel++;
+
+                    _playerInventoryManager.AddModifier(equipment, true);
                     return;
                 }
             }

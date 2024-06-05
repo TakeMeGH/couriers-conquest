@@ -19,10 +19,16 @@ MonoBehaviour:
     diukir menggunakan kalimat kuno. Bisa menambahkan XP yang didapatkan dari mengantar
     makanan. Disaat XP mengalami penambahan, attack dan deff player akan berkurang
   itemSprite: {fileID: 21300000, guid: be7fc6c87d588b14abb69a32cb8206e5, type: 3}
-  maxStacks: 0
+  maxStacks: 1
   costBuy: 60
   costSell: 30
   runeStats:
     isPercent: 0
     statsToModify:
-      _serializedList: []
+      _serializedList:
+      - Key: 6
+        Value: 0.75
+      - Key: 2
+        Value: -5
+      - Key: 4
+        Value: -5

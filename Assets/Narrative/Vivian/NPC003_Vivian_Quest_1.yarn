@@ -1,0 +1,60 @@
+title: NPC003_Vivian_Quest_1
+tags:
+---
+Aiden: Halo, apakah benar ini adalah rumah dari Vivian?
+Vivian: Ya benar, adakah yang bisa ku bantu?
+-> Aiden: Aku disuruh mengantarkan barang ini oleh Reymond, kau bisa melihat barangnya dulu.
+    <<jump NPC003_Vivian_Quest_1_Background>>
+-> Aiden: Reymond memberikan misi kepadaku untuk mengantarkan barang ini kepadamu.
+    <<jump NPC003_Vivian_Quest_1_ToThePoint>>
+===
+
+title: NPC003_Vivian_Quest_1_Background
+tags:
+---
+Vivian: Sini biar ku lihat, aku takut barang ini rusak atau kualitasnya menurun.
+Vivian: Hmmmm...
+Vivian: Baiklah, kualitasnya masih bagus, terima kasih karena telah mengantarkannya.
+Aiden: Dengan senang hati, karena itu adalah pekerjaanku.
+Vivian: Ngomong-ngomong, adakah yang kau butuhkan lagi?
+-> Aiden: Aku hanya ingin sedikit bertanya, kenapa kau tinggal di tempat seperti ini?
+    <<jump NPC003_Vivian_Quest_1_Background_1>>
+-> Aiden: Sepertinya tidak ada lagi, Vivian, aku hanya ditugaskan untuk mengantarkan barang tadi.
+    <<jump NPC003_Vivian_Quest_1_Background_2>>
+===
+
+title: NPC003_Vivian_Quest_1_Background_1
+tags:
+---
+Vivian: Ahhh, setiap orang yang bertemu denganku pasti bertanya pertanyaan itu. Aku disini karena ingin meneliti tentang crystal, karena menurutku itu sangat menarik, dan juga misterius.
+Aiden: Crystal? Jadi kau tinggal disini hanya untuk crystal?
+Vivian: Kelihatannya aneh kan? Tapi kalau kau tahu, ini benar-benar bisa membantu banyak orang. Jika kau tahu, ada sebuah crystal bernama Frostbite, crystal itu sangat langka, tetapi crystal itu juga bisa membuat senjata yang hampir bisa memotong apa saja, bahkan kulit monster terkeras pun bisa dilukai dengan crystal tersebut.
+Aiden: Wah, aku baru tahu ada crystal seperti itu.
+Vivian: Sebenarnya, ada banyak sekali jenis crystal sekarang, itulah kenapa aku tertarik untuk meneliti hal tersebut.
+Aiden: Benar-benar informasi yang sangat berguna, Vivian, terima kasih karena telah menceritakannya padaku.
+Vivian: Sama-sama, bukan hal besar juga. Oh iya, ini untuk reward karena kau telah mengantarkan barang tadi tanpa mengurangi kualitasnya sedikit pun.
+Aiden: Terima kasih, Vivian, kalau begitu sampai jumpa lagi.
+Vivian: Sampai jumpa juga, Aiden.
+<<CustomAction Vivian 0>>
+<<Close>>
+===
+
+title: NPC003_Vivian_Quest_1_Background_2
+tags:
+---
+Vivian: Baiklah, kalau begitu, ini untuk rewardnya, dan terima kasih karena telah mengantarkan barang ini. Sampai jumpa.
+Aiden: Terima kasih atas rewardnya, dan sampai jumpa juga.
+<<CustomAction Vivian 0>>
+<<Close>>
+===
+
+
+title: NPC003_Vivian_Quest_1_ToThePoint
+tags:
+---
+Vivian: Ahh, akhirnya sampai juga. Sebentar aku cek terlebih dahulu.
+Vivian: Ok, sepertinya sudah benar, ini untuk rewardnya sendiri ya, terima kasih karena telah mengantarkan barang ini.
+Aiden: Sama-sama, kalau begitu, sampai jumpa lain waktu.
+<<CustomAction Vivian 0>>
+<<Close>>
+===
