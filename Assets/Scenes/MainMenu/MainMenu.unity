@@ -13356,6 +13356,22 @@ MonoBehaviour:
             m_StringArgument: Loading
             m_BoolArgument: 0
           m_CallState: 2
+  - channel: {fileID: 11400000, guid: 988fd44df6d809a42acb27a43e8f48fd, type: 2}
+    eventToCall:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1895544481}
+          m_TargetAssemblyTypeName: CC.Core.Save.UI.LoadHandler, Assembly-CSharp
+          m_MethodName: goToSceneName
+          m_Mode: 5
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: CutSceneMenu
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1895544481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15363,6 +15379,12 @@ PrefabInstance:
       propertyPath: _loadOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1223120037944052256, guid: 5270566cd8f31314ab5926275b8f315c,
+        type: 3}
+      propertyPath: _onNewGameFinished
+      value: 
+      objectReference: {fileID: 11400000, guid: 988fd44df6d809a42acb27a43e8f48fd,
+        type: 2}
     - target: {fileID: 2354980168500475971, guid: 5270566cd8f31314ab5926275b8f315c,
         type: 3}
       propertyPath: m_Pivot.x

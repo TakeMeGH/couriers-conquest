@@ -1,6 +1,5 @@
 using System;
 using CC.Events;
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
