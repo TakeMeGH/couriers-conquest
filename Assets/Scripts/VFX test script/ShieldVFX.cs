@@ -15,7 +15,7 @@ namespace CC.Characters.States
         shieldVFX.Play();
     }
 
-    public void ReinitializeVFX()
+    public void ReinitializeBlock()
     {
         shieldVFX.Reinit();
     } 
