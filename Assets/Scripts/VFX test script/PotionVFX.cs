@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using CC.Events;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -10,9 +11,18 @@ namespace CC.Inventory
         [SerializeField]
         private VisualEffect healEffect; // Reference to the healing VFX particle system
         [SerializeField]
-        private float vfxDuration = 5f; // Duration for the VFX to play before stopping
+        private float vfxDuration = 5f;
+        [SerializeField] VoidEventChannelSO _enableVFXHeal;
 
-        // Function to activate the healing effect
+        private void OnEnable()
+        {
+            _enableVFXHeal.OnEventRaised += ActivateHealingEffect;
+        }
+
+        private void OnDisable()
+        {
+            _enableVFXHeal.OnEventRaised -= ActivateHealingEffect;
+        }
         public void ActivateHealingEffect()
         {
             if (healEffect != null)
