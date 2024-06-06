@@ -1,4 +1,6 @@
 using CC.Core.Data.Dynamic;
+using CC.Core.Data.Stable;
+using CC.Events;
 using CC.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,48 +10,80 @@ namespace CC.Inventory
 {
     public class ItemsActionPlayerStats : MonoBehaviour
     {
-        private PlayerStatsSO _playerStats;
-        private UIPlayerStatus _uiPlayerStats;
-        private InventoryData _playerInventoryData;
+        [SerializeField] VoidEventChannelSO _enableVFXHeal;
+        [SerializeField] private PlayerStatsSO _playerStats;
+        private InventoryData _inventoryData;
 
-        private float amountRegeneration;
+        private float _amountRegenerationHP;
 
-        public void Initialize(UIPlayerStatus uiPlayerStatus, PlayerStatsSO playerStats, InventoryData playerInventoryData)
+        public void Initialize(InventoryData playerInventoryData)
         {
-            _uiPlayerStats = uiPlayerStatus;
-            _playerStats = playerStats;
-            _playerInventoryData = playerInventoryData;
+            _inventoryData = playerInventoryData;
         }
 
-        public void AttempToOvertimeRegeneration(float regenerationPoint, float regenDuration)
+        public void AttempToOvertimeRegeneration(float regenerationPoint, float regenDuration, mainStat statType)
         {
-            amountRegeneration = regenerationPoint;
-            InvokeRepeating("StartOvertimeRegenerationHP", 0f, 1f);
-            Invoke("StopOvetimeRegenerationHP", regenDuration);
-            ReduceItem();
+            _enableVFXHeal.RaiseEvent();
+            StartCoroutine(OvertimeRegenerationCoroutine(regenerationPoint, regenDuration, statType));
         }
 
-        public void StartOvertimeRegenerationHP()
+        private IEnumerator OvertimeRegenerationCoroutine(float regenerationPoint, float regenDuration, mainStat statType)
         {
-            float _newPlayerHP = _playerStats.GetInstanceValue(mainStat.Health);
-            float _maxHp = _playerStats.GetValue(mainStat.Health);
-            _playerStats.SetInstanceValue(mainStat.Health, _newPlayerHP + _maxHp);
-            _uiPlayerStats.UpdateHealthUI();
-        }
+            float elapsed = 0f;
 
-        public void StopOvetimeRegenerationHP()
-        {
-            CancelInvoke("StartOvertimeRegenerationHP");
-        }
-
-        private void ReduceItem()
-        {
-            _playerInventoryData.items[_playerInventoryData.pouchIndex].stacks--;
-            if (_playerInventoryData.items[_playerInventoryData.pouchIndex].stacks <= 0)
+            while (elapsed < regenDuration)
             {
-                _playerInventoryData.items[_playerInventoryData.pouchIndex].item = null;
+                StartOvertimeRegenerationHP(regenerationPoint, statType);
+                yield return new WaitForSeconds(1f);
+                elapsed += 1f;
             }
-            _uiPlayerStats.UpdatePouchUI();
+        }
+
+        public void StartOvertimeRegenerationHP(float amount, mainStat statType)
+        {
+            float value = amount;
+            float _currentAmount = _playerStats.GetInstanceValue(statType);
+            float _maxAmount = _playerStats.GetValue(statType);
+
+            if (_currentAmount + amount >= _maxAmount)
+            {
+                value = _maxAmount - _currentAmount;
+            }
+
+            _playerStats.SetInstanceValue(statType, _currentAmount + value);
+
+            Debug.Log("Regen " + statType.ToString() + " : " + amount.ToString());
+        }
+
+        public void AttempToIncreaseStat(float amountPoint, float duration, mainStat statType)
+        {
+            Debug.Log("Increase");
+            _enableVFXHeal.RaiseEvent();
+            StartCoroutine(StatIncreaseCoroutine(amountPoint, duration, statType));
+        }
+
+        private IEnumerator StatIncreaseCoroutine(float amountPoint, float duration, mainStat statType)
+        {
+            float elapsed = 0f;
+            StatsModifier _newModifier = IncreasePlayerStats(amountPoint, statType);
+
+            while (elapsed < duration)
+            {
+                yield return new WaitForSeconds(1f);
+                elapsed += 1f;
+            }
+
+            DecreasePlayerStats(_newModifier);
+        }
+
+        private StatsModifier IncreasePlayerStats(float amount, mainStat statType)
+        {
+            return _playerStats.AddModifier(statType, amount);
+        }
+
+        private void DecreasePlayerStats(StatsModifier modifier)
+        {
+            _playerStats.RemoveModifier(modifier);
         }
     }
 }

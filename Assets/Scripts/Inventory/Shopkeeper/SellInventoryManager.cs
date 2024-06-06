@@ -124,7 +124,6 @@ namespace CC.Inventory
                 }
             }
 
-            _shopManager.UpdateSellPrice(price);
         }
 
         public void SellItem()

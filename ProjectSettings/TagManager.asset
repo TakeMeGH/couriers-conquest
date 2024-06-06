@@ -9,8 +9,13 @@ TagManager:
   - Pickable
   - AudioEmitter
   - PayLoad
+  - Enemy
+  - Weapon
+  - Goblin
+  - Bandit
   - ErraRenderer
   - Waypoint
+  - WaypointIcon
   layers:
   - Default
   - TransparentFX
@@ -29,11 +34,12 @@ TagManager:
   - Interractables
   - Grass
   - Weapon
-  - 
-  - 
+  - MiniMap
+  - Building
   - HeightDef
   - 
   - Waypoint
+  - WorldCollider
   - 
   - 
   - 
@@ -42,8 +48,7 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
+  - PostProcessing
   m_SortingLayers:
   - name: Default
     uniqueID: 0

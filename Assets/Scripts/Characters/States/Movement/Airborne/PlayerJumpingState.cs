@@ -7,6 +7,8 @@ namespace CC.Characters.States
         private bool shouldKeepRotating;
         private bool canStartFalling;
 
+        bool canClimb = false;
+
         public PlayerJumpingState(PlayerControllerStatesMachine _playerController) : base(_playerController)
         {
         }
@@ -14,6 +16,8 @@ namespace CC.Characters.States
         public override void Enter()
         {
             base.Enter();
+
+            canClimb = false;
 
             _playerController.PlayerCurrentData.MovementSpeedModifier = 0f;
 
@@ -38,6 +42,11 @@ namespace CC.Characters.States
         public override void Update()
         {
             base.Update();
+
+            if (canClimb)
+            {
+                CheckForClimb();
+            }
 
             if (!canStartFalling && IsMovingUp(0f))
             {
@@ -127,5 +136,13 @@ namespace CC.Characters.States
         protected override void OnMovementCanceled()
         {
         }
+
+        public override void OnAnimationTransitionEvent()
+        {
+            canClimb = true;
+        }
+
+
+
     }
 }

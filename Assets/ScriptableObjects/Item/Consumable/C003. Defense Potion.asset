@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba8a9da6ea335d04b9e3362266650be7, type: 3}
+  m_Name: C003. Defense Potion
+  m_EditorClassIdentifier: 
+  itemName: Defense Potion
+  idItem: C003
+  itemWeight: 0.4
+  itemDescription: Memiliki kemampuan untuk mengurangi attack lawan, dan menambahkan
+    deff dari player dalam waktu tertentu
+  itemSprite: {fileID: 21300000, guid: 7b0addedcc3837742859b89f3236cb7f, type: 3}
+  maxStacks: 10
+  costBuy: 23
+  costSell: 13
+  durationEffect: 8
+  effectStats:
+    isPercent: 0
+    statsToModify:
+      _serializedList:
+      - Key: 4
+        Value: 5
+  _consumableType: 2

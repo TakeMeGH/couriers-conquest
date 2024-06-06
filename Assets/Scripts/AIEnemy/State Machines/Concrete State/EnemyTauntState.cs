@@ -17,16 +17,15 @@ namespace CC.Enemy.States
         {
             base.Enter();
 
-            StartAnimation("isTaunting");
+            StartAnimation("isSlowTaunting");
 
             _tauntCount = 0;
 
             _enemyController.NavMeshAgent.speed = 0;
             _enemyController.NavMeshAgent.velocity = Vector3.zero;
             _enemyController.NavMeshAgent.isStopped = true;
-
-            _enemyController.transform.LookAt(_enemyController.EnemyCurrentData.PlayerTransform.position);
-            _enemyController.EnemyCurrentData.IsPlayerInRange = false;
+            LookAt(_enemyController.EnemyCurrentData.PlayerTransform);
+            _enemyController.PlayerOutOfRange();
         }
 
 
@@ -47,15 +46,13 @@ namespace CC.Enemy.States
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
-
-
         }
 
         public override void Exit()
         {
             base.Exit();
 
-            StopAnimation("isTaunting");
+            StopAnimation("isSlowTaunting");
         }
 
         public override void OnAnimationExitEvent()

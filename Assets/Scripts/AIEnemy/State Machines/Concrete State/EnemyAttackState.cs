@@ -15,19 +15,24 @@ namespace CC.Enemy.States
         {
             base.Enter();
 
-            int randomValue = Random.Range(0, 2);
-            _enemyController.EnemyCurrentData.IsHeavyAttack = randomValue;
 
-            StartAnimation("isAttacking");
-            _enemyController.Animator.SetFloat("isHeavyAttack", _enemyController.EnemyCurrentData.IsHeavyAttack);
-
+            if (_enemyController.EnemyCurrentData.IsHeavyAttack)
+            {
+                StartAnimation("isHeavyAttack");
+            }
+            else
+            {
+                StartAnimation("isLightAttack");
+            }
+            
+            LookAt(_enemyController.EnemyCurrentData.PlayerTransform);
+            // _enemyController.transform.LookAt(_enemyController.EnemyCurrentData.PlayerTransform.position);
             _enemyController.WeaponDamage.SetAttack();
 
             _enemyController.NavMeshAgent.speed = 0;
             _enemyController.NavMeshAgent.velocity = Vector3.zero;
             _enemyController.NavMeshAgent.isStopped = true;
 
-            _enemyController.transform.LookAt(_enemyController.EnemyCurrentData.PlayerTransform.position);
         }
 
 
@@ -47,25 +52,21 @@ namespace CC.Enemy.States
         {
             base.Exit();
 
-            StopAnimation("isAttacking");
+            if (_enemyController.EnemyCurrentData.IsHeavyAttack)
+            {
+                StopAnimation("isHeavyAttack");
+            }
+            else
+            {
+                StopAnimation("isLightAttack");
+            }
 
         }
         public override void OnAnimationExitEvent()
         {
             base.OnAnimationExitEvent();
 
-            float distance = Vector3.Distance(_enemyController.transform.position,
-    _enemyController.EnemyCurrentData.PlayerTransform.transform.position);
-
-            if (distance < _enemyController.EnemyPersistenceData.TooCloseDistance)
-            {
-                _enemyController.SwitchState(_enemyController.StepBackState);
-                return;
-            }
-
             _enemyController.SwitchState(_enemyController.ChasingState);
         }
-
-
     }
 }

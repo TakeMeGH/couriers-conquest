@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1e000dc388328a43a763d6142549454, type: 3}
+  m_Name: 03. Aiden Armor
+  m_EditorClassIdentifier: 
+  itemName: Aiden Armor
+  idItem: E003
+  itemWeight: 0
+  itemDescription: Armor yang digunakan untuk melindungi tubuh Aiden, dan memiliki
+    kegunaan untuk disatukan dengan rune
+  itemSprite: {fileID: 21300000, guid: d7f494a04bc343b48a61b0b2d3fa42ea, type: 3}
+  maxStacks: 1
+  costBuy: 0
+  costSell: 0
+  equipmentLevel: 0
+  _baseStats:
+    _serializedList:
+    - Key: 0
+      Value: 15
+  specificType: 3
+  upgradeRequiriment:
+  - materialRequiriment:
+    - itemRequiriment: {fileID: 11400000, guid: 682e083349ed3b94e9494c5281401aef,
+        type: 2}
+      amount: 2
+    - itemRequiriment: {fileID: 11400000, guid: 67dcfa53c07ea3e4ca05ee6d7793545f,
+        type: 2}
+      amount: 2
+    price: 40
+    EquipmentStats:
+      _serializedList:
+      - Key: 0
+        Value: 25
+  - materialRequiriment:
+    - itemRequiriment: {fileID: 11400000, guid: 682e083349ed3b94e9494c5281401aef,
+        type: 2}
+      amount: 4
+    - itemRequiriment: {fileID: 11400000, guid: 67dcfa53c07ea3e4ca05ee6d7793545f,
+        type: 2}
+      amount: 4
+    price: 50
+    EquipmentStats:
+      _serializedList:
+      - Key: 0
+        Value: 35
+  - materialRequiriment:
+    - itemRequiriment: {fileID: 11400000, guid: a82e255da905aaa4f824eafb1d676a52,
+        type: 2}
+      amount: 3
+    - itemRequiriment: {fileID: 11400000, guid: 67dcfa53c07ea3e4ca05ee6d7793545f,
+        type: 2}
+      amount: 5
+    price: 70
+    EquipmentStats:
+      _serializedList:
+      - Key: 0
+        Value: 45
+  - materialRequiriment:
+    - itemRequiriment: {fileID: 11400000, guid: a82e255da905aaa4f824eafb1d676a52,
+        type: 2}
+      amount: 4
+    - itemRequiriment: {fileID: 11400000, guid: 67dcfa53c07ea3e4ca05ee6d7793545f,
+        type: 2}
+      amount: 9
+    - itemRequiriment: {fileID: 11400000, guid: f8376366fdc676241aaf518d00bd996f,
+        type: 2}
+      amount: 9
+    price: 90
+    EquipmentStats:
+      _serializedList:
+      - Key: 0
+        Value: 60

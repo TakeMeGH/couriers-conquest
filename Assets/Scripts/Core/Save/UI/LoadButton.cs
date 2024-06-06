@@ -14,7 +14,7 @@ namespace CC.Core.Save.UI
     {
         [SerializeField] int slot;
         [SerializeField] GameData _data;
-        [SerializeField] SaveDataHandler _handler;
+        [SerializeField] LoadHandler _loadHandler;
         [Header("Display")]
         [SerializeField] Image _lastCaptureImage;
         [SerializeField] TextMeshProUGUI _saveDateText;
@@ -23,13 +23,13 @@ namespace CC.Core.Save.UI
         [Header("Null/NotNull")]
         [SerializeField] GameObject _nullField;
         [SerializeField] GameObject _notNullObject;
-        public void PopulateButton()
+        public void PopulateButton(bool isIgnoreUnavailableSlot = true)
         {
             string path = Application.persistentDataPath + "/GameData/Save" + slot;
             if (!File.Exists(path))
             {
                 Debug.Log("File on slot not found");
-                DisplayNull();
+                DisplayNull(isIgnoreUnavailableSlot);
                 return;
             }
             try
@@ -43,11 +43,11 @@ namespace CC.Core.Save.UI
             }
         }
 
-        void DisplayNull()
+        void DisplayNull(bool isIgnoreUnavailableSlot = true)
         {
             _notNullObject.SetActive(false);
             _nullField.SetActive(true);
-            GetComponent<Button>().interactable = false;
+            GetComponent<Button>().interactable = !isIgnoreUnavailableSlot;
         }
 
         void OnDisplay()
@@ -58,6 +58,7 @@ namespace CC.Core.Save.UI
             _lastCaptureImage.sprite = loadSprite();
             _dayText.text = "Day " + _model.day.ToString();
             _timeText.text = string.Format("{0:00}:{1:00}", _model.time / 60, _model.time % 60);
+            _saveDateText.text = _data.saveTime.ToString();
         }
 
         Sprite loadSprite()
@@ -86,7 +87,7 @@ namespace CC.Core.Save.UI
 
         public void loadOnClick()
         {
-            _handler.LoadGame(this, slot);
+            _loadHandler.selectSlot(slot);
         }
     }
 }

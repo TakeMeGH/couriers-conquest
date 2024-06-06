@@ -11,8 +11,9 @@ namespace CC
         private bool click;
         private IPanelAction _actionPanel;
 
-        public override void OnEnable()
+        public override void Initialize(IInventoryManager inventoryManager)
         {
+            inventory = inventoryManager;
             _actionPanel = new PanelInventoryAction();
             _actionPanel.Initialize(this, inventory, mousePanel, itemSlot, itemImage, GetSlotType());
         }
@@ -50,34 +51,6 @@ namespace CC
             }
         }
 
-        public override void OnBeginDrag(PointerEventData eventData)
-        {
-            click = true;
-        }
-
-        public override void OnEndDrag(PointerEventData eventData)
-        {
-            if (click)
-            {
-                _actionPanel.OnAction();
-                click = false;
-            }
-        }
-
-        public override void OnDrag(PointerEventData eventData)
-        {
-            if (click)
-            {
-                _actionPanel.OnAction();
-                click = false;
-            }
-        }
-        public override void OnDrop(PointerEventData eventData)
-        {
-            _actionPanel.OnAction();
-            click = false;
-        }
-
         public override void RefreshInventory()
         {
             _actionPanel.RefreshInventory();
@@ -89,6 +62,11 @@ namespace CC
             itemSlot.stacks = 0;
             itemImage.gameObject.SetActive(false);
             stacksText.gameObject.SetActive(false);
+        }
+
+        public override void OnAction()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -22,14 +22,23 @@ namespace CC.Inventory
         Rune,
         Equipment,
         QuestItem,
-        DropMonster
+        DropMonster,
+        None
     }
 
     public enum ConsumableType
     {
-        HPRegeneration,
-        OnetimeATK,
-        OvertimeATK,
-        Stamina,
+        RegenerationHP,
+        IncreaseAttack,
+        IncreaseDefense,
+        IncreaseStamina,
+        IncreaseSpeed
+    }
+
+    public enum InventoryActionType
+    {
+        None,
+        Equip,
+        Unequip
     }
 }

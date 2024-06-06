@@ -13,10 +13,20 @@ namespace CC.Inventory
     {
         private bool click;
         private IPanelAction _actionPanel;
+        private PlayerInventoryManager _playerInventoryManager;
+        public int itemIndex;
+        [SerializeField] private Image _frameItem;
 
-        public override void OnEnable()
+        public override void Initialize(IInventoryManager inventoryManager)
         {
+            inventory = inventoryManager;
             _actionPanel = new PanelInventoryAction();
+            _actionPanel.Initialize(this, inventory, mousePanel, itemSlot, itemImage, GetSlotType());
+            _playerInventoryManager = (PlayerInventoryManager)inventory;
+        }
+
+        public void OnEnable()
+        {
             _actionPanel.Initialize(this, inventory, mousePanel, itemSlot, itemImage, GetSlotType());
         }
 
@@ -27,60 +37,46 @@ namespace CC.Inventory
 
         public override void OnPointerClick(PointerEventData eventData)
         {
+            if (isNull) return;
+
             if (eventData.button == PointerEventData.InputButton.Left)
             {
-                if (mousePanel.itemSlot.item == null)
-                {
-                    if (itemSlot.item != null)
-                    {
-                        itemSlot.item.UseItem();
-                    }
-                }
-                else if (mousePanel.itemSlot.item != null)
-                {
-                    _actionPanel.OnAction();
-                }
-            }
-            else if (eventData.button == PointerEventData.InputButton.Right)
-            {
-                if (mousePanel.itemSlot.item != null)
-                {
-                    inventory.RefreshInventory();
-                }
-            }
-        }
+                if (itemSlot.item == null) return;
 
-        public override void OnBeginDrag(PointerEventData eventData)
-        {
-            click = true;
-        }
+                //Debug.Log("OnAction");
 
-        public override void OnEndDrag(PointerEventData eventData)
-        {
-            if (click)
-            {
+                _playerInventoryManager.SwapActiveSlot(itemIndex);
                 _actionPanel.OnAction();
-                click = false;
+                _playerInventoryManager.itemDetailPanel.SetActive(true);
             }
         }
 
-        public override void OnDrag(PointerEventData eventData)
+        public override void ShowEquipedPanel(bool condition)
         {
-            if (click)
-            {
-                _actionPanel.OnAction();
-                click = false;
-            }
-        }
-        public override void OnDrop(PointerEventData eventData)
-        {
-            _actionPanel.OnAction();
-            click = false;
+            base.ShowEquipedPanel(condition);
         }
 
         public override void RefreshInventory()
         {
             _actionPanel.RefreshInventory();
+        }
+
+        public override void OnAction()
+        {
+            _actionPanel.OnAction();
+        }
+
+        public void ChangeFrameSlotUI(Sprite frame)
+        {
+            if (itemSlot.item == null) return;
+            if (itemSlot.item.GetItemType() == ItemType.Equipment) return;    
+
+            _frameItem.sprite = frame;
+        }
+
+        public void ForceChangeFrame(Sprite frame)
+        {
+            _frameItem.sprite = frame;
         }
     }
 }

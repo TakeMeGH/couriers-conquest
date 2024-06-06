@@ -1,9 +1,11 @@
 using System.Collections;
+using CC.Event;
 using CC.Events;
 using CC.Interaction;
+using CC.UI.Notification;
 using UnityEngine;
 
-namespace CC.Inventory.Item
+namespace CC.Inventory
 {
     public class ItemPickup : MonoBehaviour
     {
@@ -11,6 +13,7 @@ namespace CC.Inventory.Item
         [SerializeField] private int _amount = 1;
         [SerializeField] ItemInventoryEventChannel _addItemToInventory;
         [SerializeField] VoidEventChannelSO _onItemPickup;
+        [SerializeField] SenderDataEventChannelSO _itemPickedUP;
         private bool isPickup = false;
 
         public bool isDropItem = false;
@@ -75,8 +78,10 @@ namespace CC.Inventory.Item
 
         public void OnItemSet()
         {
+
             if (_customInteractables == null) _customInteractables = GetComponent<CustomInterractables>();
 
+            if (_customInteractables == null) return;
             _customInteractables.SetName(_item.itemName);
             _customInteractables.SetIcon(_item.itemSprite);
 

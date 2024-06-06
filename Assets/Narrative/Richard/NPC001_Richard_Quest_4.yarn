@@ -1,0 +1,33 @@
+﻿title: NPC001_Richard_Quest_4
+tags:
+---
+Aiden: Halo, Richard, ini barang-barang yang dikirimkan oleh Evellyn, hati-hati karena ini cukup berat.
+Richard: Tentu saja, sebentar ya, kuli hati dulu, takut ada yang tertinggal.
+Richard: Ok, ini sudah semua, terima kasih karena telah mengantarkan ini, Aiden. Ngomong-ngomong, apakah kau memerlukan sesuatu lagi?
+-> Aiden: Aku hanya ingin mengingatkan, mungkin ini nanti akan berguna bagi yang ingin pergi keluar, karena saat ini sedang banyak sekali bandit dan goblin yang sedang berkeliaran.
+    <<jump NPC001_Richard_Quest_4_Background>>
+-> Aiden: Sepertinya tidak ada lagi, Richard. Aku hanya ingin mengantarkan barang itu.
+    <<jump NPC001_Richard_Quest_4_ToThePoint>>
+===
+
+title: NPC001_Richard_Quest_4_Background
+tags:
+---
+Aiden: Aku tadi bahkan sempat bertarung disaat ingin mengantarkan barang itu.
+Richard: Hm, tidak biasanya bandit dan goblin berkeliaran seperti itu, tapi terima kasih atas infonya, Aiden. Aku akan memberitahu yang lain nanti, informasi ini akan sangat berguna nantinya.
+Aiden: Tentu saja, karena aku takut ada yang terluka nanti disaat sedang berpergian keluar.
+Richard: Oiya, ngomong-ngomong, ini untuk reward karena telah mengantarkan barang yang berat tadi. Sekali lagi terima kasih, Aiden, dan sampai jumpa lagi nanti.
+Aiden: Terima kasih juga atas rewardnya, Richard. Sampai jumpa lagi.
+<<CustomAction Richard 0>>
+<<Close>>
+===
+
+title: NPC001_Richard_Quest_4_ToThePoint
+tags:
+---
+Richard: Baiklah kalau begitu, ini untuk rewardnya sendiri. Terima kasih karena telah mengantarkan barang tadi, dan sampai jumpa.
+Aiden: Terima kasih atas rewardnya, dan juga itu memang pekerjaanku. Sampai jumpa juga, Richard.
+<<CustomAction Richard 0>>
+<<Close>>
+===
+

@@ -1,25 +1,39 @@
+using CC.Core.Data.Dynamic;
+using CC.Core.Data.Stable;
 using CC.Event;
 using CC.Events;
 using CC.UI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace CC.Inventory
 {
     public class PlayerInventoryManager : MonoBehaviour, IInventoryManager
     {
         [SerializeField] private AInventoryData _aitemInventoryData;
-        [SerializeField] private UIPlayerStatus _uiPlayerStatus;
+        [SerializeField] private PlayerStatsSO _playerStats;
+        //[SerializeField] private UIPlayerStatus _uiPlayerStatus;
+        private PouchAndRuneManager _pouchRuneManager;
+        public GameObject itemDetailPanel;
+        [SerializeField] private GameObject _hudPanel;
 
         private InventoryData _inventoryData;
-        public List<AItemPanel> existingPanels = new List<AItemPanel>();
+        public List<PanelInventory> existingPanels = new List<PanelInventory>();
+        public StatsModifier _activeModifierSword;
+        public StatsModifier _activeModifierShield;
+        public StatsModifier _activeModifierArmor;
+        //public ABaseItem[] _defaultEquipment;
 
         private IInventoryManagement _playerInventoryManagement;
-        private IInventoryAction _playerInventoryAction;
+        private PlayerInventoryAction _playerInventoryAction;
         private IInventoryWeight _playerInventoryWeight;
+
+        public FMOD.Studio.EventInstance openSound;
 
         [Space]
         [Header("Inventory Menu Components")]
@@ -28,15 +42,37 @@ namespace CC.Inventory
         [SerializeField] private ItemSlotMouse _itemSlotMouse;
         [HideInInspector] public bool isActived = false;
 
-        [Header("Weight System")]
+        [Header("Player Status")]
+        [SerializeField] private TextMeshProUGUI _textAttack;
+        [SerializeField] private TextMeshProUGUI _textDefense;
         [SerializeField] private TextMeshProUGUI _textWeight;
         private float _weightValue;
+
+        [Header("Equiped")]
+        [SerializeField] public ItemType activeSlot;
+        [SerializeField] private GameObject _labelDropSlotItem;
+        [SerializeField] private GameObject _labelEquipSlotItem;
+        [SerializeField] private GameObject _labelConsumeSlotItem;
+        [SerializeField] private TextMeshProUGUI _textLabelEquiped;
+        [SerializeField] private Sprite _frameItemDefault;
+        [SerializeField] private Sprite _frameItemHover;
+        public int activeIndexItemSlot;
+        private int _previousActive;
+        public InventoryActionType actionType = InventoryActionType.None;
+
+        [Header("Drop Item")]
+        [SerializeField] private float maxHoldDuration = 3f;
+        public bool isHoldDrop;
+        [HideInInspector] public bool canDrop;
+        public Slider sliderDrop;
+
         private void OnEnable()
         {
             _inventoryData = (InventoryData)_aitemInventoryData;
             _playerInventoryWeight = new PlayerInventoryWeight();
             _playerInventoryManagement = new PlayerInventoryManagement();
             _playerInventoryAction = new PlayerInventoryAction();
+            _pouchRuneManager = GetComponent<PouchAndRuneManager>();
             Initalize();
 
             _inventoryData.addItemToInventory.OnEventRaised += _playerInventoryManagement.OnAddItem;
@@ -46,28 +82,48 @@ namespace CC.Inventory
             _inventoryData.onSellItem.OnEventRaised += _playerInventoryManagement.OnSellItem;
             _inventoryData.onUpdateCurrency.OnEventRaised += _playerInventoryManagement.OnUpdateCurrency;
             _inventoryData.onUpgradeEquipment.OnEventRaised += _playerInventoryAction.UpgradeItem;
-            _inventoryData.inputReader.DropItemPerformed += _playerInventoryAction.OnDropItem;
-            _uiPlayerStatus.Initialize();
+            _inventoryData.onCharacterDamaged.OnEventRaised += CloseInventory;
+
+            _inventoryData.inputReader.EquipItemPerformed += OnEquipSlot;
+            _inventoryData.inputReader.DropItemPerformed += _playerInventoryAction.DropPerformed;
+            _inventoryData.inputReader.DropItemCanceled += _playerInventoryAction.DropCanceled;
+            _inventoryData.inputReader.ConsumeItemPerformed += OnConsumeItem;
         }
 
         private void OnDisable()
         {
             _inventoryData.addItemToInventory.OnEventRaised -= _playerInventoryManagement.OnAddItem;
-            _inventoryData.removeItemEvent.OnEventRaised.AddListener(_playerInventoryManagement.OnRemoveItem);
+            _inventoryData.removeItemEvent.OnEventRaised.RemoveListener(_playerInventoryManagement.OnRemoveItem);
             _inventoryData.itemCheckEvent.OnEventRaised -= _playerInventoryAction.CheckItem;
             _inventoryData.onItemPickup.OnEventRaised -= WeightCount;
             _inventoryData.onSellItem.OnEventRaised -= _playerInventoryManagement.OnSellItem;
             _inventoryData.onUpdateCurrency.OnEventRaised -= _playerInventoryManagement.OnUpdateCurrency;
             _inventoryData.onUpgradeEquipment.OnEventRaised -= _playerInventoryAction.UpgradeItem;
-            _inventoryData.inputReader.DropItemPerformed -= _playerInventoryAction.OnDropItem;
+            _inventoryData.onCharacterDamaged.OnEventRaised -= CloseInventory;
 
+            _inventoryData.inputReader.EquipItemPerformed -= OnEquipSlot;
+            _inventoryData.inputReader.DropItemPerformed -= _playerInventoryAction.DropPerformed;
+            _inventoryData.inputReader.DropItemCanceled -= _playerInventoryAction.DropCanceled;
+            _inventoryData.inputReader.ConsumeItemPerformed -= OnConsumeItem;
         }
 
         public void Initalize()
         {
             _playerInventoryWeight.Initialize(_inventoryData);
             _playerInventoryManagement.Initialize(_inventoryData, this, _itemSlotMouse);
-            _playerInventoryAction.Initialize(_inventoryData, this, _itemSlotMouse);
+            _playerInventoryAction.Initialize(_inventoryData, this, _itemSlotMouse, sliderDrop);
+            _pouchRuneManager.Initialize(this, _inventoryData, _playerStats);
+
+            inventoryMenuUI.SetActive(true);
+            inventoryMenuUI.SetActive(false);
+        }
+
+        private void Update()
+        {
+            if (isHoldDrop)
+            {
+                _playerInventoryAction.HoldAttemp();
+            }
         }
 
         public void OpenInventory()
@@ -76,7 +132,15 @@ namespace CC.Inventory
 
             RefreshInventory();
             _inventoryData.inputReader.EnableInventoryUIInput();
-            _uiPlayerStatus.HidePouchPanel();
+            //_uiPlayerStatus.HidePouchPanel();
+            itemDetailPanel.SetActive(false);
+            sliderDrop.gameObject.SetActive(false);
+            activeSlot = ItemType.None;
+            existingPanels[activeIndexItemSlot].ChangeFrameSlotUI(_frameItemDefault);
+
+            FMODUnity.RuntimeManager.PlayOneShotAttached("event:/SFX/Character/Walk", gameObject);
+            _hudPanel.SetActive(false);
+            UpdatePlayerStatus();
         }
 
         public void CloseInventory()
@@ -84,19 +148,193 @@ namespace CC.Inventory
             inventoryMenuUI.SetActive(false);
             _itemSlotMouse.EmptySlot();
             _inventoryData.inputReader.EnableGameplayInput();
-            _uiPlayerStatus.ShowPouchPanel();
+            _hudPanel.SetActive(true);
+        }
+
+        public void SwapActiveSlot(int targetActive)
+        {
+            _previousActive = activeIndexItemSlot;
+            existingPanels[_previousActive].ChangeFrameSlotUI(_frameItemDefault);
+
+            activeIndexItemSlot = targetActive;
+            existingPanels[activeIndexItemSlot].ChangeFrameSlotUI(_frameItemHover);
+        }
+
+        public void ChangeFrameToDefault(int index)
+        {
+            existingPanels[index].ForceChangeFrame(_frameItemDefault);
+        }
+
+        public void RefreshPanelItem()
+        {
+            existingPanels[activeIndexItemSlot].isNull = true;
+            existingPanels[activeIndexItemSlot].ChangeFrameSlotUI(_frameItemDefault);
         }
 
         private void WeightCount()
         {
             _weightValue = _playerInventoryWeight.GetWeight();
-            _textWeight.text = "Weight : " + _weightValue.ToString();
+            _textWeight.text = _weightValue.ToString();
         }
 
         public void ClearSlot(ItemSlotInfo slot)
         {
             slot.item = null;
             slot.stacks = 0;
+        }
+
+        public void SetLabelConsumableType()
+        {
+            _labelConsumeSlotItem.SetActive(true);
+            _labelDropSlotItem.SetActive(true);
+        }
+
+        public void SetLabelMaterialsType()
+        {
+            _labelDropSlotItem.SetActive(true);
+            _labelConsumeSlotItem.SetActive(false);
+            _labelEquipSlotItem.SetActive(false);
+        }
+
+        public void SetNoActionLabel()
+        {
+            _labelDropSlotItem.SetActive(false);
+            _labelConsumeSlotItem.SetActive(false);
+            _labelEquipSlotItem.SetActive(false);
+        }
+
+        public void CanEquipSpesifikSlot()
+        {
+            _labelEquipSlotItem.SetActive(true);
+            _labelConsumeSlotItem.SetActive(false);
+
+            if ((_inventoryData.isPouchEquiped && activeIndexItemSlot == _inventoryData.indexPouchEquiped) || (_inventoryData.isRuneEquiped && activeIndexItemSlot == _inventoryData.indexRuneEquiped))
+            {
+                _textLabelEquiped.text = "Unequip Item";
+                actionType = InventoryActionType.Unequip;
+            }
+            else if ((!_inventoryData.isRuneEquiped) || (!_inventoryData.isPouchEquiped))
+            {
+                _textLabelEquiped.text = "Equip Item";
+                actionType = InventoryActionType.Equip;
+            }
+            else
+            {
+                actionType = InventoryActionType.None;
+            }
+        }
+
+        private void OnEquipSlot()
+        {
+            if (actionType == InventoryActionType.None) return;
+
+            if (actionType == InventoryActionType.Equip)
+            {
+                if (activeSlot == ItemType.Consumable)
+                {
+                    _pouchRuneManager.EquipPouch(existingPanels[activeIndexItemSlot].itemSlot.item, activeIndexItemSlot);
+                    existingPanels[activeIndexItemSlot].OnAction();
+                }
+                else if (activeSlot == ItemType.Rune)
+                {
+                    _pouchRuneManager.EquipRune(existingPanels[activeIndexItemSlot].itemSlot.item, activeIndexItemSlot);
+                    existingPanels[activeIndexItemSlot].OnAction();
+                }
+            }
+            else if (actionType == InventoryActionType.Unequip)
+            {
+                if (activeSlot == ItemType.Consumable)
+                {
+                    UnEquipSlot(ItemType.Consumable);
+                }
+                else if (activeSlot == ItemType.Rune)
+                {
+                    UnEquipSlot(ItemType.Rune);
+                }
+            }
+        }
+
+        public void UnEquipSlot(ItemType type)
+        {
+            if (type == ItemType.Consumable)
+            {
+                _pouchRuneManager.UnEquipPouch();
+            }
+            else if (type == ItemType.Rune)
+            {
+                _pouchRuneManager.UnEquipRune();
+            }
+
+            existingPanels[activeIndexItemSlot].ChangeFrameSlotUI(_frameItemDefault);
+            itemDetailPanel.SetActive(false);
+        }
+
+        private void OnConsumeItem()
+        {
+            if (activeSlot == ItemType.Consumable)
+            {
+                _pouchRuneManager.AttempToConsumeItem(activeIndexItemSlot);
+            }
+        }
+
+        public void AddModifier(EquipmentItem item, bool hasAttach)
+        {
+            if (item.specificType == ItemSlotType.Weapon)
+            {
+                float attack = item.GetStatsWeapon(mainStat.AttackValue);
+                AddEquipmentModifier(mainStat.AttackValue, attack, hasAttach);
+            }
+            else if (item.specificType == ItemSlotType.Shield)
+            {
+                float shield = item.GetStatsWeapon(mainStat.ShieldValue);
+                AddEquipmentModifier(mainStat.ShieldValue, shield, hasAttach);
+            }
+            else if (item.specificType == ItemSlotType.Armor)
+            {
+                float health = item.GetStatsWeapon(mainStat.Health);
+                AddEquipmentModifier(mainStat.Health, health, hasAttach);
+            }
+        }
+
+        public void ClearAllModifier()
+        {
+            _playerStats.ClearAllModifier();
+        }
+
+        public void AddEquipmentModifier(mainStat key, float value, bool hasAttach)
+        {
+            if (key == mainStat.AttackValue && hasAttach)
+            {
+                _playerStats.RemoveModifier(_activeModifierSword);
+            }
+            else if (key == mainStat.ShieldValue && hasAttach)
+            {
+                _playerStats.RemoveModifier(_activeModifierShield);
+            }
+            else if (key == mainStat.Health && hasAttach)
+            {
+                _playerStats.RemoveModifier(_activeModifierArmor);
+            }
+
+            StatsModifier newModifier = _playerStats.AddModifier(key, value);
+            if (key == mainStat.AttackValue)
+            {
+                _activeModifierSword = newModifier;
+            }
+            else if (key == mainStat.ShieldValue)
+            {
+                _activeModifierShield = newModifier;
+            }
+            else if (key == mainStat.Health)
+            {
+                _activeModifierArmor = newModifier;
+            }
+        }
+
+        public void UpdatePlayerStatus()
+        {
+            _textAttack.text = _playerStats.GetValue(mainStat.AttackValue).ToString();
+            _textDefense.text = _playerStats.GetValue(mainStat.Defense).ToString();
         }
 
         public void RefreshInventory()
@@ -123,9 +361,26 @@ namespace CC.Inventory
                         panel.itemImage.CrossFadeAlpha(1, 0.05f, true);
                         panel.stacksText.gameObject.SetActive(true);
 
-                        if (i.stacks > 1)
+                        if (i.stacks <= 0)
                         {
-                            panel.stacksText.text = "" + i.stacks;
+                            i.item = null;
+                            i.stacks = 0;
+                            panel.isNull = true;
+                            panel.stacksText.gameObject.SetActive(false);
+                            panel.itemImage.gameObject.SetActive(false);
+                        }
+                        else if (i.stacks > 0)
+                        {
+                            if (i.stacks == 1)
+                            {
+                                panel.stacksText.text = "";
+                            }
+                            else
+                            {
+                                panel.stacksText.text = "" + i.stacks;
+                            }
+
+                            panel.isNull = false;
                         }
                         else
                         {

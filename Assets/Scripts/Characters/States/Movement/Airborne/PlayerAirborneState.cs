@@ -34,5 +34,15 @@ namespace CC.Characters.States
             _playerController.SwitchState(_playerController.PlayerLightLandingState);
             // _playerController.TransitionToState(PlayerControllerStatesMachine.PlayerStateEnum.LIGHTLANDING);
         }
+
+        public void CheckForClimb()
+        {
+            if (_playerController.FreeClimb.CheckForClimb())
+            {
+                _playerController.SwitchState(_playerController.PlayerClimbState);
+
+            }
+
+        }
     }
 }

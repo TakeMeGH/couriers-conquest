@@ -24,6 +24,16 @@ namespace CC.Core.Save
             _saveInventoryData = ((JObject)data).ToObject<SaveDataInventory>();
 
             AddToInventory();
+            SetOtherValue();
+        }
+
+        private void SetOtherValue()
+        {
+            _playerInventory.playerGold = _saveInventoryData.playerGold;
+            _playerInventory.isRuneEquiped = _saveInventoryData.isQuipedRune;
+            _playerInventory.isPouchEquiped = _saveInventoryData.isEquipedPouch;
+            _playerInventory.indexPouchEquiped = _saveInventoryData.indexPouch;
+            _playerInventory.indexRuneEquiped = _saveInventoryData.indexRune;
         }
 
         public override ISaveable Save()
@@ -34,8 +44,15 @@ namespace CC.Core.Save
 
         public override void SetDefaultValue()
         {
+            _playerInventory.items.Clear();
+            for (int i = 0; i < _playerInventory.inventorySize; i++)
+            {
+                _playerInventory.items.Add(new ItemSlotInfo(null, 0));
+            }
+
             _saveInventoryData.CopyFrom(_defaultInventoryData);
             AddToInventory();
+            SetOtherValue();
         }
 
         private void AddToInventory()
@@ -120,6 +137,13 @@ namespace CC.Core.Save
                     Debug.Log("Add : " + i.item.itemName);
                 }
             }
+
+            _saveInventoryData.playerGold = _playerInventory.playerGold;
+            _saveInventoryData.isEquipedPouch = _playerInventory.isPouchEquiped;
+            _saveInventoryData.isQuipedRune = _playerInventory.isRuneEquiped;
+            _saveInventoryData.indexPouch = _playerInventory.indexPouchEquiped;
+            _saveInventoryData.indexRune = _playerInventory.indexRuneEquiped;
+
         }
 
         private int GetEquipmentLevel(string key)
@@ -140,11 +164,20 @@ namespace CC.Core.Save
     {
         public List<RawInventorySaveData> dataValue;
         public SerializedDictionary<string, int> equipmentLevel;
+        public int playerGold;
+        public bool isEquipedPouch;
+        public bool isQuipedRune;
+        public int indexPouch;
+        public int indexRune;
         public void CopyFrom(ISaveable obj)
         {
             var target = (SaveDataInventory)obj;
             this.dataValue = new(target.dataValue);
             this.equipmentLevel = new(target.equipmentLevel);
+            this.playerGold = target.playerGold;
+            this.isEquipedPouch = target.isEquipedPouch;
+            this.indexPouch = target.indexPouch;
+            this.indexRune = target.indexRune;
         }
     }
 

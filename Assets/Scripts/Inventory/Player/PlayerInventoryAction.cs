@@ -1,11 +1,7 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using CC.Core.Data.Dynamic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using CC.Inventory.Item;
+using UnityEngine.UI;
 
 namespace CC.Inventory
 {
@@ -15,60 +11,149 @@ namespace CC.Inventory
         private PlayerInventoryManager _playerInventoryManager;
         private ItemSlotMouse _itemSlotMouse;
 
-        public void Initialize(InventoryData inventoryData, IInventoryManager inventoryManager, ItemSlotMouse itemSlotMouse)
+        private Transform _camTransform = null;
+        private Transform _playerTransform = null;
+        private float _holdTime = 0;
+        private float maxHoldDuration = 0.5f;
+        private Slider _sliderDrop;
+        private bool _hasDroped = false;
+
+        public void Initialize(InventoryData inventoryData, IInventoryManager inventoryManager, ItemSlotMouse itemSlotMouse, Slider slider)
         {
             _inventoryData = inventoryData;
             _playerInventoryManager = (PlayerInventoryManager)inventoryManager;
             _itemSlotMouse = itemSlotMouse;
-
+            _sliderDrop = slider;
         }
 
-        public void OnDropItem()
+        public void HoldAttemp()
         {
-            if (_itemSlotMouse.itemSlot.item != null && !EventSystem.current.IsPointerOverGameObject())
+            _holdTime += Time.deltaTime;
+
+            if (_holdTime >= maxHoldDuration)
             {
-                AttempToDrop(_itemSlotMouse.itemSlot.item);
+                DropAllItem();
+                _playerInventoryManager.isHoldDrop = false;
             }
+
+            UpdateSliderValue();
         }
 
-        public void AttempToDrop(ABaseItem item)
+
+        private void UpdateSliderValue()
         {
+            float sliderValue = Mathf.Clamp01(_holdTime / maxHoldDuration) * _sliderDrop.maxValue;
+            _sliderDrop.value = sliderValue;
+        }
+
+        public void DropPerformed()
+        {
+            if (!_playerInventoryManager.canDrop) return;
+
+            _sliderDrop.value = 0;
+            _sliderDrop.gameObject.SetActive(true);
+            _playerInventoryManager.isHoldDrop = true;
+            _holdTime = 0;
+        }
+
+        public void DropCanceled()
+        {
+            if (!_playerInventoryManager.canDrop) return;
+
+            OnDropItem(_playerInventoryManager.activeIndexItemSlot, 1);
+            RefreshDropAttempt();
+        }
+
+        private void DropAllItem()
+        {
+            OnDropItem(_playerInventoryManager.activeIndexItemSlot, _inventoryData.items[_playerInventoryManager.activeIndexItemSlot].stacks);
+            RefreshDropAttempt();
+        }
+
+        private void RefreshDropAttempt()
+        {
+            _sliderDrop.gameObject.SetActive(false);
+            _playerInventoryManager.isHoldDrop = false;
+            _holdTime = 0;
+
+            if (CheckActiveItemStack() <= 0)
+            {
+                Debug.Log("Checking - " + _playerInventoryManager.activeIndexItemSlot.ToString());
+                _playerInventoryManager.activeSlot = ItemType.None;
+                _playerInventoryManager.itemDetailPanel.SetActive(false);
+                _playerInventoryManager.existingPanels[_playerInventoryManager.activeIndexItemSlot].isNull = true;
+
+                if (_playerInventoryManager.activeIndexItemSlot == _inventoryData.indexPouchEquiped)
+                {
+                    _playerInventoryManager.UnEquipSlot(ItemType.Consumable);
+                }else if(_playerInventoryManager.activeIndexItemSlot == _inventoryData.indexRuneEquiped)
+                {
+                    _playerInventoryManager.UnEquipSlot(ItemType.Rune);
+                }
+
+                _playerInventoryManager.RefreshPanelItem();
+            }
+
+            _playerInventoryManager.RefreshInventory();
+        }
+
+        public int CheckActiveItemStack()
+        {
+            if (_playerInventoryManager.activeSlot == ItemType.None)
+                return 0;
+
+            return _inventoryData.items[_playerInventoryManager.activeIndexItemSlot].stacks;
+        }
+
+        public void OnDropItem(int index, int amount)
+        {
+            if (_playerTransform == null)
+            {
+                _camTransform = UnityEngine.Camera.main.transform;
+                _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+            }
+
+            ABaseItem item = _inventoryData.items[index].item;
+
             if (item == null)
             {
                 Debug.Log("Could not find Item in Dictionary to add to drop");
                 return;
             }
+            else
+            {
+                _inventoryData.items[index].stacks -= amount;
+            }
 
             if (item.GetItemType() == ItemType.QuestItem)
             {
                 RemoveQuestItemEvent((QuestItem)item);
-
             }
-            Transform camTransform = UnityEngine.Camera.main.transform;
-            Transform _playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+
             GameObject dropPrefab = ObjectPooling.SharedInstance.GetPooledObject(PoolObjectType.Item);
             if (dropPrefab != null)
             {
-                dropPrefab.transform.position = _playerTransform.position + new Vector3(0, 1.8f, 0) + camTransform.forward;
+                dropPrefab.transform.position = _playerTransform.position + new Vector3(0, 3f, 0) + _camTransform.forward;
                 dropPrefab.transform.rotation = _playerTransform.rotation;
                 dropPrefab.SetActive(true);
             }
 
             Rigidbody rb = dropPrefab.GetComponent<Rigidbody>();
-            if (rb != null) rb.velocity = camTransform.forward * _inventoryData.dropSpeed;
+            if (rb != null) rb.velocity = _camTransform.forward * _inventoryData.dropSpeed;
 
             ItemPickup ip = dropPrefab.GetComponentInChildren<ItemPickup>();
             ip.isDropItem = true;
             if (ip != null)
             {
                 ip.item = item;
-                ip.amount = _itemSlotMouse.splitSize;
-                _itemSlotMouse.itemSlot.stacks -= _itemSlotMouse.splitSize;
+                ip.amount = amount;
             }
 
             if (_itemSlotMouse.itemSlot.stacks < 1) _playerInventoryManager.ClearSlot(_itemSlotMouse.itemSlot);
             _itemSlotMouse.EmptySlot();
-            _playerInventoryManager.RefreshInventory();
+
+            //_playerInventoryManager.RefreshInventory();
+            //RefreshDropAttempt();
         }
 
         public bool CheckItem(ABaseItem _item)
@@ -90,17 +175,9 @@ namespace CC.Inventory
                 if (_item == i.item)
                 {
                     EquipmentItem equipment = (EquipmentItem)i.item;
-
-                    foreach (mainStat stat in Enum.GetValues(typeof(mainStat)))
-                    {
-                        float additionValue = 0;
-                        if (equipment.EquipmentStats.TryGetValue(stat, out float value) &&
-                            equipment.upgradeRequiriment[equipment.equipmentLevel].EquipmentStats.TryGetValue(stat, out additionValue)) { }
-                        {
-                            equipment.EquipmentStats[stat] = value + additionValue;
-                        }
-                    }
                     equipment.equipmentLevel++;
+
+                    _playerInventoryManager.AddModifier(equipment, true);
                     return;
                 }
             }

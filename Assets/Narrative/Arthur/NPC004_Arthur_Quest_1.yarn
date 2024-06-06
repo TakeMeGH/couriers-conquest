@@ -1,0 +1,58 @@
+title: NPC004_Arthur_Quest_1
+tags:
+---
+Aiden: Halo, apakah benar ini rumah dari Arthur?
+Arthur: Ya benar, adakah yang bisa kubantu?
+-> Aiden: Halo, Arthur. Aku Aiden, aku disuruh oleh Vivian untuk mengirimkan surat ini kepadamu.
+    <<jump NPC004_Arthur_Quest_1_Background>>
+-> Aiden: Halo, aku ingin mengantarkan surat ini, Vivian menyuruhku tadi.
+    <<jump NPC004_Arthur_Quest_1_ToThePoint>>
+===
+
+title: NPC004_Arthur_Quest_1_Background
+tags:
+---
+Arthur: Vivian? Hm, pasti ada sesuatu yang baru saja dia temukan. Sebentar, aku baca suratnya terlebih dahulu.
+-> Aiden: Tentu saja, aku akan menunggu.
+    <<jump NPC004_Arthur_Quest_1_Background_1>>
+-> Aiden: Maaf, itu sepertinya surat yang cukup penting, jadi tidak etis jika aku menunggu untuk itu.
+    <<jump NPC004_Arthur_Quest_1_Background_2>>
+
+===
+
+title: NPC004_Arthur_Quest_1_Background_1
+tags:
+---
+Arthur: ....
+Arthur: ....
+Arthur: Wow, aku tidak menyangka dia menemukan itu, ini benar-benar bisa menjadi berita besar, dan aku juga siap-siap kalau begitu. Namamu tadi itu Aiden kan? Kau juga sepertinya adalah seorang Postman, jadi sepertinya berita ini nantinya akan sangat membantumu.
+Aiden: Memangnya berita apa?
+Arthur: Jadi begini, Aiden, aku tidak tahu orang bodoh mana yang melakukan hal ini, tetapi ini benar-benar nyata. Vivian baru saja bilang bahwa ada seseorang yang sangat kaya raya, entah karena hal apa, dia menyebarkan beberapa harta diseluruh tempat. Dan bahkan Vivian sendiri bilang, didalam harta itu juga ada sebuah Frostbite Crystal, itu adalah salah satu material yang sangat langka kalau kau tahu.
+Aiden: Benarkah? Bukannya ini bisa menjadi berita besar kalau orang-orang tau?
+Arthur: Nah itu dia, Aiden, karena kau adalah salah satu orang yang mendengarnya duluan, ini bisa menjadi keberuntunganmu, bisa saja kau menemukannya disaat mengantarkan barang nanti. Tapi dari yang kubaca, hal ini sudah berlangsung selama beberapa hari, jadi harusnya, bisa saja harta tersebut sudah habis, atau masih ada, siapa yang tahu.
+Aiden: Ini benar-benar berita yang sangat hebat, Arthur, terimakasih karena telah mengatakannya padaku.
+Arthur: Hahaha, santai saja. Ngomong-ngomong, ini untuk rewardmu, terimakasih juga karena telah mengantarkan surat ini, kalau begitu, sampai jumpa lagi nanti.
+Aiden: Terimakasih juga atas rewardnya, sampai jumpa nanti juga, Arthur.
+<<CustomAction Arthur 0>>
+<<Close>>
+===
+
+title: NPC004_Arthur_Quest_1_Background_2
+tags:
+---
+Arthur: Ahhh, baiklah kalau itu maumu. Kalau begitu, ini untuk reward karena kau telah mengantarkan surat ini kepadaku. Sampai jumpa, Aiden.
+Aiden: Terimakasih atas rewardnya, sampai jumpa nanti juga, Arthur.
+<<CustomAction Arthur 0>>
+<<Close>>
+===
+
+
+title: NPC004_Arthur_Quest_1_ToThePoint
+tags:
+---
+Arthur: Wah, sepertinya ini surat yang cukup penting. Terimakasih karena telah mengantarkannya, ini untuk rewardnya sendiri.
+Aiden: Tentu saja, karena ini merupakan pekerjaanku, terimakasih juga atas rewardnya, kalau begitu sampai jumpa lain waktu.
+Arthur: Sampai jumpa.
+<<CustomAction Arthur 0>>
+<<Close>>
+===

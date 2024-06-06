@@ -1,6 +1,4 @@
 using UnityEngine;
-using System;
-using System.Diagnostics;
 
 
 namespace CC.Enemy.States
@@ -30,7 +28,7 @@ namespace CC.Enemy.States
 
             if (_enemyController.EnemyCurrentData.IsPlayerInRange)
             {
-                _enemyController.SwitchState(_enemyController.ChasingState);
+                _enemyController.SwitchState(_enemyController.FastTauntingState);
             }
 
         }

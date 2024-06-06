@@ -31,19 +31,24 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     public event UnityAction DropClimbingPerformed = delegate { };
     public event UnityAction<float> ScrollInteracionPerformed = delegate { };
     public event UnityAction PouchPerformed = delegate { };
+    public event UnityAction PausePerformed = delegate { };
 
     public bool IsBlocking { get; private set; }
     public bool IsAttacking { get; private set; }
 
-
     public event UnityAction OpenInventoryEvent = delegate { };
     public event UnityAction CloseInventoryEvent = delegate { };
     public event UnityAction DropItemPerformed = delegate { };
+    public event UnityAction DropItemCanceled = delegate { };
+    public event UnityAction EquipItemPerformed = delegate { };
+    public event UnityAction ConsumeItemPerformed = delegate { };
+    public event UnityAction ConfirmActionPerformed = delegate { };
+    public event UnityAction BackActionPerformed = delegate { };
+    public event UnityAction ShowWaypointPerformed = delegate { };
+
     [SerializeField] VoidEventChannelSO _enableCameraInputEvent;
 
     [SerializeField] VoidEventChannelSO _disableCameraInputEvent;
-
-
 
     GameInput _playerInput;
 
@@ -198,7 +203,13 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     public void OnDropItem(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Performed)
+        {
             DropItemPerformed.Invoke();
+        }
+        else if (context.phase == InputActionPhase.Canceled)
+        {
+            DropItemCanceled.Invoke();
+        }
     }
 
     public void EnableGameplayInput()
@@ -293,5 +304,41 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     {
         if (context.phase == InputActionPhase.Performed)
             PouchPerformed.Invoke();
+    }
+
+    public void OnEquipItem(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            EquipItemPerformed.Invoke();
+    }
+
+    public void OnConsumeItem(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            ConsumeItemPerformed.Invoke();
+    }
+
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            PausePerformed.Invoke();
+    }
+
+    public void OnConfirm(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            ConfirmActionPerformed.Invoke();
+    }
+
+    public void OnBack(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            BackActionPerformed.Invoke();
+    }
+
+    public void OnShowWaypoint(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            ShowWaypointPerformed.Invoke();
     }
 }

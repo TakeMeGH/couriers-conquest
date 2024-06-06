@@ -6,6 +6,9 @@ using CC.Combats;
 using CC.Core.Data.Dynamic;
 using CC.Events;
 using SA;
+using CC.Ragdoll;
+using CC.Interaction;
+using CC.Characters.States;
 
 namespace CC.Characters
 {
@@ -22,8 +25,10 @@ namespace CC.Characters
         [field: SerializeField] public VoidEventChannelSO TriggerOnMovementStateAnimationExitEvent { get; private set; }
         [field: SerializeField] public VoidEventChannelSO TriggerOnMovementStateAnimationTransitionEvent { get; private set; }
 
-        [field: Header("Animation Events")]
-        [field: SerializeField] public VoidEventChannelSO _onPlayerDead { get; private set; }
+        [field: Header("Events")]
+        [SerializeField] VoidEventChannelSO _onPlayerDead;
+        [SerializeField] IntEventChannelSO _playerWatcher;
+        [SerializeField] IntEventChannelSO _onUpdateExp;
 
         [field: Header("Collisions")]
         [field: SerializeField] public PlayerLayerData LayerData { get; private set; }
@@ -49,6 +54,11 @@ namespace CC.Characters
         [field: Header("Stamina")]
         [field: SerializeField] public StaminaController StaminaController { get; private set; }
 
+        [field: Header("Ragdoll")]
+        [field: SerializeField] private RagdollController _ragdollController;
+        #region Variable
+        int _playerWatcherCount = 0;
+        #endregion
 
         #region Component
         public Animator Animator { get; private set; }
@@ -56,6 +66,7 @@ namespace CC.Characters
         public Transform MainCameraTransform { get; private set; }
         public PlayerStateData PlayerCurrentData { get; private set; }
         public PlayerResizableCapsuleCollider ResizableCapsuleCollider { get; private set; }
+        public InteractionManager _interactionManager { get; private set; }
 
         #endregion
 
@@ -77,8 +88,6 @@ namespace CC.Characters
         public States.PlayerWalkingState PlayerWalkingState { get; private set; }
         public States.PlayerClimbState PlayerClimbState { get; private set; }
         public States.PlayerClimbUpState PlayerClimbUpState { get; private set; }
-
-
         public List<States.PlayerAttackingState> PlayerAttackingStates { get; private set; }
 
         #endregion
@@ -88,6 +97,7 @@ namespace CC.Characters
             ResizableCapsuleCollider = GetComponent<PlayerResizableCapsuleCollider>();
             Animator = GetComponentInChildren<Animator>();
             StaminaController = GetComponent<StaminaController>();
+            _interactionManager = GetComponent<InteractionManager>();
 
             PlayerCurrentData = new PlayerStateData();
 
@@ -120,6 +130,8 @@ namespace CC.Characters
             Health.SetStats(PlayerStatsSO);
             StaminaController.SetStats(PlayerStatsSO);
 
+            _playerWatcher.OnEventRaised += OnEnemyWatch;
+            _onUpdateExp.OnEventRaised += PlayerStatsSO.OnUpdateExp;
         }
 
         private void Start()
@@ -128,9 +140,28 @@ namespace CC.Characters
             SwitchState(PlayerIdlingState);
         }
 
+        void OnEnemyWatch(int value)
+        {
+            _playerWatcherCount += value;
+            if (_playerWatcherCount > 0)
+            {
+                _interactionManager.CanInteract = false;
+            }
+            else
+            {
+                _interactionManager.CanInteract = true;
+            }
+        }
         public void OnDead()
         {
-            Destroy(gameObject);
+            OnDestroy();
+
+            Rigidbody.isKinematic = true;
+            Rigidbody.useGravity = false;
+            currentState = null;
+
+            AudioManager.instance.InitializeBGM(AudioManager.instance.DeadBGM);
+            _ragdollController.SetRagdoll(true, false);
             _onPlayerDead.RaiseEvent();
         }
 
@@ -142,6 +173,11 @@ namespace CC.Characters
         private void OnTriggerExit(Collider collider)
         {
             TriggerExitEvent.Invoke(collider);
+        }
+
+        private void OnDestroy()
+        {
+            if (currentState != null) ((PlayerMovementState)currentState).OnDestroy();
         }
     }
 }

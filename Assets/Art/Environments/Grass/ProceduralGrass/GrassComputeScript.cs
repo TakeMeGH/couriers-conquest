@@ -5,6 +5,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CC.Events;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -344,7 +345,7 @@ public class GrassComputeScript : MonoBehaviour
             m_ArgsBuffer?.Release();
             m_VisibleIDBuffer?.Release();
         }
-        _onCharacterSpawn.OnEventRaised += UpdateInteractor;
+        _onCharacterSpawn.OnEventRaised -= UpdateInteractor;
         m_Initialized = false;
     }
 
@@ -507,6 +508,7 @@ public class GrassComputeScript : MonoBehaviour
     void UpdateInteractor(GameObject _character)
     {
         interactors = (ShaderInteractor[])FindObjectsOfType(typeof(ShaderInteractor));
+        if(interactors.Length > 0) foreach(var inter in interactors) Debug.Log(inter.gameObject.name);
     }
 }
 

@@ -115,7 +115,6 @@ namespace CC.Characters.States
             _playerController.InputReader.MoveEvent -= ReadMovementInput;
             _playerController.InputReader.WalkToggleStarted -= OnWalkToggleStarted;
 
-
             _playerController.TriggerOnMovementStateAnimationEnterEvent.OnEventRaised -= OnAnimationEnterEvent;
             _playerController.TriggerOnMovementStateAnimationExitEvent.OnEventRaised -= OnAnimationExitEvent;
             _playerController.TriggerOnMovementStateAnimationTransitionEvent.OnEventRaised -= OnAnimationTransitionEvent;
@@ -336,6 +335,12 @@ namespace CC.Characters.States
         {
             _playerController.Rigidbody.useGravity = true;
             _playerController.Rigidbody.isKinematic = false;
+        }
+
+
+        public void OnDestroy()
+        {
+            Exit();
         }
     }
 }

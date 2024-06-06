@@ -11,84 +11,67 @@ namespace CC.Inventory
         public GameObject mouseItemUI;
         public Image mouseCursor;
         public ItemSlotInfo itemSlot;
-        public Image itemImage;
-        public TextMeshProUGUI stacksText;
         public ItemSlotType slotType;
+
+        [SerializeField] private List<Color> _backgroundColor;
 
         public AItemPanel sourceItemPanel;
         public int splitSize;
 
+        [Header("UI COMPONENT")]
+        [SerializeField] private Image _itemImage;
+        [SerializeField] private TextMeshProUGUI _itemName;
+        [SerializeField] private TextMeshProUGUI _itemWeight;
+        [SerializeField] private TextMeshProUGUI _itemEffect;
+        [SerializeField] private TextMeshProUGUI _itemDescription;
+        [SerializeField] private Image _background;
+        [SerializeField] private GameObject _panelQuality;
+
         private void Start()
         {
-            Cursor.lockState = CursorLockMode.Locked;
-
+            // Cursor.lockState = CursorLockMode.Locked;
         }
-        void Update()
+    
+        public void SetUI()
         {
-            transform.position = Input.mousePosition;
-            if (Cursor.lockState == CursorLockMode.Locked)
+            if (itemSlot.item.GetItemType() == ItemType.QuestItem)
             {
-                mouseCursor.enabled = false;
-                mouseItemUI.SetActive(false);
+                QuestItem item = (QuestItem)itemSlot.item;
+                _panelQuality.SetActive(true);
+                _itemEffect.text = ((int)item.CurrentQuality).ToString() + "%";
             }
             else
             {
-                mouseCursor.enabled = true;
-
-                if (itemSlot.item != null)
-                {
-                    mouseItemUI.SetActive(true);
-                }
-                else
-                {
-                    mouseItemUI.SetActive(false);
-                }
+                _panelQuality.SetActive(false);
             }
-            if (itemSlot.item != null)
-            {
-                if (Input.GetKey(KeyCode.Mouse1))
-                {
-                    sourceItemPanel.RefreshInventory();
-                    return;
-                }
 
-                if (Input.GetAxis("Mouse ScrollWheel") > 0 && splitSize < itemSlot.stacks)
-                {
-                    splitSize++;
-                }
-                if (Input.GetAxis("Mouse ScrollWheel") < 0 && splitSize > 1)
-                {
-                    splitSize--;
-                }
+            _itemName.text = itemSlot.item.itemName;
+            _itemWeight.text = " " + itemSlot.item.itemWeight.ToString() + " kg";
+            _itemDescription.text =  itemSlot.item.itemDescription;
 
-                stacksText.text = "" + splitSize;
+            _itemImage.sprite = itemSlot.item.itemSprite;
 
-
-
-                if (splitSize == itemSlot.stacks && sourceItemPanel.stacksText?.gameObject != null)
-                {
-                    sourceItemPanel.stacksText.gameObject.SetActive(false);
-                }
-                else
-                {
-                    if (sourceItemPanel.stacksText != null)
-                    {
-                        sourceItemPanel.stacksText.gameObject.SetActive(true);
-                        sourceItemPanel.stacksText.text = "" + (itemSlot.stacks - splitSize);
-                    }
-                    else
-                    {
-                        return;
-                    }
-                    
-                }
-            }
+            SetItemType();
         }
 
-        public void SetUI()
+        private void SetItemType()
         {
-            stacksText.text = "" + splitSize;
-            itemImage.sprite = itemSlot.item.itemSprite;
+            if (itemSlot.item.GetItemType() == ItemType.Materials)
+            {
+                _background.color = _backgroundColor[0];
+            }
+            else if(itemSlot.item.GetItemType() == ItemType.QuestItem)
+            {
+                _background.color = _backgroundColor[1];
+            }
+            else if (itemSlot.item.GetItemType() == ItemType.Consumable)
+            {
+                _background.color = _backgroundColor[2];
+            }
+            else if (itemSlot.item.GetItemType() == ItemType.DropMonster)
+            {
+                _background.color = _backgroundColor[3];
+            }
         }
 
         public void EmptySlot()

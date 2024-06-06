@@ -16,11 +16,10 @@ namespace CC.Inventory
 
         protected void PickupItem()
         {
+            //Debug.Log("Select Item");
             _mousePanel.itemSlot = _itemSlot;
             _mousePanel.sourceItemPanel = _inventoryPanel;
-            SetSlotType();
-            if (Input.GetKey(KeyCode.LeftShift) && _itemSlot.stacks > 1) _mousePanel.splitSize = _itemSlot.stacks / 2;
-            else _mousePanel.splitSize = _itemSlot.stacks;
+            //SetSlotType();
             _mousePanel.SetUI();
         }
 
@@ -44,7 +43,10 @@ namespace CC.Inventory
                 _inventory.ClearSlot(_mousePanel.itemSlot);
             }
         }
-        protected void SwapItem(ItemSlotInfo slotA, ItemSlotInfo slotB)
+
+        #region Temp Code
+
+        /*protected void SwapItem(ItemSlotInfo slotA, ItemSlotInfo slotB)
         {
             if (_mousePanel.slotType == _inventoryPanel.GetSlotType())
             {
@@ -176,13 +178,14 @@ namespace CC.Inventory
 
         private void SetSlotType()
         {
-            if(_inventoryPanel.GetSlotType() != ItemSlotType.Inventory)
+            if (_inventoryPanel.GetSlotType() != ItemSlotType.Inventory)
             {
                 ItemType type = _inventoryPanel.itemSlot.item.GetItemType();
                 if (type == ItemType.Consumable)
                 {
                     _mousePanel.slotType = ItemSlotType.Consumable;
-                }else if(type == ItemType.Equipment)
+                }
+                else if (type == ItemType.Equipment)
                 {
                     _mousePanel.slotType = ItemSlotType.Equipment;
                 }
@@ -207,7 +210,8 @@ namespace CC.Inventory
             else if (type == ItemType.Rune && (_inventoryPanel.GetSlotType() == ItemSlotType.Rune || _mousePanel.slotType == ItemSlotType.Rune))
             {
                 return true;
-            }else if(type == ItemType.Equipment && (_inventoryPanel.GetSlotType() == ItemSlotType.Equipment || _mousePanel.slotType == ItemSlotType.Equipment))
+            }
+            else if (type == ItemType.Equipment && (_inventoryPanel.GetSlotType() == ItemSlotType.Equipment || _mousePanel.slotType == ItemSlotType.Equipment))
             {
                 return true;
             }
@@ -216,6 +220,8 @@ namespace CC.Inventory
                 return false;
             }
 
-        }
+        }*/
+
+        #endregion
     }
 }

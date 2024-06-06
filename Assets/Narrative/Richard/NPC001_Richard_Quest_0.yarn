@@ -2,28 +2,41 @@
 tags:
 ---
 Richard: Halo, senang bertemu dengan mu, adakah yang bisa ku bantu?
-Aiden: Halo pak, sebelumnya perkenalkan nama saya Aiden, dan saya baru diterima sebagai Postman
-Aiden: Saya diarahkan menuju ke Townhall ini setelah saya diterima kemarin, apakah bapak tau apa yang harus dilakukan selanjutnya?
-Richard: Ahhh, ternyata kamu si Aiden yang itu, aku sudah mendapatkan informasi tentang mu
-Richard: Sebelumnya perkenalkan, namaku Richard, aku yang mengurus terkait Postman di kota ini
-Richard: Karna kamu sudah diterima menjadi Postman kemarin, berarti kamu sudah bisa untuk bekerja sekarang
-Richard: Tapi seperti yang kamu tau, menjadi seorang Postman itu bukan pekerjaan yang mudah, terkadang kamu akan dihadang oleh bandit, kamu harus mengantarkan barang dengan waktu tertentu, dan terdapat quality yang kamu harus perhatian disaat mengantarkan barang
-Richard: Aku akan menjelaskan satu-satu tentang hal tadi, itu bertujuan agar kamu tidak bingung lagi nanti, dan kamu bisa mengantisipasi
-Richard: Yang pertama adalah bisa saja saat kamu mengantarkan barang, kamu akan dihadang oleh bandit atau monster lain, maka kamu diharakan untuk bisa bertarung. Tapi karna kamu sudah lolos pelatihan Postman sebelumnya, seharusnya kamu tidak punya masalah dalam bertarung
-Richard: Lalu yang kedua, terkadang disaat kamu mengantarkan barang, kamu disuruh mengantarkan barang dalam waktu tertentu, jadi tolong diperhatikan pesan yang disampaikan oleh pengirim sebelumnya, karna jika kamu melewati batas waktu tersebut, maka dipastikan kamu gagal mengantarkan barang tersebut
-Richard: Dan terakhir, quality dari barang, terkadang terdapat barang yang memiliki quality, kamu tidak boleh terkena serangan jika memegang barang itu, jika kamu sedang memegangnya dan terkena serangan, maka quality dari barang itu akan berkurang, dan jika qualitynya habis, maka kamu gagal untuk mengantarkan barang tersebut
-Richard: Sekali lagi, tolong dengan jelas dengarkan pesan yang disampaikan dari pengirim, karna itu akan sangat membantu mu nanti
-Aiden: Baiklah, aku akan mengingatnya, dan terimakasih karna terlah memberitahukan hal tersebut
-Aiden: Lalu, untuk mengambil misi pengantaran barang sendiri, kita bisa mengambilnya dimana?
-Richard: Untuk menerima misinya sendiri, kamu lihat papan misi disana, biasanya orang-orang yang sedang membutuhkan jasa Postman akan menaruh pemberitahuan disana, dan kita sebagai Postman akan mengambilnya langsung dari papan misi disana.
-Richard: Kita tinggal menerima misi di papan misi disana, dan kita langsung menuju ke lokasi pengirim, agar kita bisa langsung mengantarkan barang yang ingin dia kirim]
-Richard: Untuk reward sendiri, itu akan diberikan setelah kamu menyelesaikan pengiriman, entah itu selesai pada si pengirim, ataupun pada si penerima
-Aiden: Jadi, apakah semua misi akan berada disana, dan kita tinggal langsung mengambilnya, tanpa perlu konfirmasi dulu?
-Richard: Benar, kamu bisa langsung mengambilnya, dan langsung menuju ke pengirim
-Richard: Ngomong-ngomong, agar kamu bisa lebih mengerti, ambil misi di papan misi disana, aku tadi menaruh permintaan disana, itu juga bisa sebagai debut mu, aku tidak menaruh pesan untuk permintaan ini, dan kamu sepertinya akan lebih mudah mengerti jika langsung melihatnya disana
-Aiden: Baiklah kalau begitu, akan ku ambil misi tersebut sebagai debut ku sebagai Postman
-Richard: Bagus, dan terakhir ingat, jika kamu sudah mengambil misinya melalui papan misi, langsung menuju ke pengirimnya agar bisa memulai misi tersebut, dan untuk misi sekarang disaat kamu sudah menerimanya di papan misi disana, kamu langsung menuju lagi kearah ku. Dan disaat kamu sudah mengantarkan barangnya, kamu bisa menemuiku lagi disini, karna masih ada beberapa hal yang ingin ku sampaikan
-Aiden: Siapp pak Richard, terimakasih juga atas penjelasannya
+Aiden: Halo pak, sebelumnya perkenalkan nama saya Aiden, dan saya baru diterima sebagai Postman. Saya diarahkan menuju ke Townhall ini setelah saya diterima kemarin, apakah bapak tau apa yang harus dilakukan selanjutnya?
+Richard: Ahhh, ternyata kamu si Aiden yang itu, aku sudah mendapatkan informasi tentang mu sebelumnya. Perkenalkan, namaku Richard, aku yang mengurus terkait Postman di kota ini.
+Richard: Apakah kamu ingin mendapatkan penjelasan tentang Postman Aiden?
+-> Aiden: Sepertinya tidak buruk jika saya mendengarnya, pak. Pasti akan sangat membantu nanti.
+    <<jump NPC001_Richard_Quest_0_Tutorial>>
+-> Aiden: Sepertinya aku bisa langsung mulai saja, pak. Saya sudah mempelajarinya selama pelatihan.
+    <<jump NPC001_Richard_Quest_0_Bulletin_Board>>
+===
+
+title: NPC001_Richard_Quest_0_Tutorial
+tags:
+---
+Aiden: Sepertinya tidak buruk jika saya mendengarnya, pak. Pasti akan sangat membantu nanti.
+Richard: Seperti yang diharapkan. Setiap informasi penting, terutama terkait pekerjaanmu.
+Richard: Menjadi seorang Postman bukan pekerjaan mudah. Terkadang kamu akan dihadang bandit, harus mengantarkan barang tepat waktu, dan menjaga kualitas barang.
+Richard: Aku akan menjelaskan satu per satu. Tujuannya agar kamu tidak bingung dan bisa mengantisipasi.
+Richard: Pertama, mungkin kamu akan dihadang saat mengantarkan barang. Kamu harus siap bertarung, tapi seharusnya tidak masalah bagimu setelah lulus pelatihan.
+Richard: Kedua, ada waktu tertentu untuk mengantarkan barang. Harap perhatikan pesan dari pengirim, jika melewati batas waktu, kamu gagal.
+Richard: Terakhir, kualitas barang. Terkadang barang memiliki kualitas yang jika terkena serangan, kualitasnya akan berkurang.
+Richard: Dengarkan pesan dengan jelas, itu akan membantumu.
+Aiden: Baiklah, akan kuingat. Terima kasih atas penjelasannya.
+Aiden: Lalu, di mana kita bisa mengambil quest pengantaran barang?
+Richard: Lihat Bulletin Board. Biasanya orang yang membutuhkan jasa Postman menaruh pemberitahuan di sana. Kamu bisa langsung ambil dari situ.
+Richard: Ambil misi di sana, lalu langsung menuju pengirim untuk mengambil barangnya.
+Richard: Reward akan diberikan setelah pengiriman selesai, baik kepada pengirim atau penerima.
+Aiden: Paham. Aku akan mengambil quest tersebut.
+<<jump NPC001_Richard_Quest_0_Bulletin_Board>>
+===
+
+
+title: NPC001_Richard_Quest_0_Bulletin_Board
+tags:
+---
+Richard: Baiklah. Ambil quest debutmu di Bulletin Board. Aku sudah menaruhnya di sana. Setelah itu, kembali ke sini untuk mengambil barang yang akan kamu antarkan.
+Aiden: Baiklah. Saya akan mengambil quest itu.
 <<CustomAction Richard 0>>
 <<Close>>
 ===

@@ -19,15 +19,14 @@ namespace CC.Enemy.States
 
             StartAnimation("isPatroling");
 
+            if (_enemyController.HealthBar != null) _enemyController.HealthBar.gameObject.SetActive(false);
+
             _enemyController.NavMeshAgent.isStopped = false;
             _enemyController.NavMeshAgent.speed = _enemyController.EnemyPersistenceData.PatrolSpeed;
             _enemyController.NavMeshAgent.stoppingDistance = _enemyController.EnemyPersistenceData.PatrolStopDistance;
             _enemyController.NavMeshAgent.SetDestination(GetRandomWayPointDestination());
 
-            _enemyController.EnemyCurrentData.IsPlayerInRange = false;
-            // navMeshPath = new NavMeshPath();
-            // Debug.Log(_enemyController.NavMeshAgent.pathStatus + " DEBUG");
-            // Debug.Log(_enemyController.NavMeshAgent.CalculatePath(GetRandomWayPointDestination(), navMeshPath) + " " + navMeshPath.status);
+            _enemyController.PlayerOutOfRange();
         }
 
         public override void Update()
@@ -36,7 +35,7 @@ namespace CC.Enemy.States
 
             if (_enemyController.EnemyCurrentData.IsPlayerInRange)
             {
-                _enemyController.SwitchState(_enemyController.ChasingState);
+                _enemyController.SwitchState(_enemyController.FastTauntingState);
             }
 
             if (IsStoping())
@@ -71,28 +70,5 @@ namespace CC.Enemy.States
             return _enemyController.PatrolWaypoints[randomIndex].position;
         }
 
-
-        // public override void OnAnimationEnterEvent()
-        // {
-        //     base.OnAnimationEnterEvent();
-        // }
-
-        // private void Patroling()
-        // {
-        //         if (enemy.EnemyCurrentData.navMeshAgent.remainingDistance <= enemy.EnemyCurrentData.navMeshAgent.stoppingDistance)
-        //         {
-        //             if (enemy.EnemyCurrentData.m_WaitTime <= 0)
-        //             {
-        //                 NextPoint();
-        //                 Move(enemy.EnemyCurrentData.speedWalk);
-        //                 enemy.EnemyCurrentData.m_WaitTime = Random.Range(0f, enemy.EnemyCurrentData.maxWaitTime);
-        //             }
-        //             else
-        //             {
-        //                 Stop();
-        //                 enemy.EnemyCurrentData.m_WaitTime -= Time.deltaTime;
-        //             }
-        //         }
-        // }
     }
 }
