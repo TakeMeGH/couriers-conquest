@@ -50,6 +50,7 @@ namespace CC.Inventory
         public void ReduceItemQualityOnDamaged()
         {
             CurrentQuality -= _valueReducePerDamage;
+            Debug.Log("CURRENT QUALITY" + CurrentQuality);
             CheckDestroyed();
         }
 
@@ -57,6 +58,8 @@ namespace CC.Inventory
         {
             if (CurrentQuality <= 0)
             {
+                Debug.Log("DESTROYED");
+
                 _onItemDestroyed.RaiseEvent();
             }
         }

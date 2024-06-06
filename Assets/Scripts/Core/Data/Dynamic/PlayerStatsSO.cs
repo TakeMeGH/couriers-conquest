@@ -174,6 +174,7 @@ namespace CC.Core.Data.Dynamic
             this.defaultValue = new(target.defaultValue);
             this.instanceValue = new(target.instanceValue);
             this.playerExp = target.playerExp;
+            this.playerLevel = target.playerLevel;
             this.damageReduction = target.damageReduction;
         }
     }

@@ -52,6 +52,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] public EventReference ForestBGM;
     [SerializeField] public EventReference VillageBGM;
     [SerializeField] public EventReference DeadBGM;
+    [SerializeField] public EventReference Cutscene_1;
+    [SerializeField] public EventReference Cutscene_2;
+
+
     [Header("Event")]
     [SerializeField] SenderDataEventChannelSO _OnLoadFinished;
 
@@ -88,13 +92,28 @@ public class AudioManager : MonoBehaviour
         return _BGMEventInstance.isValid();
     }
 
-    public void InitializeBGM(EventReference BGMReference)
+    public void InitializeBGM(EventReference BGMReference, bool isInstant = false)
     {
-        if (_currentBGMReference.Path == BGMReference.Path)
+        if (_currentBGMReference.Guid == BGMReference.Guid)
         {
             return;
         }
-        StartCoroutine(FadeOutAndChangeBGM(BGMReference));
+        if (isInstant)
+        {
+            if (_BGMEventInstance.isValid())
+            {
+                _BGMEventInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+                _BGMEventInstance.release();
+            }
+
+            _BGMEventInstance = RuntimeManager.CreateInstance(BGMReference);
+            _BGMEventInstance.start();
+            _currentBGMReference = BGMReference;
+        }
+        else
+        {
+            StartCoroutine(FadeOutAndChangeBGM(BGMReference));
+        }
     }
 
     public void StopBGM(Component component, object sender)
@@ -171,6 +190,8 @@ public class AudioManager : MonoBehaviour
         musicBus.setVolume(musicVolume);
         sfxBus.setVolume(SFXVolume);
     }
+
+
 
     private void OnDestroy()
     {

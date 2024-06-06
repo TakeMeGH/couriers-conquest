@@ -1,5 +1,6 @@
 using CC.Core.Data.Dynamic;
 using CC.Core.Data.Stable;
+using CC.Events;
 using CC.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ namespace CC.Inventory
 {
     public class ItemsActionPlayerStats : MonoBehaviour
     {
+        [SerializeField] VoidEventChannelSO _enableVFXHeal;
         [SerializeField] private PlayerStatsSO _playerStats;
         private InventoryData _inventoryData;
 
@@ -21,6 +23,7 @@ namespace CC.Inventory
 
         public void AttempToOvertimeRegeneration(float regenerationPoint, float regenDuration, mainStat statType)
         {
+            _enableVFXHeal.RaiseEvent();
             StartCoroutine(OvertimeRegenerationCoroutine(regenerationPoint, regenDuration, statType));
         }
 
@@ -55,6 +58,7 @@ namespace CC.Inventory
         public void AttempToIncreaseStat(float amountPoint, float duration, mainStat statType)
         {
             Debug.Log("Increase");
+            _enableVFXHeal.RaiseEvent();
             StartCoroutine(StatIncreaseCoroutine(amountPoint, duration, statType));
         }
 

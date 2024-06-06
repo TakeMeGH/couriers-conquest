@@ -88,16 +88,37 @@ namespace CC.Enemy
             var CloneAttackedEvent = Instantiate(OnEnemyAttacked);
             OnEnemyAttacked = CloneAttackedEvent;
 
-            _healthController.gameObject.SetActive(true);
-            _healthController.SetStats(_enemyStatsSO);
-            _healthController.SetAttackEvent(OnEnemyAttacked);
+            if (_healthController != null)
+            {
+                _healthController.gameObject.SetActive(true);
+                _healthController.SetStats(_enemyStatsSO);
+                _healthController.SetAttackEvent(OnEnemyAttacked);
 
-            HealthBar.gameObject.SetActive(true);
+            }
 
-            WeaponDamage.SetStats(_enemyStatsSO);
-            HealthBar.SetStats(_enemyStatsSO);
 
-            _ragdollController.Initialize();
+            if (HealthBar != null)
+            {
+                HealthBar.gameObject.SetActive(true);
+            }
+
+            if (WeaponDamage != null)
+            {
+                WeaponDamage.SetStats(_enemyStatsSO);
+
+            }
+
+            if (HealthBar != null)
+            {
+                HealthBar.SetStats(_enemyStatsSO);
+            }
+
+            if (_ragdollController != null)
+            {
+                _ragdollController.Initialize();
+            }
+
+
             IsDead = false;
             SwitchState(PatrolingState);
 

@@ -66,6 +66,11 @@ namespace CC.Combats
                     _canHitPause = false;
                     _hitPause?.OnHit();
                 }
+                if (other.TryGetComponent(out ForceLookAt _forceLookAt))
+                {
+                    _forceLookAt.Force(transform.parent.parent.position);
+                }
+
             }
         }
 

@@ -21610,6 +21610,8 @@ MonoBehaviour:
   _inputReader: {fileID: 11400000, guid: 2c06813ec1504fb49916705513d476fd, type: 2}
   _onInventoryOpen: {fileID: 11400000, guid: c6bb3ecc4baaf4d4182582a4d7b253f0, type: 2}
   _onInventoryClose: {fileID: 11400000, guid: 1c11e13bb4944b7468b781bd6695c380, type: 2}
+  _onCharacterDamaged: {fileID: 11400000, guid: 2d6ad549611d5a74ab9b67dfcf4273eb,
+    type: 2}
   _HUD: {fileID: 5507140252499092477}
 --- !u!114 &1391172919097498713
 MonoBehaviour:
@@ -21644,6 +21646,7 @@ MonoBehaviour:
   _continueButton: {fileID: 8565318727304080635}
   _exitButton: {fileID: 2795735770045873714}
   _onPlayerDeath: {fileID: 11400000, guid: 939f7ace2fa4ab643b35f126639fdfa5, type: 2}
+  _onItemDestroyed: {fileID: 11400000, guid: cf9e6b8ee0f3084419daedb752861645, type: 2}
   _inputReader: {fileID: 11400000, guid: 2c06813ec1504fb49916705513d476fd, type: 2}
 --- !u!1 &3043414399089287136
 GameObject:
@@ -43977,7 +43980,6 @@ GameObject:
   - component: {fileID: 6462842147841519989}
   - component: {fileID: 7549495776116343640}
   - component: {fileID: 5587710088795264361}
-  - component: {fileID: 8683479443238980168}
   - component: {fileID: 933060627836075706}
   m_Layer: 5
   m_Name: Inventory UI
@@ -44077,19 +44079,6 @@ MonoBehaviour:
   _bgRune: {fileID: 127583784884490665}
   _iconPouch: {fileID: 8342379454712280093}
   _bgPouch: {fileID: 4450899148423948887}
---- !u!114 &8683479443238980168
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6220733435676029763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3680f0f0ddf8ad44b24720a948f7668, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerStats: {fileID: 11400000, guid: f3ee829ae9f91ee48b6a0fd3da31e4a9, type: 2}
 --- !u!114 &933060627836075706
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44102,6 +44091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3680f0f0ddf8ad44b24720a948f7668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enableVFXHeal: {fileID: 11400000, guid: c7b4e17b9306a664db804c106f24c435, type: 2}
   _playerStats: {fileID: 11400000, guid: f3ee829ae9f91ee48b6a0fd3da31e4a9, type: 2}
 --- !u!1 &6228830863370971639
 GameObject:

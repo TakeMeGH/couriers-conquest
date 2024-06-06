@@ -3,7 +3,17 @@ guid: 7edfc481200061f4f93744cafa6b74c3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Blacksmith_ToolSG
+    second: {fileID: 2100000, guid: 40ccf173d807c644aadd6ec49c413f9b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Blacksmith_ToolSG1
+    second: {fileID: 2100000, guid: 52943a667ade5d94b95528c5f5b7f689, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -37,7 +47,7 @@ ModelImporter:
     lODScreenPercentages: []
     globalScale: 1
     meshCompression: 0
-    addColliders: 0
+    addColliders: 1
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
     importPhysicalCameras: 1

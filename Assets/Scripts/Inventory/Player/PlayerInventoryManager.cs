@@ -93,7 +93,7 @@ namespace CC.Inventory
         private void OnDisable()
         {
             _inventoryData.addItemToInventory.OnEventRaised -= _playerInventoryManagement.OnAddItem;
-            _inventoryData.removeItemEvent.OnEventRaised.AddListener(_playerInventoryManagement.OnRemoveItem);
+            _inventoryData.removeItemEvent.OnEventRaised.RemoveListener(_playerInventoryManagement.OnRemoveItem);
             _inventoryData.itemCheckEvent.OnEventRaised -= _playerInventoryAction.CheckItem;
             _inventoryData.onItemPickup.OnEventRaised -= WeightCount;
             _inventoryData.onSellItem.OnEventRaised -= _playerInventoryManagement.OnSellItem;
