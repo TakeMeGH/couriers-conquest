@@ -29,9 +29,10 @@ namespace CC.NPC
             if (_dialogueVariable == null) _dialogueVariable = FindObjectOfType<VariableStorageBehaviour>();
             if (_isCommandHandler)
             {
+                Debug.Log("MASUK");
                 _dialogueRunner.AddCommandHandler("Close", () => OnDialogueClosed());
-                _dialogueRunner.AddCommandHandler("SpecialAction", (int index) => SpecialAction(index));
-                _dialogueRunner.AddCommandHandler("CustomAction", (int index) => emitEvent(index));
+                // _dialogueRunner.AddCommandHandler("SpecialAction", (int index) => SpecialAction(index));
+                // _dialogueRunner.AddCommandHandler("CustomAction", (int index) => emitEvent(index));
             }
         }
 
