@@ -11,6 +11,7 @@ namespace CC.Quest
     {
         [SerializeField] SerializedDictionary<int, AQuest> _questDict;
         [SerializeField] PlayerStateSO _playerState;
+        [SerializeField] bool _isDebug = true;
 
         public AQuest GetQuestByID(int id)
         {
@@ -26,7 +27,10 @@ namespace CC.Quest
             List<AQuest> res = new();
             foreach (var key in _questDict.Keys)
             {
-                if (checkPrequisites(key)) res.Add(_questDict[key]);
+                if (checkPrequisites(key))
+                {
+                    if (_isDebug || !isQuestFinished(key)) res.Add(_questDict[key]);
+                }
             }
             return res;
         }
@@ -45,6 +49,11 @@ namespace CC.Quest
         {
             if (_playerState.GetFinishedQuest().Length == 0 || !_playerState.GetFinishedQuest().Contains(id)) return false;
             return true;
+        }
+
+        public bool isQuestFinished(int id)
+        {
+            return _playerState.GetFinishedQuest().Contains(id);
         }
     }
 }

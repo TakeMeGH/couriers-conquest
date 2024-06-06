@@ -79,6 +79,12 @@ namespace CC.Combats
             {
                 float shieldValue = _statsSO.GetValue(mainStat.ShieldValue);
                 totalReduction += shieldValue / 100f;
+                AudioManager.instance.AudioPlayOneShot(AudioManager.instance.ShieldHit, transform.position);
+
+            }
+            else
+            {
+                AudioManager.instance.AudioPlayOneShot(AudioManager.instance.SwordHit, transform.position);
             }
             float calculatedDamage = Mathf.Min(Mathf.RoundToInt(damage * (1 - totalReduction)), _health);
 
@@ -114,6 +120,11 @@ namespace CC.Combats
             FloatingDamageController _floatingDamageController = tmp.GetComponent<FloatingDamageController>();
             _floatingDamageController.Init(_damage.ToString());
 
+        }
+
+        private void OnDestroy()
+        {
+            _onCharacterDamaged.OnEventRaised = null;
         }
 
     }

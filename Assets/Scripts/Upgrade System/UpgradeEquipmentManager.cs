@@ -23,23 +23,23 @@ namespace CC.UpgradeEquipment
 
         [Space]
         [Header("Events")]
-        [SerializeField] private PlayerInventoryDataChannel _onShowUpgradeEvent;
+        [SerializeField] private NPCInventoryDataChannel _onShowUpgradeEvent;
         [SerializeField] private SellItemEventChannel _onSellItemEvent;
         [SerializeField] private OnUpdateCurrencyEventChannel _onUpdateCurrency;
         [SerializeField] private OnSenderBaseItemEventChannel _onUpgradeEquipment;
 
-        private float _playerMoney = 0;
-        private float _lastPrice = 0;
+        private int _playerMoney = 0;
+        private int _lastPrice = 0;
 
         private void OnEnable()
         {
             _upgradeEquipmentUI = GetComponent<UpgradeEquipmentUI>();
-            _onShowUpgradeEvent.OnEventRaised += Initialize;
+            //_onShowUpgradeEvent.OnEventRaised += Initialize;
         }
 
         private void OnDisable()
         {
-            _onShowUpgradeEvent.OnEventRaised -= Initialize;
+            //_onShowUpgradeEvent.OnEventRaised -= Initialize;
         }
 
         private void Initialize(AInventoryData playerData, AInventoryData blacksmithInventoryData)
@@ -153,7 +153,7 @@ namespace CC.UpgradeEquipment
         {
             UseMaterialRequiriment();
             ReducePlayerMoney();
-            SuccesfullUpgrade();
+            //SuccesfullUpgrade();
 
             ResetPanel();
             _tempPlayerInventory.Initialize(_inventoryData, this, _itemSlotMouse, _playerInventoryData);
@@ -181,7 +181,7 @@ namespace CC.UpgradeEquipment
             _onUpdateCurrency.RaiseEvent(-_lastPrice);
         }
 
-        private void SuccesfullUpgrade()
+       /* private void SuccesfullUpgrade()
         {
             // TODO : FIX
             _upgradeEquipmentUI.SetStatsPanelBeforeUpgrade(_currentEquipmentItem.itemSprite, 
@@ -193,6 +193,6 @@ namespace CC.UpgradeEquipment
             _upgradeEquipmentUI.SetStatsPanelAfterUpgrade(_currentEquipmentItem.itemSprite, 
                 _currentEquipmentItem.equipmentLevel, _currentEquipmentItem.EquipmentStats, 
                 _currentEquipmentItem.itemWeight);
-        }
+        }*/
     }
 }

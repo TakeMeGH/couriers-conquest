@@ -8,6 +8,7 @@ using CC.Events;
 using SA;
 using CC.Ragdoll;
 using CC.Interaction;
+using CC.Characters.States;
 
 namespace CC.Characters
 {
@@ -27,6 +28,7 @@ namespace CC.Characters
         [field: Header("Events")]
         [SerializeField] VoidEventChannelSO _onPlayerDead;
         [SerializeField] IntEventChannelSO _playerWatcher;
+        [SerializeField] IntEventChannelSO _onUpdateExp;
 
         [field: Header("Collisions")]
         [field: SerializeField] public PlayerLayerData LayerData { get; private set; }
@@ -129,6 +131,7 @@ namespace CC.Characters
             StaminaController.SetStats(PlayerStatsSO);
 
             _playerWatcher.OnEventRaised += OnEnemyWatch;
+            _onUpdateExp.OnEventRaised += PlayerStatsSO.OnUpdateExp;
         }
 
         private void Start()
@@ -151,10 +154,13 @@ namespace CC.Characters
         }
         public void OnDead()
         {
+            OnDestroy();
+
             Rigidbody.isKinematic = true;
             Rigidbody.useGravity = false;
             currentState = null;
 
+            AudioManager.instance.InitializeBGM(AudioManager.instance.DeadBGM);
             _ragdollController.SetRagdoll(true, false);
             _onPlayerDead.RaiseEvent();
         }
@@ -167,6 +173,11 @@ namespace CC.Characters
         private void OnTriggerExit(Collider collider)
         {
             TriggerExitEvent.Invoke(collider);
+        }
+
+        private void OnDestroy()
+        {
+            if (currentState != null) ((PlayerMovementState)currentState).OnDestroy();
         }
     }
 }

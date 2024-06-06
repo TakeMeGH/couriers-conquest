@@ -1,0 +1,164 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8811206672666204821
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7677075970302710508}
+  - component: {fileID: 5519930619950925331}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7677075970302710508
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8811206672666204821}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 367.5431, y: 233.19548, z: -2.9158058}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5519930619950925331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8811206672666204821}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfa9f7c38d103ae49ac7a33065573466, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  masterVolume: 0.112
+  musicVolume: 0.101
+  SFXVolume: 0.081
+  settingValue: {fileID: 11400000, guid: 42389bf0155686c49ac220452321e9de, type: 2}
+  ConfirmUI:
+    Guid:
+      Data1: -1168399515
+      Data2: 1135277066
+      Data3: 1342163869
+      Data4: -1229166639
+    Path: event:/SFX (all goes to SFX slider)/UI (User Interface)/Confirm 2
+  BackUI:
+    Guid:
+      Data1: -223790822
+      Data2: 1270411004
+      Data3: -717618781
+      Data4: -2000836559
+    Path: event:/SFX (all goes to SFX slider)/UI (User Interface)/Confirm
+  DialogueUI:
+    Guid:
+      Data1: 913657074
+      Data2: 1333045673
+      Data3: -1052233538
+      Data4: -1156562583
+    Path: event:/SFX (all goes to SFX slider)/UI (User Interface)/Dialog Click
+  DashPlayer:
+    Guid:
+      Data1: -1061824525
+      Data2: 1075222495
+      Data3: -213351500
+      Data4: -1364366728
+    Path: event:/SFX (all goes to SFX slider)/Player/Dash
+  WalkPlayer:
+    Guid:
+      Data1: -1208850874
+      Data2: 1146795793
+      Data3: -444779602
+      Data4: 1026099210
+    Path: event:/SFX (all goes to SFX slider)/Player/Walk
+  SwordSwing:
+    Guid:
+      Data1: -984571173
+      Data2: 1278582821
+      Data3: -949619558
+      Data4: 1200027139
+    Path: event:/SFX (all goes to SFX slider)/Player/Sword Swing
+  SwordHit:
+    Guid:
+      Data1: 29736168
+      Data2: 1289823012
+      Data3: 61571732
+      Data4: -1277236415
+    Path: event:/SFX (all goes to SFX slider)/Player/Sword Clashing
+  ShieldHit:
+    Guid:
+      Data1: 666091928
+      Data2: 1091828242
+      Data3: 1773408146
+      Data4: -238590239
+    Path: event:/SFX (all goes to SFX slider)/Player/Shield Hit
+  BlacksmithHit:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
+  GoblinNotice:
+    Guid:
+      Data1: -501896800
+      Data2: 1286524001
+      Data3: 1909450667
+      Data4: 2136251066
+    Path: event:/SFX (all goes to SFX slider)/Enemy/Goblin/Notice
+  BanditNotice:
+    Guid:
+      Data1: 1177003219
+      Data2: 1116914781
+      Data3: -1225357153
+      Data4: -1103855468
+    Path: event:/SFX (all goes to SFX slider)/Enemy/Bandits/Notice
+  MainMenuBGM:
+    Guid:
+      Data1: -1588717940
+      Data2: 1086969497
+      Data3: -1361297494
+      Data4: 1248302993
+    Path: event:/Music (all goes to Music Slider)/Main Menu
+  CityBGM:
+    Guid:
+      Data1: -923239665
+      Data2: 1120405490
+      Data3: -1565218399
+      Data4: -1602325563
+    Path: event:/Music (all goes to Music Slider)/First City (slowed down to the
+      perfection or Idk)
+  ForestBGM:
+    Guid:
+      Data1: -808984206
+      Data2: 1318801026
+      Data3: -1835663205
+      Data4: -1878379932
+    Path: event:/Music (all goes to Music Slider)/Forest - Wild
+  VillageBGM:
+    Guid:
+      Data1: 282333603
+      Data2: 1282576251
+      Data3: 2145141425
+      Data4: 996322907
+    Path: event:/Music (all goes to Music Slider)/First Village
+  DeadBGM:
+    Guid:
+      Data1: 503805436
+      Data2: 1088126752
+      Data3: -1806957891
+      Data4: -1439094729
+    Path: event:/Music (all goes to Music Slider)/haha game over omegalul
+  _OnLoadFinished: {fileID: 11400000, guid: 1b4fc92c341e1c9448ea128f13dfd9c3, type: 2}

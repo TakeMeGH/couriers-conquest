@@ -1,6 +1,13 @@
 ﻿title: Shop01_MaleShop_Default_0
 tags:
 ---
+<<declare $ReymondHaveQuest = false>>
+<<declare $ReymondQuestNode = "" >>
+
+<<if $ReymondHaveQuest>>
+    <<jump {$ReymondQuestNode}>>
+<<endif>>
+
 Reymond : Halo kak, senang bertemu denganmu!
 Reymond : Selamat datang di GoodCompany Shop
 Reymond : Disini kamu bisa menemukan berbagai barang premium yang tidak akan bisa kamu temukan di tempat lain
@@ -13,14 +20,16 @@ Reymond : Jadi, adakah yang kamu butuhkan disini sekarang kak?
 title: Shop01_MaleShop_All_Choice
 tags:
 ---
--> Aku memiliki kisah petualangan
-    <<jump Shop01_MaleShop_Choice_0>>
--> Aku ingin membeli atau menjual sesuatu
-    <<jump Shop01_MaleShop_Choice_1>>
--> Bisakah kita membuat sebuah kontrak?
-    <<jump Shop01_MaleShop_Choice_2>>
--> Tidak ada, aku sudah punya apa yang kubutuhkan
+-> Aiden: Tidak ada, aku sudah punya apa yang kubutuhkan
     <<jump Shop01_MaleShop_Choice_3>>
+-> Aiden: Bisakah kita membuat sebuah kontrak?
+    <<jump Shop01_MaleShop_Choice_2>>
+-> Aiden: Aku ingin membeli sesuatu
+    <<jump Shop01_MaleShop_Choice_1>>
+-> Aiden: Aku ingin menjual sesuatu
+    <<jump Shop01_MaleShop_Choice_4>>
+-> Aiden: Aku memiliki kisah petualangan
+    <<jump Shop01_MaleShop_Choice_0>>
 ===
 
 title: Shop01_MaleShop_Choice_0
@@ -153,9 +162,17 @@ tags:
 title: Shop01_MaleShop_Choice_1
 tags:
 ---
-Reymond : Silahkan pilih barang yang ingin kamu beli, aku pasti menjual barang dengan kualitas bagus. Tidak hanya itu, aku juga menerima barang rampasan, walaupun aku sendiri benci dengan bagaimana kamu mendapatkannya
+Reymond : Silahkan pilih barang yang ingin kamu beli, aku pasti menjual barang dengan kualitas bagus.
 <<SpecialAction Reymond 0>>
 ===
+
+title: Shop01_MaleShop_Choice_4
+tags:
+---
+Reymond : Aku menerima barang rampasan, walaupun aku sendiri benci dengan bagaimana kamu mendapatkannya.
+<<SpecialAction Reymond 1>>
+===
+
 
 title: Shop01_MaleShop_Choice_2
 tags:

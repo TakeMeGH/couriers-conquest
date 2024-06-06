@@ -1,0 +1,13 @@
+title: NPC003_Vivian_Default_0
+tags:
+---
+<<declare $VivianHaveQuest = false>>
+<<declare $VivianQuestNode = "" >>
+
+<<if $VivianHaveQuest>>
+    <<jump {$VivianQuestNode}>>
+<<endif>>
+
+Vivian : Hati-hati disekitar sini banyak monster dan bandit.
+<<Close>>
+===

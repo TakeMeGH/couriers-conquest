@@ -1,20 +1,42 @@
 ﻿title: NPC001_Richard_Quest_2
 tags:
 ---
-Aiden: Pak Richard, aku sudah mengantarkan barang ke Rachel, dan dia juga sudah menerimanya.
-Richard: Wah, ternyata kau selesai lebih cepat dari yang kubayangkan, nak. Kau sepertinya memang berbakat seperti ayahmu.
-Aiden: Tidak usah melebihkan, ini hanya mengantarkan barang biasa.
-Richard: Hahaha, santai saja, nak.
-Richard: Ngomong-ngomong, karena kau telah berhasil mengantarkan barangnya, seharusnya kamu sudah tahu betul bagaimana menjadi seorang pengantar di lapangan langsung. Di masa depan, seharusnya kamu tidak akan kesulitan lagi.
-Richard: Dan juga, apakah kamu sudah menerima reward-nya? Kamu pasti akan menerima reward berupa gold dan XP. XP akan berfungsi untuk menaikkan levelmu, dan gold berfungsi untuk melakukan pembelian barang ataupun untuk melakukan upgrade pada senjatamu juga.
-Richard: Kamu tidak hanya bisa melakukan pembelian, tapi kamu juga bisa menjual barang-barang yang kamu temukan saat berburu monster, ataupun item drop dari seorang bandit. Untuk kedua hal tersebut, kita sudah memiliki seorang Shopkeeper di sini. Kamu bisa langsung menuju ke sana, dia ada dekat dengan gerbang kota.
-Richard: Biasanya di setiap daerah, entah itu kota ataupun desa, pasti selalu ada Shopkeeper. Jadi jika kamu memerlukan beberapa barang, kamu bisa langsung pergi menuju Shopkeeper tersebut.
-Richard: Ngomong-ngomong, karena kamu telah mendapatkan gold pertamamu, kenapa kamu tidak membelanjakannya di Shopkeeper depan sana, nak.
-Richard: Namanya Reymond. Dia anak seorang saudagar, dia orang yang banyak bicara dan cukup periang. Ceritakanlah beberapa cerita petualangan jika kau punya kepadanya, dia pasti akan suka.
-Richard: Yah, karena sudah tidak ada lagi hal yang bisa kita bicarakan, mari kita sudahi saja perbincangan ini. Aku harus melakukan pekerjaan yang lain.
-Aiden: Baiklah, Pak Richard. Sekali lagi terima kasih atas informasi dan masukan yang Bapak berikan. Aku pasti akan selalu mengingat hal tersebut. Sepertinya aku juga perlu membeli beberapa barang, jadi aku akan mampir dulu ke Shopkeeper tersebut.
-Richard: Sama-sama. Kuharap kau bisa sukses seperti ayahmu dulu. Sekali lagi terima kasih juga, dan sampai jumpa di lain waktu.
-Aiden: Baik, Pak Richard. Sampai jumpa juga di lain waktu.
-<<CustomAction Richard 1>>
+Aiden: Halo Richard, senang bertemu denganmu lagi.
+Richard: Halo juga Aiden, senang bertemu denganmu juga, adakah yang bisa kubantu?
+-> Aiden: Aku mendengar kau dulu cukup akrab dengan ayahku pak, apakah itu benar?
+    <<jump NPC001_Richard_Quest_2_Background>>
+-> Aiden: Aku tadi mengambil questmu di Bulletin Board pak, jadi apa yang harus ku kirim?
+    <<jump NPC001_Richard_Quest_2_ToThePoint>>
+===
+
+title: NPC001_Richard_Quest_2_Background
+tags:
+---
+Richard: Tentu saja, aku dulu cukup akrab dengan ayahmu Aiden, terkadang jika sedang senggang, kami malah sering berpetualang bersama.
+Richard: Dulu itu ayahmu merupakan seorang yang hebat dalam mengantarkan barang, dia benar-benar selalu mengantarkan barang dengan sangat cepat, bahkan saking hebatnya, banyak orang yang secara pribadi menyuruhnya untuk mengantarkan barang, tidak dengan menaruhnya di Bulletin Board.
+Richard: Tapi sehebat apapun orang, dia pasti memulainya dari bawah, atau bahkan dari nol, sama seperti ayahmu yang memulai menjadi seorang Postman dari yang bukan siapa-siapa seperti kamu saat ini, sampai menjadi orang yang hebat.
+Aiden: Mendengar itu, sepertinya ayahku dulu merupakan orang yang hebat. Kalau boleh, jika kau tahu kisah yang spesifik dilakukan oleh ayahku, apakah kau mau menceritakannya kepada ku pak?
+Richard: Hahaha, dengan senang hati, bahkan sebanyak yang kau mau, karena aku tahu beberapa kisah tentang ayahmu dulu.
+Richard: Tapi sebelum itu, apakah kau sudah mengecek Bulletin Board di sana, aku menaruh sebuah quest tadi karena aku ingin mengirimkan barang ke sebuah tempat yang cukup jauh, dan aku ingin paket ini segera dikirim.
+Aiden: Ahhh, terkait quest tersebut aku sudah mengambilnya pak. Tadinya aku hanya ingin melihat-lihat sebentar kedalam Bulletin Board dan setelah itu ingin bertanya beberapa hal terkait ayahku denganmu, tetapi saat kulihat ada namamu di sana, aku langsung mengambil quest tersebut, karena ini searah dengan tujuan awalku.
+Richard: Bagus kalau kamu sudah mengambilnya, aku bisa langsung menyuruhmu mengantarkan barang ini tanpa perlu kamu menuju ke Bulletin Board terlebih dahulu.
+Richard: Sebelum aku menceritakan tentang ayahmu lagi, tolong antarkan barang ini terlebih dahulu menuju ke tempat di dekat bukit, aku sudah menandainya di peta, nama penerimanya sendiri adalah Arthur.
+Richard: Setelah kamu mengantarkan barang ini, nanti kembali lagi kesini, dan aku akan menceritakan kisah tentang ayahmu lagi.
+Aiden: Baiklah pak kalau begitu, aku akan mengantarkan barang ini terlebih dahulu.
+Aiden: Kalau begitu aku pamit dulu, dan nanti akan kembali lagi, sampai jumpa nanti.
+Richard: Sampai jumpa juga Aiden, hati-hati disaat kamu mengirimkannya.
+<<CustomAction Richard 0>>
 <<Close>>
 ===
+
+title: NPC001_Richard_Quest_2_ToThePoint
+tags:
+---
+Richard: Ah, jadi kau yang mengambilnya Aiden, baiklah, ambil barang ini, lokasi penerimanya sendiri adalah di dekat bukit, dan jauh dari kota dan desa, untuk penerimanya sendiri adalah Arthur. Aku juga sudah menandainya di mapmu, harusnya itu akan membantumu kesana.
+Richard: Jika kau kosong sehabis mengantarkan barang itu, kau bisa ke sini lagi, karena ada hal yang ingin kubicarakan denganmu.
+Aiden: Baiklah pak, kalau begitu aku akan langsung pergi, sampai jumpa.
+Richard: Sampai jumpa juga, hati-hati disaat kau mengantarkan barang itu nanti.
+<<CustomAction Richard 0>>
+<<Close>>
+===
+

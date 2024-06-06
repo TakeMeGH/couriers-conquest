@@ -9,9 +9,9 @@ namespace CC.Events
     [CreateAssetMenu(menuName = "Game/Events/Update Currency")]
     public class OnUpdateCurrencyEventChannel : DescriptionBaseSO
     {
-        public Action<float> OnEventRaised;
+        public Action<int> OnEventRaised;
 
-        public void RaiseEvent(float _amount)
+        public void RaiseEvent(int _amount)
         {
             if (OnEventRaised != null)
                 OnEventRaised.Invoke(_amount);

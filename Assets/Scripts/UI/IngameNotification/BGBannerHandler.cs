@@ -8,21 +8,15 @@ namespace CC.UI.Notification
 {
     public class BGBannerHandler : MonoBehaviour
     {
-        [SerializeField] Image _BG;
         [SerializeField] TextMeshProUGUI _title;
-        [SerializeField] TextMeshProUGUI _description;
-        [SerializeField] float _time = 3f;
-        public void Set(BGBannerData _data)
+        public void Set(string questTitle)
         {
-            if (_data.BG != null) _BG.sprite = _data.BG;
-            _title.text = _data.Title;
-            _description.text = "-" + _data.description + "-";
+            _title.text = questTitle;
         }
 
-        private void Update()
+        public void DestroyBanner()
         {
-            if (_time > 0) _time -= Time.deltaTime;
-            if (_time <= 0) Destroy(gameObject);
+            Destroy(gameObject);
         }
     }
 }

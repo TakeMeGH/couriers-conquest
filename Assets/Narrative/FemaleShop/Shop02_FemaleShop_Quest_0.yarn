@@ -1,0 +1,107 @@
+﻿title: Shop02_FemaleShop_Quest_0
+tags:
+---
+Aiden: Halo Evellyn, senang bertemu denganmu lagi.
+Evellyn: Oh halo juga Aiden, senang bertemu denganmu juga.  Adakah yang sedang kau butuhkan sekarang?
+Aiden: Aku mendapatkan misi dari Dravor untuk mengantarkan barang ini kepadamu. Hati-hati, barang ini cukup berat.
+Evellyn: Wah, terimakasih Aiden sudah mengantarkan barang ini, nyaris saja aku kehabisan stok barang. Ngomong-ngomong, aku baru inget dengan sesutu, kau itu anak dari Raidan kan? Aku baru mengetahuinya baru-baru ini.
+-> Aiden: Sama-sama, karena sekali lagi itu memang merupakan tugasku. Iya benar, Raidan itu ayahku, memangnya kenapa ya?
+    <<jump Shop02_FemaleShop_Quest_0_Background>>
+-> Aiden: Sama-sama, itu memang tugasku. Yah, dia memang ayahku, memangnya ada apa ya?
+    <<jump Shop02_FemaleShop_Quest_0_ToThePoint>>
+===
+
+title: Shop02_FemaleShop_Quest_0_Background
+tags:
+---
+Evellyn: Tidak ada, aku hanya memastikan saja, karena ayahmu dulu itu orang yang sangat hebat, dan aku bahkan pernah ditolong olehnya. Jadi aku hanya ingin tahu apakah dia benar memiliki anak atau tidak.
+Evellyn: Ngomong-ngomong, apakah kamu mau tahu cerita tentang ayahmu dulu saat menyelamatkanku, Aiden?
+-> Aiden: Wah, tentu saja, sepertinya itu akan menjadi cerita yang menarik untuk didengarkan.
+    <<jump Shop02_FemaleShop_Quest_0_Background_1>>
+-> Aiden: Itu sepertinya cerita yang menarik, tapi apakah kau bisa menyingkatnya? Karena aku tidak bisa berlama-lama.
+    <<jump Shop02_FemaleShop_Quest_0_Background_2>>
+===
+
+title: Shop02_FemaleShop_Quest_0_Background_1
+tags:
+---
+Evellyn: Baiklah, dengarkan baik-baik. Dulu saat aku dan temanku berpetualang bersama, kami tidak sengaja terluka oleh kumpulan monster. Kami sudah mengalahkannya, tetapi luka yang temanku alami cukup parah, dan potion kami juga sudah habis.
+Evellyn: Hari semakin malam dan kami juga mulai kehabisan makanan, tetapi entah takdir atau apa, tiba-tiba ayahmu menemukan kami yang sedang berlindung di antara semak dan pohon.
+Evellyn: Saat itu ayahmu sedang dalam misi mengantarkan barang ke tempat yang cukup jauh, dan dia melewati hutan itu juga, jadi kami bisa dibilang cukup beruntung. Setelah ayahmu memberikan kami makanan dan potion, dia juga ikut mengantarkan kami menuju ke kota berikutnya, bahkan dia sambil melindungi kami dari monster dan bandit.
+Evellyn: Yang membuatku paling ingat dengan ayahmu adalah pedangnya, itu sepertinya menyala di malam hari saat sedang melawan monster. Dan itu benar-benar pedang yang indah. Sampai akhirnya kita sampai menuju ke kota berikutnya. Ayahmu langsung pergi begitu saja untuk mengantarkan barang, dan kami akhirnya berpisah.
+Aiden: Wah, apakah memang sehebat itu? Dan sepertinya itu adalah suatu keberuntungan ayahku menemukan kalian juga.
+Evellyn: Aku setuju jika kau bilang itu adalah sebuah keberuntungan, dan dari yang ku lihat, ayahmu memang sehebat itu.
+Evellyn: Oh, dan juga, tidak hanya aku yang dulu pernah ditolong oleh ayahmu, saat kami ingin ke kota Luminare, kami bertemu dengan seseorang yang meneliti tentang crystal, tetapi sedang dikejar goblin. Namanya adalah Vivian.
+Evellyn: Kami membantunya melawan goblin tersebut, tetapi setelah itu, dia mulai tertarik dengan pedang ayahmu itu, karena dia bilang pedang itu seperti memiliki suatu kekuatan. Tapi...
+Aiden: Tapi kenapa, Evellyn?
+Evellyn: Aku tidak tahu kelanjutannya, karena setelah itu aku langsung pergi karena aku dan temanku harus cepat ke kota Luminare, jadi hanya ayahmu sendiri yang mendengarkan hal tersebut.
+Aiden: Ahhh, ternyata seperti itu. Tapi sepertinya itu info yang cukup banyak juga, jadi aku berterima kasih atas info tersebut. Dan karena sekarang aku mewarisi pedang dari ayahku ini, aku sepertinya akan menuju ke Vivian untuk menanyakan tentang pedang ini juga nanti.
+Evellyn: Itu keputusan yang bagus, kau harus menemuinya nanti, karena siapa tahu itu bisa membantumu di masa depan nanti.
+Evellyn: Sepertinya hanya itu saja yang bisa kuberitahukan kepadamu. Ngomong-ngomong, ini untuk reward mengantarkan barang tadi. Terima kasih ya, dan sampai jumpa.
+Aiden: Tentu saja, terima kasih juga atas rewardnya, dan sampai jumpa juga.
+<<CustomAction Evellyn 0>>
+<<Close>>
+===
+
+title: Shop02_FemaleShop_Quest_0_Background_2
+tags:
+---
+Evellyn: Hahaha, dengan senang hati.
+Evellyn: Kau tahu aku dulu petualang kan? Nah, dulu aku pernah mengalami musibah terluka bersama temanku di tengah hutan. Kami tidak bisa kemana-mana, hanya bisa meratapi nasib kami saja disana. Tadinya kami hampir putus asa, tapi entah dari mana ayahmu melewati tempat kami, dan menolong kami yang terluka tersebut.
+Evellyn: Setelah itu, kami berjalan menuju ke kota terdekat, dan berpisah disana. Semenjak kejadian tersebut, akhirnya kami berteman, dan terkadang bertualang bersama jika dia mendapatkan misi ke tempat yang jauh.
+Aiden: Wah, ternyata ayahku sehebat itu ya. Ku kira dulu dia hanya hebat dalam mengantarkan barang saja, tapi dia juga hebat dalam menjadi petualang atau dalam bertarung juga.
+Evellyn: Yah, orang-orang melihatnya sebagai seorang Postman yang hebat, tapi bagiku, dia malah lebih seperti seorang petualang yang hebat daripada Postman.
+Evellyn: Oh, dan juga saat kami pergi ke Kota Luminare, kami bertemu dengan seseorang bernama Vivian. Dia memberitahukan tentang ada sesuatu di pedang ayahmu tersebut. Jika kau ingin tahu lebih lanjut, kau bisa langsung pergi ke tempat dia berada.
+Aiden: Sepertinya itu saran yang menarik, aku akan kesana nanti untuk menanyakan hal tersebut.
+Evellyn: Oiya, ini untuk reward mengantarkan barang tadi. Terima kasih ya, dan hati-hati jika kau ingin pergi kesana, karena yang kusempatkan, banyak sekali monster di sana.
+Aiden: Terima kasih untuk rewardnya dan juga atas peringatannya, kalau begitu sampai jumpa lagi nanti.
+<<CustomAction Evellyn 0>>
+<<Close>>
+===
+
+
+
+title: Shop02_FemaleShop_Quest_0_ToThePoint
+tags:
+---
+Evellyn: Tidak ada, aku hanya ingin memastikan saja, karena ayahmu dulu itu orang yang sangat hebat, dan aku bahkan pernah ditolong olehnya. Jadi aku hanya ingin tahu apakah dia benar memiliki anak atau tidak.
+Aiden: Yah, seharusnya itu bukan urusanmu kan.
+Evellyn: Tentu, tapi apakah kau mau mendengarkan kisahnya tentangnya dulu?
+-> Aiden: Ok, ini sepertinya sesuatu yang menarik untuk didengarkan.   
+    <<jump Shop02_FemaleShop_Quest_0_ToThePoint_1>>
+-> Aiden: Maaf, tapi aku sepertinya tidak terlalu tertarik untuk mendengarkannya.
+    <<jump Shop02_FemaleShop_Quest_0_ToThePoint_2>>
+===
+
+title: Shop02_FemaleShop_Quest_0_ToThePoint_1
+tags:
+---
+Aiden: Baiklah, aku akan mendengarkan cerita tentangnya dulu.
+Evellyn: Aku tahu kamu pasti akan tertarik mendengarkannya.
+Evellyn: Baiklah, dengarkan baik-baik ya. Dulu saat aku dan temanku berpetualang bersama, kami tidak sengaja terluka oleh kumpulan monster. Kami sudah mengalahkannya, tetapi luka yang temanku alami cukup parah, dan potion kami juga sudah habis.
+Evellyn: Hari semakin malam dan kami juga mulai kehabisan makanan, tetapi entah takdir atau apa, tiba-tiba ayahmu menemukan kami yang sedang berlindung di antara semak dan pohon.
+Evellyn: Saat itu ayahmu sedang dalam misi mengantarkan barang ke tempat yang cukup jauh, dan dia melewati hutan itu juga, jadi kami bisa dibilang cukup beruntung. Setelah ayahmu memberikan kami makanan dan potion, dia juga ikut mengantarkan kami menuju ke kota berikutnya, bahkan dia sambil melindungi kami dari monster dan bandit.
+Evellyn: Yang membuatku paling ingat dengan ayahmu adalah pedangnya, itu sepertinya menyala di malam hari saat sedang melawan monster. Dan itu benar-benar pedang yang indah. Sampai akhirnya kita sampai menuju ke kota berikutnya. Ayahmu langsung pergi begitu saja untuk mengantarkan barang, dan kami akhirnya berpisah.
+Aiden: Wah, apakah memang sehebat itu? Dan sepertinya itu adalah suatu keberuntungan ayahku menemukan kalian juga.
+Evellyn: Aku setuju jika kau bilang itu adalah sebuah keberuntungan, dan dari yang ku lihat, ayahmu memang sehebat itu.
+Evellyn: Oh, dan juga, tidak hanya aku yang dulu pernah ditolong oleh ayahmu, saat kami ingin ke kota Luminare, kami bertemu dengan seseorang yang meneliti tentang crystal, tetapi sedang dikejar goblin. Namanya adalah Vivian.
+Evellyn: Kami membantunya melawan goblin tersebut, tetapi setelah itu, dia mulai tertarik dengan pedang ayahmu itu, karena dia bilang pedang itu seperti memiliki suatu kekuatan. Tapi...
+Aiden: Tapi kenapa, Evellyn?
+Evellyn: Aku tidak tahu kelanjutannya, karena setelah itu aku langsung pergi karena aku dan temanku harus cepat ke kota Luminare, jadi hanya ayahmu sendiri yang mendengarkan hal tersebut.
+Aiden: Ahhh, ternyata seperti itu. Tapi sepertinya itu info yang cukup banyak juga, jadi aku berterima kasih atas info tersebut. Dan karena sekarang aku mewarisi pedang dari ayahku ini, aku sepertinya akan menuju ke Vivian untuk menanyakan tentang pedang ini juga nanti.
+Evellyn: Itu keputusan yang bagus, kau harus menemuinya nanti, karena siapa tahu itu bisa membantumu di masa depan nanti.
+Evellyn: Sepertinya hanya itu saja yang bisa kuberitahukan kepadamu. Ngomong-ngomong, ini untuk reward mengantarkan barang tadi. Terima kasih ya, dan sampai jumpa.
+Aiden: Tentu saja, terima kasih juga atas rewardnya, dan sampai jumpa juga.
+<<CustomAction Evellyn 0>>
+<<Close>>
+===
+
+title: Shop02_FemaleShop_Quest_0_ToThePoint_2
+tags:
+---
+Evellyn: Baiklah jika kamu tidak mau. Kalau begitu ini untuk rewardmu sendiri.
+Evellyn: Oh dan juga, ku lihat kamu membawa pedang ayahmu dulu. Jika kamu penasaran tentang pedang itu, kamu bisa bertemu dengan Vivian, dia tinggal di antara Kota Luminare dan desa ini. Dulu dia pernah meneliti tentang pedang itu, jadi mungkin itu akan membantumu nanti.
+Aiden: Baiklah, aku akan kesana nanti jika memiliki waktu luang. Ngomong-ngomong terima kasih atas rewardnya, dan sampai jumpa lagi nanti.
+<<CustomAction Evellyn 0>>
+<<Close>>
+===

@@ -1,0 +1,60 @@
+title: NPC003_Vivian_Quest_0
+tags:
+---
+Aiden: Halo Vivian, senang bertemu denganmu, dan maaf jika mengganggu waktumu juga.  Ngomong-ngomong aku ingin bertanya sesuatu hal kepadamu, apakah bisa?
+Vivian: Halo juga Aiden, senang bertemu dengamu lagi. Hahaha santai saja, aku juga sedang senggang sekarang, jadi kau tidak mengganggu sama sekali. Dan Tentu saja sangat bisa, dengan senang hati aku akan menjawab semua pertanyaanmu jika aku tau jawabannya.
+Aiden: Baiklah, tadi aku sehabis bertemu dengan Evellyn, dia bercerita tentang ayahku dulu, dan dia memberitahukan kepadaku tentang pedang yang dibawah ayah dulu, dan sekarang pedang itu sedang ada bersamaku. Dia bilang kau tau sesuatu tentang pedang ini, jadi apakah kau bisa menceritakannya?
+Vivian: Wah, sudah lama aku tidak melihat pedang ini, ya tentu saja aku akan menceritakannya. Tetapi kau mau cerita yang lengkap, atau secara singkat saja?
+-> Aiden: Sepertinya cerita yang lengkap akan sangat membantu.
+    <<jump NPC003_Vivian_Quest_0_Background>>
+-> Aiden: Aku ingin mendengarkannya secara singkat, karna aku tidak ingin mengganggumu lebih lama lagi.
+    <<jump NPC003_Vivian_Quest_0_ToThePoint>>
+-> Aiden: Maaf, sepertinya aku mengurungkan niatku untuk mendengarkan cerita tersebut.
+    <<jump NPC003_Vivian_Quest_0_Regret>>
+
+===
+
+title: NPC003_Vivian_Quest_0_Background
+tags:
+---
+Vivian: Baiklah, dengarkan. Waktu itu aku sedang dikejar oleh goblin disaat sedang meneliti crystal, tetapi ayahmu dan beberapa petualang yang salah satunya adalah Evellyn yang membantu untuk mengusir mereka. Disaat itu aku melihat pedang ayahmu, aku jadi tertarik karna itu seperti memiliki energi dan kekuatan tertentu. Aku izin untuk menelitinya sebentar dan dia setuju.
+Vivian: Dia bilang bawah pedang itu merupakan salah satu pedang yang dia temukan, bukan  pedang yang dibuat dari dasar. Dia juga bilang bahwa pedang itu juga dulu pernah diteliti oleh Dravor.
+Vivian: Setelah aku menelitinya selama beberapa saat, aku mengatakan beberapa hal kepada ayahmu tentang pedang ini, seperti materialnya, pedang ini bisa bersinergi dengan rune dan magis, serta pedang ini yang mungkin bisa memotong crystal.
+Vivian: Yah tapi tentu saja, ayahmu kaget karna itu semua memang benar adanya, tapi dulunya itu memerlukan waktu yang lama untuk mengetahui hal-hal tersebut. Sedangkan Aku sendiri hanya memerlukan waktu beberapa jam.
+Vivian: Aku juga meneliti tentang energi antar pedang itu dengan crystal. Serta beberapa penelitian lainnya. Sampai sebuah kesimpulan muncul, bahwa pedang ini memiliki beberapa kekuatan yang bisa dibuka.
+Vivian: Aku menyarankannya untuk kembali ke tempat dimana dia menemukan pedang ini, karna disana sepertinya masih ada hal yang ditinggalkan oleh ayahmu, dan itu seperti berhubungan dengan pedang tersebut.
+Vivian: Ayahmu mengatakan bahwa itu merupakan tempat yang sangat amat jauh, dan sangat sulit untuk sampai kesana. Tapi karna rasa penasaran, ayahmu akhirnya pergi ke tempat tersebut untuk menemukan hal tersebut dari pedangnya itu.
+Aiden: Tunggu Vivian, apakah kamu tau tempat itu ada dimana? Bisakah kamu memberitahukannya kepadaku.
+Vivian: Untuk saat ini sepertinya tidak bisa, karna tempat tersebut sangat berbahaya untukmu sekarang, bahkan aku tidak tau apakah tempat itu masiha ada atau tidak. Tapi satu hal yang pasti, aku tidak mau kau membahayakan dirimu untuk pergi kesana.
+Aiden: Yah jika kau mengatakan hal yang seperti itu, untuk sekarang sepertinya aku memang tidak bisa pergi kesana. Tapi aku ingin kau berjanji sesuatu kepadaku Vivian, jika suatu saat aku berhasil melampaui ekspetasimu, apakah kau mau mengatakan tempat itu kepadaku?
+Vivian: Sudah pasti aku akan mengatakannya nanti, tapi tidak hanya kau yang harus memenuhi ekspetasiku, tetapi jika keadaan, dan kendaraan sudah memungkinkan menuju kesana, aku pasti akan mengatakannya.
+Vivian: Tapi tentunya, itu memerlukan waktu, dan aku tidak tau kapan itu akan terjadi.
+Aiden: Baiklah jika seperti itu, kalau begitu aku akan pamit. Terimakasih atas informasi yang kau berikan Vivian, itu benar-benar membantu, sampai jumpa.
+Vivian: Sampai jumpa juga Aiden.
+<<CustomAction Vivian 0>>
+<<Close>>
+===
+
+title: NPC003_Vivian_Quest_0_ToThePoint
+tags:
+---
+Vivian: Tentu jika itu maumu. Kau pasti sudah mendengar cerita tentang ayahmu dan aku bertemu dulu kan, dan disaat itu aku tertarik untuk meneliti pedang yang ayahmu bawa. Aku menelitinya selama beberapa saat, dan langsung memberikannya beberapa hasil penelitian tersebut kepada ayahmu.
+Vivian: Ayahmu cukup terkejut, karna aku memberitahukan semua hasil penelitian yang telah dilakukan cukup lama sebelumnya. Padahal aku baru saja meneliti selama beberapa jam. Setelahnya aku meneliti lebih dalam tentang pedang tersebut, dan aku seperti merasakan ada sesuatu yang hilang.
+Vivian: Setelah aku selesai meneliti, aku memberikan saran kepada ayahmu untuk pergi menuju tempat pedang itu berada sebelumnya, karna aku yakin ada hal yang tertinggal oleh ayahmu, dan sepertinya itu berhubungan dengan pedang tersebut. Tanpa pikir panjang ayahmu langsung pergi ke tempat pedang itu dia temukan sebelumnya.
+Vivian: Sebelumnya dia telah bilang dimana dia menemukan pedang tersebut, tetapi yang aku tau tempat tersebut sangat berbahaya, dan sangat jauh. Tetapi dia tetap memberanikan diri menuju kesana. Mohon maaf jika aku tidak bisa mengatakan tempat itu kepadamu, karna itu hal yang sangat berbahaya, dan aku tidak ingin kau nekat menuju kesana.
+Aiden: Jika kau mengatakan hal tersebut, sepertinya aku memang tidak bisa untuk pergi kesana. Tapi apakah kau bisa berjanji Vivian, bahwa jika suatu saat nanti aku cukup hebat, kau mau mengatakan tempat tersebut kepadaku.
+Vivian: Hal tersebut juga tidak bisa membuatku mengatakan tentang tempat itu kepadamu Aiden, tetapi suatu hal yang pasti, jika keadaannya memungkinkan dan sudaha ada kendaraan yang bisa membawamu kesana, aku pasti akan mengatakannya nanti. Tapi pastinya itu memerlukan waktu, dan aku tidak tau kapan itu akan berlangsung.
+Aiden: Baiklah jika seperti itu, terimakasih atas informasi yang kau berikan Vivian, itu benar-benar sangat membantuku. Kalau begitu sampai jumpa.
+Vivian: Sampai jumpa juga Aiden, sampai bertemu lagi nanti.
+<<CustomAction Vivian 0>>
+<<Close>>
+===
+
+title: NPC003_Vivian_Quest_0_Regret
+tags:
+---
+Vivian: Ohh tidak apa-apa, jika kau ingin mendengarkan cerita itu nanti, kau bisa kesini lagi. Aku dengan senang hati akan menyambutmu.
+Aiden: Baiklah, sekali lagi maaf sekali ya Vivian. Dan sampai jumpa lagi nanti.
+Vivian: Sampai jumpa juga Aiden.
+<<Close>>
+===

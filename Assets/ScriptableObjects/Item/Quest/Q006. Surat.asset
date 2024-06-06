@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 886f6160a6139bb4593bbcabf067f839, type: 3}
+  m_Name: Q006. Surat
+  m_EditorClassIdentifier: 
+  itemName: Surat
+  idItem: Q006
+  itemWeight: 0.1
+  itemDescription: Surat Berharga
+  itemSprite: {fileID: 21300000, guid: d85591aef1e0c744db7fcdc673013a78, type: 3}
+  maxStacks: 1
+  costBuy: 0
+  costSell: 0
+  _onPlayerGetDamaged: {fileID: 11400000, guid: 2d6ad549611d5a74ab9b67dfcf4273eb,
+    type: 2}
+  _onItemDestroyed: {fileID: 11400000, guid: cf9e6b8ee0f3084419daedb752861645, type: 2}
+  CurrentQuality: 100
+  DefaultQuality: 100
+  _valueReducePerDamage: 2
+  _valueReducePerDrop: 20

@@ -10,7 +10,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] InputReader _inputReader;
     [SerializeField] SenderDataEventChannelSO _onInventoryOpen;
     [SerializeField] SenderDataEventChannelSO _onInventoryClose;
-    [SerializeField] GameObject _HUD;
+    [SerializeField] VoidEventChannelSO _onCharacterDamaged;
+    [SerializeField] CanvasGroup _HUD;
     DialogueRunner _dialogueRunner;
 
     bool isInventoryOpen;
@@ -20,6 +21,7 @@ public class UIManager : MonoBehaviour
     {
         _inputReader.OpenInventoryEvent += OpenInventory;
         _inputReader.CloseInventoryEvent += CloseInventory;
+        _onCharacterDamaged.OnEventRaised += CloseInventory;
         if (_dialogueRunner != null)
         {
             _dialogueRunner.onDialogueStart.AddListener(OnDialogueOpen);
@@ -42,6 +44,8 @@ public class UIManager : MonoBehaviour
     {
         _inputReader.OpenInventoryEvent -= OpenInventory;
         _inputReader.CloseInventoryEvent -= CloseInventory;
+        _onCharacterDamaged.OnEventRaised -= CloseInventory;
+
         _dialogueRunner.onDialogueStart.RemoveListener(OnDialogueOpen);
         _dialogueRunner.onDialogueComplete.RemoveListener(OnDialogueOpen);
     }
@@ -49,16 +53,13 @@ public class UIManager : MonoBehaviour
 
     public void OnDialogueOpen()
     {
-        _HUD.SetActive(false);
+        _HUD.alpha = 0;
     }
 
     public void OnDialogueComplete()
     {
-        _HUD.SetActive(true);
+        _HUD.alpha = 1;
     }
-
-
-
 
     private void OpenInventory()
     {

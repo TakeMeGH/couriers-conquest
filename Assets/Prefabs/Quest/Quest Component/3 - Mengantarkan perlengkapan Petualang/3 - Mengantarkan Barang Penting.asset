@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fc8af5ec0429eb41a03046326a0106e, type: 3}
+  m_Name: 3 - Mengantarkan Barang Penting
+  m_EditorClassIdentifier: 
+  _questID: 3
+  _questType: 1
+  _questName: Mengantarkan perlengkapan Petualang
+  _questDescription: Dibutuhkan Postman untuk mengantarkan barang menuju Desa Little
+    Valey, berisi botol pottion, dan beberapa senjata kecil, cukup berat.
+  _questArea: 
+  _questPrerequisitesID: 02000000
+  _addItemToInventory: {fileID: 11400000, guid: 4611073ba66144c44ba509f62ea86853,
+    type: 2}
+  _onUpdateCurrency: {fileID: 11400000, guid: 60a8e86410b7bfc47953ac08146e97aa, type: 2}
+  _onUpdateExp: {fileID: 11400000, guid: c3d722e27167b1740bbeb30729d9a68e, type: 2}
+  _onSpawnBanner: {fileID: 11400000, guid: a782506403c389841b949d8769fc2f28, type: 2}
+  _reward:
+    gold: 35
+    exp: 150
+    item:
+      _serializedList:
+      - Key: {fileID: 11400000, guid: 09c60c90f62663640aa0591f877cd0c3, type: 2}
+        Value: 1
+      - Key: {fileID: 11400000, guid: 67dcfa53c07ea3e4ca05ee6d7793545f, type: 2}
+        Value: 2
+  pickupPrefab:
+    prefab: {fileID: 6618757732054344946, guid: 162d777a60b7b554eaa9fb7da154630b,
+      type: 3}
+    position: {x: 0, y: 0, z: 0}
+  dropPrefab:
+    prefab: {fileID: 7398444736682334487, guid: d5926baa8e2f55c4cb19d852410423c3,
+      type: 3}
+    position: {x: 0, y: 0, z: 0}
+  _questPrefabs:
+  - prefab: {fileID: 6618757732054344946, guid: d8e86ba166c83b14ea674905b1dd1f2e,
+      type: 3}
+    position: {x: 0, y: 0, z: 0}
+  itemToDeliver: {fileID: 11400000, guid: 27628652f8e35e549affc11132720401, type: 2}
+  _pickedUp: 0
+  SendNPCQuestDialogue: {fileID: 11400000, guid: acf930db98f4c3646a9449d6d1863992,
+    type: 2}
+  ClearNPCQuestDialogue: {fileID: 11400000, guid: 83cde709c0a1f4c4e8441bfe20c19bfe,
+    type: 2}
+  _npcList:
+  - targetNPC: Shop03
+    dialogueNode: Shop03_Blacksmith_Quest_1
+    events:
+    - {fileID: 11400000, guid: e152843c24039274c84e4bd60d7d76fd, type: 2}
+  _findQuestHintOwner: {fileID: 11400000, guid: f85d367ed4b0ea848a5ac8d6fdd4dad9,
+    type: 2}
+  _questHintData: {fileID: 11400000, guid: d5717b396a101bc4c97f361dc761eae9, type: 2}

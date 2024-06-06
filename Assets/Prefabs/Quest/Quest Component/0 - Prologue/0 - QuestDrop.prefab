@@ -45,10 +45,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca64120829071d4429e5c27d4df5f3f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _onDrop: {fileID: 11400000, guid: 38cd4e099427acd4a89565c352e7f044, type: 2}
+  _onDrop:
+  - {fileID: 11400000, guid: 38cd4e099427acd4a89565c352e7f044, type: 2}
+  - {fileID: 11400000, guid: 9159890fb49c355418da3c75607d2ac8, type: 2}
   _itemCheckEvent: {fileID: 11400000, guid: 41611e7359646fa4aa396be77ab032bc, type: 2}
   _questItemRemoveEvent: {fileID: 11400000, guid: 766a1bd66c57f004c9da23725408ea2d,
     type: 2}
+  _nextNpcList: []
+  SendNPCQuestDialogue: {fileID: 0}
+  _findQuestHintOwner: {fileID: 0}
+  _questHintData: {fileID: 0}
 --- !u!114 &7551833558603642292
 MonoBehaviour:
   m_ObjectHideFlags: 0

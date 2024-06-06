@@ -42,7 +42,13 @@ namespace CC.UI
             _staminaSlider.minValue = 0;
             _staminaSlider.value = _playerStatsSO.GetInstanceValue(mainStat.Stamina);
 
+            _expSlider.maxValue = _playerStatsSO.GetLevelMaxExp();
+            _expSlider.minValue = 0;
+            _expSlider.value = _playerStatsSO.GetExp();
+            _levelText.text = _playerStatsSO.GetLevel().ToString();
+
             _playerStatsSO.OnStatChange += OnStatChange;
+            _playerStatsSO.OnExpChange += OnExpChange;
 
             SetHealthSprite();
         }
@@ -52,6 +58,14 @@ namespace CC.UI
             HealthAdjust();
             StaminaAdjust();
         }
+
+        void OnExpChange()
+        {
+            _expSlider.maxValue = _playerStatsSO.GetLevelMaxExp();
+            _expSlider.value = _playerStatsSO.GetExp();
+            _levelText.text = _playerStatsSO.GetLevel().ToString();
+        }
+
 
         void HealthAdjust()
         {
@@ -65,7 +79,7 @@ namespace CC.UI
 
         void SetHealthSprite()
         {
-            if(_healthSlider.value / _healthSlider.maxValue <= _lowHealthThreshold)
+            if (_healthSlider.value / _healthSlider.maxValue <= _lowHealthThreshold)
             {
                 _healthImage.sprite = _lowHealthSprite;
             }

@@ -1,0 +1,234 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6861210169379414599
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 5524846034012856904}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: f42ac6b2e391cee4ca2dbb8ed7f7c247,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f42ac6b2e391cee4ca2dbb8ed7f7c247,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f42ac6b2e391cee4ca2dbb8ed7f7c247,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f42ac6b2e391cee4ca2dbb8ed7f7c247,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f42ac6b2e391cee4ca2dbb8ed7f7c247,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f42ac6b2e391cee4ca2dbb8ed7f7c247,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f42ac6b2e391cee4ca2dbb8ed7f7c247,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f42ac6b2e391cee4ca2dbb8ed7f7c247,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f42ac6b2e391cee4ca2dbb8ed7f7c247,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f42ac6b2e391cee4ca2dbb8ed7f7c247,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f42ac6b2e391cee4ca2dbb8ed7f7c247,
+        type: 3}
+      propertyPath: m_Name
+      value: Vivian
+      objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: f42ac6b2e391cee4ca2dbb8ed7f7c247,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 26a07efe7b16a7f4fac3ab9235b14734, type: 2}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f42ac6b2e391cee4ca2dbb8ed7f7c247,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6504793427541889539}
+  m_SourcePrefab: {fileID: 100100000, guid: f42ac6b2e391cee4ca2dbb8ed7f7c247, type: 3}
+--- !u!95 &1035124098019680214 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: f42ac6b2e391cee4ca2dbb8ed7f7c247,
+    type: 3}
+  m_PrefabInstance: {fileID: 6861210169379414599}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6050167847389585174 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f42ac6b2e391cee4ca2dbb8ed7f7c247,
+    type: 3}
+  m_PrefabInstance: {fileID: 6861210169379414599}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6504793427541889539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6050167847389585174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 205119acadb04e44291319dedebd8921, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 1035124098019680214}
+--- !u!4 &6394358539570447788 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f42ac6b2e391cee4ca2dbb8ed7f7c247,
+    type: 3}
+  m_PrefabInstance: {fileID: 6861210169379414599}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &7924569524954755608
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 861043098086933215, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      propertyPath: m_Name
+      value: Vivian NPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401979689340997712, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401979689340997712, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401979689340997712, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401979689340997712, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.39782456
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401979689340997712, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401979689340997712, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.9174615
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401979689340997712, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401979689340997712, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401979689340997712, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -133.116
+      objectReference: {fileID: 0}
+    - target: {fileID: 2401979689340997712, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3181783482422912824, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      propertyPath: _NPCID
+      value: NPC003
+      objectReference: {fileID: 0}
+    - target: {fileID: 3181783482422912824, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      propertyPath: _NPCName
+      value: Vivian
+      objectReference: {fileID: 0}
+    - target: {fileID: 3181783482422912824, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      propertyPath: Default_dialogue_node
+      value: NPC003_Vivian_Default_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4278921274070383820, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      propertyPath: ID
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4420335364994792135, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      propertyPath: _name
+      value: Vivian
+      objectReference: {fileID: 0}
+    - target: {fileID: 4420335364994792135, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      propertyPath: functionTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 6504793427541889539}
+    - target: {fileID: 4420335364994792135, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      propertyPath: functionTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Interact
+      objectReference: {fileID: 0}
+    - target: {fileID: 4420335364994792135, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      propertyPath: functionTrigger.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: CC.NPCAnimatorController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6748204931939413281, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      propertyPath: m_Name
+      value: Vivian
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects:
+    - {fileID: 7557054940399863189, guid: beb467ee82d158b4bb9a1c323f9ca565, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 2401979689340997712, guid: beb467ee82d158b4bb9a1c323f9ca565,
+        type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 6394358539570447788}
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: beb467ee82d158b4bb9a1c323f9ca565, type: 3}
+--- !u!4 &5524846034012856904 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2401979689340997712, guid: beb467ee82d158b4bb9a1c323f9ca565,
+    type: 3}
+  m_PrefabInstance: {fileID: 7924569524954755608}
+  m_PrefabAsset: {fileID: 0}

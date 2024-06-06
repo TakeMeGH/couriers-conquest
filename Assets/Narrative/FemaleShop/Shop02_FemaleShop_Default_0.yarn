@@ -1,8 +1,13 @@
 ﻿title: Shop02_FemaleShop_Default_0
 tags:
 ---
-<<declare $EveHaveQuest = false>>
-<<declare $EveQuestNode = "" >>
+<<declare $EvellynHaveQuest = false>>
+<<declare $EvellynQuestNode = "" >>
+
+<<if $EvellynHaveQuest>>
+    <<jump {$EvellynQuestNode}>>
+<<endif>>
+
 
 Evellyn : Halo, senang bertemu dengan mu nak! 
 Evellyn : Selamat datang di Advent's Shop
@@ -15,12 +20,16 @@ Evellyn : Ngomong-ngomong, adakah yang sedang kamu butuhkan disini?
 title: Shop02_FemaleShop_All_Choice
 tags:
 ---
--> Aku ingin mendengarkan cerita petualangan mu
-    <<jump Shop02_FemaleShop_Choice_0>>
--> Aku ingin membeli atau menjual sesuatu
-    <<jump Shop02_FemaleShop_Choice_1>>
 -> Tidak ada, aku hanya ingin bertemu dengan mu...
     <<jump Shop02_FemaleShop_Choice_2>>
+-> Aku ingin membeli sesuatu
+    <<jump Shop02_FemaleShop_Choice_1>>
+-> Aku ingin menjual sesuatu
+    <<jump Shop02_FemaleShop_Choice_3>>
+-> Aku ingin mendengarkan cerita petualangan mu
+    <<jump Shop02_FemaleShop_Choice_0>>
+
+
 ===
 
 title: Shop02_FemaleShop_Choice_0
@@ -78,9 +87,17 @@ Eve: Jadi, setelah mendengar cerita tersebut, adakah yang kamu butuhkan lagi di 
 title: Shop02_FemaleShop_Choice_1
 tags:
 ---
-Evellyn : Tentu saja, kamu tidak akan menyesal jika membeli ataupun menjual barang mu disini
+Evellyn : Tentu saja, kamu tidak akan menyesal jika membeli barang disini
 <<SpecialAction Evellyn 0>>
 ===
+
+title: Shop02_FemaleShop_Choice_3
+tags:
+---
+Evellyn : Tentu saja, kamu tidak akan menyesal jika menjual barang disini
+<<SpecialAction Evellyn 1>>
+===
+
 
 title: Shop02_FemaleShop_Choice_2
 tags:

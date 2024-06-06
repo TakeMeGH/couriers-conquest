@@ -33,10 +33,8 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     public event UnityAction PouchPerformed = delegate { };
     public event UnityAction PausePerformed = delegate { };
 
-
     public bool IsBlocking { get; private set; }
     public bool IsAttacking { get; private set; }
-
 
     public event UnityAction OpenInventoryEvent = delegate { };
     public event UnityAction CloseInventoryEvent = delegate { };
@@ -44,11 +42,13 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     public event UnityAction DropItemCanceled = delegate { };
     public event UnityAction EquipItemPerformed = delegate { };
     public event UnityAction ConsumeItemPerformed = delegate { };
+    public event UnityAction ConfirmActionPerformed = delegate { };
+    public event UnityAction BackActionPerformed = delegate { };
+    public event UnityAction ShowWaypointPerformed = delegate { };
+
     [SerializeField] VoidEventChannelSO _enableCameraInputEvent;
 
     [SerializeField] VoidEventChannelSO _disableCameraInputEvent;
-
-
 
     GameInput _playerInput;
 
@@ -322,5 +322,23 @@ public class InputReader : DescriptionBaseSO, GameInput.IGameplayActions, GameIn
     {
         if (context.phase == InputActionPhase.Performed)
             PausePerformed.Invoke();
+    }
+
+    public void OnConfirm(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            ConfirmActionPerformed.Invoke();
+    }
+
+    public void OnBack(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            BackActionPerformed.Invoke();
+    }
+
+    public void OnShowWaypoint(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Performed)
+            ShowWaypointPerformed.Invoke();
     }
 }

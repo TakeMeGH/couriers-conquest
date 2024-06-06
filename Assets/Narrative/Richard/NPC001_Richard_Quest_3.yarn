@@ -1,0 +1,46 @@
+﻿title: NPC001_Richard_Quest_3
+tags:
+---
+Aiden: Halo pak Richard, aku sudah mengantarkan barangnya tadi ke Arthur.
+Richard: Wah, ternyata kau cukup cepat juga ya, Aiden, mengantarkan barang tadi.
+Richard: Kalau begitu, apakah kau ingin mendengarkan kisah ayahmu lagi sekarang?
+-> Aiden: Tentu saja pak, karena niat awalku juga ingin mendengarkan kisah ayahku sendiri dari awal.
+    <<jump NPC001_Richard_Quest_3_Background>>
+-> Aiden: Maaf sepertinya aku berubah pikiran pak, aku sedang tidak mau mendengar cerita tentang ayahku.
+    <<jump NPC001_Richard_Quest_3_ToThePoint>>
+===
+
+title: NPC001_Richard_Quest_3_Background
+tags:
+---
+Richard: Hahaha, baiklah kalau begitu, aku akan menceritakan sebuah kisah tentang ayahmu dulu.
+Richard: Seperti yang kubilang sebelumnya, di waktu kosong, aku dan ayahmu sering menjelajah ke tempat-tempat cukup berbahaya, dan walaupun seperti ini, aku juga cukup pandai dalam bertarung, jadi setidaknya kami bisa menutupi kekurangan masing-masing.
+Richard: Waktu itu kami berhenti di sebuah hutan yang tercemar dengan kristal cukup banyak. Jika kau lihat hutan di luar kota ini, kau hanya akan menemukan kristal yang menyatu dengan pohon itu di tengah hutannya saja kan, dan tidak terlalu banyak.
+Richard: Tetapi itu sangat berbeda dengan hutan ini, di bibir hutan sekalipun hampir rata-rata pohon di sana bermutasi dengan kristal, bahkan ada beberapa hewan yang juga ikut bermutasi dengan kristal, dan itu benar-benar informasi yang orang-orang masih belum ketahui.
+Richard: Semakin kedalam hutan itu, suasanya juga semakin menyeramkan, dan semakin banyak kristal yang muncul, tidak hanya pada makhluk hidup, tetapi di jalanpun juga.
+Richard: Setelah kita berdua berjalan cukup dalam, akhirnya kita dikagetkan dengan sebuah monster yang terkontaminasi dengan kristal, dan monster tersebut menjadi sangat agresif.
+Richard: Setelah monster itu melihat kita, dia langsung menyerang. Kulihatnya benar-benar sangat keras, dan hanya pedang ayahmu lah yang mampu menembus kulit kristal dari monster tersebut.
+Richard: Aku hanya menjadi supporter di belakang, karena pedangku tidak bisa menembus kulitnya, dan ayahmu bertarung dengan hebat melawan monster itu.
+Richard: Terutama pedangnya yang menyala disaat melawan monster kristal, itu benar-benar sangat hebat dan menakjubkan.
+Richard: Setelah beberapa waktu melawan monster kristal itu, akhirnya monster itu kalah juga, dan kami mengambil beberapa bagian dari monster itu untuk diteliti.
+Richard: Karena monster tersebut sebelumnya belum ada yang pernah menemukannya, dan cukup berbahaya juga, karena pedang biasa tidak bisa menembus kulitnya, hanya pedang ayahmu yang bisa menembusnya.
+Aiden: Wah, ternyata ada monster yang keras seperti itu ya. Tapi pak, apakah pedang yang ayahku gunakan itu pedang ini? Karena aku mendapatkan pedang ini juga dari ayah dulu.
+Richard: Nah benar, pedang yang digunakan ayahmu dulu itu pedang yang kamu bawa sekarang, itu merupakan pedang yang hebat, dan jika kamu ingin tahu lebih lanjut tentang pedang itu, kamu bisa langsung menuju ke Blacksmith Dravor, karena dia juga meneliti material dari pedang itu dulu.
+Richard: Dan tadi itu salah satu kisah ayahmu dulu denganku, kubilang tadi cerita yang cukup panjang, jadi ku akhiri saja karena aku harus suatu hal, maaf ya Aiden aku hanya bisa menceritakan salah satu kisahnya saja, padahal dia memiliki banyak sekali cerita.
+Aiden: Tidak apa-apa pak, tadi itu cerita yang cukup seru, dan aku juga sedikit termotivasi untuk menjadi petualang juga di waktu kosongku nanti, agar bisa mencari hal-hal baru diluar sana.
+Richard: Bagus kalau kau termotivasi dari kisah ayahmu tadi, jika kita bertemu lagi aku berjanji akan menceritakan salah satu kisah dari ayahmu. Dan jika kau penasaran dengan pedang itu, kau bisa langsung menuju ke Blacksmith Dravor saja.
+Aiden: Baik pak, aku menantikan cerita ayahku darimu lagi, dan sepertinya aku juga ingin sedikit mencari tau tentang pedang ini. Kalau begitu sampai jumpa dilain waktu.
+<<CustomAction Richard 1>>
+<<Close>>
+===
+
+title: NPC001_Richard_Quest_3_ToThePoint
+tags:
+---
+Richard: Jika kau tidak mau mendengarkannya, aku tidak akan memaksa. Tetapi, aku akan memberikan sedikit saran kepadamu. Jika kau sedang kosong pergilah menuju Dravor, dia akan memberitahukan beberapa hal terkait pedang yang telah diwariskan itu kepadamu. Dan pastinya informasi tersebut akan berguna untukmu berkembang nanti.
+Aiden: Wah, baiklah pak, aku akan menuju ke Dravor nanti disaat aku sedang tidak ada misi. Karena aku juga penasaran dengan pedang ini, terimakasih atas saran dan informasinya. Kalau begitu aku pamit dulu pak, sampai jumpa lagi nanti.
+Richard: Sama-sama, sampai jumpa juga.
+<<CustomAction Richard 1>>
+<<Close>>
+===
+

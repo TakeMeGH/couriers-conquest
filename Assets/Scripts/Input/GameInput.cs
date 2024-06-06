@@ -188,6 +188,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShowWaypoint"",
+                    ""type"": ""Button"",
+                    ""id"": ""22277749-7f07-494e-ad0b-545204f5b43d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -432,6 +441,17 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""523b6b62-342c-4006-a688-a95db78cbda2"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShowWaypoint"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -470,6 +490,24 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""name"": ""ConsumeItem"",
                     ""type"": ""Button"",
                     ""id"": ""3128a277-39ee-4839-9bcc-62e960df3269"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Confirm"",
+                    ""type"": ""Button"",
+                    ""id"": ""7d36fd63-2923-49e8-a96e-744d64b3aff2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Back"",
+                    ""type"": ""Button"",
+                    ""id"": ""e215b2be-275d-4541-a185-85456be532c9"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -520,6 +558,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""ConsumeItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a0273480-ec60-45de-a11e-f05929b5b2b8"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Confirm"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""11d639e6-25d5-4817-9480-478b19c9afe2"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Back"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -546,12 +606,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Gameplay_DropClimbing = m_Gameplay.FindAction("DropClimbing", throwIfNotFound: true);
         m_Gameplay_Pouch = m_Gameplay.FindAction("Pouch", throwIfNotFound: true);
         m_Gameplay_Pause = m_Gameplay.FindAction("Pause", throwIfNotFound: true);
+        m_Gameplay_ShowWaypoint = m_Gameplay.FindAction("ShowWaypoint", throwIfNotFound: true);
         // InventoryUI
         m_InventoryUI = asset.FindActionMap("InventoryUI", throwIfNotFound: true);
         m_InventoryUI_CloseInventory = m_InventoryUI.FindAction("CloseInventory", throwIfNotFound: true);
         m_InventoryUI_DropItem = m_InventoryUI.FindAction("DropItem", throwIfNotFound: true);
         m_InventoryUI_EquipItem = m_InventoryUI.FindAction("EquipItem", throwIfNotFound: true);
         m_InventoryUI_ConsumeItem = m_InventoryUI.FindAction("ConsumeItem", throwIfNotFound: true);
+        m_InventoryUI_Confirm = m_InventoryUI.FindAction("Confirm", throwIfNotFound: true);
+        m_InventoryUI_Back = m_InventoryUI.FindAction("Back", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -631,6 +694,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Gameplay_DropClimbing;
     private readonly InputAction m_Gameplay_Pouch;
     private readonly InputAction m_Gameplay_Pause;
+    private readonly InputAction m_Gameplay_ShowWaypoint;
     public struct GameplayActions
     {
         private @GameInput m_Wrapper;
@@ -653,6 +717,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @DropClimbing => m_Wrapper.m_Gameplay_DropClimbing;
         public InputAction @Pouch => m_Wrapper.m_Gameplay_Pouch;
         public InputAction @Pause => m_Wrapper.m_Gameplay_Pause;
+        public InputAction @ShowWaypoint => m_Wrapper.m_Gameplay_ShowWaypoint;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -716,6 +781,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @ShowWaypoint.started += instance.OnShowWaypoint;
+            @ShowWaypoint.performed += instance.OnShowWaypoint;
+            @ShowWaypoint.canceled += instance.OnShowWaypoint;
         }
 
         private void UnregisterCallbacks(IGameplayActions instance)
@@ -774,6 +842,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @ShowWaypoint.started -= instance.OnShowWaypoint;
+            @ShowWaypoint.performed -= instance.OnShowWaypoint;
+            @ShowWaypoint.canceled -= instance.OnShowWaypoint;
         }
 
         public void RemoveCallbacks(IGameplayActions instance)
@@ -799,6 +870,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_InventoryUI_DropItem;
     private readonly InputAction m_InventoryUI_EquipItem;
     private readonly InputAction m_InventoryUI_ConsumeItem;
+    private readonly InputAction m_InventoryUI_Confirm;
+    private readonly InputAction m_InventoryUI_Back;
     public struct InventoryUIActions
     {
         private @GameInput m_Wrapper;
@@ -807,6 +880,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @DropItem => m_Wrapper.m_InventoryUI_DropItem;
         public InputAction @EquipItem => m_Wrapper.m_InventoryUI_EquipItem;
         public InputAction @ConsumeItem => m_Wrapper.m_InventoryUI_ConsumeItem;
+        public InputAction @Confirm => m_Wrapper.m_InventoryUI_Confirm;
+        public InputAction @Back => m_Wrapper.m_InventoryUI_Back;
         public InputActionMap Get() { return m_Wrapper.m_InventoryUI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -828,6 +903,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @ConsumeItem.started += instance.OnConsumeItem;
             @ConsumeItem.performed += instance.OnConsumeItem;
             @ConsumeItem.canceled += instance.OnConsumeItem;
+            @Confirm.started += instance.OnConfirm;
+            @Confirm.performed += instance.OnConfirm;
+            @Confirm.canceled += instance.OnConfirm;
+            @Back.started += instance.OnBack;
+            @Back.performed += instance.OnBack;
+            @Back.canceled += instance.OnBack;
         }
 
         private void UnregisterCallbacks(IInventoryUIActions instance)
@@ -844,6 +925,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @ConsumeItem.started -= instance.OnConsumeItem;
             @ConsumeItem.performed -= instance.OnConsumeItem;
             @ConsumeItem.canceled -= instance.OnConsumeItem;
+            @Confirm.started -= instance.OnConfirm;
+            @Confirm.performed -= instance.OnConfirm;
+            @Confirm.canceled -= instance.OnConfirm;
+            @Back.started -= instance.OnBack;
+            @Back.performed -= instance.OnBack;
+            @Back.canceled -= instance.OnBack;
         }
 
         public void RemoveCallbacks(IInventoryUIActions instance)
@@ -881,6 +968,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnDropClimbing(InputAction.CallbackContext context);
         void OnPouch(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnShowWaypoint(InputAction.CallbackContext context);
     }
     public interface IInventoryUIActions
     {
@@ -888,5 +976,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnDropItem(InputAction.CallbackContext context);
         void OnEquipItem(InputAction.CallbackContext context);
         void OnConsumeItem(InputAction.CallbackContext context);
+        void OnConfirm(InputAction.CallbackContext context);
+        void OnBack(InputAction.CallbackContext context);
     }
 }

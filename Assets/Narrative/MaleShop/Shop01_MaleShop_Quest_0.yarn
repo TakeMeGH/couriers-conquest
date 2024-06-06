@@ -1,0 +1,54 @@
+﻿title: Shop01_MaleShop_Quest_0
+tags:
+---
+Aiden: Halo, apakah benar ini toko milik Reymond?
+Reymond: Ya, itu aku sendiri. Ada yang bisa aku bantu?
+-> Aiden: Aku disuruh mengantarkan hasil penelitian ini oleh Rachel, berikut untuk barangnya.
+    <<jump Shop01_MaleShop_Quest_0_Background>>
+-> Aiden: Rachel tadi menyuruhku untuk mengantarkan barang penelitian ini, berikut untuk barangnya.
+    <<jump Shop01_MaleShop_Quest_0_ToThePoint>>
+===
+
+title: Shop01_MaleShop_Quest_0_Background
+tags:
+---
+Reymond: Wah, akhirnya dia berhasil juga dalam penelitian itu, aku sudah menunggunya lama sekali. Terima kasih karena telah mengantarkan barang ini, karena ini benar-benar sangat penting.
+-> Aiden: Tentu saja. Ngomong-ngomong, jika aku boleh tahu, memangnya benda apa itu?
+    <<jump Shop01_MaleShop_Quest_0_Background_1>>
+-> Aiden: Tentu saja, karena ini juga merupakan tugasku sebagai seorang Postman.
+    <<jump Shop01_MaleShop_Quest_0_Background_2>>
+===
+
+title: Shop01_MaleShop_Quest_0_Background_1
+tags:
+---
+Reymond: Beberapa barang penelitian ini adalah rahasia, tetapi ada juga beberapa barang yang nantinya akan ku jual, seperti Rune ini, ini memiliki beberapa efek yang cukup hebat, kau tahu. Tapi aku perlu mengujinya terlebih dahulu.
+Aiden: Wah, apakah Rune itu memiliki efek yang berbeda dari Rune lainnya?
+Reymond: Tentu saja, itulah kenapa kubilang ini merupakan barang yang sangat penting. Tapi sepertinya ini memerlukan waktu yang lama untuk bisa diperjual belikan, karena sangat banyak tes yang diperlukan sampai ini benar-benar siap untuk diperjual belikan.
+Aiden: Ku kira itu sudah bisa langsung digunakan, tetapi memerlukan pengujian terlebih dahulu. Baiklah, kalau begitu, aku akan menunggu sampai Rune itu dijual, dan aku akan mencobanya nanti.
+Reymond: Hahaha, tentu, nanti jika Rune ini sudah siap digunakan, aku akan langsung mengabari mu. Ngomong-ngomong ini untuk reward karena telah mengantarkan penelitian ini, terima kasih dan sampai jumpa lagi lain waktu.
+Aiden: Baiklah, terima kasih juga atas rewardnya, aku nantikan Rune itu sampai dijual nanti.
+<<CustomAction Reymond 0>>
+<<Close>>
+===
+
+title: Shop01_MaleShop_Quest_0_Background_2
+tags:
+---
+Reymond: Baik-baik, ini untuk rewardnya sendiri karena kau telah mengantarkan barang penelitian ini kesini. Sampai jumpa lagi dilain waktu.
+Aiden: Terima kasih atas rewardnya, sampai jumpa juga.
+<<CustomAction Reymond 0>>
+<<Close>>
+===
+
+
+
+title: Shop01_MaleShop_Quest_0_ToThePoint
+tags:
+---
+Reymond: Wah, akhirnya sudah sampai juga hasil dari penelitian Rachel.
+Reymond: Ini untuk reward karena kau telah mengantarkan barang ini, terima kasih ya karena telah mengantarkannya kesini.
+Aiden: Tentu saja, terima kasih juga atas rewardnya, sampai jumpa lagi lain waktu.
+<<CustomAction Reymond 0>>
+<<Close>>
+===

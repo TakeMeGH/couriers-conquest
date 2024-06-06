@@ -17,7 +17,7 @@ namespace CC.Core.Save
             canv.enabled = false;
             yield return new WaitForEndOfFrame();
             ScreenCapture.CaptureScreenshot(Application.persistentDataPath + "/GameData/SaveShot" + slot);
-            canv.enabled = false;
+            canv.enabled = true;
         }
     }
 }

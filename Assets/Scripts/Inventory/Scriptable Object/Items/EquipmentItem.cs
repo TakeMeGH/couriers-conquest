@@ -10,7 +10,7 @@ namespace CC.Inventory
     public class EquipmentItem : ABaseItem
     {
         public int equipmentLevel;
-        public SerializedDictionary<mainStat, float> EquipmentStats;
+        public SerializedDictionary<mainStat, float> _baseStats;
         public ItemSlotType specificType;
         public List<UpgradeRequiriment> upgradeRequiriment = new List<UpgradeRequiriment>();
 
@@ -23,14 +23,52 @@ namespace CC.Inventory
         {
             Debug.Log("Use : " + itemName);
         }
+
+        public float GetStatsWeapon(mainStat key)
+        {
+            if (equipmentLevel <= 0)
+            {
+                if (_baseStats.TryGetValue(key, out float value))
+                {
+                    return value;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                if (upgradeRequiriment[equipmentLevel - 1].EquipmentStats.TryGetValue(key, out float value))
+                {
+                    return value;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
     }
 
     [System.Serializable]
     public class UpgradeRequiriment
     {
         public List<UpgradeMaterialRequiriment> materialRequiriment = new List<UpgradeMaterialRequiriment>();
-        public float price;
+        public int price;
         public SerializedDictionary<mainStat, float> EquipmentStats;
+
+        public float GetStatsUpgradeWeapon(mainStat key)
+        {
+            if (EquipmentStats.TryGetValue(key, out float value))
+            {
+                return value;
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
 
     [System.Serializable]

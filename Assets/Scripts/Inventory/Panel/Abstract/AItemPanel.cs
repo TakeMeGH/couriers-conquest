@@ -32,7 +32,9 @@ namespace CC.Inventory
         public virtual void ShowEquipedPanel(bool condition)
         {
             equipedPanel.SetActive(condition);
-        } 
+        }
+
+        public abstract void OnAction();
 
         public abstract void Initialize(IInventoryManager inventory);
     }

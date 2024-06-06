@@ -25,79 +25,29 @@ namespace CC.Inventory
         [SerializeField] private TextMeshProUGUI _itemEffect;
         [SerializeField] private TextMeshProUGUI _itemDescription;
         [SerializeField] private Image _background;
+        [SerializeField] private GameObject _panelQuality;
 
         private void Start()
         {
             // Cursor.lockState = CursorLockMode.Locked;
-
         }
-        void Update()
+    
+        public void SetUI()
         {
-            /*transform.position = Input.mousePosition;
-            if (Cursor.lockState == CursorLockMode.Locked)
+            if (itemSlot.item.GetItemType() == ItemType.QuestItem)
             {
-                mouseCursor.enabled = false;
-                mouseItemUI.SetActive(false);
+                QuestItem item = (QuestItem)itemSlot.item;
+                _panelQuality.SetActive(true);
+                _itemEffect.text = ((int)item.CurrentQuality).ToString() + "%";
             }
             else
             {
-                mouseCursor.enabled = true;
-
-                if (itemSlot.item != null)
-                {
-                    mouseItemUI.SetActive(true);
-                }
-                else
-                {
-                    mouseItemUI.SetActive(false);
-                }
+                _panelQuality.SetActive(false);
             }
-            if (itemSlot.item != null)
-            {
-                if (Input.GetKey(KeyCode.Mouse1))
-                {
-                    sourceItemPanel.RefreshInventory();
-                    return;
-                }
 
-                if (Input.GetAxis("Mouse ScrollWheel") > 0 && splitSize < itemSlot.stacks)
-                {
-                    splitSize++;
-                }
-                if (Input.GetAxis("Mouse ScrollWheel") < 0 && splitSize > 1)
-                {
-                    splitSize--;
-                }
-
-                stacksText.text = "" + splitSize;
-
-
-
-                if (splitSize == itemSlot.stacks && sourceItemPanel.stacksText?.gameObject != null)
-                {
-                    sourceItemPanel.stacksText.gameObject.SetActive(false);
-                }
-                else
-                {
-                    if (sourceItemPanel.stacksText != null)
-                    {
-                        sourceItemPanel.stacksText.gameObject.SetActive(true);
-                        sourceItemPanel.stacksText.text = "" + (itemSlot.stacks - splitSize);
-                    }
-                    else
-                    {
-                        return;
-                    }
-                    
-                }
-            }*/
-        }
-
-        public void SetUI()
-        {
-            _itemName.text = itemSlot.item.name;
-            _itemWeight.text = (itemSlot.item.itemWeight * itemSlot.stacks).ToString();
-            _itemDescription.text = itemSlot.item.itemDescription;
+            _itemName.text = itemSlot.item.itemName;
+            _itemWeight.text = " " + itemSlot.item.itemWeight.ToString() + " kg";
+            _itemDescription.text =  itemSlot.item.itemDescription;
 
             _itemImage.sprite = itemSlot.item.itemSprite;
 
