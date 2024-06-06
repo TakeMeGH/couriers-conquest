@@ -6,7 +6,7 @@ namespace CC.StateMachine
     public abstract class StateMachine : MonoBehaviour
     {
         protected IState currentState;
-        bool _onSwitchState = false;
+        protected bool _onSwitchState = false;
 
         public void SwitchState(IState newState)
         {

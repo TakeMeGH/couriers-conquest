@@ -140,6 +140,16 @@ namespace CC.Characters
             SwitchState(PlayerIdlingState);
         }
 
+        private void Update()
+        {
+            if (!_onSwitchState) currentState?.Update();
+            
+            if (transform.position.y <= -200)
+            {
+                OnDead();
+            }
+        }
+
         void OnEnemyWatch(int value)
         {
             _playerWatcherCount += value;

@@ -26,6 +26,9 @@ namespace CC.UpgradeEquipment
         [SerializeField] private TextMeshProUGUI _textStatAfter;
         [SerializeField] private TextMeshProUGUI _textPlayerGold;
         [SerializeField] private TextMeshProUGUI _textPrice;
+        [SerializeField] Image _upgradePanelBackground;
+        [SerializeField] Image _upgradePanelIcon;
+
 
         [Header("PANELS FAILED")]
         [SerializeField] private GameObject _panelsFailedProces;
@@ -41,6 +44,13 @@ namespace CC.UpgradeEquipment
 
 
         [SerializeField] private List<PanelMaterialsUpgrade> _panelsMaterialsRequiriment = new List<PanelMaterialsUpgrade>();
+        [Header("Failed Sprite")]
+        [SerializeField] Sprite _cannotUpgradeBackground;
+        [SerializeField] Sprite _canUpgradeBackground;
+        [SerializeField] Sprite _cannotUpgradeIcon;
+        [SerializeField] Sprite _canUpgradeIcon;
+
+
         private EquipmentItem _items;
         private bool _hasSelected = false;
         private bool _hasSelectedUI = false;
@@ -97,11 +107,22 @@ namespace CC.UpgradeEquipment
                 _panelsMaterialsRequiriment[i].gameObject.SetActive(true);
             }
 
-            SetUI();
+            SetUI(CheckRequiriment());
         }
 
-        private void SetUI()
+        private void SetUI(bool isCanUpgrade)
         {
+            if (isCanUpgrade)
+            {
+                _upgradePanelBackground.sprite = _canUpgradeBackground;
+                _upgradePanelIcon.sprite = _canUpgradeIcon;
+            }
+            else
+            {
+                _upgradePanelBackground.sprite = _cannotUpgradeBackground;
+                _upgradePanelIcon.sprite = _cannotUpgradeIcon;
+
+            }
             _itemBeforeImage.sprite = _items.itemSprite;
             _itemAfterImage.sprite = _items.itemSprite;
 
