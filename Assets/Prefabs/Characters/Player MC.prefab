@@ -1228,6 +1228,7 @@ GameObject:
   - component: {fileID: 2107294712133200879}
   - component: {fileID: 7427144683471969171}
   - component: {fileID: 2750770969685492590}
+  - component: {fileID: 646757123185074357}
   m_Layer: 11
   m_Name: HealthManager
   m_TagString: Untagged
@@ -1317,6 +1318,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e34c22ae38de5084d8d0663ecda71a93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &646757123185074357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6655406177078873421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d670f88660e3aef4bb400ac91654aab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  usedObject: {fileID: 1713287152588927198}
+  _playerStates: {fileID: 1968939700130690617}
+  _rotationTime: 0.1
 --- !u!1 &6839657509875483949
 GameObject:
   m_ObjectHideFlags: 0
