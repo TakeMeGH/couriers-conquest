@@ -5232,6 +5232,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1797437524985038262, guid: 5533058e9891cb14093871ae413afa2b,
         type: 3}
+      propertyPath: _isBandit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797437524985038262, guid: 5533058e9891cb14093871ae413afa2b,
+        type: 3}
       propertyPath: _enemyCamp
       value: 
       objectReference: {fileID: 6679565170017711985}
@@ -6400,6 +6405,11 @@ PrefabInstance:
     - target: {fileID: 1127962216099913475, guid: 5533058e9891cb14093871ae413afa2b,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1797437524985038262, guid: 5533058e9891cb14093871ae413afa2b,
+        type: 3}
+      propertyPath: _isBandit
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1797437524985038262, guid: 5533058e9891cb14093871ae413afa2b,

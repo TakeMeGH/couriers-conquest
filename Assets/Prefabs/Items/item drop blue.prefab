@@ -110,9 +110,9 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!65 &3866704553676540072
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -211,6 +211,7 @@ MonoBehaviour:
   _icon: {fileID: 21300000, guid: dbc29ce57b14fdd4dbafbdb57c6a5992, type: 3}
   _name: Apple
   _amount: 1
+  <IsAlwaysCanInteract>k__BackingField: 1
   functionTrigger:
     m_PersistentCalls:
       m_Calls:
