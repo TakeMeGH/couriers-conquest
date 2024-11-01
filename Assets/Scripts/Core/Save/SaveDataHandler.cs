@@ -27,6 +27,7 @@ namespace CC.Core.Save
         [SerializeField] SenderDataEventChannelSO _OnBeforeSave;
         [SerializeField] SenderDataEventChannelSO _OnLoadFinished;
         [SerializeField] SenderDataEventChannelSO _OnSaveFinished;
+        [SerializeField] SenderDataEventChannelSO _onNewGameFinished;
         float timeIndicator;
         private void Awake()
         {
@@ -173,7 +174,7 @@ namespace CC.Core.Save
         {
             foreach (var model in _dataModels) model.SetDefaultValue();
             await Task.Yield();
-            _OnLoadFinished?.raiseEvent(this, null);
+            _onNewGameFinished?.raiseEvent(this, null);
         }
     }
 

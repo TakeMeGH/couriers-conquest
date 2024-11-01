@@ -20,7 +20,7 @@ namespace CC
         public void Force(Vector3 target)
         {
             if(_playerStates == null) return;
-            if (_playerStates.GetCurrentState().GetType() != typeof(PlayerBlockingState)) return;
+            if (_playerStates.GetCurrentState()?.GetType() != typeof(PlayerBlockingState)) return;
 
             _initialRotation = usedObject.transform.rotation;
 

@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
   m_AnchoredPosition: {x: 40, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 75, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6986100310478192747
 CanvasRenderer:
@@ -140,10 +140,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Context item
+  m_text: Iron Metalic Crystal x 100
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: f96f085a963d0564496c431dc849ebba, type: 2}
-  m_sharedMaterial: {fileID: -7823736865112955479, guid: f96f085a963d0564496c431dc849ebba,
+  m_fontAsset: {fileID: 11400000, guid: 6b92043e7f90aaa408620b000c9a063b, type: 2}
+  m_sharedMaterial: {fileID: 6748759770356522266, guid: 6b92043e7f90aaa408620b000c9a063b,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -204,7 +204,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 0, z: -113.08447, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -338,7 +338,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _itemName: {fileID: 768999683066780815}
-  _itemQuantity: {fileID: 8749695023243044607}
   _icon: {fileID: 2805915408914145332}
   _duration: 0
   _onScreen: 0
@@ -359,7 +358,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7915243009643219708
 RectTransform:
   m_ObjectHideFlags: 0

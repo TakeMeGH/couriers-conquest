@@ -237,7 +237,7 @@ namespace CC.Inventory
 
         private bool CanBuyItem()
         {
-            if (_inventoryData.playerGold > _costBuy)
+            if (_inventoryData.playerGold >= _costBuy)
             {
                 return true;
             }

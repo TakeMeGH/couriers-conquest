@@ -13,5 +13,14 @@ MonoBehaviour:
   m_Name: AlphaGoblinDrop
   m_EditorClassIdentifier: 
   _listItemID: {fileID: 11400000, guid: 3b953422f9393254cb26578637893519, type: 2}
-  _possibleDropItem: []
+  _possibleDropItem:
+  - Chance: 1
+    Amount: 5
+    ItemID: D002
+  - Chance: 1
+    Amount: 3
+    ItemID: D003
+  - Chance: 0.06
+    Amount: 1
+    ItemID: D006
   <Exp>k__BackingField: 13

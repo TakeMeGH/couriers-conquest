@@ -9,6 +9,7 @@ namespace CC
         [SerializeField] TransformAnchor _playerTransformAnchor = default;
         [SerializeField] Vector3 _targetOffset;
         [SerializeField] Vector3 _cameraRotation;
+        [SerializeField] bool isUsingYRotation;
 
         Transform _target;
 
@@ -35,9 +36,21 @@ namespace CC
                 transform.position = new Vector3(_target.position.x + _targetOffset.x,
                     _target.position.y + _targetOffset.y,
                     _target.position.z + _targetOffset.z);
-                    
-                transform.rotation = Quaternion.Euler(_cameraRotation.x, 
+
+
+                if (isUsingYRotation)
+                {
+                    // HOTFIX ICON PLAYE FOLLOW
+                    transform.rotation = Quaternion.Euler(_cameraRotation.x,
+                        _target.parent.parent.eulerAngles.y, _cameraRotation.z);
+
+                }
+
+                else
+                {
+                    transform.rotation = Quaternion.Euler(_cameraRotation.x,
                     _cameraRotation.y, _cameraRotation.z);
+                }
             }
         }
 

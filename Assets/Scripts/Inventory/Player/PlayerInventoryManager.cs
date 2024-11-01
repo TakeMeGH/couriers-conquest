@@ -46,6 +46,7 @@ namespace CC.Inventory
         [SerializeField] private TextMeshProUGUI _textAttack;
         [SerializeField] private TextMeshProUGUI _textDefense;
         [SerializeField] private TextMeshProUGUI _textWeight;
+        [SerializeField] private TextMeshProUGUI _textGold;
         private float _weightValue;
 
         [Header("Equiped")]
@@ -335,6 +336,7 @@ namespace CC.Inventory
         {
             _textAttack.text = _playerStats.GetValue(mainStat.AttackValue).ToString();
             _textDefense.text = _playerStats.GetValue(mainStat.Defense).ToString();
+            _textGold.text = ((InventoryData)_aitemInventoryData).playerGold.ToString();
         }
 
         public void RefreshInventory()

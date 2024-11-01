@@ -44,7 +44,7 @@ namespace CC
         public void CopyFrom(ISaveable obj)
         {
             var target = (CampData)obj;
-            this.IsAlive = target.IsAlive;
+            this.IsAlive = new List<bool>(target.IsAlive);
             this.CurrentDay = target.CurrentDay;
         }
     }

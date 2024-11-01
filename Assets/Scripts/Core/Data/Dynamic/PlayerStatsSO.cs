@@ -89,8 +89,9 @@ namespace CC.Core.Data.Dynamic
 
         public void OnUpdateExp(int amount)
         {
-            _itemPickupUI.raiseEvent(null, new itemNotifData("Exp", amount, _expIcon));
-            statData.playerExp += amount;
+            int _realAmount = (int)(amount * GetValue(mainStat.ExpMultiplier));
+            _itemPickupUI.raiseEvent(null, new itemNotifData("Exp", _realAmount, _expIcon));
+            statData.playerExp += _realAmount;
             while (GetLevelMaxExp() > 0 && statData.playerExp >= GetLevelMaxExp())
             {
                 statData.playerExp -= GetLevelMaxExp();
@@ -174,6 +175,7 @@ namespace CC.Core.Data.Dynamic
             this.defaultValue = new(target.defaultValue);
             this.instanceValue = new(target.instanceValue);
             this.playerExp = target.playerExp;
+            this.playerLevel = target.playerLevel;
             this.damageReduction = target.damageReduction;
         }
     }

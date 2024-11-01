@@ -27,16 +27,33 @@ MonoBehaviour:
         Value: 1
       - Key: 6
         Value: 1
+      - Key: 5
+        Value: 2.5
     instanceValue:
       _serializedList:
       - Key: 0
-        Value: 30
+        Value: 115
       - Key: 1
-        Value: 45.969376
-    playerExp: 62
-    playerLevel: 2
+        Value: 100
+    playerExp: 0
+    playerLevel: 0
     damageReduction: 0
-  modifiers: []
+  modifiers:
+  - isPercent: 0
+    statsToModify:
+      _serializedList:
+      - Key: 2
+        Value: 10
+  - isPercent: 0
+    statsToModify:
+      _serializedList:
+      - Key: 5
+        Value: 5
+  - isPercent: 0
+    statsToModify:
+      _serializedList:
+      - Key: 0
+        Value: 15
   _defaultStatData:
     defaultValue:
       _serializedList:
@@ -52,10 +69,12 @@ MonoBehaviour:
         Value: 1
       - Key: 6
         Value: 1
+      - Key: 5
+        Value: 2.5
     instanceValue:
       _serializedList:
       - Key: 0
-        Value: 100
+        Value: 115
       - Key: 1
         Value: 100
     playerExp: 0
@@ -92,6 +111,8 @@ MonoBehaviour:
         Value: 1
       - Key: 6
         Value: 1
+      - Key: 5
+        Value: 3
   - RequiredExp: 225
     Stats:
       _serializedList:
@@ -107,6 +128,8 @@ MonoBehaviour:
         Value: 1
       - Key: 6
         Value: 1
+      - Key: 5
+        Value: 4
   - RequiredExp: 300
     Stats:
       _serializedList:
@@ -122,6 +145,8 @@ MonoBehaviour:
         Value: 1
       - Key: 6
         Value: 1
+      - Key: 5
+        Value: 4.5
   - RequiredExp: 375
     Stats:
       _serializedList:
@@ -137,6 +162,8 @@ MonoBehaviour:
         Value: 1
       - Key: 6
         Value: 1
+      - Key: 5
+        Value: 5
   _itemPickupUI: {fileID: 11400000, guid: b0fda64278ae15e4daee6ae8f77d445b, type: 2}
   _expIcon: {fileID: 21300000, guid: c66334be5347a66489608f8a81b06101, type: 3}
   _levelUpIcon: {fileID: 21300000, guid: eb6b236540ada9148b0645cdc5c37377, type: 3}
